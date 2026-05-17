@@ -1,0 +1,25 @@
+node_modules/
+.next/
+.npm-cache/
+data/runtime-state.json
+.env
+.env.local
+.env.*.local
+.DS_Store
+*.log
+npm-debug.log*
+README.md
+tests/
+vitest.config.ts
+vitest.setup.ts
+tsconfig.tsbuildinfo
+dist/
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Development scratchpad — contains credentials, never include in images
+scratch/
+scratch/credentials.json
+graphify-out/

@@ -1,0 +1,8 @@
+{
+  "crons": [
+    { "path": "/api/agents/cfo/run", "schedule": "0 7 * * *" },
+    { "path": "/api/agents/followup/run", "schedule": "0 8 * * *" },
+    { "path": "/api/agents/outreach/run", "schedule": "0 9 * * *" },
+    { "path": "/api/agents/research/run", "schedule": "0 6 * * 1,3,5" }
+  ]
+}
