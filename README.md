@@ -51,6 +51,8 @@ Important variables:
 - `TELEGRAM_BOT_TOKEN` optional
 - `TELEGRAM_WEBHOOK_SECRET` optional
 - `TELEGRAM_ALLOWED_CHAT_IDS` optional
+- `OPENAI_API_KEY` optional, enables Telegram image understanding
+- `OPENAI_VISION_MODEL` optional, defaults to `gpt-4o-mini`
 
 Development bypass flags are present for local work only:
 
@@ -116,3 +118,7 @@ curl "https://api.telegram.org/bot<TELEGRAM_BOT_TOKEN>/setWebhook?url=<SX_PUBLIC
 
 Telegram calls the webhook directly; the route verifies Telegram's secret-token
 header before forwarding text messages into Hermes.
+
+Images and files sent to the bot are downloaded from Telegram. Images are
+analyzed first when `OPENAI_API_KEY` is configured, then the visual summary and
+file metadata are passed into Hermes as prompt context.

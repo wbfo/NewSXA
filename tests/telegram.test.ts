@@ -101,4 +101,65 @@ describe("telegram hermes webhook", () => {
       }),
     );
   });
+
+  it("downloads Telegram photos and forwards attachment context into Hermes", async () => {
+    await resetStore();
+    globalThis.fetch = vi.fn(async (url) => {
+      const target = String(url);
+      if (target.includes("/getFile")) {
+        return new Response(JSON.stringify({
+          ok: true,
+          result: {
+            file_id: "photo-file-id",
+            file_path: "photos/file_1.jpg",
+            file_size: 128,
+          },
+        }), { status: 200 });
+      }
+
+      if (target.includes("/file/bot")) {
+        return new Response(new Uint8Array([1, 2, 3]), {
+          status: 200,
+          headers: { "content-type": "image/jpeg" },
+        });
+      }
+
+      return new Response(JSON.stringify({ ok: true }), { status: 200 });
+    }) as typeof fetch;
+
+    const response = await telegramRoute(new Request("http://localhost/api/telegram/hermes", {
+      method: "POST",
+      body: JSON.stringify({
+        update_id: 3,
+        message: {
+          message_id: 12,
+          chat: { id: 12345, type: "private" },
+          from: { id: 777, username: "operator" },
+          caption: "What do you see here?",
+          photo: [
+            {
+              file_id: "photo-file-id",
+              file_unique_id: "photo-unique-id",
+              width: 1200,
+              height: 800,
+              file_size: 128,
+            },
+          ],
+        },
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        "x-telegram-bot-api-secret-token": "test-secret",
+      },
+    }));
+
+    expect(response.status).toBe(200);
+    expect(globalThis.fetch).toHaveBeenCalledWith(
+      "https://api.telegram.org/bottest-token/sendMessage",
+      expect.objectContaining({
+        method: "POST",
+        body: expect.stringContaining("Image received: telegram-photo-photo-unique-id.jpg"),
+      }),
+    );
+  });
 });
