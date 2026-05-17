@@ -14,7 +14,12 @@ export interface StartWorkflowInput {
 }
 
 export interface HermesGatewayAdapter {
-  sendMessage(input: { message: string; requestedBy: string; attachments?: { name: string; size: number; type: string }[] }): Promise<{ reply: ChatMessage; startedWorkflow?: WorkflowRun }>;
+  sendMessage(input: {
+    message: string;
+    requestedBy: string;
+    source?: "dashboard" | "telegram";
+    attachments?: { name: string; size: number; type: string }[];
+  }): Promise<{ reply: ChatMessage; startedWorkflow?: WorkflowRun }>;
   startWorkflow(input: StartWorkflowInput): Promise<WorkflowRun>;
   approveWorkflow(input: { workflowId: string }): Promise<WorkflowRun | null>;
   fetchActiveRuns(): Promise<WorkflowRun[]>;

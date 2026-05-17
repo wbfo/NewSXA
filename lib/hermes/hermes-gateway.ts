@@ -14,13 +14,36 @@ import {
 
 /** Number of prior chat turns to include as context with every query. */
 const CHAT_HISTORY_TURNS = 20;
+const TELEGRAM_CHAT_HISTORY_TURNS = 8;
 
 /** Formats the last N chat messages into a plain-text conversation block. */
-function buildChatHistoryContext(messages: ChatMessage[]): string {
+function buildChatHistoryContext(messages: ChatMessage[], turns = CHAT_HISTORY_TURNS): string {
   return messages
-    .slice(-CHAT_HISTORY_TURNS)
+    .filter((m) => !m.content.includes("TELEGRAM_BOT_MESSAGE:"))
+    .slice(-turns)
     .map((m) => `${m.role === "user" ? "OPERATOR" : "HERMES"}: ${m.content}`)
     .join("\n");
+}
+
+function buildHermesMessagePrompt(input: {
+  message: string;
+  source?: "dashboard" | "telegram";
+}) {
+  if (input.source !== "telegram") {
+    return input.message;
+  }
+
+  return [
+    "TELEGRAM MESSAGE FROM OLA",
+    "",
+    "Treat the message below as the highest-priority current operator instruction.",
+    "Respond directly to what Ola just said. Do not reset to a generic help greeting.",
+    "If Ola gives a standing preference, name, correction, or instruction, acknowledge it and use it moving forward.",
+    "If Ola is frustrated, answer the substance of the correction first.",
+    "",
+    "LATEST TELEGRAM MESSAGE:",
+    input.message,
+  ].join("\n");
 }
 
 function quoteWorkflowType(type: WorkflowType) {
@@ -166,7 +189,12 @@ async function queryHermes(prompt: string, chatHistory?: string) {
 }
 
 class RealHermesAdapter implements HermesGatewayAdapter {
-  async sendMessage(input: { message: string; requestedBy: string; attachments?: { name: string; size: number; type: string }[] }) {
+  async sendMessage(input: {
+    message: string;
+    requestedBy: string;
+    source?: "dashboard" | "telegram";
+    attachments?: { name: string; size: number; type: string }[];
+  }) {
     let finalMessageContent = input.message;
     if (input.attachments && input.attachments.length > 0) {
       const attachmentsText = input.attachments.map(a => `[Attached file: ${a.name} (${Math.round(a.size/1024)}KB)]`).join("\n");
@@ -184,9 +212,13 @@ class RealHermesAdapter implements HermesGatewayAdapter {
     // Build conversation context from recent history (excluding the message just appended).
     const dashboard = await readDashboard();
     const priorMessages = dashboard.chat.filter((m) => m.id !== userMessage.id);
-    const chatHistory = priorMessages.length > 0 ? buildChatHistoryContext(priorMessages) : undefined;
+    const chatHistoryTurns = input.source === "telegram" ? TELEGRAM_CHAT_HISTORY_TURNS : CHAT_HISTORY_TURNS;
+    const chatHistory = priorMessages.length > 0 ? buildChatHistoryContext(priorMessages, chatHistoryTurns) : undefined;
 
-    const replyText = await queryHermes(input.message, chatHistory);
+    const replyText = await queryHermes(
+      buildHermesMessagePrompt({ message: finalMessageContent, source: input.source }),
+      chatHistory
+    );
     const reply: ChatMessage = {
       id: crypto.randomUUID(),
       role: "assistant",

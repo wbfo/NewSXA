@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import type { ChatMessage } from "@/lib/domain/types";
 import { POST as telegramRoute } from "@/app/api/telegram/hermes/route";
+import { resetStore } from "@/lib/server/store";
 
 vi.mock("@/lib/hermes/hermes-gateway", () => ({
   getHermesAdapter: () => ({
@@ -44,6 +45,7 @@ describe("telegram hermes webhook", () => {
   });
 
   it("sends Hermes replies back to allowed Telegram chats", async () => {
+    await resetStore();
     const response = await telegramRoute(new Request("http://localhost/api/telegram/hermes", {
       method: "POST",
       body: JSON.stringify({
@@ -71,5 +73,32 @@ describe("telegram hermes webhook", () => {
       }),
     );
   });
-});
 
+  it("stores and acknowledges preferred address instructions directly", async () => {
+    const response = await telegramRoute(new Request("http://localhost/api/telegram/hermes", {
+      method: "POST",
+      body: JSON.stringify({
+        update_id: 2,
+        message: {
+          message_id: 11,
+          chat: { id: 12345, type: "private" },
+          from: { id: 777, username: "operator" },
+          text: "Moving forward, refer to me as the honored one.",
+        },
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        "x-telegram-bot-api-secret-token": "test-secret",
+      },
+    }));
+
+    expect(response.status).toBe(200);
+    expect(globalThis.fetch).toHaveBeenCalledWith(
+      "https://api.telegram.org/bottest-token/sendMessage",
+      expect.objectContaining({
+        method: "POST",
+        body: expect.stringContaining("Understood, the honored one."),
+      }),
+    );
+  });
+});

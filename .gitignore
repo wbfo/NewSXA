@@ -11,6 +11,7 @@ dist/
 
 # Runtime state (contains live data — seed from resetStore if needed)
 data/runtime-state.json
+data/telegram-preferences.json
 
 # Environment / secrets
 .env
@@ -41,6 +42,7 @@ tsconfig.tsbuildinfo
 
 # Development scratchpad — not for source control
 scratch/
+.tmp/
 
 # Generated analysis / local export artifacts
 .graphify_*.json

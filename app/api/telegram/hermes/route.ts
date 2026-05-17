@@ -4,6 +4,11 @@ import { getHermesAdapter } from "@/lib/hermes/hermes-gateway";
 import { logger } from "@/lib/server/logger";
 import { getTelegramAllowedChatIds, isTelegramWebhookAuthorized } from "@/lib/telegram/config";
 import { sendTelegramMessage } from "@/lib/telegram/client";
+import {
+  extractPreferredAddress,
+  getTelegramChatPreference,
+  setTelegramPreferredAddress,
+} from "@/lib/telegram/preferences";
 
 const telegramUpdateSchema = z.object({
   update_id: z.number().optional(),
@@ -57,10 +62,31 @@ export async function POST(request: Request) {
     const requester = message.from?.username
       ? `telegram:${message.from.username}`
       : `telegram:${message.from?.id ?? chatId}`;
+    const preferredAddress = extractPreferredAddress(text);
+
+    if (preferredAddress) {
+      await setTelegramPreferredAddress(chatId, preferredAddress);
+      await sendTelegramMessage({
+        chatId,
+        text: `Understood, ${preferredAddress}. I’ll refer to you that way moving forward.`,
+      });
+      return jsonResponse({ ok: true });
+    }
+
+    const preference = await getTelegramChatPreference(chatId);
+    const messageForHermes = preference?.preferredAddress
+      ? [
+          `Ola's preferred form of address in this Telegram chat is "${preference.preferredAddress}".`,
+          `Use that address naturally when speaking directly to her.`,
+          ``,
+          text,
+        ].join("\n")
+      : text;
 
     const result = await getHermesAdapter().sendMessage({
-      message: text,
+      message: messageForHermes,
       requestedBy: requester,
+      source: "telegram",
     });
 
     await sendTelegramMessage({
@@ -87,4 +113,3 @@ export async function POST(request: Request) {
 export function GET() {
   return jsonResponse({ ok: true, service: "telegram-hermes" });
 }
-
