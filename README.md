@@ -48,6 +48,9 @@ Important variables:
 - `SX_PUBLIC_URL`
 - `CRON_SECRET`
 - `PERPLEXITY_API_KEY` optional
+- `TELEGRAM_BOT_TOKEN` optional
+- `TELEGRAM_WEBHOOK_SECRET` optional
+- `TELEGRAM_ALLOWED_CHAT_IDS` optional
 
 Development bypass flags are present for local work only:
 
@@ -96,3 +99,20 @@ Runtime state is stored at `data/runtime-state.json`, which is intentionally git
 ## Docker
 
 The included `Dockerfile` builds the Next standalone output. Mount `/app/data` as a persistent volume if using the JSON runtime store.
+
+## Telegram Access
+
+Hermes can receive Telegram messages through `POST /api/telegram/hermes`.
+
+1. Create a bot with BotFather.
+2. Set `TELEGRAM_BOT_TOKEN`.
+3. Generate and set a strong `TELEGRAM_WEBHOOK_SECRET`.
+4. Optional: set `TELEGRAM_ALLOWED_CHAT_IDS` to a comma-separated allowlist.
+5. Set the webhook:
+
+```bash
+curl "https://api.telegram.org/bot<TELEGRAM_BOT_TOKEN>/setWebhook?url=<SX_PUBLIC_URL>/api/telegram/hermes&secret_token=<TELEGRAM_WEBHOOK_SECRET>"
+```
+
+Telegram calls the webhook directly; the route verifies Telegram's secret-token
+header before forwarding text messages into Hermes.
