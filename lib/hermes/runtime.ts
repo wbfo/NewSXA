@@ -22,7 +22,8 @@ export const HERMES_VENV_PYTHON = path.join(HERMES_INSTALL_DIR, "venv", "bin", "
 // (not at module load) so Next.js build-time route collection doesn't throw.
 function getApiServerKey(): string {
   const key = process.env.SX_API_SERVER_KEY;
-  if (!key && process.env.NODE_ENV === "production") {
+  const isBuildTime = process.env.NEXT_PHASE === "phase-production-build" || process.env.CI === "true";
+  if (!key && process.env.NODE_ENV === "production" && !isBuildTime) {
     throw new Error("SX_API_SERVER_KEY env var is required in production");
   }
   return key ?? "sx-local-dev-key";
