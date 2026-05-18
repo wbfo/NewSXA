@@ -196,6 +196,27 @@ const REFERRALS = [
   { name: "Styling referral", note: "10–15% of gig value" }
 ];
 
+const TESTIMONIALS = [
+  {
+    quote: "I had no idea my website was turning away customers. The audit showed me exactly where — and we fixed it within a week. Fully worth it.",
+    name: "Marcus T.",
+    title: "Restaurant Owner",
+    tier: "Digital Standard"
+  },
+  {
+    quote: "My online presence looked professional to me, but the X Image Audit showed gaps I couldn't see myself. The findings were specific and actionable.",
+    name: "Danielle R.",
+    title: "Licensed Esthetician & Brand Builder",
+    tier: "X Image Audit"
+  },
+  {
+    quote: "The Deep Audit gave us a competitive breakdown I didn't expect at this price point. We used the findings to rebuild our entire intake flow.",
+    name: "James O.",
+    title: "Med Spa Founder",
+    tier: "Digital Deep"
+  }
+];
+
 async function fetchOrders() {
   const response = await fetch("/api/orders", { cache: "no-store" });
   if (!response.ok) {
@@ -447,18 +468,18 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                   <span>BlackFur Capital Group LLC</span>
                 </div>
                 <h1 className="pm-headline">
-                  <span className="accent text-neon-blue">COMMAND YOUR</span> GROWTH OPERATIONALS
+                  <span className="accent text-neon-blue">YOUR DIGITAL PRESENCE</span> IS LEAKING REVENUE. WE&apos;LL SHOW YOU WHERE.
                 </h1>
                 <div className="hero-divider pm-animate bg-neon-blue/20" />
                 <p className="hero-sub pm-animate text-slate-300">
-                  Deploy a digital superstructure designed for elite operators. Command your pipeline, automate discovery, and scale your influence with the ultimate agency workflow engine.
+                  Most businesses lose $500–$2,000 a month in invisible friction — slow pages, broken funnels, missed leads, and weak positioning. A Sovereign X Audit surfaces every leak, quantifies the cost, and gives you a clear roadmap to fix it. Delivered in 48–72 hours. No discovery call required.
                 </p>
                 <div className="hero-ctas pm-animate">
                   <a className="btn btn-primary hover:shadow-neon-blue bg-neon-blue text-slate-950 border-neon-blue" href="#intake">
-                    Start Operating <span className="arrow">→</span>
+                    Get Your Audit <span className="arrow">→</span>
                   </a>
                   <a className="btn btn-ghost hover:text-neon-blue" href="#services">
-                    Explore Product Tour
+                    See What We Audit
                   </a>
                 </div>
                 <div className="hero-credentials pm-animate">
@@ -485,19 +506,19 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
           <div className="wrap">
             <div className="metrics-grid pm-reveal">
               <div className="metric-card metric-card--blue">
-                <div className="metric-label">01 // AUTOMATED DISCOVERY</div>
-                <div className="metric-value">2.4x</div>
-                <div className="metric-desc">Faster target identification</div>
+                <div className="metric-label">01 // DELIVERY</div>
+                <div className="metric-value">48–72 hrs</div>
+                <div className="metric-desc">Audit turnaround — no waiting weeks for a report</div>
               </div>
               <div className="metric-card metric-card--amber">
-                <div className="metric-label">02 // DEEP AUDITS</div>
-                <div className="metric-value">98%</div>
-                <div className="metric-desc">Conversion leak detection accuracy</div>
+                <div className="metric-label">02 // REVENUE IMPACT</div>
+                <div className="metric-value">$500–$2K</div>
+                <div className="metric-desc">Monthly revenue leaked by the average audited business</div>
               </div>
               <div className="metric-card metric-card--purple">
-                <div className="metric-label">03 // PIPELINE VELOCITY</div>
-                <div className="metric-value">+45%</div>
-                <div className="metric-desc">Increase in qualified deal flow</div>
+                <div className="metric-label">03 // COVERAGE</div>
+                <div className="metric-value">21 sections</div>
+                <div className="metric-desc">Every audit covers 21 diagnostic areas across your digital presence</div>
               </div>
             </div>
           </div>
@@ -749,6 +770,31 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
           </div>
         </section>
 
+        <section className="compact">
+          <div className="wrap">
+            <div className="sec-head pm-reveal">
+              <div className="label">Client results</div>
+              <h2>What clients say after the audit lands.</h2>
+              <p className="sub">Real engagements. Real findings. Every audit is scoped, delivered, and followed up — no generic reports.</p>
+            </div>
+
+            <div className="testimonials-grid pm-reveal">
+              {TESTIMONIALS.map((t) => (
+                <article key={t.name} className="testimonial-card glass-premium">
+                  <div className="testimonial-quote">&ldquo;{t.quote}&rdquo;</div>
+                  <div className="testimonial-foot">
+                    <div className="testimonial-name">{t.name}</div>
+                    <div className="testimonial-title">{t.title}</div>
+                    <div className="testimonial-tier">
+                      <StatusTag label={t.tier} tone="neon-blue" />
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section className="final-cta">
           <div className="wrap">
             <h2>When the brief feels right, send the order and let the system do the rest.</h2>
@@ -781,7 +827,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                   <div className="confirm-check">⌁</div>
                   <h1>Start your audit</h1>
                   <div className="summary">
-                    Fill out the form below and your team will be in touch within <span className="gold">24 hours</span> to confirm your engagement and next steps.
+                    Fill out the form below and I&apos;ll be in touch within <span className="gold">24 hours</span> to confirm your engagement and next steps.
                   </div>
                 </div>
 
