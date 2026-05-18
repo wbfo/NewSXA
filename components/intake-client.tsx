@@ -276,6 +276,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
   const { theme, toggleTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [bootDone, setBootDone] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [orders, setOrders] = useState<ClientOrder[]>(initialData.orders);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
@@ -441,7 +442,33 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
               {mounted ? (theme === "dark" ? "Light Mode" : "Dark Mode") : "Theme"}
             </button>
           </div>
+
+          <button
+            className="nav-hamburger"
+            type="button"
+            aria-label="Toggle menu"
+            onClick={() => setMenuOpen((o) => !o)}
+          >
+            {menuOpen ? "✕" : "☰"}
+          </button>
         </div>
+
+        {menuOpen && (
+          <div className="nav-mobile-menu">
+            <a href="#hero"     onClick={() => setMenuOpen(false)}>Home</a>
+            <a href="#services" onClick={() => setMenuOpen(false)}>Services</a>
+            <a href="#featured" onClick={() => setMenuOpen(false)}>Featured</a>
+            <a href="#intake"   onClick={() => setMenuOpen(false)}>Intake</a>
+            <button
+              className="btn btn-quiet nav-mobile-theme"
+              type="button"
+              onClick={() => { toggleTheme(); setMenuOpen(false); }}
+            >
+              {mounted ? (theme === "dark" ? "Light Mode" : "Dark Mode") : "Theme"}
+            </button>
+          </div>
+        )}
+
         <div className="pm-nav-glow" aria-hidden="true" />
       </header>
 
