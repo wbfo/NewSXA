@@ -17,7 +17,6 @@ const AUTH_COOKIE_OPTIONS = {
 };
 const AUTH_COOKIE_NAMES = ["firebase-token", "sx-user-email", "sx-user-uid", "sx-auth-role"];
 const DEV_BYPASS_ENABLED =
-  process.env.NODE_ENV !== "production" &&
   process.env.NEXT_PUBLIC_ENABLE_DEV_BYPASS === "true";
 
 interface AuthContextType {

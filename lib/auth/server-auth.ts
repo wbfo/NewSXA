@@ -22,7 +22,6 @@ import { redirect } from "next/navigation";
 import { logger } from "@/lib/server/logger";
 
 const DEV_BYPASS_ENABLED =
-  process.env.NODE_ENV !== "production" &&
   process.env.SX_ENABLE_DEV_BYPASS === "true";
 
 export interface ServerAuthSession {

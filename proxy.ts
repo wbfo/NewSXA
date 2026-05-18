@@ -1,7 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 
 const DEV_BYPASS_ENABLED =
-  process.env.NODE_ENV !== "production" &&
   process.env.SX_ENABLE_DEV_BYPASS === "true";
 
 /**

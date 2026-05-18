@@ -1,6 +1,6 @@
 import type { NextConfig } from "next";
 
-const isDev = process.env.NODE_ENV !== "production";
+const isDev = process.env.NODE_ENV !== "production" || process.env.SX_ENABLE_DEV_BYPASS === "true";
 
 /**
  * Build the Content-Security-Policy value.
