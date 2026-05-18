@@ -50,32 +50,41 @@ function parseEnvValue(contents: string, key: string) {
 }
 
 export async function ensureHermesWorkspaceEnv() {
-  await mkdir(path.dirname(HERMES_STATE_PATH), { recursive: true });
-  await mkdir(HERMES_HOME, { recursive: true });
-
-  let existing = "";
   try {
-    existing = await readFile(HERMES_ENV_PATH, "utf8");
-  } catch {
-    existing = "";
+    await mkdir(path.dirname(HERMES_STATE_PATH), { recursive: true });
+  } catch (err) {
+    logger.warn({ err }, "Could not ensure state directory in read-only environment");
   }
-  const lines = existing.split("\n");
-  const updates = new Map<string, string>([
-    ["API_SERVER_ENABLED", "true"],
-    ["API_SERVER_KEY", getApiServerKey()],
-    ["API_SERVER_CORS_ORIGINS", PUBLIC_URL]
-  ]);
 
-  for (const [key, value] of updates) {
-    const index = lines.findIndex((line) => line.startsWith(`${key}=`));
-    if (index >= 0) {
-      lines[index] = `${key}=${value}`;
-    } else {
-      lines.push(`${key}=${value}`);
+  try {
+    await mkdir(HERMES_HOME, { recursive: true });
+
+    let existing = "";
+    try {
+      existing = await readFile(HERMES_ENV_PATH, "utf8");
+    } catch {
+      existing = "";
     }
-  }
+    const lines = existing.split("\n");
+    const updates = new Map<string, string>([
+      ["API_SERVER_ENABLED", "true"],
+      ["API_SERVER_KEY", getApiServerKey()],
+      ["API_SERVER_CORS_ORIGINS", PUBLIC_URL]
+    ]);
 
-  await writeFile(HERMES_ENV_PATH, `${lines.join("\n").trim()}\n`, "utf8");
+    for (const [key, value] of updates) {
+      const index = lines.findIndex((line) => line.startsWith(`${key}=`));
+      if (index >= 0) {
+        lines[index] = `${key}=${value}`;
+      } else {
+        lines.push(`${key}=${value}`);
+      }
+    }
+
+    await writeFile(HERMES_ENV_PATH, `${lines.join("\n").trim()}\n`, "utf8");
+  } catch (err) {
+    logger.warn({ err }, "Could not ensure HERMES HOME or env file write in read-only environment");
+  }
 }
 
 export async function isHermesInstalled() {

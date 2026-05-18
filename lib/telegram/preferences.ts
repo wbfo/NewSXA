@@ -1,5 +1,6 @@
 import { mkdir, readFile, unlink, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { logger } from "@/lib/server/logger";
 
 interface TelegramChatPreference {
   preferredAddress?: string;
@@ -20,8 +21,12 @@ async function readPreferences(): Promise<TelegramPreferences> {
 }
 
 async function writePreferences(preferences: TelegramPreferences) {
-  await mkdir(path.dirname(PREFERENCES_PATH), { recursive: true });
-  await writeFile(PREFERENCES_PATH, `${JSON.stringify(preferences, null, 2)}\n`, "utf8");
+  try {
+    await mkdir(path.dirname(PREFERENCES_PATH), { recursive: true });
+    await writeFile(PREFERENCES_PATH, `${JSON.stringify(preferences, null, 2)}\n`, "utf8");
+  } catch (err) {
+    logger.warn({ err, path: PREFERENCES_PATH }, "Telegram preferences could not be persisted in this runtime");
+  }
 }
 
 export function extractPreferredAddress(text: string): string | null {

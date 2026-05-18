@@ -130,13 +130,19 @@ async function getRedis(): Promise<RedisType> {
 
 // ── File backend (local dev) ──────────────────────────────────────────────────
 
+let _inMemoryFallbackState: PersistedRuntimeState = { ...EMPTY_STATE };
+
 async function ensureStateFile() {
-  await mkdir(path.dirname(HERMES_STATE_PATH), { recursive: true });
   try {
-    await readFile(HERMES_STATE_PATH, "utf8");
-  } catch {
-    logger.info({ path: HERMES_STATE_PATH }, "State file not found — initialising with empty state");
-    await writeFile(HERMES_STATE_PATH, `${JSON.stringify(EMPTY_STATE, null, 2)}\n`, "utf8");
+    await mkdir(path.dirname(HERMES_STATE_PATH), { recursive: true });
+    try {
+      await readFile(HERMES_STATE_PATH, "utf8");
+    } catch {
+      logger.info({ path: HERMES_STATE_PATH }, "State file not found — initialising with empty state");
+      await writeFile(HERMES_STATE_PATH, `${JSON.stringify(EMPTY_STATE, null, 2)}\n`, "utf8");
+    }
+  } catch (err) {
+    logger.warn({ err, path: HERMES_STATE_PATH }, "Failed to ensure state file in read-only environment. Operating in-memory.");
   }
 }
 
@@ -154,23 +160,32 @@ async function readPersistedState(): Promise<PersistedRuntimeState> {
     }
   }
 
-  await ensureStateFile();
-  const raw = await readFile(HERMES_STATE_PATH, "utf8");
-  if (!raw.trim()) {
-    await writePersistedState(EMPTY_STATE);
-    return { ...EMPTY_STATE };
-  }
-
   try {
-    return normalizePersistedState(JSON.parse(raw) as Partial<PersistedRuntimeState>);
-  } catch {
-    logger.warn({ path: HERMES_STATE_PATH }, "State file was invalid JSON — resetting to empty state");
-    await writePersistedState(EMPTY_STATE);
-    return { ...EMPTY_STATE };
+    await ensureStateFile();
+    const raw = await readFile(HERMES_STATE_PATH, "utf8");
+    if (!raw.trim()) {
+      await writePersistedState(EMPTY_STATE);
+      return { ...EMPTY_STATE };
+    }
+
+    try {
+      const parsed = normalizePersistedState(JSON.parse(raw) as Partial<PersistedRuntimeState>);
+      _inMemoryFallbackState = parsed;
+      return parsed;
+    } catch {
+      logger.warn({ path: HERMES_STATE_PATH }, "State file was invalid JSON — resetting to empty state");
+      await writePersistedState(EMPTY_STATE);
+      return { ...EMPTY_STATE };
+    }
+  } catch (err) {
+    logger.warn({ err, path: HERMES_STATE_PATH }, "Read-only filesystem encountered or file read failed — returning in-memory state");
+    return _inMemoryFallbackState;
   }
 }
 
 async function writePersistedState(state: PersistedRuntimeState) {
+  _inMemoryFallbackState = state;
+
   if (shouldUseRedisBackend()) {
     try {
       const redis = await getRedis();
@@ -180,7 +195,12 @@ async function writePersistedState(state: PersistedRuntimeState) {
     }
     return;
   }
-  await writeFile(HERMES_STATE_PATH, `${JSON.stringify(state, null, 2)}\n`, "utf8");
+
+  try {
+    await writeFile(HERMES_STATE_PATH, `${JSON.stringify(state, null, 2)}\n`, "utf8");
+  } catch (err) {
+    logger.warn({ err, path: HERMES_STATE_PATH }, "Failed to write persisted state in read-only filesystem. Updated in-memory only.");
+  }
 }
 
 function pushEvent(state: PersistedRuntimeState, event: AgentEvent) {

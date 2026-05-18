@@ -2,19 +2,16 @@ import { initializeApp, getApps, getApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
-// All values must be provided via environment variables.
-// See .env.local.example for the full list. Hardcoded fallbacks are intentionally
-// absent — missing vars produce undefined so Firebase throws a clear error at
-// init time rather than silently connecting to the wrong project.
-const isBuildTime = typeof window === "undefined" && !process.env.NEXT_PUBLIC_FIREBASE_API_KEY;
-
+// See .env.local.example for the full list. Production should provide real
+// Firebase public config values, but client initialization must not crash during
+// deploy previews or bypass-only environments when they are temporarily missing.
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || (isBuildTime ? "mock-api-key-for-build" : undefined),
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || (isBuildTime ? "mock-project.firebaseapp.com" : undefined),
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || (isBuildTime ? "mock-project-id" : undefined),
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET || (isBuildTime ? "mock-project.appspot.com" : undefined),
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID || (isBuildTime ? "123456789" : undefined),
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID || (isBuildTime ? "1:123456789:web:mockapp" : undefined),
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "mock-api-key-for-bypass-or-build",
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || "mock-project.firebaseapp.com",
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || "mock-project-id",
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET || "mock-project.appspot.com",
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID || "123456789",
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID || "1:123456789:web:mockapp",
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
