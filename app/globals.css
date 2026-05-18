@@ -2744,6 +2744,15 @@ html[data-theme="light"] .sx-intake .nav-mobile-menu {
   box-shadow: 0 10px 30px rgba(211, 173, 100, 0.16);
 }
 
+.sx-intake .cta-primary {
+  box-shadow: 0 0 32px rgba(200, 169, 110, 0.18);
+  transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease, color 0.18s ease, box-shadow 0.3s ease;
+}
+
+.sx-intake .cta-primary:hover {
+  box-shadow: 0 0 52px rgba(200, 169, 110, 0.35);
+}
+
 .sx-intake .btn-ghost {
   border-color: var(--gold);
   color: var(--gold);
@@ -2765,6 +2774,18 @@ html[data-theme="light"] .sx-intake .nav-mobile-menu {
   padding: 88px 0 72px;
   position: relative;
   overflow: hidden;
+}
+
+.sx-intake .hero-dot-grid {
+  position: absolute;
+  inset: -120px 0 0;
+  pointer-events: none;
+  opacity: 1;
+  background-image: radial-gradient(circle, rgba(200, 169, 110, 0.18) 1px, transparent 1px);
+  background-size: 24px 24px;
+  transition: transform 0.08s linear;
+  mask-image: linear-gradient(180deg, #000 0%, rgba(0,0,0,0.7) 55%, transparent 100%);
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, rgba(0,0,0,0.7) 55%, transparent 100%);
 }
 
 .sx-intake .hero-grid {
@@ -2800,9 +2821,13 @@ html[data-theme="light"] .sx-intake .nav-mobile-menu {
 }
 
 .sx-intake h1 {
-  font-size: clamp(44px, 6vw, 84px);
+  font-family: var(--mono);
+  font-size: clamp(42px, 5.8vw, 82px);
   line-height: 1.02;
   color: #ede6d4;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
 }
 
 .sx-intake h1 .accent {
@@ -2818,8 +2843,9 @@ html[data-theme="light"] .sx-intake .nav-mobile-menu {
 }
 
 .sx-intake .hero-sub {
+  font-family: var(--serif);
   font-size: 19px;
-  line-height: 1.55;
+  line-height: 1.75;
   color: var(--text);
   opacity: 0.9;
   max-width: 540px;
@@ -2913,6 +2939,11 @@ html[data-theme="light"] .sx-intake .nav-mobile-menu {
 .sx-intake .compact,
 .sx-intake .samples-section {
   padding: 64px 0;
+}
+
+.sx-intake .section-diagonal {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 32px), 0 100%);
+  padding-bottom: 96px;
 }
 
 .sx-intake .problem-block {
@@ -3169,6 +3200,15 @@ html[data-theme="light"] .sx-intake .nav-mobile-menu {
   position: relative;
 }
 
+.sx-intake .preview-float {
+  animation: sx-preview-float 3.5s ease-in-out infinite;
+}
+
+@keyframes sx-preview-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
 .sx-intake .snippet-preview-doc::before,
 .sx-intake .snippet-preview-doc::after {
   content: "";
@@ -3381,6 +3421,68 @@ html[data-theme="light"] .sx-intake .nav-mobile-menu {
   grid-column: 1 / -1;
   resize: vertical;
   min-height: 148px;
+}
+
+.sx-intake .checkbox-field,
+.sx-intake .photo-notice {
+  grid-column: 1 / -1;
+}
+
+.sx-intake .checkbox-title {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+
+.sx-intake .checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 16px;
+}
+
+.sx-intake .checkbox-grid label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.sx-intake .checkbox-grid input {
+  accent-color: var(--gold);
+}
+
+.sx-intake .photo-notice {
+  border: 1px solid rgba(200, 169, 110, 0.34);
+  background: rgba(200, 169, 110, 0.08);
+  padding: 18px 20px;
+  color: var(--text);
+}
+
+.sx-intake .photo-notice strong {
+  display: block;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+
+.sx-intake .photo-notice p {
+  margin: 0;
+  color: var(--text);
+  opacity: 0.82;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.sx-intake .photo-notice p + p {
+  margin-top: 8px;
 }
 
 .sx-intake .intake-form-actions {
@@ -3838,6 +3940,20 @@ html[data-theme="light"] .sx-intake .nav-mobile-menu {
   font-style: italic;
 }
 
+.sx-intake .aicc-cross-link {
+  width: fit-content;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.78;
+}
+
+.sx-intake .aicc-cross-link:hover {
+  opacity: 1;
+}
+
 .sx-intake .aicc-flow {
   margin-top: 64px;
   display: grid;
@@ -3928,6 +4044,76 @@ html[data-theme="light"] .sx-intake .nav-mobile-menu {
   color: var(--text);
   opacity: 0.82;
   line-height: 1.55;
+}
+
+.sx-intake .white-section {
+  background: #F5F0E8;
+  color: #0D0D0D;
+  clip-path: polygon(0 40px, 100% 0, 100% calc(100% - 40px), 0 100%);
+  margin-top: -40px;
+  margin-bottom: -40px;
+  padding: 104px 0;
+  position: relative;
+  z-index: 2;
+}
+
+.sx-intake .white-section .label {
+  color: #C8A96E;
+  letter-spacing: 0.26em;
+}
+
+.sx-intake .white-section-head {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 44px;
+}
+
+.sx-intake .white-section h2 {
+  color: #0D0D0D;
+  font-size: clamp(34px, 4vw, 58px);
+  max-width: 820px;
+}
+
+.sx-intake .deliverables-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 34px;
+}
+
+.sx-intake .deliverable-column {
+  border: 1px solid #0D0D0D22;
+  padding: 28px;
+  background: rgba(255, 255, 255, 0.44);
+}
+
+.sx-intake .deliverable-column h3 {
+  color: #0D0D0D;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+.sx-intake .deliverable-column ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.sx-intake .deliverable-column li {
+  color: #0D0D0D;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.sx-intake .white-cta {
+  background: #0D0D0D;
+  color: #C8A96E;
+  border-color: #0D0D0D;
 }
 
 .sx-intake .pricing-block {
@@ -4364,7 +4550,8 @@ html[data-theme="light"] .sx-intake .order-business {
   .sx-intake .confirm-next,
   .sx-intake .support-row,
   .sx-intake .metrics-grid,
-  .sx-intake .pipeline-steps {
+  .sx-intake .pipeline-steps,
+  .sx-intake .deliverables-grid {
     grid-template-columns: 1fr;
   }
 
@@ -4424,6 +4611,10 @@ html[data-theme="light"] .sx-intake .order-business {
 
   .sx-intake .metric-value {
     font-size: 32px !important;
+  }
+
+  .sx-intake .checkbox-grid {
+    grid-template-columns: 1fr;
   }
 }
 

@@ -24,6 +24,12 @@ const SERVICE_CARDS = [
     icon: "◎",
     desc: "A premium brand and public-presence review for professionals and creators.",
     bullets: ["Personal brand review", "Public presence audit", "Image alignment"]
+  },
+  {
+    title: "Voice Agent",
+    icon: "⌁",
+    desc: "A deployed voice intake layer for missed calls, booking flow, and client routing.",
+    bullets: ["Voice persona", "Calendar + CRM integration", "Monthly management"]
   }
 ];
 
@@ -97,6 +103,16 @@ const TIER_OPTIONS = [
     summary: "Premium brand presentation for public-facing clients.",
     tags: ["Personal brand", "Public presence", "Image alignment"],
     selectedTone: "neon-purple"
+  },
+  {
+    id: "Voice Agent",
+    name: "Voice Agent",
+    serviceType: "Voice Agent",
+    pricePromo: "$1,500+ setup",
+    priceReg: "monthly management",
+    summary: "Call intake, booking, and after-hours coverage.",
+    tags: ["ElevenLabs", "CRM integration", "Analytics dashboard"],
+    selectedTone: "neon-blue"
   }
 ];
 
@@ -105,31 +121,31 @@ const AICC_STEPS = [
     num: "01",
     icon: "◈",
     title: "Generator",
-    text: "Creates the first pass, gathers the raw inputs, and turns the intake into an actionable brief."
+    text: "Pulls every available signal about your business, brand, or image from across the web."
   },
   {
     num: "02",
     icon: "◉",
     title: "Critic",
-    text: "Challenges weak assumptions, catches gaps, and makes the intake more defensible before it ships."
+    text: "Challenges every finding. If it's not defensible with real data, it doesn't make it into your report."
   },
   {
     num: "03",
     icon: "✦",
     title: "Verifier",
-    text: "Checks the details against the source material and confirms the order is ready for review."
+    text: "Cross-references findings across multiple sources. Confirmed, directional, or pending — every finding is labeled honestly."
   },
   {
     num: "04",
     icon: "◎",
     title: "Refiner",
-    text: "Shapes the order into something clearer, tighter, and easier to act on in the command center."
+    text: "Converts raw findings into clear dollar figures and specific recommendations you can act on immediately."
   },
   {
     num: "05",
     icon: "⬡",
     title: "Specialist",
-    text: "Turns the verified brief into a usable engagement path with the right next action."
+    text: "Adds the industry context that makes the findings specific to your world — not generic advice that fits everyone."
   }
 ];
 
@@ -137,17 +153,17 @@ const PROCESS_STEPS = [
   {
     num: "01",
     title: "Inquiry lands",
-    text: "The client fills out the intake form and the order is written into the shared queue."
+    text: "You tell us who you are and what you need. We take it from there."
   },
   {
     num: "02",
     title: "Brief is shaped",
-    text: "The order gets a clear package, summary, and service type so the operator knows what to do."
+    text: "Every finding goes through a five-stage verification process. Nothing reaches you unless it's defensible."
   },
   {
     num: "03",
     title: "Command center updates",
-    text: "A live record appears in the dashboard with status, timing, and the latest notes."
+    text: "Your audit lands in Google Drive within 72 hours. Clear findings. Dollar figures. A roadmap you can act on today."
   },
   {
     num: "04",
@@ -155,6 +171,85 @@ const PROCESS_STEPS = [
     text: "The order moves into review, follow-up, and completion without the client needing to resend anything."
   }
 ];
+
+const PLATFORM_OPTIONS = ["Instagram", "TikTok", "LinkedIn", "YouTube", "X / Twitter", "Website", "Press / Media"];
+
+const EMPTY_FORM = {
+  customerName: "",
+  businessName: "",
+  email: "",
+  phone: "",
+  packageName: "Digital Standard",
+  serviceType: "Digital Audit",
+  budget: "",
+  hearAbout: "",
+  websiteUrl: "",
+  industry: "",
+  cityState: "",
+  locations: "",
+  biggestChallenge: "",
+  aiImplementation: "",
+  deadlines: "",
+  gender: "",
+  ageRange: "",
+  height: "",
+  weight: "",
+  instagram: "",
+  tiktok: "",
+  linkedin: "",
+  youtube: "",
+  twitter: "",
+  otherPlatform: "",
+  importantPlatforms: [] as string[],
+  imageCommunication: "",
+  imageConcerns: "",
+  imageEvents: "",
+  styleAdmire: "",
+  desiredEnergy: "",
+  wardrobeBudget: "",
+  photographyInterest: "",
+  wardrobeBlueprintInterest: "",
+  monthlyCallVolume: "",
+  afterHoursVoicemail: "",
+  onlineBooking: "",
+  averageTransactionValue: "",
+  phoneChallenges: "",
+  notes: ""
+};
+
+function AnimatedNumber({ target, suffix = "", prefix = "" }: { target: number; suffix?: string; prefix?: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const [count, setCount] = useState(0);
+  const [started, setStarted] = useState(false);
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry?.isIntersecting) {
+        setStarted(true);
+        observer.disconnect();
+      }
+    }, { threshold: 0.4 });
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!started) return;
+    let frame = 0;
+    const frames = 112;
+    const timer = setInterval(() => {
+      frame += 1;
+      const eased = 1 - Math.pow(1 - frame / frames, 3);
+      setCount(Math.min(target, Math.floor(target * eased)));
+      if (frame >= frames) clearInterval(timer);
+    }, 16);
+    return () => clearInterval(timer);
+  }, [started, target]);
+
+  return <span ref={ref}>{prefix}{count}{suffix}</span>;
+}
 
 const PRICING_BLOCKS = [
   {
@@ -263,6 +358,8 @@ function StatusTag({ label, tone }: { label: string; tone: "gold" | "teal" | "gr
   return <span className="sx-pill" style={{ color, borderColor: `${color}55`, textShadow: tone.startsWith('neon') ? `0 0 8px ${color}` : undefined }}>{label}</span>;
 }
 
+type StatusTone = Parameters<typeof StatusTag>[0]["tone"];
+
 // Staggered particle data (generated once)
 const PARTICLES = Array.from({ length: 18 }, (_, i) => ({
   id: i,
@@ -282,6 +379,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [selectedTier, setSelectedTier] = useState(TIER_OPTIONS[0].id);
+  const [heroBgY, setHeroBgY] = useState(0);
   const revealRef = useRef<HTMLDivElement>(null);
 
   const stats = useMemo(() => {
@@ -298,6 +396,13 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
     startTransition(() => setMounted(true));
     const t = setTimeout(() => startTransition(() => setBootDone(true)), 2900);
     return () => clearTimeout(t);
+  }, []);
+
+  useEffect(() => {
+    const update = () => setHeroBgY(Math.min(180, window.scrollY * 0.3));
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    return () => window.removeEventListener("scroll", update);
   }, []);
 
   // Scroll-reveal observer
@@ -327,21 +432,23 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
     return () => stream.close();
   }, []);
 
-  const [form, setForm] = useState({
-    customerName: "",
-    businessName: "",
-    email: "",
-    phone: "",
-    packageName: "Digital Standard",
-    serviceType: "Audit",
-    budget: "",
-    notes: ""
-  });
+  const [form, setForm] = useState(EMPTY_FORM);
 
-  const selectedTierData = TIER_OPTIONS.find((tier) => tier.id === selectedTier) ?? TIER_OPTIONS[0];
+  const isDigitalAudit = form.packageName === "Digital Standard" || form.packageName === "Digital Deep";
+  const isImageAudit = form.packageName === "X Image Audit";
+  const isVoiceAgent = form.packageName === "Voice Agent";
 
-  const updateField = (field: keyof typeof form, value: string) => {
+  const updateField = (field: keyof typeof form, value: string | string[]) => {
     setForm((current) => ({ ...current, [field]: value }));
+  };
+
+  const togglePlatform = (platform: string) => {
+    setForm((current) => ({
+      ...current,
+      importantPlatforms: current.importantPlatforms.includes(platform)
+        ? current.importantPlatforms.filter((item) => item !== platform)
+        : [...current.importantPlatforms, platform]
+    }));
   };
 
   const pickTier = (tier: (typeof TIER_OPTIONS)[number]) => {
@@ -351,6 +458,67 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
       packageName: tier.name,
       serviceType: tier.serviceType
     }));
+  };
+
+  const buildExpandedNotes = () => {
+    const sections = [
+      `How heard about us: ${form.hearAbout || "Not provided"}`,
+      form.notes ? `General notes: ${form.notes}` : "",
+    ];
+
+    if (isDigitalAudit) {
+      sections.push([
+        "DIGITAL AUDIT INTAKE",
+        `Website URL: ${form.websiteUrl}`,
+        `Industry / field: ${form.industry}`,
+        `City and state: ${form.cityState}`,
+        `Number of locations: ${form.locations}`,
+        `Biggest current challenge: ${form.biggestChallenge}`,
+        `Considering AI implementation: ${form.aiImplementation}`,
+        `Upcoming deadlines/events: ${form.deadlines || "None provided"}`
+      ].join("\n"));
+    }
+
+    if (isImageAudit) {
+      sections.push([
+        "X IMAGE AUDIT INTAKE",
+        `Gender: ${form.gender}`,
+        `Age range: ${form.ageRange}`,
+        `Height: ${form.height}`,
+        `Weight: ${form.weight}`,
+        `Instagram: ${form.instagram || "Not provided"}`,
+        `TikTok: ${form.tiktok || "Not provided"}`,
+        `LinkedIn: ${form.linkedin || "Not provided"}`,
+        `YouTube: ${form.youtube || "Not provided"}`,
+        `X / Twitter: ${form.twitter || "Not provided"}`,
+        `Other platform: ${form.otherPlatform || "Not provided"}`,
+        `Most important platforms: ${form.importantPlatforms.join(", ") || "Not provided"}`,
+        `Image should communicate: ${form.imageCommunication}`,
+        `Current image concerns: ${form.imageConcerns}`,
+        `Upcoming events/shoots: ${form.imageEvents || "None provided"}`,
+        `Style references: ${form.styleAdmire || "Not provided"}`,
+        `Desired energy: ${form.desiredEnergy || "Not provided"}`,
+        `Wardrobe budget: ${form.wardrobeBudget || "Not provided"}`,
+        `Photography session interest: ${form.photographyInterest || "Not provided"}`,
+        `Wardrobe Blueprint interest: ${form.wardrobeBlueprintInterest || "Not provided"}`,
+        "Photo submission notice shown: Google Drive upload link after payment confirmation."
+      ].join("\n"));
+    }
+
+    if (isVoiceAgent) {
+      sections.push([
+        "VOICE AGENT INTAKE",
+        `Website URL: ${form.websiteUrl}`,
+        `Industry: ${form.industry}`,
+        `Approx monthly call volume: ${form.monthlyCallVolume || "Not provided"}`,
+        `Calls go to voicemail after hours: ${form.afterHoursVoicemail || "Not provided"}`,
+        `Online booking system: ${form.onlineBooking || "Not provided"}`,
+        `Average transaction value: ${form.averageTransactionValue || "Not provided"}`,
+        `Phone intake challenges: ${form.phoneChallenges || "Not provided"}`
+      ].join("\n"));
+    }
+
+    return sections.filter(Boolean).join("\n\n");
   };
 
   const submitOrder = async (event: FormEvent<HTMLFormElement>) => {
@@ -365,6 +533,9 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...form,
+          businessName: form.businessName || form.customerName,
+          budget: form.budget || form.wardrobeBudget || form.averageTransactionValue,
+          notes: buildExpandedNotes(),
           source: "Sovereign X Landing",
           status: "NEW"
         })
@@ -374,16 +545,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
         throw new Error(body.error ?? "Order submission failed.");
       }
 
-      setForm({
-        customerName: "",
-        businessName: "",
-        email: "",
-        phone: "",
-        packageName: "Digital Standard",
-        serviceType: "Audit",
-        budget: "",
-        notes: ""
-      });
+      setForm(EMPTY_FORM);
       setSelectedTier(TIER_OPTIONS[0].id);
       setSuccess("Order submitted. It is now flowing into the command center.");
       setOrders(await fetchOrders());
@@ -474,6 +636,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
 
       <main>
         <section className="hero" id="hero">
+          <div className="hero-dot-grid" style={{ transform: `translateY(${heroBgY}px)` }} aria-hidden="true" />
           {/* floating particles */}
           <div className="pm-particles" aria-hidden="true">
             {PARTICLES.map((p) => (
@@ -495,19 +658,19 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                   <span>BlackFur Capital Group LLC</span>
                 </div>
                 <h1 className="pm-headline">
-                  <span className="accent text-neon-blue">YOUR DIGITAL PRESENCE</span>{" "}IS LEAKING REVENUE.{" "}
-                  <span className="pm-headline-break">WE&apos;LL SHOW YOU WHERE.</span>
+                  YOUR PRESENCE IS TELLING A STORY.
+                  <span className="pm-headline-break">IS IT THE RIGHT ONE?</span>
                 </h1>
                 <div className="hero-divider pm-animate bg-neon-blue/20" />
                 <p className="hero-sub pm-animate text-slate-300">
-                  Most businesses lose $500–$2,000 a month in invisible friction — slow pages, broken funnels, missed leads, and weak positioning. A Sovereign X Audit surfaces every leak, quantifies the cost, and gives you a clear roadmap to fix it. Delivered in 48–72 hours. No discovery call required.
+                  We audit your business, your brand, and your image — and show you exactly what it&apos;s costing you. Delivered in 72 hours. No discovery call.
                 </p>
                 <div className="hero-ctas pm-animate">
-                  <a className="btn btn-primary hover:shadow-neon-blue bg-neon-blue text-slate-950 border-neon-blue" href="#intake">
+                  <a className="btn btn-primary cta-primary hover:shadow-neon-blue bg-neon-blue text-slate-950 border-neon-blue" href="#intake">
                     Get Your Audit <span className="arrow">→</span>
                   </a>
                   <a className="btn btn-ghost hover:text-neon-blue" href="#services">
-                    See What We Audit
+                    See What We Audit <span className="arrow">↓</span>
                   </a>
                 </div>
                 <div className="hero-credentials pm-animate">
@@ -530,22 +693,22 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
 
         <div className="pm-section-glow" aria-hidden="true" />
 
-        <section className="compact">
+        <section className="compact section-diagonal">
           <div className="wrap">
             <div className="metrics-grid pm-reveal">
               <div className="metric-card metric-card--blue">
                 <div className="metric-label">01 // DELIVERY</div>
-                <div className="metric-value">48–72 hrs</div>
+                <div className="metric-value"><AnimatedNumber target={48} suffix=" hrs" /></div>
                 <div className="metric-desc">Audit turnaround — no waiting weeks for a report</div>
               </div>
               <div className="metric-card metric-card--amber">
                 <div className="metric-label">02 // REVENUE IMPACT</div>
-                <div className="metric-value">$500–$2K</div>
+                <div className="metric-value"><AnimatedNumber prefix="$" target={500} suffix="–$2K" /></div>
                 <div className="metric-desc">Monthly revenue leaked by the average audited business</div>
               </div>
               <div className="metric-card metric-card--purple">
                 <div className="metric-label">03 // COVERAGE</div>
-                <div className="metric-value">21 sections</div>
+                <div className="metric-value"><AnimatedNumber target={21} suffix=" sections" /></div>
                 <div className="metric-desc">Every audit covers 21 diagnostic areas across your digital presence</div>
               </div>
             </div>
@@ -556,25 +719,25 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
           <div className="wrap">
             <div className="sec-head pm-reveal">
               <div className="label text-neon-blue border-neon-blue">Workflow Logic</div>
-              <h2 className="text-white">A frictionless pipeline from cold data to closed engagement.</h2>
-              <p className="sub text-slate-400">The Agency Superstructure integrates discovery, auditing, and outreach into a single commanding interface.</p>
+              <h2 className="text-white">A clear path from intake to verified delivery.</h2>
+              <p className="sub text-slate-400">You submit once. We audit, verify, and deliver the findings in a format you can act on immediately.</p>
             </div>
 
             <div className="pipeline-steps pm-reveal">
               <article className="pipeline-step pipeline-step--blue">
                 <div className="num">01</div>
                 <h4>Discovery & Intake</h4>
-                <p>Target parameters are ingested. The system structures the raw data into actionable prospect profiles.</p>
+                <p>You tell us who you are and what you need. We take it from there.</p>
               </article>
               <article className="pipeline-step pipeline-step--amber">
                 <div className="num">02</div>
-                <h4>AICC Audit Generation</h4>
-                <p>The AI Critic/Creator pipeline analyzes the target, identifying friction points and structural weaknesses.</p>
+                <h4>AICC Verification</h4>
+                <p>Every finding goes through a five-stage verification process. Nothing reaches you unless it&apos;s defensible.</p>
               </article>
               <article className="pipeline-step pipeline-step--purple">
                 <div className="num">03</div>
-                <h4>Command Outreach</h4>
-                <p>A definitive, executive-ready report is generated alongside tailored outreach copy, ready to dispatch.</p>
+                <h4>Google Drive delivery</h4>
+                <p>Your audit lands in Google Drive within 72 hours. Clear findings. Dollar figures. A roadmap you can act on today.</p>
               </article>
             </div>
           </div>
@@ -586,7 +749,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
           <div className="wrap">
             <div className="sec-head pm-reveal">
               <div className="label">Service entry points</div>
-              <h2>Three ways a client can step into the system.</h2>
+              <h2>Four ways a client can step into the system.</h2>
               <p className="sub">Each tier is designed to match where a client is in their growth process — from a fast structured review to a premium brand and visibility build.</p>
             </div>
 
@@ -632,7 +795,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                         <h4 className={isSelected ? "text-neon-amber" : ""}>{tier.name}</h4>
                         <StatusTag
                           label={isSelected ? "Selected" : "Available"}
-                          tone={isSelected ? (tier.selectedTone as "gold" | "teal" | "green" | "orange" | "red" | "muted") : "muted"}
+                          tone={isSelected ? (tier.selectedTone as StatusTone) : "muted"}
                         />
                       </div>
                       <div className="price-row">
@@ -680,7 +843,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                   </div>
                 </div>
 
-                <div className="snippet-preview">
+                <div className="snippet-preview preview-float">
                   <div className="snippet-preview-doc">
                     <div className="doc-head">
                       <div className="doc-badge">SX</div>
@@ -713,13 +876,16 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
         </section>
 
 
-        <section className="aicc-block">
+        <section className="aicc-block section-diagonal">
           <div className="wrap">
             <div className="sec-head aicc-head">
               <div className="label">AICC method</div>
               <h2>
                 Generated, critiqued, verified, refined, and specialized through the <span className="accent">AICC</span> workflow.
               </h2>
+              <a className="aicc-cross-link" href="https://aicouncilconductor.com" target="_blank" rel="noreferrer">
+                Powered by the AI Council Conductor methodology →
+              </a>
               <p className="sub">Each output passes through a five-stage refinement cycle before it reaches the operator. Defensible analysis, not just fast generation.</p>
             </div>
 
@@ -736,7 +902,64 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
           </div>
         </section>
 
-        <section className="compact">
+        <section className="white-section" id="deliverables">
+          <div className="wrap">
+            <div className="white-section-head">
+              <div className="label">What Gets Delivered</div>
+              <h2>Seven deliverables. One Google Drive link. 72 hours.</h2>
+            </div>
+            <div className="deliverables-grid">
+              {[
+                {
+                  title: "Digital Audit",
+                  items: [
+                    "21-section written report",
+                    "Technical performance scores",
+                    "Revenue leak analysis with dollar figures",
+                    "AI Readiness & Voice Agent assessment",
+                    "Impact Matrix",
+                    "Fix-It Checklist",
+                    "Delivered to your Google Drive"
+                  ]
+                },
+                {
+                  title: "X Image Audit",
+                  items: [
+                    "18-section written report",
+                    "Personal Color Analysis Card",
+                    "Hairstyle Analysis Card",
+                    "Outfit Analysis Card",
+                    "Grooming Guide (Men) / Makeup Guide (Women)",
+                    "Scent Profile Card",
+                    "Quick Reference Card"
+                  ]
+                },
+                {
+                  title: "Voice Agent",
+                  items: [
+                    "Conversation flow design",
+                    "Voice persona configuration",
+                    "ElevenLabs deployment",
+                    "Calendar + CRM integration",
+                    "Branded client portal",
+                    "Monthly management",
+                    "Usage analytics dashboard"
+                  ]
+                }
+              ].map((column) => (
+                <article key={column.title} className="deliverable-column">
+                  <h3>{column.title}</h3>
+                  <ul>
+                    {column.items.map((item) => <li key={item}>✦ {item}</li>)}
+                  </ul>
+                </article>
+              ))}
+            </div>
+            <a className="btn white-cta" href="#intake">Start Your Audit <span className="arrow">→</span></a>
+          </div>
+        </section>
+
+        <section className="compact section-diagonal">
           <div className="wrap">
             <div className="sec-head">
               <div className="label">Process</div>
@@ -761,7 +984,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
             <div className="sec-head">
               <div className="label">Pricing</div>
               <h2>Transparent pricing. No discovery calls required.</h2>
-              <p className="sub">Every tier is structured for operator use, with referral-ready pricing for bulk and follow-up engagements.</p>
+              <p className="sub">Every tier is structured for clean delivery, clear scope, and simple next steps.</p>
             </div>
 
             <div className="pricing-block">
@@ -806,9 +1029,9 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
               <p className="sub">Real engagements. Real findings. Every audit is scoped, delivered, and followed up — no generic reports.</p>
             </div>
 
-            <div className="testimonials-grid pm-reveal">
-              {TESTIMONIALS.map((t) => (
-                <article key={t.name} className="testimonial-card glass-premium">
+            <div className="testimonials-grid">
+              {TESTIMONIALS.map((t, index) => (
+                <article key={t.name} className="testimonial-card glass-premium testimonial-stagger pm-reveal" style={{ transitionDelay: `${index * 0.15}s` }}>
                   <div className="testimonial-quote">&ldquo;{t.quote}&rdquo;</div>
                   <div className="testimonial-foot">
                     <div className="testimonial-name">{t.name}</div>
@@ -854,17 +1077,16 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                 <div className="confirm-stage">
                   <div className="confirm-check">⌁</div>
                   <h1>Start your audit</h1>
-                  <div className="summary">
-                    Fill out the form below and I&apos;ll be in touch within <span className="gold">24 hours</span> to confirm your engagement and next steps.
-                  </div>
+                <div className="summary">
+                  Fill out the full intake below. Your audit brief routes into the command center and delivery moves through Google Drive.
+                </div>
                 </div>
 
                 <form className="order-form" onSubmit={submitOrder}>
                   <div className="intake-form-grid">
-                    <input className="field" placeholder="Client name *" value={form.customerName} onChange={(event) => updateField("customerName", event.target.value)} required />
-                    <input className="field" placeholder="Business name *" value={form.businessName} onChange={(event) => updateField("businessName", event.target.value)} required />
-                    <input className="field" placeholder="Email *" type="email" value={form.email} onChange={(event) => updateField("email", event.target.value)} required />
-                    <input className="field" placeholder="Phone" value={form.phone} onChange={(event) => updateField("phone", event.target.value)} />
+                    <input className="field" placeholder="Full name *" value={form.customerName} onChange={(event) => updateField("customerName", event.target.value)} required />
+                    <input className="field" placeholder="Email address *" type="email" value={form.email} onChange={(event) => updateField("email", event.target.value)} required />
+                    <input className="field" placeholder="Phone / WhatsApp" value={form.phone} onChange={(event) => updateField("phone", event.target.value)} />
                     <select
                       className="field"
                       value={form.packageName}
@@ -883,14 +1105,124 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                       <option>X Image Audit</option>
                       <option>Voice Agent</option>
                     </select>
-                    <input className="field" placeholder="Service type" value={form.serviceType} onChange={(event) => updateField("serviceType", event.target.value)} />
-                    <input className="field" placeholder="Budget / target value" value={form.budget} onChange={(event) => updateField("budget", event.target.value)} />
+                    <input className="field" placeholder="How did you hear about us?" value={form.hearAbout} onChange={(event) => updateField("hearAbout", event.target.value)} required />
+
+                    {(isDigitalAudit || isVoiceAgent) && (
+                      <>
+                        <input className="field" placeholder="Business name *" value={form.businessName} onChange={(event) => updateField("businessName", event.target.value)} required />
+                        <input className="field" placeholder="Website URL *" value={form.websiteUrl} onChange={(event) => updateField("websiteUrl", event.target.value)} required />
+                        <input className="field" placeholder={isVoiceAgent ? "Industry *" : "Industry / field *"} value={form.industry} onChange={(event) => updateField("industry", event.target.value)} required />
+                      </>
+                    )}
+
+                    {isDigitalAudit && (
+                      <>
+                        <input className="field" placeholder="City and state *" value={form.cityState} onChange={(event) => updateField("cityState", event.target.value)} required />
+                        <input className="field" placeholder="Number of locations *" value={form.locations} onChange={(event) => updateField("locations", event.target.value)} required />
+                        <textarea className="field field-textarea" placeholder="Biggest current challenge *" value={form.biggestChallenge} onChange={(event) => updateField("biggestChallenge", event.target.value)} rows={3} required />
+                        <select className="field" value={form.aiImplementation} onChange={(event) => updateField("aiImplementation", event.target.value)} required>
+                          <option value="">Considering AI implementation? *</option>
+                          <option>Yes</option>
+                          <option>No</option>
+                          <option>Maybe</option>
+                        </select>
+                        <input className="field" placeholder="Any upcoming deadlines or events?" value={form.deadlines} onChange={(event) => updateField("deadlines", event.target.value)} />
+                      </>
+                    )}
+
+                    {isImageAudit && (
+                      <>
+                        <select className="field" value={form.gender} onChange={(event) => updateField("gender", event.target.value)} required>
+                          <option value="">Gender *</option>
+                          <option>Man</option>
+                          <option>Woman</option>
+                          <option>Non-binary</option>
+                          <option>Prefer not to say</option>
+                        </select>
+                        <select className="field" value={form.ageRange} onChange={(event) => updateField("ageRange", event.target.value)} required>
+                          <option value="">Age range *</option>
+                          <option>18–24</option>
+                          <option>25–34</option>
+                          <option>35–44</option>
+                          <option>45–54</option>
+                          <option>55+</option>
+                        </select>
+                        <input className="field" placeholder="Height *" value={form.height} onChange={(event) => updateField("height", event.target.value)} required />
+                        <input className="field" placeholder="Weight *" value={form.weight} onChange={(event) => updateField("weight", event.target.value)} required />
+                        <input className="field" placeholder="Instagram handle" value={form.instagram} onChange={(event) => updateField("instagram", event.target.value)} />
+                        <input className="field" placeholder="TikTok handle" value={form.tiktok} onChange={(event) => updateField("tiktok", event.target.value)} />
+                        <input className="field" placeholder="LinkedIn profile URL" value={form.linkedin} onChange={(event) => updateField("linkedin", event.target.value)} />
+                        <input className="field" placeholder="YouTube channel" value={form.youtube} onChange={(event) => updateField("youtube", event.target.value)} />
+                        <input className="field" placeholder="X / Twitter handle" value={form.twitter} onChange={(event) => updateField("twitter", event.target.value)} />
+                        <input className="field" placeholder="Any other platform + handle" value={form.otherPlatform} onChange={(event) => updateField("otherPlatform", event.target.value)} />
+                        <div className="field checkbox-field">
+                          <div className="checkbox-title">Most important platforms</div>
+                          <div className="checkbox-grid">
+                            {PLATFORM_OPTIONS.map((platform) => (
+                              <label key={platform}><input type="checkbox" checked={form.importantPlatforms.includes(platform)} onChange={() => togglePlatform(platform)} /> {platform}</label>
+                            ))}
+                          </div>
+                        </div>
+                        <textarea className="field field-textarea" placeholder="What do you want your image to communicate? *" value={form.imageCommunication} onChange={(event) => updateField("imageCommunication", event.target.value)} rows={3} required />
+                        <textarea className="field field-textarea" placeholder="Biggest current image concerns *" value={form.imageConcerns} onChange={(event) => updateField("imageConcerns", event.target.value)} rows={3} required />
+                        <input className="field" placeholder="Upcoming events or shoots?" value={form.imageEvents} onChange={(event) => updateField("imageEvents", event.target.value)} />
+                        <textarea className="field field-textarea" placeholder="People whose style you admire" value={form.styleAdmire} onChange={(event) => updateField("styleAdmire", event.target.value)} rows={3} />
+                        <textarea className="field field-textarea" placeholder="Describe the energy you want to project" value={form.desiredEnergy} onChange={(event) => updateField("desiredEnergy", event.target.value)} rows={3} />
+                        <select className="field" value={form.wardrobeBudget} onChange={(event) => updateField("wardrobeBudget", event.target.value)}>
+                          <option value="">Wardrobe budget range</option>
+                          <option>$0–$250</option>
+                          <option>$250–$750</option>
+                          <option>$750–$1,500</option>
+                          <option>$1,500+</option>
+                        </select>
+                        <select className="field" value={form.photographyInterest} onChange={(event) => updateField("photographyInterest", event.target.value)}>
+                          <option value="">Interested in photography session after audit?</option>
+                          <option>Yes</option>
+                          <option>Possibly</option>
+                          <option>No</option>
+                        </select>
+                        <select className="field" value={form.wardrobeBlueprintInterest} onChange={(event) => updateField("wardrobeBlueprintInterest", event.target.value)}>
+                          <option value="">Interested in Wardrobe Blueprint add-on?</option>
+                          <option>Yes</option>
+                          <option>Possibly</option>
+                          <option>No</option>
+                          <option>Tell me more</option>
+                        </select>
+                        <div className="photo-notice">
+                          <strong>Photo submission after payment confirmation</strong>
+                          <p>After payment confirmation you will receive a Google Drive upload link for photo submission.</p>
+                          <p>Required: full body front in natural light, full body side, face close-up in natural light, and 3 current outfit photos.</p>
+                          <p>For Instagram and TikTok, submit 6–10 feed screenshots as part of your image dump for social media analysis.</p>
+                          <p>Color analysis requires a natural light face close-up. Body type analysis requires accurate height and weight. Sections without complete data are marked directional.</p>
+                        </div>
+                      </>
+                    )}
+
+                    {isVoiceAgent && (
+                      <>
+                        <input className="field" placeholder="Approximate monthly call volume" value={form.monthlyCallVolume} onChange={(event) => updateField("monthlyCallVolume", event.target.value)} />
+                        <select className="field" value={form.afterHoursVoicemail} onChange={(event) => updateField("afterHoursVoicemail", event.target.value)}>
+                          <option value="">Do calls currently go to voicemail after hours?</option>
+                          <option>Yes</option>
+                          <option>No</option>
+                          <option>Not sure</option>
+                        </select>
+                        <select className="field" value={form.onlineBooking} onChange={(event) => updateField("onlineBooking", event.target.value)}>
+                          <option value="">Do you have an online booking system?</option>
+                          <option>Yes</option>
+                          <option>No</option>
+                        </select>
+                        <input className="field" placeholder="Average transaction value ($)" value={form.averageTransactionValue} onChange={(event) => updateField("averageTransactionValue", event.target.value)} />
+                        <textarea className="field field-textarea" placeholder="Any notes on current phone intake challenges" value={form.phoneChallenges} onChange={(event) => updateField("phoneChallenges", event.target.value)} rows={4} />
+                      </>
+                    )}
+
                     <textarea
                       className="field field-textarea"
-                      placeholder="Notes, goals, timeline, or anything the operator should know"
+                      placeholder="Anything else we should know?"
                       value={form.notes}
                       onChange={(event) => updateField("notes", event.target.value)}
-                      rows={5}
+                      rows={4}
                     />
                   </div>
 
@@ -923,6 +1255,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                 <Link href="/login">Client Login</Link>
                 <Link href="#services">Services</Link>
                 <Link href="#intake">Intake</Link>
+                <a href="https://aicouncilconductor.com" target="_blank" rel="noreferrer">AI Council Conductor</a>
               </div>
               <div className="footer-col">
                 <h5>Support</h5>
@@ -931,7 +1264,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
               </div>
             </div>
             <div className="footer-bottom">
-              <span>© 2026 Sovereign X Audits</span>
+              <span>© 2026 Sovereign X Audits · sxaudits.com</span>
               <span>
                 <a href="#hero">Top</a>
                 <a href="#intake">Intake</a>

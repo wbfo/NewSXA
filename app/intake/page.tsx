@@ -2,8 +2,20 @@ import { IntakeClient } from "@/components/intake-client";
 import { readDashboard } from "@/lib/server/store";
 
 export const metadata = {
-  title: "Client Intake | Sovereign X Audits",
-  description: "Premium client intake landing page that routes directly into the command center order queue."
+  title: {
+    absolute: "Sovereign X Audits"
+  },
+  description: "Your presence is telling a story. We audit your business, brand, and image and show you exactly what it's costing you.",
+  alternates: {
+    canonical: "https://sxaudits.com/intake"
+  },
+  openGraph: {
+    title: "Sovereign X Audits",
+    description: "Delivered in 72 hours. No discovery call.",
+    url: "https://sxaudits.com/intake",
+    siteName: "Sovereign X Audits",
+    type: "website"
+  }
 };
 
 export default async function IntakePage() {

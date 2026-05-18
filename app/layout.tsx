@@ -4,8 +4,22 @@ import { AuthProvider } from "@/components/auth-context";
 import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata: Metadata = {
-  title: "Sovereign X Command Center",
-  description: "Command center for audits, pipeline, Hermes workflows, and operator approvals."
+  metadataBase: new URL("https://sxaudits.com"),
+  title: {
+    default: "Sovereign X Audits",
+    template: "%s | Sovereign X Audits"
+  },
+  description: "Business, brand, image, and voice-agent audits delivered in 72 hours by BlackFur Capital Group LLC.",
+  alternates: {
+    canonical: "https://sxaudits.com"
+  },
+  openGraph: {
+    title: "Sovereign X Audits",
+    description: "We audit your business, your brand, and your image — and show you exactly what it's costing you.",
+    url: "https://sxaudits.com",
+    siteName: "Sovereign X Audits",
+    type: "website"
+  }
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
