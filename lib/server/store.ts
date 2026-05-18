@@ -113,7 +113,7 @@ function normalizePersistedState(raw: Partial<PersistedRuntimeState> | null | un
 const REDIS_STATE_KEY = "sx:runtime-state";
 let _redis: RedisType | null = null;
 
-function useRedis() {
+function shouldUseRedisBackend() {
   return Boolean(process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN);
 }
 
@@ -143,7 +143,7 @@ async function ensureStateFile() {
 // ── Unified read / write ──────────────────────────────────────────────────────
 
 async function readPersistedState(): Promise<PersistedRuntimeState> {
-  if (useRedis()) {
+  if (shouldUseRedisBackend()) {
     try {
       const redis = await getRedis();
       const raw = await redis.get<PersistedRuntimeState>(REDIS_STATE_KEY);
@@ -171,7 +171,7 @@ async function readPersistedState(): Promise<PersistedRuntimeState> {
 }
 
 async function writePersistedState(state: PersistedRuntimeState) {
-  if (useRedis()) {
+  if (shouldUseRedisBackend()) {
     try {
       const redis = await getRedis();
       await redis.set(REDIS_STATE_KEY, state);
