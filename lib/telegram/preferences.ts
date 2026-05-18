@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, unlink, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 interface TelegramChatPreference {
@@ -51,3 +51,10 @@ export async function setTelegramPreferredAddress(chatId: number | string, prefe
   await writePreferences(preferences);
 }
 
+export async function resetTelegramPreferencesForTests() {
+  if (process.env.NODE_ENV !== "test") {
+    throw new Error("resetTelegramPreferencesForTests can only run in tests");
+  }
+
+  await unlink(PREFERENCES_PATH).catch(() => undefined);
+}

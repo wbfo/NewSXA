@@ -2,13 +2,14 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import type { DashboardPayload, QueueItem, ReportItem, WorkflowRun } from "@/lib/domain/types";
+import type { BusinessExpense, DashboardPayload, ExpenseCategory, ExpenseCycle, ExpenseDecision, ExpenseStatus, FinanceBudget, QueueItem, ReportItem, WorkflowRun } from "@/lib/domain/types";
 import { Navigation } from "@/components/navigation";
 import { TopBar } from "@/components/topbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Badge, Panel, ProgressBar } from "@/components/ui";
 import { ToolkitSectionView } from "@/components/toolkit-views";
 import { formatDisplayTime } from "@/lib/utils/time";
+import { buildFinanceSummary, getMonthlyExpenseAmount } from "@/lib/finance/calculations";
 
 async function fetchDashboard() {
   const response = await fetch("/api/dashboard", { cache: "no-store" });
@@ -125,6 +126,69 @@ function useDashboard(initialData: DashboardPayload) {
     setDashboard(await fetchDashboard());
   };
 
+  const addExpense = async (payload: {
+    name: string;
+    vendor: string;
+    category: ExpenseCategory;
+    amount: number;
+    billingCycle: ExpenseCycle;
+    nextDueDate?: string;
+    paymentMethod?: string;
+    status: ExpenseStatus;
+    decision: ExpenseDecision;
+    owner?: string;
+    useCase?: string;
+    notes?: string;
+    receiptUrl?: string;
+    relatedVaultAssetId?: string;
+  }) => {
+    const response = await fetch("/api/finance/expenses", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    if (!response.ok) {
+      const body = (await response.json()) as { error?: string };
+      throw new Error(body.error ?? "Failed to add expense.");
+    }
+    setDashboard(await fetchDashboard());
+  };
+
+  const updateExpense = async (expenseId: string, patch: Partial<BusinessExpense>) => {
+    const response = await fetch(`/api/finance/expenses/${expenseId}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(patch),
+    });
+    if (!response.ok) {
+      const body = (await response.json()) as { error?: string };
+      throw new Error(body.error ?? "Failed to update expense.");
+    }
+    setDashboard(await fetchDashboard());
+  };
+
+  const deleteExpense = async (expenseId: string) => {
+    const response = await fetch(`/api/finance/expenses/${expenseId}`, { method: "DELETE" });
+    if (!response.ok) {
+      const body = (await response.json()) as { error?: string };
+      throw new Error(body.error ?? "Failed to remove expense.");
+    }
+    setDashboard(await fetchDashboard());
+  };
+
+  const updateFinanceBudget = async (patch: Partial<FinanceBudget>) => {
+    const response = await fetch("/api/finance/budget", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(patch),
+    });
+    if (!response.ok) {
+      const body = (await response.json()) as { error?: string };
+      throw new Error(body.error ?? "Failed to update finance budget.");
+    }
+    setDashboard(await fetchDashboard());
+  };
+
   const updateOrderStatus = async (orderId: string, status: string) => {
     await fetch(`/api/orders/${orderId}`, {
       method: "PATCH",
@@ -152,6 +216,24 @@ function useDashboard(initialData: DashboardPayload) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(patch)
     });
+    setDashboard(await fetchDashboard());
+  };
+
+  const uploadVaultFile = async (payload: { file: File; prompt: string }) => {
+    const formData = new FormData();
+    formData.append("file", payload.file);
+    if (payload.prompt.trim()) {
+      formData.append("prompt", payload.prompt.trim());
+    }
+
+    const response = await fetch("/api/uploads", {
+      method: "POST",
+      body: formData,
+    });
+    if (!response.ok) {
+      const body = (await response.json()) as { error?: string };
+      throw new Error(body.error ?? "Upload failed.");
+    }
     setDashboard(await fetchDashboard());
   };
 
@@ -226,7 +308,7 @@ function useDashboard(initialData: DashboardPayload) {
     setDashboard(await fetchDashboard());
   };
 
-  return { dashboard, triggerAudit, approveWorkflow, addProspect, addPipelineItem, updateRevenue, updateOrderStatus, addAsset, updateAsset, deletePipelineItem, deleteProspect, dismissQueueItem, markReportRead, dismissReport, approveReportItem, dismissReportItem, runOutreach, runCfo, runFollowup, runResearch, isSubmitting, error, connectionError };
+  return { dashboard, triggerAudit, approveWorkflow, addProspect, addPipelineItem, updateRevenue, addExpense, updateExpense, deleteExpense, updateFinanceBudget, updateOrderStatus, addAsset, updateAsset, uploadVaultFile, deletePipelineItem, deleteProspect, dismissQueueItem, markReportRead, dismissReport, approveReportItem, dismissReportItem, runOutreach, runCfo, runFollowup, runResearch, isSubmitting, error, connectionError };
 }
 
 function toneForQueue(item: QueueItem) {
@@ -272,6 +354,10 @@ function formatActivityLabel(eventType: string) {
       return "Agent update";
     case "intake.submitted":
       return "Intake submitted";
+    case "vault.ingested":
+      return "Vault ingested";
+    case "finance.updated":
+      return "Finance updated";
     default:
       return "Activity";
   }
@@ -653,6 +739,118 @@ function AssetsView({ dashboard, onUpdateAsset }: { dashboard: DashboardPayload;
             <div className="mono-subtle">No deliverables yet. Add one from the Audits section.</div>
           )}
         </div>
+      </Panel>
+    </div>
+  );
+}
+
+function formatAssetBytes(size: number) {
+  if (size < 1024) return `${size} B`;
+  if (size < 1024 * 1024) return `${Math.round(size / 1024)} KB`;
+  return `${(size / (1024 * 1024)).toFixed(1)} MB`;
+}
+
+function VaultUploadForm({ onUpload }: { onUpload: (payload: { file: File; prompt: string }) => Promise<void> }) {
+  const [file, setFile] = useState<File | null>(null);
+  const [prompt, setPrompt] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
+
+  return (
+    <form
+      className="form-grid"
+      onSubmit={(event) => {
+        event.preventDefault();
+        if (!file || submitting) return;
+        setSubmitting(true);
+        setError("");
+        void onUpload({ file, prompt })
+          .then(() => {
+            setFile(null);
+            setPrompt("");
+            const input = event.currentTarget.querySelector<HTMLInputElement>("input[type=file]");
+            if (input) input.value = "";
+          })
+          .catch((caughtError) => setError(caughtError instanceof Error ? caughtError.message : "Upload failed."))
+          .finally(() => setSubmitting(false));
+      }}
+    >
+      <input
+        className="input"
+        type="file"
+        accept="image/*,.txt,.md,.markdown,.csv,.json,.jsonl,.log,.xml,.yaml,.yml,.pdf,.doc,.docx,.xls,.xlsx"
+        onChange={(event) => setFile(event.target.files?.[0] ?? null)}
+      />
+      <textarea
+        className="input"
+        rows={3}
+        placeholder="Optional instruction for Hermes about this upload"
+        value={prompt}
+        onChange={(event) => setPrompt(event.target.value)}
+        style={{ resize: "vertical" }}
+      />
+      {file ? (
+        <div className="mono-subtle">
+          Selected: {file.name} · {formatAssetBytes(file.size)}
+        </div>
+      ) : null}
+      {error ? <div className="mono-subtle" style={{ color: "var(--red)" }}>{error}</div> : null}
+      <button className="button" type="submit" disabled={!file || submitting}>
+        {submitting ? "Ingesting…" : "Add to Vault"}
+      </button>
+    </form>
+  );
+}
+
+function VaultView({ dashboard, onUpload }: { dashboard: DashboardPayload; onUpload: (payload: { file: File; prompt: string }) => Promise<void> }) {
+  const readyCount = dashboard.knowledgeAssets.filter((asset) => asset.status === "READY").length;
+  const limitedCount = dashboard.knowledgeAssets.filter((asset) => asset.status === "LIMITED").length;
+
+  return (
+    <div className="section-grid">
+      <Panel title="Hermes Vault">
+        <div className="mini-stat-grid" style={{ marginBottom: 16 }}>
+          <div className="mini-stat">
+            <div className="mono-subtle">Items</div>
+            <div>{dashboard.knowledgeAssets.length}</div>
+          </div>
+          <div className="mini-stat">
+            <div className="mono-subtle">Readable</div>
+            <div style={{ color: "var(--green)" }}>{readyCount}</div>
+          </div>
+          <div className="mini-stat">
+            <div className="mono-subtle">Limited</div>
+            <div style={{ color: limitedCount > 0 ? "var(--orange)" : undefined }}>{limitedCount}</div>
+          </div>
+        </div>
+
+        <div className="stack">
+          {dashboard.knowledgeAssets.length === 0 ? (
+            <div className="mono-subtle">No vault items yet. Add files below and Hermes will receive their extracted context in chat.</div>
+          ) : (
+            dashboard.knowledgeAssets.map((asset) => (
+              <div key={asset.id} className="list-card">
+                <div className="split-row" style={{ marginBottom: 8 }}>
+                  <div>
+                    <div style={{ fontSize: 15 }}>{asset.name}</div>
+                    <div className="mono-subtle">
+                      {asset.mimeType} · {formatAssetBytes(asset.size)} · {formatDisplayTime(asset.uploadedAt)}
+                    </div>
+                  </div>
+                  <Badge label={asset.status} tone={asset.status === "READY" ? "green" : asset.status === "LIMITED" ? "orange" : "red"} />
+                </div>
+                <div className="mono-subtle" style={{ marginBottom: 8 }}>Stored for Hermes context as {asset.id}</div>
+                <div style={{ whiteSpace: "pre-wrap", lineHeight: 1.65, maxHeight: 220, overflow: "auto" }}>
+                  {asset.summary}
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+      </Panel>
+
+      <Panel title="Drop Files Into Context">
+        <VaultUploadForm onUpload={onUpload} />
       </Panel>
     </div>
   );
@@ -1213,6 +1411,331 @@ function RevenueView({ dashboard, onUpdateRevenue }: { dashboard: DashboardPaylo
   );
 }
 
+const EXPENSE_CATEGORIES: { value: ExpenseCategory; label: string }[] = [
+  { value: "AI_TOOLS", label: "AI / Tools" },
+  { value: "HOSTING", label: "Hosting" },
+  { value: "SOFTWARE", label: "Software" },
+  { value: "MARKETING", label: "Marketing" },
+  { value: "CONTRACTOR", label: "Contractor" },
+  { value: "ADMIN", label: "Admin" },
+  { value: "TAX_LEGAL", label: "Tax / Legal" },
+  { value: "OPERATIONS", label: "Operations" },
+  { value: "OTHER", label: "Other" },
+];
+
+function formatCurrency(value: number) {
+  return `$${Math.round(value).toLocaleString()}`;
+}
+
+function expenseStatusTone(status: ExpenseStatus): "default" | "green" | "red" | "orange" | "teal" | "purple" {
+  switch (status) {
+    case "active":
+    case "paid":
+      return "green";
+    case "overdue":
+      return "red";
+    case "paused":
+      return "orange";
+    case "cancelled":
+      return "default";
+    default:
+      return "teal";
+  }
+}
+
+function decisionTone(decision: ExpenseDecision): "default" | "green" | "red" | "orange" | "teal" | "purple" {
+  if (decision === "keep") return "green";
+  if (decision === "cancel") return "red";
+  return "orange";
+}
+
+function ExpenseForm({ onAdd, vaultAssets }: {
+  onAdd: (payload: {
+    name: string;
+    vendor: string;
+    category: ExpenseCategory;
+    amount: number;
+    billingCycle: ExpenseCycle;
+    nextDueDate?: string;
+    paymentMethod?: string;
+    status: ExpenseStatus;
+    decision: ExpenseDecision;
+    owner?: string;
+    useCase?: string;
+    notes?: string;
+    receiptUrl?: string;
+    relatedVaultAssetId?: string;
+  }) => Promise<void>;
+  vaultAssets: DashboardPayload["knowledgeAssets"];
+}) {
+  const [name, setName] = useState("");
+  const [vendor, setVendor] = useState("");
+  const [category, setCategory] = useState<ExpenseCategory>("SOFTWARE");
+  const [amount, setAmount] = useState("");
+  const [billingCycle, setBillingCycle] = useState<ExpenseCycle>("monthly");
+  const [nextDueDate, setNextDueDate] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState("");
+  const [decision, setDecision] = useState<ExpenseDecision>("review");
+  const [useCase, setUseCase] = useState("");
+  const [notes, setNotes] = useState("");
+  const [receiptUrl, setReceiptUrl] = useState("");
+  const [relatedVaultAssetId, setRelatedVaultAssetId] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
+
+  return (
+    <form
+      className="form-grid finance-form"
+      onSubmit={(event) => {
+        event.preventDefault();
+        setSubmitting(true);
+        setError("");
+        void onAdd({
+          name,
+          vendor: vendor || name,
+          category,
+          amount: Number(amount) || 0,
+          billingCycle,
+          nextDueDate: nextDueDate || undefined,
+          paymentMethod: paymentMethod || undefined,
+          status: "active",
+          decision,
+          useCase: useCase || undefined,
+          notes: notes || undefined,
+          receiptUrl: receiptUrl || undefined,
+          relatedVaultAssetId: relatedVaultAssetId || undefined,
+        })
+          .then(() => {
+            setName("");
+            setVendor("");
+            setAmount("");
+            setNextDueDate("");
+            setPaymentMethod("");
+            setUseCase("");
+            setNotes("");
+            setReceiptUrl("");
+            setRelatedVaultAssetId("");
+          })
+          .catch((caughtError) => setError(caughtError instanceof Error ? caughtError.message : "Failed to add expense."))
+          .finally(() => setSubmitting(false));
+      }}
+    >
+      <input className="input" placeholder="Expense / subscription name *" value={name} onChange={(event) => setName(event.target.value)} required />
+      <input className="input" placeholder="Vendor" value={vendor} onChange={(event) => setVendor(event.target.value)} />
+      <input className="input" placeholder="Amount *" type="number" min="0" step="0.01" value={amount} onChange={(event) => setAmount(event.target.value)} required />
+      <select className="select" value={billingCycle} onChange={(event) => setBillingCycle(event.target.value as ExpenseCycle)}>
+        <option value="monthly">Monthly</option>
+        <option value="yearly">Yearly</option>
+        <option value="weekly">Weekly</option>
+        <option value="one-time">One-time</option>
+      </select>
+      <select className="select" value={category} onChange={(event) => setCategory(event.target.value as ExpenseCategory)}>
+        {EXPENSE_CATEGORIES.map((item) => <option key={item.value} value={item.value}>{item.label}</option>)}
+      </select>
+      <input className="input" type="date" value={nextDueDate} onChange={(event) => setNextDueDate(event.target.value)} />
+      <input className="input" placeholder="Payment method" value={paymentMethod} onChange={(event) => setPaymentMethod(event.target.value)} />
+      <select className="select" value={decision} onChange={(event) => setDecision(event.target.value as ExpenseDecision)}>
+        <option value="keep">Keep</option>
+        <option value="review">Review</option>
+        <option value="cancel">Cancel</option>
+      </select>
+      <input className="input" placeholder="Use case / why it exists" value={useCase} onChange={(event) => setUseCase(event.target.value)} />
+      <input className="input" placeholder="Receipt or billing URL" value={receiptUrl} onChange={(event) => setReceiptUrl(event.target.value)} />
+      <select className="select" value={relatedVaultAssetId} onChange={(event) => setRelatedVaultAssetId(event.target.value)}>
+        <option value="">No vault receipt</option>
+        {vaultAssets.map((asset) => <option key={asset.id} value={asset.id}>{asset.name}</option>)}
+      </select>
+      <textarea className="input" rows={2} placeholder="Notes" value={notes} onChange={(event) => setNotes(event.target.value)} style={{ resize: "vertical" }} />
+      {error ? <div className="mono-subtle" style={{ color: "var(--red)" }}>{error}</div> : null}
+      <button className="button" type="submit" disabled={submitting || !name || !amount}>{submitting ? "Adding…" : "Add Expense"}</button>
+    </form>
+  );
+}
+
+function FinanceBudgetForm({ budget, onUpdate }: { budget: FinanceBudget; onUpdate: (patch: Partial<FinanceBudget>) => Promise<void> }) {
+  const [monthlyRevenueTarget, setMonthlyRevenueTarget] = useState(String(budget.monthlyRevenueTarget));
+  const [monthlyExpenseLimit, setMonthlyExpenseLimit] = useState(String(budget.monthlyExpenseLimit));
+  const [cashOnHand, setCashOnHand] = useState(String(budget.cashOnHand));
+  const [taxReservePercent, setTaxReservePercent] = useState(String(budget.taxReservePercent));
+  const [submitting, setSubmitting] = useState(false);
+
+  return (
+    <form
+      className="form-grid"
+      onSubmit={(event) => {
+        event.preventDefault();
+        setSubmitting(true);
+        void onUpdate({
+          monthlyRevenueTarget: Number(monthlyRevenueTarget) || 0,
+          monthlyExpenseLimit: Number(monthlyExpenseLimit) || 0,
+          cashOnHand: Number(cashOnHand) || 0,
+          taxReservePercent: Number(taxReservePercent) || 0,
+        }).finally(() => setSubmitting(false));
+      }}
+    >
+      <input className="input" type="number" min="0" value={monthlyRevenueTarget} onChange={(event) => setMonthlyRevenueTarget(event.target.value)} placeholder="Revenue target" />
+      <input className="input" type="number" min="0" value={monthlyExpenseLimit} onChange={(event) => setMonthlyExpenseLimit(event.target.value)} placeholder="Expense ceiling" />
+      <input className="input" type="number" min="0" value={cashOnHand} onChange={(event) => setCashOnHand(event.target.value)} placeholder="Cash on hand" />
+      <input className="input" type="number" min="0" max="100" value={taxReservePercent} onChange={(event) => setTaxReservePercent(event.target.value)} placeholder="Tax reserve %" />
+      <button className="button" type="submit" disabled={submitting}>{submitting ? "Saving…" : "Update Budget"}</button>
+    </form>
+  );
+}
+
+function FinanceView({
+  dashboard,
+  onAddExpense,
+  onUpdateExpense,
+  onDeleteExpense,
+  onUpdateBudget,
+}: {
+  dashboard: DashboardPayload;
+  onAddExpense: (payload: {
+    name: string;
+    vendor: string;
+    category: ExpenseCategory;
+    amount: number;
+    billingCycle: ExpenseCycle;
+    nextDueDate?: string;
+    paymentMethod?: string;
+    status: ExpenseStatus;
+    decision: ExpenseDecision;
+    owner?: string;
+    useCase?: string;
+    notes?: string;
+    receiptUrl?: string;
+    relatedVaultAssetId?: string;
+  }) => Promise<void>;
+  onUpdateExpense: (expenseId: string, patch: Partial<BusinessExpense>) => Promise<void>;
+  onDeleteExpense: (expenseId: string) => Promise<void>;
+  onUpdateBudget: (patch: Partial<FinanceBudget>) => Promise<void>;
+}) {
+  const summary = buildFinanceSummary(dashboard.expenses, dashboard.financeBudget, dashboard.summary.monthlyReceived);
+  const monthlyLimitProgress = dashboard.financeBudget.monthlyExpenseLimit > 0
+    ? Math.round((summary.monthlyBurn / dashboard.financeBudget.monthlyExpenseLimit) * 100)
+    : 0;
+  const groupedByCategory = EXPENSE_CATEGORIES
+    .map((category) => ({
+      ...category,
+      total: dashboard.expenses
+        .filter((expense) => expense.category === category.value)
+        .reduce((sum, expense) => sum + getMonthlyExpenseAmount(expense), 0),
+    }))
+    .filter((category) => category.total > 0);
+
+  return (
+    <div className="section-grid">
+      <Panel title="Finance Command">
+        <div className="stat-grid" style={{ gridTemplateColumns: "repeat(4, minmax(0, 1fr))" }}>
+          <div className="stat-card">
+            <div className="mono-subtle">Monthly Burn</div>
+            <div style={{ fontSize: 28, color: "var(--red)", marginTop: 6 }}>{formatCurrency(summary.monthlyBurn)}</div>
+          </div>
+          <div className="stat-card">
+            <div className="mono-subtle">After Expenses</div>
+            <div style={{ fontSize: 28, color: summary.afterExpenses >= 0 ? "var(--green)" : "var(--red)", marginTop: 6 }}>{formatCurrency(summary.afterExpenses)}</div>
+          </div>
+          <div className="stat-card">
+            <div className="mono-subtle">Annualized Burn</div>
+            <div style={{ fontSize: 28, color: "var(--orange)", marginTop: 6 }}>{formatCurrency(summary.annualBurn)}</div>
+          </div>
+          <div className="stat-card">
+            <div className="mono-subtle">Runway</div>
+            <div style={{ fontSize: 28, color: "var(--teal)", marginTop: 6 }}>
+              {summary.runwayMonths === null ? "∞" : `${summary.runwayMonths.toFixed(1)} mo`}
+            </div>
+          </div>
+        </div>
+        <div style={{ marginTop: 16 }}>
+          <div className="split-row" style={{ marginBottom: 8 }}>
+            <span className="mono-subtle">Expense ceiling usage</span>
+            <span className="mono-subtle">{monthlyLimitProgress}%</span>
+          </div>
+          <ProgressBar value={monthlyLimitProgress} color={monthlyLimitProgress > 100 ? "var(--red)" : "var(--gold)"} />
+        </div>
+      </Panel>
+
+      <Panel title="Budget Settings">
+        <FinanceBudgetForm budget={dashboard.financeBudget} onUpdate={onUpdateBudget} />
+      </Panel>
+
+      <Panel title="Expense Ledger">
+        <div className="stack">
+          {dashboard.expenses.length === 0 ? (
+            <div className="mono-subtle">No expenses yet. Add subscriptions, tools, contractors, hosting, and other costs below.</div>
+          ) : (
+            dashboard.expenses.map((expense) => (
+              <div key={expense.id} className="list-card">
+                <div className="split-row" style={{ alignItems: "flex-start", marginBottom: 10 }}>
+                  <div>
+                    <div style={{ fontSize: 15 }}>{expense.name}</div>
+                    <div className="mono-subtle">
+                      {expense.vendor} · {EXPENSE_CATEGORIES.find((category) => category.value === expense.category)?.label ?? expense.category} · {expense.billingCycle}
+                    </div>
+                  </div>
+                  <div style={{ textAlign: "right" }}>
+                    <div style={{ color: "var(--gold)" }}>{formatCurrency(expense.amount)}</div>
+                    <div className="mono-subtle">{formatCurrency(getMonthlyExpenseAmount(expense))}/mo equiv.</div>
+                  </div>
+                </div>
+                <div className="split-row" style={{ marginBottom: 10, flexWrap: "wrap" }}>
+                  <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+                    <Badge label={expense.status} tone={expenseStatusTone(expense.status)} />
+                    <Badge label={expense.decision} tone={decisionTone(expense.decision)} />
+                    {expense.nextDueDate ? <Badge label={`due ${expense.nextDueDate}`} tone="teal" /> : null}
+                  </div>
+                  <div style={{ display: "flex", gap: 6, flexWrap: "wrap", justifyContent: "flex-end" }}>
+                    {(["keep", "review", "cancel"] as ExpenseDecision[]).map((decision) => (
+                      <button
+                        key={decision}
+                        className={expense.decision === decision ? "button" : "button secondary"}
+                        style={{ fontSize: 10, padding: "3px 7px" }}
+                        disabled={expense.decision === decision}
+                        onClick={() => void onUpdateExpense(expense.id, { decision })}
+                      >
+                        {decision}
+                      </button>
+                    ))}
+                    <button className="button secondary" style={{ fontSize: 10, padding: "3px 7px" }} onClick={() => void onUpdateExpense(expense.id, { status: expense.status === "paused" ? "active" : "paused" })}>
+                      {expense.status === "paused" ? "Resume" : "Pause"}
+                    </button>
+                    <button className="button secondary" style={{ fontSize: 10, padding: "3px 7px" }} onClick={() => void onUpdateExpense(expense.id, { status: "cancelled", decision: "cancel" })}>
+                      Cancel
+                    </button>
+                    <button className="button secondary" style={{ fontSize: 10, padding: "3px 7px" }} onClick={() => void onDeleteExpense(expense.id)}>
+                      Remove
+                    </button>
+                  </div>
+                </div>
+                <div className="mono-subtle">{expense.paymentMethod || "No payment method"}{expense.receiptUrl ? " · receipt linked" : ""}{expense.relatedVaultAssetId ? ` · vault ${expense.relatedVaultAssetId}` : ""}</div>
+                {expense.useCase ? <div style={{ marginTop: 8, lineHeight: 1.6 }}>{expense.useCase}</div> : null}
+                {expense.notes ? <div className="muted" style={{ marginTop: 8, lineHeight: 1.6 }}>{expense.notes}</div> : null}
+              </div>
+            ))
+          )}
+        </div>
+      </Panel>
+
+      <Panel title="Category Burn">
+        <div className="stack">
+          {groupedByCategory.length === 0 ? (
+            <div className="mono-subtle">Category totals will appear once expenses are added.</div>
+          ) : groupedByCategory.map((category) => (
+            <div key={category.value} className="split-row">
+              <span>{category.label}</span>
+              <span style={{ color: "var(--gold)" }}>{formatCurrency(category.total)}/mo</span>
+            </div>
+          ))}
+        </div>
+      </Panel>
+
+      <Panel title="Add Expense">
+        <ExpenseForm onAdd={onAddExpense} vaultAssets={dashboard.knowledgeAssets} />
+      </Panel>
+    </div>
+  );
+}
+
 function AddProspectForm({ onAdd }: { onAdd: (p: { name: string; contactPoints: string; serviceInterest: string; play: string; priority: string; estimatedValue: string }) => Promise<void> }) {
   const [name, setName] = useState("");
   const [contactPoints, setContactPoints] = useState("");
@@ -1737,11 +2260,13 @@ function InboxView({
 }
 
 export function DashboardClient({ initialData, section }: { initialData: DashboardPayload; section: string }) {
-  const { dashboard, triggerAudit, approveWorkflow, addProspect, addPipelineItem, updateRevenue, updateOrderStatus, addAsset, updateAsset, deletePipelineItem, deleteProspect, dismissQueueItem, markReportRead, dismissReport, approveReportItem, dismissReportItem, runOutreach, runCfo, runFollowup, runResearch, isSubmitting, error, connectionError } = useDashboard(initialData);
+  const { dashboard, triggerAudit, approveWorkflow, addProspect, addPipelineItem, updateRevenue, addExpense, updateExpense, deleteExpense, updateFinanceBudget, updateOrderStatus, addAsset, updateAsset, uploadVaultFile, deletePipelineItem, deleteProspect, dismissQueueItem, markReportRead, dismissReport, approveReportItem, dismissReportItem, runOutreach, runCfo, runFollowup, runResearch, isSubmitting, error, connectionError } = useDashboard(initialData);
   const toolkitDocument = dashboard.toolkit.find((item) => item.id === section);
 
   const mainView = (() => {
     switch (section) {
+      case "vault":
+        return <VaultView dashboard={dashboard} onUpload={uploadVaultFile} />;
       case "assets":
         return <AssetsView dashboard={dashboard} onUpdateAsset={updateAsset} />;
       case "audits":
@@ -1754,6 +2279,8 @@ export function DashboardClient({ initialData, section }: { initialData: Dashboa
         return <ChatView dashboard={dashboard} />;
       case "agents":
         return <AgentsView dashboard={dashboard} onRunOutreach={runOutreach} onRunCfo={runCfo} onRunFollowup={runFollowup} onRunResearch={runResearch} />;
+      case "finance":
+        return <FinanceView dashboard={dashboard} onAddExpense={addExpense} onUpdateExpense={updateExpense} onDeleteExpense={deleteExpense} onUpdateBudget={updateFinanceBudget} />;
       case "revenue":
         return <RevenueView dashboard={dashboard} onUpdateRevenue={updateRevenue} />;
       case "prospects":

@@ -30,6 +30,9 @@ vi.mock("@/lib/auth/server-auth", () => ({
 import { GET as getDashboard } from "@/app/api/dashboard/route";
 import { POST as createAudit } from "@/app/api/audits/route";
 import { GET as getToolkit } from "@/app/api/toolkit/[id]/route";
+import { POST as uploadVaultFile } from "@/app/api/uploads/route";
+import { POST as createExpense } from "@/app/api/finance/expenses/route";
+import { PATCH as updateBudget } from "@/app/api/finance/budget/route";
 import { resetStore } from "@/lib/server/store";
 
 describe("api contracts", () => {
@@ -65,5 +68,57 @@ describe("api contracts", () => {
     });
     const payload = await response.json();
     expect(payload.title).toBe("Research");
+  });
+
+  it("ingests text uploads into the Hermes vault", async () => {
+    const file = new File(["Vault line one\nVault line two"], "vault-notes.txt", { type: "text/plain" });
+    const formData = new FormData();
+    formData.set("file", file);
+
+    const response = await uploadVaultFile({
+      formData: async () => formData,
+    } as Request);
+    const payload = await response.json();
+
+    expect(response.status).toBe(201);
+    expect(payload.asset.name).toBe("vault-notes.txt");
+    expect(payload.asset.summary).toContain("Vault line one");
+  });
+
+  it("tracks business finance expenses and budget settings", async () => {
+    const expenseResponse = await createExpense(new Request("http://localhost/api/finance/expenses", {
+      method: "POST",
+      body: JSON.stringify({
+        name: "OpenAI",
+        vendor: "OpenAI",
+        category: "AI_TOOLS",
+        amount: 50,
+        billingCycle: "monthly",
+        nextDueDate: "2026-06-01",
+        paymentMethod: "Business card",
+        decision: "keep",
+        useCase: "Hermes image and reasoning provider",
+      }),
+      headers: { "Content-Type": "application/json" },
+    }));
+    expect(expenseResponse.status).toBe(201);
+
+    const budgetResponse = await updateBudget(new Request("http://localhost/api/finance/budget", {
+      method: "PATCH",
+      body: JSON.stringify({
+        monthlyRevenueTarget: 5000,
+        monthlyExpenseLimit: 1000,
+        cashOnHand: 2500,
+        taxReservePercent: 20,
+      }),
+      headers: { "Content-Type": "application/json" },
+    }));
+    expect(budgetResponse.status).toBe(200);
+
+    const dashboardResponse = await getDashboard();
+    const dashboard = await dashboardResponse.json();
+    expect(dashboard.expenses).toHaveLength(1);
+    expect(dashboard.expenses[0].name).toBe("OpenAI");
+    expect(dashboard.financeBudget.monthlyRevenueTarget).toBe(5000);
   });
 });

@@ -5,12 +5,15 @@ import {
   addAudit,
   appendChatMessage,
   emitDomainEvent,
+  listExpenses,
+  listKnowledgeAssets,
   listWorkflowRuns,
   readDashboard,
   removeQueueItem,
   replaceWorkflowRun,
   updateAudit
 } from "@/lib/server/store";
+import { buildFinanceSummary, getMonthlyExpenseAmount } from "@/lib/finance/calculations";
 
 /** Number of prior chat turns to include as context with every query. */
 const CHAT_HISTORY_TURNS = 20;
@@ -43,6 +46,51 @@ function buildHermesMessagePrompt(input: {
     "",
     "LATEST TELEGRAM MESSAGE:",
     input.message,
+  ].join("\n");
+}
+
+function buildVaultContext(assets: Awaited<ReturnType<typeof listKnowledgeAssets>>) {
+  const recentAssets = assets.slice(0, 8);
+  if (recentAssets.length === 0) return "";
+
+  return [
+    "COMMAND CENTER VAULT CONTEXT:",
+    "These are files/images Ola deliberately dumped into the Command Center for Hermes to use as working context.",
+    ...recentAssets.map((asset, index) => [
+      `Vault item ${index + 1}: ${asset.name}`,
+      `Type: ${asset.mimeType}`,
+      `Size: ${asset.size} bytes`,
+      `Status: ${asset.status}`,
+      `Uploaded: ${asset.uploadedAt}`,
+      asset.summary,
+    ].join("\n")),
+  ].join("\n\n");
+}
+
+function buildFinanceContext(finance: Awaited<ReturnType<typeof listExpenses>>) {
+  if (finance.expenses.length === 0) return "";
+
+  const summary = buildFinanceSummary(finance.expenses, finance.budget, finance.monthlyReceived);
+  const reviewItems = finance.expenses
+    .filter((expense) => expense.decision !== "keep" || expense.status === "overdue")
+    .slice(0, 8);
+
+  return [
+    "COMMAND CENTER FINANCE CONTEXT:",
+    `Monthly revenue received: $${finance.monthlyReceived.toLocaleString()}`,
+    `Monthly burn: $${Math.round(summary.monthlyBurn).toLocaleString()}`,
+    `After expenses: $${Math.round(summary.afterExpenses).toLocaleString()}`,
+    `Annualized burn: $${Math.round(summary.annualBurn).toLocaleString()}`,
+    `Cash on hand: $${finance.budget.cashOnHand.toLocaleString()}`,
+    `Expense ceiling: $${finance.budget.monthlyExpenseLimit.toLocaleString()}/mo`,
+    reviewItems.length > 0 ? "Expenses needing review:" : "No expenses currently marked for review/cancel.",
+    ...reviewItems.map((expense) => [
+      `- ${expense.name} (${expense.vendor})`,
+      `  Status: ${expense.status}; decision: ${expense.decision}; cycle: ${expense.billingCycle}`,
+      `  Amount: $${expense.amount}; monthly equivalent: $${Math.round(getMonthlyExpenseAmount(expense))}`,
+      expense.nextDueDate ? `  Next due: ${expense.nextDueDate}` : "",
+      expense.useCase ? `  Use case: ${expense.useCase}` : "",
+    ].filter(Boolean).join("\n")),
   ].join("\n");
 }
 
@@ -215,8 +263,13 @@ class RealHermesAdapter implements HermesGatewayAdapter {
     const chatHistoryTurns = input.source === "telegram" ? TELEGRAM_CHAT_HISTORY_TURNS : CHAT_HISTORY_TURNS;
     const chatHistory = priorMessages.length > 0 ? buildChatHistoryContext(priorMessages, chatHistoryTurns) : undefined;
 
+    const [vaultAssets, finance] = await Promise.all([listKnowledgeAssets(), listExpenses()]);
+    const vaultContext = buildVaultContext(vaultAssets);
+    const financeContext = buildFinanceContext(finance);
+    const promptContent = [vaultContext, financeContext, finalMessageContent].filter(Boolean).join("\n\n");
+
     const replyText = await queryHermes(
-      buildHermesMessagePrompt({ message: finalMessageContent, source: input.source }),
+      buildHermesMessagePrompt({ message: promptContent, source: input.source }),
       chatHistory
     );
     const reply: ChatMessage = {

@@ -114,6 +114,14 @@ export function createEmptyDashboard(agents: AgentNode[], councilBrief: CouncilB
     events: [],
     workflowRuns: [],
     chat,
-    reports: []
+    reports: [],
+    knowledgeAssets: [],
+    expenses: [],
+    financeBudget: {
+      monthlyRevenueTarget: 3000,
+      monthlyExpenseLimit: 750,
+      cashOnHand: 0,
+      taxReservePercent: 20,
+    }
   };
 }

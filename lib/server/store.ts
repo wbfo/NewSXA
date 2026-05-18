@@ -1,21 +1,20 @@
 /**
- * Runtime state store — JSON file backend.
+ * Runtime state store — dual-backend.
  *
- * ARCHITECTURAL CONSTRAINT: All state is persisted to a single JSON file
- * (`data/runtime-state.json`) on the local filesystem. This design works for
- * a single-server deployment but is NOT suitable for:
- *   - Horizontally-scaled / multi-instance deployments (each instance has its
- *     own file; state will diverge between pods)
- *   - Read replicas or serverless environments (no persistent local filesystem)
+ * PRODUCTION (Vercel / serverless):
+ *   Uses Upstash Redis when UPSTASH_REDIS_REST_URL + UPSTASH_REDIS_REST_TOKEN
+ *   are set. State is stored as a single JSON value at key "sx:runtime-state".
+ *   The in-process mutex still prevents concurrent writes within one invocation;
+ *   at this operator scale (one user) cross-invocation races are acceptable.
  *
- * If you need to scale beyond one server, replace readPersistedState /
- * writePersistedState with a database adapter (PostgreSQL, PlanetScale, etc.)
- * and swap withStoreLock() for a distributed lock (Redlock / Upstash).
+ * LOCAL DEV:
+ *   Falls back to the JSON file at data/runtime-state.json when Redis env vars
+ *   are absent. No extra setup required.
  *
- * Within a single process, concurrent writes are serialised by withStoreLock()
- * (lib/server/mutex.ts) to prevent race conditions.
+ * To scale further: replace with a proper relational DB + distributed lock.
  */
 import { mkdir, readFile, writeFile } from "node:fs/promises";
+import type { Redis as RedisType } from "@upstash/redis";
 import path from "node:path";
 import { createEmptyDashboard, seededToolkit } from "@/lib/demo-data/seed";
 import type {
@@ -26,6 +25,9 @@ import type {
   ClientOrder,
   DashboardPayload,
   DeliverableAsset,
+  BusinessExpense,
+  FinanceBudget,
+  KnowledgeAsset,
   OrderStatus,
   PipelineItem,
   Prospect,
@@ -52,8 +54,18 @@ interface PersistedRuntimeState {
   workflowRuns: WorkflowRun[];
   chat: ChatMessage[];
   reports: AgentReport[];
+  knowledgeAssets: KnowledgeAsset[];
+  expenses: BusinessExpense[];
+  financeBudget: FinanceBudget;
   agentLastRun?: Partial<Record<"cfo" | "followup" | "outreach" | "research", string>>;
 }
+
+const DEFAULT_FINANCE_BUDGET: FinanceBudget = {
+  monthlyRevenueTarget: 3000,
+  monthlyExpenseLimit: 750,
+  cashOnHand: 0,
+  taxReservePercent: 20,
+};
 
 const EMPTY_STATE: PersistedRuntimeState = {
   monthlyReceived: 0,
@@ -68,6 +80,9 @@ const EMPTY_STATE: PersistedRuntimeState = {
   workflowRuns: [],
   chat: [],
   reports: [],
+  knowledgeAssets: [],
+  expenses: [],
+  financeBudget: DEFAULT_FINANCE_BUDGET,
   agentLastRun: {},
 };
 
@@ -84,9 +99,36 @@ function normalizePersistedState(raw: Partial<PersistedRuntimeState> | null | un
     workflowRuns: Array.isArray(raw?.workflowRuns) ? raw.workflowRuns : [],
     chat: Array.isArray(raw?.chat) ? raw.chat : [],
     reports: Array.isArray(raw?.reports) ? raw.reports : [],
+    knowledgeAssets: Array.isArray(raw?.knowledgeAssets) ? raw.knowledgeAssets : [],
+    expenses: Array.isArray(raw?.expenses) ? raw.expenses : [],
+    financeBudget: (raw?.financeBudget && typeof raw.financeBudget === "object")
+      ? { ...DEFAULT_FINANCE_BUDGET, ...raw.financeBudget }
+      : DEFAULT_FINANCE_BUDGET,
     agentLastRun: (raw?.agentLastRun && typeof raw.agentLastRun === "object") ? raw.agentLastRun : {},
   };
 }
+
+// ── Redis backend (Vercel / production) ──────────────────────────────────────
+
+const REDIS_STATE_KEY = "sx:runtime-state";
+let _redis: RedisType | null = null;
+
+function useRedis() {
+  return Boolean(process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN);
+}
+
+async function getRedis(): Promise<RedisType> {
+  if (!_redis) {
+    const { Redis } = await import("@upstash/redis");
+    _redis = new Redis({
+      url: process.env.UPSTASH_REDIS_REST_URL!,
+      token: process.env.UPSTASH_REDIS_REST_TOKEN!,
+    });
+  }
+  return _redis;
+}
+
+// ── File backend (local dev) ──────────────────────────────────────────────────
 
 async function ensureStateFile() {
   await mkdir(path.dirname(HERMES_STATE_PATH), { recursive: true });
@@ -98,7 +140,20 @@ async function ensureStateFile() {
   }
 }
 
+// ── Unified read / write ──────────────────────────────────────────────────────
+
 async function readPersistedState(): Promise<PersistedRuntimeState> {
+  if (useRedis()) {
+    try {
+      const redis = await getRedis();
+      const raw = await redis.get<PersistedRuntimeState>(REDIS_STATE_KEY);
+      return normalizePersistedState(raw);
+    } catch (err) {
+      logger.error({ err }, "Redis read failed — returning empty state");
+      return { ...EMPTY_STATE };
+    }
+  }
+
   await ensureStateFile();
   const raw = await readFile(HERMES_STATE_PATH, "utf8");
   if (!raw.trim()) {
@@ -116,6 +171,15 @@ async function readPersistedState(): Promise<PersistedRuntimeState> {
 }
 
 async function writePersistedState(state: PersistedRuntimeState) {
+  if (useRedis()) {
+    try {
+      const redis = await getRedis();
+      await redis.set(REDIS_STATE_KEY, state);
+    } catch (err) {
+      logger.error({ err }, "Redis write failed");
+    }
+    return;
+  }
   await writeFile(HERMES_STATE_PATH, `${JSON.stringify(state, null, 2)}\n`, "utf8");
 }
 
@@ -145,6 +209,9 @@ export async function readDashboard(): Promise<DashboardPayload> {
   dashboard.toolkit = seededToolkit.map((item) => ({ ...item }));
   dashboard.knowledge = knowledgeContent.map((item) => ({ ...item }));
   dashboard.reports = state.reports;
+  dashboard.knowledgeAssets = state.knowledgeAssets;
+  dashboard.expenses = state.expenses;
+  dashboard.financeBudget = state.financeBudget;
   return dashboard;
 }
 
@@ -198,6 +265,113 @@ export async function appendChatMessage(message: ChatMessage) {
     state.chat.push(message);
     await writePersistedState(state);
     logger.debug({ messageId: message.id, role: message.role }, "Chat message appended");
+  });
+}
+
+export async function listKnowledgeAssets() {
+  return (await readPersistedState()).knowledgeAssets;
+}
+
+export async function listExpenses() {
+  const state = await readPersistedState();
+  return {
+    expenses: state.expenses,
+    budget: state.financeBudget,
+    monthlyReceived: state.monthlyReceived,
+  };
+}
+
+export async function addExpense(expense: BusinessExpense) {
+  return withStoreLock(async () => {
+    const state = await readPersistedState();
+    state.expenses = [expense, ...state.expenses];
+    pushEvent(state, {
+      id: crypto.randomUUID(),
+      timestamp: new Date().toISOString(),
+      sourceAgent: "Finance",
+      eventType: "finance.updated",
+      payloadSummary: `${expense.name} added to business expenses.`,
+      relatedEntityIds: [expense.id],
+    });
+    await writePersistedState(state);
+    logger.info({ expenseId: expense.id, name: expense.name }, "Expense added");
+  });
+}
+
+export async function updateExpense(expenseId: string, patch: Partial<BusinessExpense>) {
+  return withStoreLock(async () => {
+    const state = await readPersistedState();
+    let updatedName = expenseId;
+    state.expenses = state.expenses.map((expense) => {
+      if (expense.id !== expenseId) return expense;
+      updatedName = patch.name ?? expense.name;
+      return { ...expense, ...patch, id: expense.id, createdAt: expense.createdAt, updatedAt: new Date().toISOString() };
+    });
+    pushEvent(state, {
+      id: crypto.randomUUID(),
+      timestamp: new Date().toISOString(),
+      sourceAgent: "Finance",
+      eventType: "finance.updated",
+      payloadSummary: `${updatedName} expense record updated.`,
+      relatedEntityIds: [expenseId],
+    });
+    await writePersistedState(state);
+    logger.info({ expenseId, patch }, "Expense updated");
+  });
+}
+
+export async function removeExpense(expenseId: string) {
+  return withStoreLock(async () => {
+    const state = await readPersistedState();
+    state.expenses = state.expenses.filter((expense) => expense.id !== expenseId);
+    pushEvent(state, {
+      id: crypto.randomUUID(),
+      timestamp: new Date().toISOString(),
+      sourceAgent: "Finance",
+      eventType: "finance.updated",
+      payloadSummary: "Expense removed from business finance ledger.",
+      relatedEntityIds: [expenseId],
+    });
+    await writePersistedState(state);
+    logger.info({ expenseId }, "Expense removed");
+  });
+}
+
+export async function updateFinanceBudget(patch: Partial<FinanceBudget>) {
+  return withStoreLock(async () => {
+    const state = await readPersistedState();
+    state.financeBudget = {
+      ...state.financeBudget,
+      ...patch,
+      updatedAt: new Date().toISOString(),
+    };
+    pushEvent(state, {
+      id: crypto.randomUUID(),
+      timestamp: new Date().toISOString(),
+      sourceAgent: "Finance",
+      eventType: "finance.updated",
+      payloadSummary: "Business finance budget updated.",
+      relatedEntityIds: [],
+    });
+    await writePersistedState(state);
+    logger.info({ patch }, "Finance budget updated");
+  });
+}
+
+export async function addKnowledgeAsset(asset: KnowledgeAsset) {
+  return withStoreLock(async () => {
+    const state = await readPersistedState();
+    state.knowledgeAssets = [asset, ...state.knowledgeAssets].slice(0, 100);
+    pushEvent(state, {
+      id: crypto.randomUUID(),
+      timestamp: new Date().toISOString(),
+      sourceAgent: "Vault",
+      eventType: "vault.ingested",
+      payloadSummary: `${asset.name} ingested for Hermes context.`,
+      relatedEntityIds: [asset.id],
+    });
+    await writePersistedState(state);
+    logger.info({ assetId: asset.id, name: asset.name, status: asset.status }, "Knowledge asset ingested");
   });
 }
 

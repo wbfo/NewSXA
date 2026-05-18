@@ -379,17 +379,63 @@ HERMES:`;
   return parts.join("\n");
 }
 
+/**
+ * Cloud fallback: calls OpenAI directly when the Hermes binary is not
+ * available (e.g. Vercel serverless). Uses OPENAI_API_KEY from env.
+ */
+async function runHermesViaOpenAI(fullPrompt: string): Promise<string> {
+  const apiKey = process.env.OPENAI_API_KEY;
+  if (!apiKey || apiKey.includes("your_")) {
+    throw new Error("OPENAI_API_KEY is not configured for cloud Hermes fallback.");
+  }
+
+  const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      model: "gpt-4o-mini",
+      messages: [{ role: "user", content: fullPrompt }],
+      max_tokens: 2048,
+      temperature: 0.7,
+    }),
+    signal: AbortSignal.timeout(115_000),
+  });
+
+  if (!response.ok) {
+    const err = await response.text().catch(() => response.statusText);
+    throw new Error(`OpenAI API error ${response.status}: ${err}`);
+  }
+
+  const data = await response.json() as { choices: { message: { content: string } }[] };
+  return data.choices[0]?.message?.content?.trim() ?? "";
+}
+
 export async function runHermesQuery(query: string, chatHistory?: string) {
   const status = await getHermesStatusSummary();
+  const fullPrompt = buildFullPrompt(query, status, chatHistory);
+  const start = Date.now();
+
+  // ── Cloud path: binary not available (Vercel / serverless) ───────────────
   if (!status.installed) {
-    throw new Error("Hermes is not installed.");
+    logger.info({ queryLength: query.length }, "Hermes binary not found — falling back to OpenAI API");
+    try {
+      const replyText = await runHermesViaOpenAI(fullPrompt);
+      logger.info({ durationMs: Date.now() - start, replyLength: replyText.length }, "Hermes cloud query completed");
+      return replyText;
+    } catch (error) {
+      logger.error({ durationMs: Date.now() - start, error }, "Hermes cloud query failed");
+      throw error;
+    }
   }
+
   if (!status.providerConfigured) {
     throw new Error("Hermes is installed, but no model provider key is configured in ~/.hermes/.env.");
   }
 
-  const fullPrompt = buildFullPrompt(query, status, chatHistory);
-  const start = Date.now();
+  // ── Local path: binary available ─────────────────────────────────────────
   logger.info({ queryLength: query.length, fullPromptLength: fullPrompt.length }, "Hermes query started");
 
   try {

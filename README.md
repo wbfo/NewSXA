@@ -121,4 +121,38 @@ header before forwarding text messages into Hermes.
 
 Images and files sent to the bot are downloaded from Telegram. Images are
 analyzed first when `OPENAI_API_KEY` is configured, then the visual summary and
-file metadata are passed into Hermes as prompt context.
+file metadata are passed into Hermes as prompt context. Text-like uploads
+(`.txt`, `.md`, `.csv`, `.json`, `.log`, XML/YAML, and `text/*`) are extracted
+inline before Hermes is called. Binary formats such as PDFs and Office documents
+are downloaded and identified, but require a dedicated parser before Hermes can
+truthfully read their contents.
+
+## Command Center Vault
+
+Admins can open Command Center → Vault to drop files and images into Hermes'
+working context. Uploads are stored locally in `data/uploads/` and indexed in
+`data/runtime-state.json`; both are gitignored because they may contain private
+operator or client material.
+
+The vault uses the same analysis rules as Telegram attachments:
+
+- Images are visually summarized when `OPENAI_API_KEY` is configured.
+- Text-like files are extracted inline and sent to Hermes as readable context.
+- PDFs and Office files are stored and identified, but need a dedicated parser
+  before Hermes can truthfully read their contents.
+
+Recent vault items are automatically included in Hermes chat prompts so the
+engine can see the dumped material without you pasting it into every message.
+
+## Command Center Finance
+
+Admins can open Command Center → Finance to track the operating budget, recurring
+subscriptions, one-time expenses, payment methods, renewal dates, and keep/review
+/cancel decisions. Finance data is stored in the local runtime state file and is
+included in Hermes chat context so the agent can answer questions about monthly
+burn, expense pressure, upcoming renewals, runway, and subscriptions marked for
+review.
+
+The finance module is bookkeeping-lite, not tax/accounting software. Use it as
+the operational command layer for deciding what to keep, cut, renew, or chase
+down with receipts.

@@ -20,8 +20,14 @@ export type EventType =
   | "workflow.completed"
   | "chat.message"
   | "agent.status"
-  | "intake.submitted";
+  | "intake.submitted"
+  | "vault.ingested"
+  | "finance.updated";
 export type DeliverableStatus = "Generated" | "Internal Review" | "Ready" | "Sent";
+export type ExpenseCategory = "AI_TOOLS" | "HOSTING" | "SOFTWARE" | "MARKETING" | "CONTRACTOR" | "ADMIN" | "TAX_LEGAL" | "OPERATIONS" | "OTHER";
+export type ExpenseCycle = "monthly" | "yearly" | "weekly" | "one-time";
+export type ExpenseStatus = "active" | "paused" | "cancelled" | "overdue" | "paid";
+export type ExpenseDecision = "keep" | "review" | "cancel";
 
 export interface DeliverableAsset {
   id: string;
@@ -185,6 +191,46 @@ export interface ChatMessage {
   createdAt: string;
 }
 
+export interface KnowledgeAsset {
+  id: string;
+  name: string;
+  mimeType: string;
+  size: number;
+  uploadedAt: string;
+  uploadedBy: string;
+  storedPath: string;
+  summary: string;
+  status: "READY" | "LIMITED" | "FAILED";
+}
+
+export interface BusinessExpense {
+  id: string;
+  name: string;
+  vendor: string;
+  category: ExpenseCategory;
+  amount: number;
+  billingCycle: ExpenseCycle;
+  nextDueDate?: string;
+  paymentMethod?: string;
+  status: ExpenseStatus;
+  decision: ExpenseDecision;
+  owner?: string;
+  useCase?: string;
+  notes?: string;
+  receiptUrl?: string;
+  relatedVaultAssetId?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface FinanceBudget {
+  monthlyRevenueTarget: number;
+  monthlyExpenseLimit: number;
+  cashOnHand: number;
+  taxReservePercent: number;
+  updatedAt?: string;
+}
+
 export interface DashboardSummary {
   month: string;
   survivalTarget: number;
@@ -239,4 +285,7 @@ export interface DashboardPayload {
   workflowRuns: WorkflowRun[];
   chat: ChatMessage[];
   reports: AgentReport[];
+  knowledgeAssets: KnowledgeAsset[];
+  expenses: BusinessExpense[];
+  financeBudget: FinanceBudget;
 }

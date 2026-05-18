@@ -8,11 +8,13 @@ import { useAuth } from "@/components/auth-context";
 
 const dashboardNav = [
   { id: "command", label: "Command", icon: "⬡" },
+  { id: "vault", label: "Vault", icon: "▥" },
   { id: "audits", label: "Audits", icon: "◈" },
   { id: "assets", label: "Deliverables", icon: "▤" },
   { id: "orders", label: "Orders", icon: "▣" },
   { id: "pipeline", label: "Pipeline", icon: "◇" },
   { id: "agents", label: "Agents", icon: "◉" },
+  { id: "finance", label: "Finance", icon: "$" },
   { id: "revenue", label: "Revenue", icon: "◆" },
   { id: "prospects", label: "Prospects", icon: "◎" },
   { id: "chat", label: "Chat", icon: "◌" },

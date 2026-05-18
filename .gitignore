@@ -12,6 +12,7 @@ dist/
 # Runtime state (contains live data — seed from resetStore if needed)
 data/runtime-state.json
 data/telegram-preferences.json
+data/uploads/
 
 # Environment / secrets
 .env

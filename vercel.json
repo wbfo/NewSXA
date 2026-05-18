@@ -1,4 +1,14 @@
 {
+  "functions": {
+    "app/api/hermes/chat/route.ts": { "maxDuration": 120 },
+    "app/api/hermes/message/route.ts": { "maxDuration": 120 },
+    "app/api/hermes/workflow/route.ts": { "maxDuration": 120 },
+    "app/api/agents/cfo/run/route.ts": { "maxDuration": 60 },
+    "app/api/agents/followup/run/route.ts": { "maxDuration": 60 },
+    "app/api/agents/outreach/run/route.ts": { "maxDuration": 60 },
+    "app/api/agents/research/run/route.ts": { "maxDuration": 60 },
+    "app/api/audits/[id]/workflow/route.ts": { "maxDuration": 120 }
+  },
   "crons": [
     { "path": "/api/agents/cfo/run", "schedule": "0 7 * * *" },
     { "path": "/api/agents/followup/run", "schedule": "0 8 * * *" },
