@@ -468,7 +468,8 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                   <span>BlackFur Capital Group LLC</span>
                 </div>
                 <h1 className="pm-headline">
-                  <span className="accent text-neon-blue">YOUR DIGITAL PRESENCE</span> IS LEAKING REVENUE. WE&apos;LL SHOW YOU WHERE.
+                  <span className="accent text-neon-blue">YOUR DIGITAL PRESENCE</span>{" "}IS LEAKING REVENUE.{" "}
+                  <span className="pm-headline-break">WE&apos;LL SHOW YOU WHERE.</span>
                 </h1>
                 <div className="hero-divider pm-animate bg-neon-blue/20" />
                 <p className="hero-sub pm-animate text-slate-300">

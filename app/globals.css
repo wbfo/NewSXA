@@ -4338,19 +4338,61 @@ html[data-theme="light"] .sx-intake .order-business {
   }
 
   .sx-intake .hero {
-    padding-top: 64px;
+    padding: 56px 0 40px !important;
+  }
+
+  .sx-intake .hero-stage {
+    display: none;
+  }
+
+  .sx-intake .hero-sub {
+    font-size: 16px;
+    max-width: 100%;
+  }
+
+  .sx-intake .hero-ctas {
+    margin-bottom: 32px;
+  }
+
+  .sx-intake .metrics-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 32px;
+  }
+
+  .sx-intake .metric-card {
+    padding: 24px 20px;
+  }
+
+  .sx-intake .metric-value {
+    font-size: 32px !important;
   }
 }
 
 @media (max-width: 720px) {
   .sx-intake .wrap,
   .sx-intake .nav-inner {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 18px;
+    padding-right: 18px;
   }
 
   .sx-intake .hero {
-    padding-bottom: 56px;
+    padding: 48px 0 32px !important;
+  }
+
+  .sx-intake .hero-eyebrow {
+    font-size: 9px;
+    gap: 6px;
+    margin-bottom: 18px;
+  }
+
+  .sx-intake .hero-divider {
+    margin: 20px 0;
+    width: 56px;
+  }
+
+  .sx-intake .hero-credentials {
+    display: none;
   }
 
   .sx-intake .snippet-card {
@@ -4608,7 +4650,7 @@ html[data-theme="light"] .sx-intake .order-business {
 
 /* ── Hero Pro Max ── */
 .sx-intake .hero {
-  padding: 110px 0 90px !important;
+  padding: 88px 0 72px !important;
   position: relative;
   overflow: visible !important;
 }
@@ -4626,8 +4668,9 @@ html[data-theme="light"] .sx-intake .order-business {
 
 /* Cinematic hero h1 gradient */
 .sx-intake h1.pm-headline {
-  font-size: clamp(52px, 7.5vw, 104px) !important;
-  line-height: 0.98 !important;
+  font-size: clamp(30px, 4.2vw, 68px) !important;
+  line-height: 1.05 !important;
+  letter-spacing: -0.02em;
   background: linear-gradient(160deg, #f5edd8 0%, #d3ad64 38%, #e8dab8 70%, rgba(200,185,150,0.6) 100%);
   background-size: 200% 200%;
   -webkit-background-clip: text;
@@ -4635,6 +4678,10 @@ html[data-theme="light"] .sx-intake .order-business {
   background-clip: text;
   animation: pm-bg-shift 8s ease infinite, pm-fadeup 1s ease both;
   animation-delay: 0s, 2.6s;
+}
+
+.sx-intake h1.pm-headline .pm-headline-break {
+  display: block;
 }
 .sx-intake h1.pm-headline .accent {
   background: linear-gradient(135deg, #d3ad64, #f5c842, #d3ad64);
