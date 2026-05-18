@@ -180,6 +180,7 @@ async function writePersistedState(state: PersistedRuntimeState) {
     }
     return;
   }
+  await mkdir(path.dirname(HERMES_STATE_PATH), { recursive: true });
   await writeFile(HERMES_STATE_PATH, `${JSON.stringify(state, null, 2)}\n`, "utf8");
 }
 
