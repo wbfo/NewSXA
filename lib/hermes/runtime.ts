@@ -18,13 +18,15 @@ export const HERMES_CONFIG_PATH = path.join(HERMES_HOME, "config.yaml");
 export const HERMES_STATE_PATH = path.join(process.cwd(), "data", "runtime-state.json");
 export const HERMES_VENV_PYTHON = path.join(HERMES_INSTALL_DIR, "venv", "bin", "python");
 
-// SX_API_SERVER_KEY must be explicitly set in production.  In development
-// the default is kept only so the dev server can start without a full env.
-const API_SERVER_KEY =
-  process.env.SX_API_SERVER_KEY ??
-  (process.env.NODE_ENV === "production"
-    ? (() => { throw new Error("SX_API_SERVER_KEY env var is required in production"); })()
-    : "sx-local-dev-key");
+// SX_API_SERVER_KEY must be set in production. Resolved lazily at request time
+// (not at module load) so Next.js build-time route collection doesn't throw.
+function getApiServerKey(): string {
+  const key = process.env.SX_API_SERVER_KEY;
+  if (!key && process.env.NODE_ENV === "production") {
+    throw new Error("SX_API_SERVER_KEY env var is required in production");
+  }
+  return key ?? "sx-local-dev-key";
+}
 
 // The public URL is used for Hermes API server CORS.  In production this must
 // match the actual origin (e.g. https://app.sxaudits.com).
@@ -58,7 +60,7 @@ export async function ensureHermesWorkspaceEnv() {
   const lines = existing.split("\n");
   const updates = new Map<string, string>([
     ["API_SERVER_ENABLED", "true"],
-    ["API_SERVER_KEY", API_SERVER_KEY],
+    ["API_SERVER_KEY", getApiServerKey()],
     ["API_SERVER_CORS_ORIGINS", PUBLIC_URL]
   ]);
 
@@ -141,7 +143,7 @@ export async function getHermesStatusSummary() {
     providerConfigured,
     paperclipRunning,
     apiServerConfigured: true,
-    apiServerKey: API_SERVER_KEY
+    apiServerKey: getApiServerKey()
   };
 }
 
