@@ -1,4 +1,5 @@
 import { access, mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { existsSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { promisify } from "node:util";
@@ -34,6 +35,11 @@ const PUBLIC_URL = process.env.SX_PUBLIC_URL ?? "http://localhost:3000";
 
 function detectHermesBinary() {
   const localLauncher = path.join(HOME_DIR, ".local", "bin", "hermes");
+  if (existsSync(localLauncher)) return localLauncher;
+
+  const projectFallback = path.join(process.cwd(), "scripts", "hermes-fallback.sh");
+  if (existsSync(projectFallback)) return projectFallback;
+
   return localLauncher;
 }
 
