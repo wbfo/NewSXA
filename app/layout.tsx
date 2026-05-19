@@ -4,8 +4,57 @@ import { AuthProvider } from "@/components/auth-context";
 import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata: Metadata = {
-  title: "Sovereign X Command Center",
-  description: "Command center for audits, pipeline, Hermes workflows, and operator approvals."
+  metadataBase: new URL("https://sxaudits.com"),
+  title: {
+    default: "Sovereign X Audits — Digital & Image Intelligence Reports",
+    template: "%s | Sovereign X Audits",
+  },
+  description:
+    "A complete audit of your business, your brand, or your image — delivered in 72 hours. Revenue leaks identified. Dollar figures attached. AICC Verified. BlackFur Capital Group LLC.",
+  keywords: [
+    "digital audit service",
+    "business intelligence audit",
+    "personal brand audit",
+    "image audit",
+    "voice agent service",
+    "website audit",
+    "revenue leak audit",
+    "AI readiness audit",
+    "personal image consultant",
+    "voice agent for law firm",
+    "voice agent for dental practice",
+  ],
+  authors: [{ name: "Ola Olaitan", url: "https://aicouncilconductor.com" }],
+  creator: "BlackFur Capital Group LLC",
+  publisher: "Sovereign X Audits",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://sxaudits.com",
+    siteName: "Sovereign X Audits",
+    title: "Sovereign X Audits — Digital & Image Intelligence Reports",
+    description:
+      "We audit your business, your brand, and your image — and show you exactly what it's costing you. Delivered in 72 hours.",
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Sovereign X Audits" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sovereign X Audits",
+    description: "We audit your business, your brand, and your image — and show you exactly what it's costing you.",
+    images: ["/og-image.png"],
+  },
+  alternates: { canonical: "https://sxaudits.com" },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
