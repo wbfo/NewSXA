@@ -5,13 +5,13 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/components/auth-context";
 
-const DEFAULT_EMAIL = "sxabfcg@gmail.com";
+type AuthMode = "sign-in" | "request-access";
 
 export default function LoginPage() {
-  const { user, login, loading, isAdmin, error, devBypass, devBypassClient } = useAuth();
+  const { user, login, loading, isAdmin, error } = useAuth();
   const router = useRouter();
-  const showDevBypass = process.env.NODE_ENV !== "production" && process.env.NEXT_PUBLIC_ENABLE_DEV_BYPASS === "true";
-  const [email, setEmail] = useState(DEFAULT_EMAIL);
+  const [email, setEmail] = useState("");
+  const [mode, setMode] = useState<AuthMode>("sign-in");
 
   useEffect(() => {
     if (!user || loading) return;
@@ -40,10 +40,31 @@ export default function LoginPage() {
         <div className="auth-grid-mark" aria-hidden="true" />
         <div className="auth-seal">SX</div>
         <div className="auth-kicker">Sovereign X Audits</div>
-        <h1>Client Portal</h1>
+        <h1>Private Portal</h1>
         <p className="auth-copy">
-          Enter an approved email address to continue. Admin access is currently reserved for the hardcoded operator account.
+          Invite-only access for approved admin and client emails.
         </p>
+
+        <div className="auth-mode-switch" role="tablist" aria-label="Authentication mode">
+          <button
+            type="button"
+            role="tab"
+            aria-selected={mode === "sign-in"}
+            className={mode === "sign-in" ? "auth-mode-tab active" : "auth-mode-tab"}
+            onClick={() => setMode("sign-in")}
+          >
+            Sign in
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={mode === "request-access"}
+            className={mode === "request-access" ? "auth-mode-tab active" : "auth-mode-tab"}
+            onClick={() => setMode("request-access")}
+          >
+            Request access
+          </button>
+        </div>
 
         {error && (
           <div className="auth-error">
@@ -57,62 +78,47 @@ export default function LoginPage() {
 
         <div className="auth-divider" />
 
-        <form
-          onSubmit={(event) => {
-            event.preventDefault();
-            void login(email);
-          }}
-          style={{ display: "grid", gap: "0.75rem" }}
-        >
-          <label className="auth-label" htmlFor="email">
-            Approved Email
-          </label>
-          <input
-            id="email"
-            type="email"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            className="auth-input"
-            autoComplete="email"
-            spellCheck={false}
-            placeholder="you@example.com"
-          />
-          <button className="auth-submit-button" type="submit">
-            Continue
-          </button>
-        </form>
+        {mode === "sign-in" ? (
+          <form
+            onSubmit={(event) => {
+              event.preventDefault();
+              void login(email);
+            }}
+            style={{ display: "grid", gap: "0.75rem" }}
+          >
+            <label className="auth-label" htmlFor="email">
+              Email address
+            </label>
+            <input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              className="auth-input"
+              autoComplete="email"
+              spellCheck={false}
+              placeholder="you@example.com"
+            />
+            <button className="auth-submit-button" type="submit">
+              Sign in
+            </button>
+          </form>
+        ) : (
+          <div className="auth-request-card">
+            <p className="auth-copy" style={{ marginBottom: "0.75rem" }}>
+              This workspace is invite-only. Ask the administrator to add your email to the approved list, then return here to sign in.
+            </p>
+            <Link className="auth-submit-button" href="/intake" style={{ textAlign: "center" }}>
+              Start Intake
+            </Link>
+          </div>
+        )}
 
         <div className="auth-actions">
           <Link href="/intake">← Back to Intake</Link>
         </div>
 
         <p className="auth-footnote">Authorized access only. BlackFur Capital Group LLC.</p>
-
-        {showDevBypass && (
-          <div style={{ marginTop: "2rem", paddingTop: "1rem", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
-            <p style={{ fontSize: "10px", letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(255,255,255,0.2)", marginBottom: "0.75rem", textAlign: "center" }}>
-              Dev Only — Not visible in production
-            </p>
-            <button
-              className="auth-submit-button secondary"
-              onClick={devBypass}
-              type="button"
-              style={{ opacity: 0.5, fontSize: "11px", marginBottom: "0.5rem" }}
-            >
-              <span className="auth-icon" aria-hidden="true">🛠️</span>
-              Admin Workstation
-            </button>
-            <button
-              className="auth-submit-button secondary"
-              onClick={devBypassClient}
-              type="button"
-              style={{ opacity: 0.5, fontSize: "11px" }}
-            >
-              <span className="auth-icon" aria-hidden="true">👤</span>
-              Preview Client Portal
-            </button>
-          </div>
-        )}
       </section>
     </main>
   );

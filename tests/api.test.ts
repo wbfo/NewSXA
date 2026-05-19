@@ -40,6 +40,8 @@ vi.mock("@/lib/auth/server-auth", () => ({
 }));
 
 import { GET as getDashboard } from "@/app/api/dashboard/route";
+import { POST as createAuthSession } from "@/app/api/auth/session/route";
+import { POST as clearAuthSession } from "@/app/api/auth/logout/route";
 import { POST as createAudit } from "@/app/api/audits/route";
 import { POST as createOrder } from "@/app/api/orders/route";
 import { GET as getToolkit } from "@/app/api/toolkit/[id]/route";
@@ -73,6 +75,25 @@ describe("api contracts", () => {
     const payload = await response.json();
     expect(response.status).toBe(200);
     expect(payload.workflow.workflowType).toBe("trigger-audit");
+  });
+
+  it("creates and clears a local auth session for allowed emails", async () => {
+    const loginResponse = await createAuthSession(new Request("http://localhost/api/auth/session", {
+      method: "POST",
+      body: JSON.stringify({ email: "sxabfcg@gmail.com" }),
+      headers: { "Content-Type": "application/json" },
+    }));
+    const loginPayload = await loginResponse.json();
+
+    expect(loginResponse.status).toBe(200);
+    expect(loginPayload.role).toBe("admin");
+    expect(loginResponse.headers.get("set-cookie")).toContain("sx-session-email");
+
+    const logoutResponse = await clearAuthSession(new Request("http://localhost/api/auth/logout", {
+      method: "POST",
+    }));
+    expect(logoutResponse.status).toBe(200);
+    expect(logoutResponse.headers.get("set-cookie")).toContain("sx-session-email=");
   });
 
   it("creates intake orders and attaches drive metadata when available", async () => {

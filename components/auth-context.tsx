@@ -109,15 +109,36 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       setError("That email is not approved for access yet.");
       return;
     }
-    const role: "admin" | "client" = isEmailAdmin(normalizedEmail) ? "admin" : "client";
-    startTransition(() => {
-      applySession(normalizedEmail, role);
-    });
-    window.location.href = role === "admin" ? "/admin" : "/portal";
+    try {
+      const response = await fetch("/api/auth/session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: normalizedEmail }),
+      });
+
+      const payload = await response.json().catch(() => null);
+      if (!response.ok) {
+        setError(payload?.error || "Unable to create session.");
+        return;
+      }
+
+      const role: "admin" | "client" = payload?.role === "admin" ? "admin" : "client";
+      startTransition(() => {
+        applySession(normalizedEmail, role);
+      });
+      window.location.href = role === "admin" ? "/admin" : "/portal";
+    } catch {
+      setError("Unable to reach the sign-in service.");
+    }
   }
 
   async function logout() {
     const wasBypass = Cookies.get("sx-session-role") === "dev";
+    try {
+      await fetch("/api/auth/logout", { method: "POST" });
+    } catch {
+      // Even if the server call fails, we still clear local cookies and leave.
+    }
     clearSession();
     if (wasBypass) {
       window.location.href = "/";
