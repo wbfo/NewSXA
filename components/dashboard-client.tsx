@@ -1875,6 +1875,19 @@ function OrdersView({ dashboard, onUpdateOrderStatus }: { dashboard: DashboardPa
                   <div className="muted">{order.serviceType}</div>
                   <div style={{ color: "var(--gold)" }}>{order.budget || "No budget provided"}</div>
                 </div>
+                {(order.driveUploadLink || order.driveFolderLink || order.driveDeliveryLink) && (
+                  <div style={{ marginTop: 10, display: "grid", gap: 6 }}>
+                    {order.driveUploadLink ? (
+                      <a href={order.driveUploadLink} target="_blank" rel="noreferrer" className="panel-link">Client upload link ↗</a>
+                    ) : null}
+                    {order.driveFolderLink ? (
+                      <a href={order.driveFolderLink} target="_blank" rel="noreferrer" className="panel-link">Drive folder ↗</a>
+                    ) : null}
+                    {order.driveDeliveryLink ? (
+                      <a href={order.driveDeliveryLink} target="_blank" rel="noreferrer" className="panel-link">Delivered report ↗</a>
+                    ) : null}
+                  </div>
+                )}
                 <div style={{ marginTop: 10, lineHeight: 1.7 }}>{order.notes || "No additional notes."}</div>
                 <div style={{ marginTop: 12, display: "flex", gap: 6, flexWrap: "wrap" }}>
                   {ORDER_STATUSES.map((s) => (

@@ -540,14 +540,18 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
           status: "NEW"
         })
       });
-      const body = (await response.json()) as { error?: string };
+      const body = (await response.json()) as { error?: string; order?: { driveUploadLink?: string } };
       if (!response.ok) {
         throw new Error(body.error ?? "Order submission failed.");
       }
 
       setForm(EMPTY_FORM);
       setSelectedTier(TIER_OPTIONS[0].id);
-      setSuccess("Order submitted. It is now flowing into the command center.");
+      setSuccess(
+        body.order?.driveUploadLink
+          ? `Order submitted. Upload your files here: ${body.order.driveUploadLink}`
+          : "Order submitted. It is now flowing into the command center."
+      );
       setOrders(await fetchOrders());
     } catch (caughtError) {
       setError(caughtError instanceof Error ? caughtError.message : "Order submission failed.");

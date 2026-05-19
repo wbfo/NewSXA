@@ -259,6 +259,11 @@ export async function listOrders() {
   return (await readPersistedState()).orders;
 }
 
+export async function getOrder(orderId: string) {
+  const state = await readPersistedState();
+  return state.orders.find((order) => order.id === orderId) ?? null;
+}
+
 export function listToolkit() {
   return seededToolkit.map((item) => ({ ...item }));
 }
@@ -499,6 +504,23 @@ export async function addOrder(order: ClientOrder) {
     pushEvent(state, event);
     await writePersistedState(state);
     logger.info({ orderId: order.id, customerName: order.customerName }, "Client order added");
+  });
+}
+
+export async function updateOrder(orderId: string, patch: Partial<ClientOrder>) {
+  return withStoreLock(async () => {
+    const state = await readPersistedState();
+    let found = false;
+    state.orders = state.orders.map((order) => {
+      if (order.id !== orderId) return order;
+      found = true;
+      return { ...order, ...patch, id: order.id, submittedAt: order.submittedAt };
+    });
+    if (!found) {
+      throw new Error(`Order ${orderId} not found`);
+    }
+    await writePersistedState(state);
+    logger.info({ orderId, patch }, "Order updated");
   });
 }
 

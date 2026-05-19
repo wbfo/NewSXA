@@ -17,6 +17,18 @@ vi.mock("@/lib/hermes/hermes-gateway", () => ({
   })
 }));
 
+vi.mock("@/lib/google/drive", () => ({
+  createClientFolder: async () => ({
+    rootFolderId: "root-folder-id",
+    intakeFolderId: "intake-folder-id",
+    photosFolderId: "photos-folder-id",
+    deliverablesFolderId: "deliverables-folder-id",
+    correspondenceFolderId: "correspondence-folder-id",
+    uploadLink: "https://drive.google.com/upload-link",
+    folderLink: "https://drive.google.com/folder-link",
+  }),
+}));
+
 vi.mock("@/lib/auth/server-auth", () => ({
   getServerAuth: async () => ({
     user: {
@@ -29,6 +41,7 @@ vi.mock("@/lib/auth/server-auth", () => ({
 
 import { GET as getDashboard } from "@/app/api/dashboard/route";
 import { POST as createAudit } from "@/app/api/audits/route";
+import { POST as createOrder } from "@/app/api/orders/route";
 import { GET as getToolkit } from "@/app/api/toolkit/[id]/route";
 import { POST as uploadVaultFile } from "@/app/api/uploads/route";
 import { POST as createExpense } from "@/app/api/finance/expenses/route";
@@ -60,6 +73,30 @@ describe("api contracts", () => {
     const payload = await response.json();
     expect(response.status).toBe(200);
     expect(payload.workflow.workflowType).toBe("trigger-audit");
+  });
+
+  it("creates intake orders and attaches drive metadata when available", async () => {
+    const response = await createOrder(new Request("http://localhost/api/orders", {
+      method: "POST",
+      body: JSON.stringify({
+        customerName: "Ola",
+        businessName: "BlackFur Capital Group LLC",
+        email: "ola@example.com",
+        phone: "555-555-5555",
+        packageName: "Digital Standard",
+        serviceType: "Digital Audit",
+        budget: "$500",
+        notes: "Please help.",
+        source: "Sovereign X Landing",
+        status: "NEW",
+      }),
+      headers: { "Content-Type": "application/json" },
+    }));
+    const payload = await response.json();
+
+    expect(response.status).toBe(200);
+    expect(payload.order.businessName).toBe("BlackFur Capital Group LLC");
+    expect(payload.order.driveUploadLink).toBe("https://drive.google.com/upload-link");
   });
 
   it("returns toolkit documents by id", async () => {

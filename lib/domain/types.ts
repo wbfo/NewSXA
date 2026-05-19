@@ -81,6 +81,14 @@ export interface Audit {
   category?: string;
   phone?: string;
   socialHandle?: string;
+  driveRootFolderId?: string;
+  driveIntakeFolderId?: string;
+  drivePhotosFolderId?: string;
+  driveDeliverablesFolderId?: string;
+  driveCorrespondenceFolderId?: string;
+  driveUploadLink?: string;
+  driveFolderLink?: string;
+  driveDeliveryLink?: string;
   findings?: AuditLayerResult[];
   diagnosticSummary?: string;
 }
@@ -110,6 +118,14 @@ export interface ClientOrder {
   notes: string;
   source: string;
   status: OrderStatus;
+  driveRootFolderId?: string;
+  driveIntakeFolderId?: string;
+  drivePhotosFolderId?: string;
+  driveDeliverablesFolderId?: string;
+  driveCorrespondenceFolderId?: string;
+  driveUploadLink?: string;
+  driveFolderLink?: string;
+  driveDeliveryLink?: string;
 }
 
 export interface PipelineItem {
