@@ -43,7 +43,7 @@ export default function AccessDeniedPage() {
         <div className="auth-kicker auth-kicker-red">Pending Review</div>
         <h1>Access Restricted</h1>
         <p className="auth-copy">
-          Your Google identity was authenticated, but it is not attached to an active client audit or an approved admin account yet.
+          This email is not attached to an active client audit or an approved admin account yet.
         </p>
 
         <div className="auth-status-list">
@@ -53,7 +53,7 @@ export default function AccessDeniedPage() {
           </div>
           <div>
             <span>Next Step</span>
-            <strong>Submit an intake or contact Sovereign X support</strong>
+            <strong>Submit an intake or ask for access approval</strong>
           </div>
         </div>
 

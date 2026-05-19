@@ -1,43 +1,21 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/components/auth-context";
+
+const DEFAULT_EMAIL = "sxabfcg@gmail.com";
 
 export default function LoginPage() {
   const { user, login, loading, isAdmin, error, devBypass, devBypassClient } = useAuth();
   const router = useRouter();
-  const showDevBypass =
-    process.env.NODE_ENV !== "production" &&
-    process.env.NEXT_PUBLIC_ENABLE_DEV_BYPASS === "true";
+  const showDevBypass = process.env.NODE_ENV !== "production" && process.env.NEXT_PUBLIC_ENABLE_DEV_BYPASS === "true";
+  const [email, setEmail] = useState(DEFAULT_EMAIL);
 
   useEffect(() => {
     if (!user || loading) return;
-
-    if (isAdmin) {
-      router.replace("/admin");
-      return;
-    }
-
-    const checkUser = async () => {
-      try {
-        const [auditsRes, ordersRes] = await Promise.all([
-          fetch("/api/audits", { cache: "no-store" }),
-          fetch("/api/orders", { cache: "no-store" }),
-        ]);
-
-        const audits = auditsRes.ok ? ((await auditsRes.json()) as unknown[]) : [];
-        const orders = ordersRes.ok ? ((await ordersRes.json()) as unknown[]) : [];
-
-        const isKnown = audits.length > 0 || orders.length > 0;
-        router.replace(isKnown ? "/portal" : "/access-denied");
-      } catch {
-        router.replace("/access-denied");
-      }
-    };
-
-    void checkUser();
+    router.replace(isAdmin ? "/admin" : "/portal");
   }, [user, loading, isAdmin, router]);
 
   if (loading) {
@@ -48,9 +26,7 @@ export default function LoginPage() {
           <div className="auth-kicker">Secure Session</div>
           <h1>{user ? "Opening Access" : "Initializing Access"}</h1>
           <p className="auth-copy">
-            {user
-              ? "Your Google session is active. Routing you to the correct Sovereign X workspace."
-              : "Verifying browser session and preparing Google authentication."}
+            {user ? "Your session is active. Routing you to the correct Sovereign X workspace." : "Verifying stored session and preparing access."}
           </p>
           <div className="auth-loading-bar" />
         </div>
@@ -66,14 +42,14 @@ export default function LoginPage() {
         <div className="auth-kicker">Sovereign X Audits</div>
         <h1>Client Portal</h1>
         <p className="auth-copy">
-          Sign in with the Google account associated with your audit engagement to access your private portal.
+          Enter an approved email address to continue. Admin access is currently reserved for the hardcoded operator account.
         </p>
 
         {error && (
           <div className="auth-error">
             <span className="error-icon">×</span>
             <div className="error-text">
-              <strong>Authentication Failure</strong>
+              <strong>Access Blocked</strong>
               <p>{error}</p>
             </div>
           </div>
@@ -81,10 +57,30 @@ export default function LoginPage() {
 
         <div className="auth-divider" />
 
-        <button className="auth-google-button" onClick={() => void login()} type="button">
-          <span className="google-mark" aria-hidden="true">G</span>
-          Continue With Google
-        </button>
+        <form
+          onSubmit={(event) => {
+            event.preventDefault();
+            void login(email);
+          }}
+          style={{ display: "grid", gap: "0.75rem" }}
+        >
+          <label className="auth-label" htmlFor="email">
+            Approved Email
+          </label>
+          <input
+            id="email"
+            type="email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+            className="auth-input"
+            autoComplete="email"
+            spellCheck={false}
+            placeholder="you@example.com"
+          />
+          <button className="auth-submit-button" type="submit">
+            Continue
+          </button>
+        </form>
 
         <div className="auth-actions">
           <Link href="/intake">← Back to Intake</Link>
@@ -98,21 +94,21 @@ export default function LoginPage() {
               Dev Only — Not visible in production
             </p>
             <button
-              className="auth-google-button secondary"
+              className="auth-submit-button secondary"
               onClick={devBypass}
               type="button"
               style={{ opacity: 0.5, fontSize: "11px", marginBottom: "0.5rem" }}
             >
-              <span className="google-mark" aria-hidden="true">🛠️</span>
+              <span className="auth-icon" aria-hidden="true">🛠️</span>
               Admin Workstation
             </button>
             <button
-              className="auth-google-button secondary"
+              className="auth-submit-button secondary"
               onClick={devBypassClient}
               type="button"
               style={{ opacity: 0.5, fontSize: "11px" }}
             >
-              <span className="google-mark" aria-hidden="true">👤</span>
+              <span className="auth-icon" aria-hidden="true">👤</span>
               Preview Client Portal
             </button>
           </div>

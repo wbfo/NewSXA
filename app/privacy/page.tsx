@@ -28,7 +28,7 @@ export default function PrivacyPage() {
           <ul className="list-none space-y-2 pl-4">
             <li className="before:content-['—'] before:mr-2 before:text-zinc-600"><strong className="text-white">Contact information</strong> — your name, email address, and phone number, submitted via the intake form.</li>
             <li className="before:content-['—'] before:mr-2 before:text-zinc-600"><strong className="text-white">Business information</strong> — your business name, website, social media handle, city, and category, submitted to scope your audit.</li>
-            <li className="before:content-['—'] before:mr-2 before:text-zinc-600"><strong className="text-white">Account information</strong> — your Google account email and profile, used to authenticate access to the client portal.</li>
+            <li className="before:content-['—'] before:mr-2 before:text-zinc-600"><strong className="text-white">Account information</strong> — your email address and basic profile, used to authenticate access to the client portal.</li>
             <li className="before:content-['—'] before:mr-2 before:text-zinc-600"><strong className="text-white">Communications</strong> — messages and requests sent to us through any channel.</li>
           </ul>
           <p>
