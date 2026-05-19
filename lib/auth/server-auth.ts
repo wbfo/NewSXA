@@ -11,6 +11,15 @@ import { redirect } from "next/navigation";
 
 const DEV_BYPASS_ENABLED = process.env.SX_ENABLE_DEV_BYPASS === "true";
 
+function readCookieValue(value?: string): string {
+  if (!value) return "";
+  try {
+    return decodeURIComponent(value);
+  } catch {
+    return value;
+  }
+}
+
 export interface ServerAuthSession {
   user: {
     uid: string;
@@ -27,12 +36,12 @@ export interface ServerAuthSession {
 export async function getServerAuth(): Promise<ServerAuthSession> {
   const cookieStore = await cookies();
   const email = (
-    cookieStore.get("sx-session-email")?.value ||
-    cookieStore.get("sx-user-email")?.value ||
+    readCookieValue(cookieStore.get("sx-session-email")?.value) ||
+    readCookieValue(cookieStore.get("sx-user-email")?.value) ||
     ""
   ).toLowerCase();
-  const uid = cookieStore.get("sx-session-uid")?.value || cookieStore.get("sx-user-uid")?.value || email;
-  const role = cookieStore.get("sx-session-role")?.value || cookieStore.get("sx-auth-role")?.value;
+  const uid = readCookieValue(cookieStore.get("sx-session-uid")?.value) || readCookieValue(cookieStore.get("sx-user-uid")?.value) || email;
+  const role = readCookieValue(cookieStore.get("sx-session-role")?.value) || readCookieValue(cookieStore.get("sx-auth-role")?.value);
 
   if (!email) {
     return { user: null, isAdmin: false };
