@@ -1005,6 +1005,57 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
           </div>
         </section>
 
+        <section className="compact section-diagonal" id="samples">
+          <div className="wrap">
+            <div className="sec-head pm-reveal">
+              <div className="label">SEE THE WORK</div>
+              <h2>Sample Intelligence Reports</h2>
+              <p className="sub">This is what lands in your Google Drive.</p>
+            </div>
+            <div className="pm-reveal">
+              <a className="sample-featured glass-premium" href="/samples/snippet">
+                <div className="sample-featured-inner">
+                  <div className="sample-featured-body">
+                    <div className="label aicc-stamp text-neon-amber border-neon-amber">THE SNIPPET</div>
+                    <h2 className="text-white">What You Receive Before You Pay a Dollar</h2>
+                    <p className="text-subtle">Before any client commits, we send a free 1-page partial disclosure — 3 verified findings from a real audit of their business or image. No pitch. No pressure. Just the intelligence. This is what that looks like.</p>
+                    <div className="snippet-badges">
+                      <span className="aicc-stamp border-neon-blue text-neon-blue">AICC VERIFIED</span>
+                      <span className="stamp">FREE</span>
+                      <span className="stamp">NO STRINGS</span>
+                    </div>
+                    <span className="btn btn-primary" style={{ display: "inline-block", marginTop: "1rem" }}>View Sample Snippet →</span>
+                    <p className="sample-featured-note">The snippet is sent before any purchase. The full report is what you receive after.</p>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div className="sample-cards pm-reveal">
+              <a className="sample-card glass-premium" href="/samples/digital">
+                <div className="label">SOVEREIGN X DIGITAL AUDIT</div>
+                <h4 className="text-white">Sample Business Intelligence Report</h4>
+                <p className="text-subtle">21 sections. Revenue leaks with dollar figures. Technical performance scores. AI readiness analysis. Impact Matrix. Priority roadmap.</p>
+                <span className="aicc-stamp border-neon-blue text-neon-blue" style={{ marginTop: "auto" }}>AICC VERIFIED</span>
+                <span className="sample-cta">View Sample Report →</span>
+              </a>
+              <a className="sample-card glass-premium" href="/samples/image">
+                <div className="label">SOVEREIGN X IMAGE AUDIT</div>
+                <h4 className="text-white">Sample Personal Brand Report</h4>
+                <p className="text-subtle">18 sections. Color analysis. Social media audit. Brand alignment. Photography readiness score. Priority sequence.</p>
+                <span className="aicc-stamp border-neon-blue text-neon-blue" style={{ marginTop: "auto" }}>AICC VERIFIED</span>
+                <span className="sample-cta">View Sample Report →</span>
+              </a>
+              <a className="sample-card glass-premium" href="/samples/voice">
+                <div className="label">SOVEREIGN X VOICE AGENT</div>
+                <h4 className="text-white">Sample ROI Analysis</h4>
+                <p className="text-subtle">After-hours lead gap calculation. Annual revenue loss from missed calls. Conversation flow design. Build and deployment plan.</p>
+                <span className="aicc-stamp border-neon-blue text-neon-blue" style={{ marginTop: "auto" }}>AICC VERIFIED</span>
+                <span className="sample-cta">View Sample →</span>
+              </a>
+            </div>
+          </div>
+        </section>
+
         <section className="compact">
           <div className="wrap">
             <div className="sec-head">
