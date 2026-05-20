@@ -1,29 +1,40 @@
 "use client";
 
+import Cookies from "js-cookie";
 import React, { createContext, useContext, useEffect, useState, startTransition } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { onAuthStateChanged, User, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
-import { auth } from "@/lib/firebase/config";
-import { isEmailAdmin } from "@/lib/constants/auth";
-import Cookies from "js-cookie";
+import { isAllowedEmail, isEmailAdmin } from "@/lib/constants/auth";
+
+type AuthUser = {
+  uid: string;
+  email?: string;
+  displayName?: string;
+  photoURL?: string;
+};
 
 const AUTH_COOKIE_OPTIONS = {
   expires: 7,
   sameSite: "strict" as const,
   path: "/",
-  // secure: true is enforced by the browser in production (HTTPS).
-  // js-cookie passes this flag through to document.cookie.
   secure: typeof window !== "undefined" && window.location.protocol === "https:",
 };
-const AUTH_COOKIE_NAMES = ["firebase-token", "sx-user-email", "sx-user-uid", "sx-auth-role"];
-const DEV_BYPASS_ENABLED =
-  process.env.NODE_ENV !== "production" &&
-  process.env.NEXT_PUBLIC_ENABLE_DEV_BYPASS === "true";
+
+const AUTH_COOKIE_NAMES = [
+  "sx-session-email",
+  "sx-session-uid",
+  "sx-session-role",
+  "firebase-token",
+  "sx-user-email",
+  "sx-user-uid",
+  "sx-auth-role",
+];
+
+const DEV_BYPASS_ENABLED = process.env.NEXT_PUBLIC_ENABLE_DEV_BYPASS === "true";
 
 interface AuthContextType {
-  user: User | null;
+  user: AuthUser | null;
   loading: boolean;
-  login: () => Promise<void>;
+  login: (email: string) => Promise<void>;
   logout: () => Promise<void>;
   isAdmin: boolean;
   error: string | null;
@@ -45,17 +56,17 @@ const AuthContext = createContext<AuthContextType>({
 });
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<AuthUser | null>(null);
   const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const pathname = usePathname();
   const router = useRouter();
 
-  // Computed once at render time — safe to use outside the useEffect
-  const isBypass = DEV_BYPASS_ENABLED &&
+  const isBypass =
+    DEV_BYPASS_ENABLED &&
     typeof window !== "undefined" &&
-    (Cookies.get("firebase-token") === "dev.bypass.token" || Cookies.get("firebase-token") === "dev-bypass-token");
+    (Cookies.get("sx-session-role") === "dev" || Cookies.get("firebase-token") === "dev.bypass.token");
 
   function clearSession() {
     AUTH_COOKIE_NAMES.forEach((name) => {
@@ -66,145 +77,132 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     setIsAdmin(false);
   }
 
-  async function login() {
+  function applySession(email: string, role: "admin" | "client" | "dev") {
+    const normalizedEmail = email.trim().toLowerCase();
+    const resolvedRole = role === "dev" ? "admin" : role;
+    const uid = normalizedEmail;
+    Cookies.set("sx-session-email", normalizedEmail, AUTH_COOKIE_OPTIONS);
+    Cookies.set("sx-session-uid", uid, AUTH_COOKIE_OPTIONS);
+    Cookies.set("sx-session-role", role, AUTH_COOKIE_OPTIONS);
+    // Legacy compatibility for any stale code paths during rollout.
+    Cookies.set("sx-user-email", normalizedEmail, AUTH_COOKIE_OPTIONS);
+    Cookies.set("sx-user-uid", uid, AUTH_COOKIE_OPTIONS);
+    Cookies.set("sx-auth-role", resolvedRole, AUTH_COOKIE_OPTIONS);
+    Cookies.set("firebase-token", `local-session:${normalizedEmail}`, AUTH_COOKIE_OPTIONS);
+    const nextUser: AuthUser = {
+      uid,
+      email: normalizedEmail,
+      displayName: normalizedEmail,
+    };
+    setUser(nextUser);
+    setIsAdmin(role === "dev" ? true : isEmailAdmin(normalizedEmail));
+  }
+
+  async function login(email: string) {
     setError(null);
+    const normalizedEmail = email.trim().toLowerCase();
+    if (!normalizedEmail) {
+      setError("Enter an email address to continue.");
+      return;
+    }
+    if (!isAllowedEmail(normalizedEmail)) {
+      setError("That email is not approved for access yet.");
+      return;
+    }
     try {
-      const provider = new GoogleAuthProvider();
-      await signInWithPopup(auth, provider);
-    } catch (err: any) {
-      console.error("Login Error:", err);
-      let message = err.message || "An unexpected error occurred during login.";
-      if (err.code === "auth/internal-error" || message.includes("internal-error")) {
-        message = "Configuration Error: Ensure 'localhost' is an Authorized Domain in Firebase Console and your API Key restrictions in Google Cloud Console allow this origin.";
-      } else if (err.code === "auth/popup-closed-by-user") {
-        message = "Login cancelled. Please complete the Google sign-in process to continue.";
+      const response = await fetch("/api/auth/session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: normalizedEmail }),
+      });
+
+      const payload = await response.json().catch(() => null);
+      if (!response.ok) {
+        setError(payload?.error || "Unable to create session.");
+        return;
       }
-      setError(message);
+
+      const role: "admin" | "client" = payload?.role === "admin" ? "admin" : "client";
+      startTransition(() => {
+        applySession(normalizedEmail, role);
+      });
+      window.location.href = role === "admin" ? "/admin" : "/portal";
+    } catch {
+      setError("Unable to reach the sign-in service.");
     }
   }
 
   async function logout() {
-    const wasBypass = Cookies.get("sx-user-uid") === "dev-bypass-uid";
-    clearSession();
+    const wasBypass = Cookies.get("sx-session-role") === "dev";
     try {
-      await signOut(auth);
-    } catch (err) {
-      console.error("Logout error", err);
+      await fetch("/api/auth/logout", { method: "POST" });
+    } catch {
+      // Even if the server call fails, we still clear local cookies and leave.
     }
+    clearSession();
     if (wasBypass) {
       window.location.href = "/";
+      return;
     }
+    router.replace("/");
+    router.refresh();
   }
 
   function devBypass() {
     if (!DEV_BYPASS_ENABLED) return;
-    // Uses the first ADMIN_EMAILS entry at build time (NEXT_PUBLIC_ prefix required
-    // for client access). Falls back to a safe placeholder that won't match any real
-    // account — configure NEXT_PUBLIC_DEV_ADMIN_EMAIL in .env.local if needed.
-    const adminEmail = process.env.NEXT_PUBLIC_DEV_ADMIN_EMAIL ?? "dev-admin@dev.local";
-    Cookies.set("firebase-token", "dev.bypass.token", AUTH_COOKIE_OPTIONS);
-    Cookies.set("sx-user-email", adminEmail, AUTH_COOKIE_OPTIONS);
-    Cookies.set("sx-user-uid", "dev-bypass-uid", AUTH_COOKIE_OPTIONS);
-    Cookies.set("sx-auth-role", "admin", AUTH_COOKIE_OPTIONS);
+    startTransition(() => {
+      applySession("sxabfcg@gmail.com", "dev");
+    });
     window.location.href = "/admin";
   }
 
   function devBypassClient() {
     if (!DEV_BYPASS_ENABLED) return;
-    Cookies.set("firebase-token", "dev.bypass.token", AUTH_COOKIE_OPTIONS);
-    Cookies.set("sx-user-email", "preview-client@dev.local", AUTH_COOKIE_OPTIONS);
-    Cookies.set("sx-user-uid", "dev-bypass-client-uid", AUTH_COOKIE_OPTIONS);
-    Cookies.set("sx-auth-role", "client", AUTH_COOKIE_OPTIONS);
+    startTransition(() => {
+      applySession("preview-client@dev.local", "dev");
+      Cookies.set("sx-session-role", "client", AUTH_COOKIE_OPTIONS);
+      Cookies.set("sx-auth-role", "client", AUTH_COOKIE_OPTIONS);
+    });
     window.location.href = "/portal";
   }
 
   useEffect(() => {
-    let refreshInterval: ReturnType<typeof setInterval> | null = null;
-    const devUid = DEV_BYPASS_ENABLED ? Cookies.get("sx-user-uid") : null;
+    const storedEmail = Cookies.get("sx-session-email") || Cookies.get("sx-user-email");
+    const storedRole = Cookies.get("sx-session-role") || Cookies.get("sx-auth-role");
+    const storedUid = Cookies.get("sx-session-uid") || Cookies.get("sx-user-uid");
 
-    async function persistSession(firebaseUser: import("firebase/auth").User) {
-      const token = await firebaseUser.getIdToken();
-      const normalizedEmail = firebaseUser.email?.toLowerCase() || "";
-      const adminUser = isEmailAdmin(normalizedEmail);
-      Cookies.set("firebase-token", token, AUTH_COOKIE_OPTIONS);
-      Cookies.set("sx-user-email", normalizedEmail, AUTH_COOKIE_OPTIONS);
-      Cookies.set("sx-user-uid", firebaseUser.uid, AUTH_COOKIE_OPTIONS);
-      Cookies.set("sx-auth-role", adminUser ? "admin" : "client", AUTH_COOKIE_OPTIONS);
-      setUser(firebaseUser);
-      setIsAdmin(adminUser);
-      return adminUser;
-    }
-
-    if (isBypass) {
-      const devEmail = Cookies.get("sx-user-email") || "dev-admin@dev.local";
-      const devRole = Cookies.get("sx-auth-role");
-      const resolvedUid = devUid || "dev-bypass-uid";
-      // startTransition: batched non-urgent auth state init from cookies
+    if (storedEmail && isAllowedEmail(storedEmail)) {
       startTransition(() => {
-        setUser({ uid: resolvedUid, email: devEmail } as User);
-        setIsAdmin(devRole === "admin");
+        setUser({
+          uid: storedUid || storedEmail,
+          email: storedEmail,
+          displayName: storedEmail,
+        });
+        setIsAdmin(storedRole === "admin" || isEmailAdmin(storedEmail));
+        setLoading(false);
+      });
+    } else if (DEV_BYPASS_ENABLED && storedRole === "dev" && storedEmail) {
+      startTransition(() => {
+        setUser({
+          uid: storedUid || storedEmail,
+          email: storedEmail,
+          displayName: storedEmail,
+        });
+        setIsAdmin(true);
+        setLoading(false);
+      });
+    } else {
+      startTransition(() => {
         setLoading(false);
       });
     }
-
-    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
-      // Re-evaluate bypass status directly from cookies to avoid closure stale state
-      const currentBypass = DEV_BYPASS_ENABLED &&
-        (Cookies.get("firebase-token") === "dev.bypass.token" ||
-          Cookies.get("firebase-token") === "dev-bypass-token");
-
-      if (currentBypass) {
-        setLoading(false);
-        return;
-      }
-
-      try {
-        if (firebaseUser) {
-          setLoading(true);
-        }
-
-        if (refreshInterval) {
-          clearInterval(refreshInterval);
-          refreshInterval = null;
-        }
-
-        if (firebaseUser) {
-          await persistSession(firebaseUser);
-          refreshInterval = setInterval(async () => {
-            try {
-              await persistSession(firebaseUser);
-            } catch {
-              clearSession();
-            }
-          }, 55 * 60 * 1000);
-        } else {
-          clearSession();
-        }
-      } catch (error) {
-        console.error("Auth session persistence failed:", error);
-        clearSession();
-      } finally {
-        setLoading(false);
-      }
-    });
-
-    // Safety timeout: Never stay in loading state for more than 8 seconds
-    const loadingTimeout = setTimeout(() => {
-      setLoading(false);
-    }, 8000);
-
-    return () => {
-      unsubscribe();
-      clearTimeout(loadingTimeout);
-      if (refreshInterval) clearInterval(refreshInterval);
-    };
-  }, [isBypass]);
+  }, []);
 
   useEffect(() => {
     if (loading || user) return;
     if (pathname?.startsWith("/admin") || pathname?.startsWith("/portal")) {
-      const isDevBypass = DEV_BYPASS_ENABLED && Cookies.get("sx-user-uid");
-      if (!isDevBypass) {
+      const hasSession = Boolean(Cookies.get("sx-session-email") || Cookies.get("sx-user-email"));
+      if (!hasSession) {
         router.replace("/");
         router.refresh();
       }

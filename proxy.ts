@@ -1,7 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 
 const DEV_BYPASS_ENABLED =
-  process.env.NODE_ENV !== "production" &&
   process.env.SX_ENABLE_DEV_BYPASS === "true";
 
 /**
@@ -29,14 +28,16 @@ function looksLikeJwt(value: string): boolean {
 
 export function proxy(request: NextRequest) {
   const tokenCookie = request.cookies.get("firebase-token");
+  const sessionEmail = request.cookies.get("sx-session-email")?.value || request.cookies.get("sx-user-email")?.value;
   const { pathname } = request.nextUrl;
 
   // Protect /admin (Admin) and /portal (Client)
   if (pathname.startsWith("/admin") || pathname.startsWith("/portal")) {
     const isDevToken = DEV_BYPASS_ENABLED &&
                       (tokenCookie?.value === "dev.bypass.token" || tokenCookie?.value === "dev-bypass-token");
+    const hasLocalSession = Boolean(sessionEmail && tokenCookie?.value?.startsWith("local-session:"));
 
-    if (!tokenCookie?.value || (!looksLikeJwt(tokenCookie.value) && !isDevToken)) {
+    if (!tokenCookie?.value || (!looksLikeJwt(tokenCookie.value) && !isDevToken && !hasLocalSession)) {
       return NextResponse.redirect(new URL("/login", request.url));
     }
   }

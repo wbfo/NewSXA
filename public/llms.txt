@@ -1,0 +1,52 @@
+# Sovereign X Audits
+> Intelligence audit services for businesses, professionals, and creatives.
+> Operated by BlackFur Capital Group LLC.
+> All payments to BlackFur Capital Group LLC.
+
+## About
+Sovereign X Audits provides three core services:
+1. Sovereign X Digital Audit — a 21-section business intelligence report
+2. X Image Audit — an 18-section personal brand intelligence report
+3. Voice Agent Services — ElevenLabs-powered voice agents for businesses
+
+All deliverables are AICC Verified through the AI Council Conductor methodology.
+Reports are delivered via Google Drive within 72 hours of intake completion.
+
+## Services and Pricing
+
+### Sovereign X Digital Audit
+- Standard: $500 promotional / $750 regular
+- Deep: $1,500 promotional / $2,000 regular
+- Deep + Intake: $2,000 promotional / $2,500 regular
+- Covers: 21 sections including technical performance, revenue leaks,
+  NAP consistency, AI search visibility, reputation management,
+  social media infrastructure, and AI readiness assessment
+- Best for: law firms, dental practices, medical practices,
+  med spas, real estate offices, CPAs, and any business
+  where reputation equals revenue
+
+### X Image Audit
+- Standard: $350 promotional / $500 regular
+- Public Figure Tier: $750 promotional / $1,000 regular
+- X Attraction Audit: $350 promotional / $500 regular
+- Covers: 18 sections including color analysis, social media audit,
+  brand alignment, hair and grooming, outfit architecture,
+  photography readiness, and personal presence
+- Best for: professionals, creatives, executives, artists,
+  content creators, athletes, public figures
+
+### Voice Agent Services
+- Starter: $1,500 setup + $200/month
+- Standard: $2,500 setup + $350/month
+- Advanced: $4,000–$5,000 setup + $500/month
+- Powered by ElevenLabs Conversational AI
+- Best for: businesses losing revenue to missed after-hours calls
+
+## AICC Methodology
+Every finding passes through the AI Council Conductor verification process:
+Generator → Critic → Verifier → Refiner → Specialist
+Operated by Ola Olaitan. More at aicouncilconductor.com
+
+## Contact
+Website: https://sxaudits.com
+Intake: https://sxaudits.com/intake

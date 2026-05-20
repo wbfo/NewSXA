@@ -1,6 +1,6 @@
 import type { NextConfig } from "next";
 
-const isDev = process.env.NODE_ENV !== "production";
+const isDev = process.env.NODE_ENV !== "production" || process.env.SX_ENABLE_DEV_BYPASS === "true";
 
 /**
  * Build the Content-Security-Policy value.
@@ -15,8 +15,8 @@ const isDev = process.env.NODE_ENV !== "production";
  */
 function buildCsp(): string {
   const scriptSrc = isDev
-    ? "script-src 'self' 'unsafe-inline' 'unsafe-eval'"
-    : "script-src 'self' 'unsafe-inline'";
+    ? "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://apis.google.com https://*.firebaseapp.com"
+    : "script-src 'self' 'unsafe-inline' https://apis.google.com https://*.firebaseapp.com";
 
   return [
     "default-src 'self'",
@@ -24,7 +24,8 @@ function buildCsp(): string {
     "style-src 'self' 'unsafe-inline'",
     "img-src 'self' data: https:",
     "font-src 'self'",
-    "connect-src 'self' https://*.googleapis.com https://*.firebaseio.com https://*.firebase.com wss://*.firebaseio.com",
+    "connect-src 'self' https://*.googleapis.com https://*.firebaseio.com https://*.firebase.com wss://*.firebaseio.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com",
+    "frame-src 'self' https://*.firebaseapp.com",
     "frame-ancestors 'none'",
   ].join("; ");
 }

@@ -1,9 +1,11 @@
 import { z } from "zod";
 import { jsonResponse } from "@/lib/api/responses";
-import { addOrder, listOrders } from "@/lib/server/store";
+import { addOrder, listOrders, updateOrder } from "@/lib/server/store";
 import { getServerAuth } from "@/lib/auth/server-auth";
 import { logger } from "@/lib/server/logger";
 import { rateLimit, getClientIp } from "@/lib/server/rate-limit";
+import { createClientFolder } from "@/lib/google/drive";
+import { sendOrderConfirmationEmail } from "@/lib/email/send";
 
 const createOrderSchema = z.object({
   customerName: z.string().min(1, "customerName is required").max(200),
@@ -61,6 +63,35 @@ export async function POST(request: Request) {
   try {
     await addOrder(order);
     logger.info({ orderId: order.id, businessName: order.businessName }, "Order created");
+
+    try {
+      const driveData = await createClientFolder(order.businessName, order.serviceType);
+      const drivePatch = {
+        driveRootFolderId: driveData.rootFolderId,
+        driveIntakeFolderId: driveData.intakeFolderId,
+        drivePhotosFolderId: driveData.photosFolderId,
+        driveDeliverablesFolderId: driveData.deliverablesFolderId,
+        driveCorrespondenceFolderId: driveData.correspondenceFolderId,
+        driveUploadLink: driveData.uploadLink,
+        driveFolderLink: driveData.folderLink,
+      };
+      await updateOrder(order.id, drivePatch);
+      Object.assign(order, drivePatch);
+      logger.info({ orderId: order.id, driveRootFolderId: driveData.rootFolderId }, "Google Drive folder created for order");
+
+      await sendOrderConfirmationEmail({
+        clientName: order.customerName,
+        clientEmail: order.email,
+        serviceType: order.serviceType,
+        orderId: order.id,
+        uploadLink: driveData.uploadLink,
+      }).catch((emailError) => {
+        logger.warn({ orderId: order.id, emailError }, "Order confirmation email was not sent");
+      });
+    } catch (driveError) {
+      logger.warn({ orderId: order.id, driveError }, "Google Drive folder creation failed for order");
+    }
+
     return jsonResponse({ order });
   } catch (error) {
     logger.error({ error }, "Failed to add order");

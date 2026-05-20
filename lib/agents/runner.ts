@@ -4,6 +4,7 @@
  * Auth checks are NOT performed here; callers are responsible for authorisation.
  */
 import { addReport, readDashboard, recordAgentRun } from "@/lib/server/store";
+import { runHermesQuery } from "@/lib/hermes/runtime";
 import { logger } from "@/lib/server/logger";
 import type { AgentReport, ReportItem } from "@/lib/domain/types";
 
@@ -242,92 +243,179 @@ export async function runFollowupAgent(): Promise<void> {
   logger.info({ reportId: report.id, itemCount: items.length, hasOverdue }, "Follow-up scan completed");
 }
 
+// ── Web search utility ────────────────────────────────────────────────────────
+
+type RawLeadItem = {
+  type?: string;
+  title?: string;
+  description?: string;
+  url?: string;
+  handle?: string;
+  estimatedValue?: string;
+};
+
+function parseLeadItems(content: string): ReportItem[] {
+  try {
+    const cleaned = content.replace(/```json|```/g, "").trim();
+    const start = cleaned.indexOf("[");
+    const end = cleaned.lastIndexOf("]");
+    if (start === -1 || end === -1) return [];
+    const items = JSON.parse(cleaned.slice(start, end + 1)) as RawLeadItem[];
+    return items.slice(0, 5).map(item => ({
+      id: `RI-${crypto.randomUUID()}`,
+      type: (item.type as ReportItem["type"]) ?? "PROSPECT",
+      title: item.title ?? "Untitled lead",
+      description: item.description ?? "",
+      url: item.url,
+      handle: item.handle,
+      estimatedValue: item.estimatedValue,
+      status: "PENDING" as const,
+    }));
+  } catch {
+    return [];
+  }
+}
+
+const SEARCH_SYSTEM_PROMPT =
+  "You are an outreach intelligence agent for Sovereign X Audits, a premium digital and image audit firm. Find real, specific leads and return them as a JSON array. Each item must have: { type: 'PROSPECT'|'PR_OPPORTUNITY'|'COLLAB_LEAD'|'SOCIAL_SIGNAL'|'BRAND_AMPLIFIER', title: string, description: string, url?: string, handle?: string, estimatedValue?: string }. Return ONLY the JSON array, no markdown, no other text.";
+
+async function searchViaPerplexity(query: string, apiKey: string): Promise<ReportItem[]> {
+  try {
+    const res = await fetch("https://api.perplexity.ai/chat/completions", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "sonar",
+        messages: [
+          { role: "system", content: SEARCH_SYSTEM_PROMPT },
+          { role: "user", content: `Search for: ${query}. Return 3-5 specific, real leads as a JSON array.` },
+        ],
+      }),
+    });
+    if (!res.ok) return [];
+    const data = await res.json() as { choices?: Array<{ message?: { content?: string } }> };
+    return parseLeadItems(data.choices?.[0]?.message?.content ?? "[]");
+  } catch {
+    return [];
+  }
+}
+
+async function searchViaOpenAI(query: string, apiKey: string): Promise<ReportItem[]> {
+  try {
+    const res = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "gpt-4o-search-preview",
+        web_search_options: {},
+        messages: [
+          { role: "system", content: SEARCH_SYSTEM_PROMPT },
+          { role: "user", content: `Search the web for: ${query}. Return 3-5 specific, real leads as a JSON array.` },
+        ],
+      }),
+    });
+    if (!res.ok) return [];
+    const data = await res.json() as { choices?: Array<{ message?: { content?: string } }> };
+    return parseLeadItems(data.choices?.[0]?.message?.content ?? "[]");
+  } catch {
+    return [];
+  }
+}
+
+// Free web search via DuckDuckGo Instant Answer API — no API key required.
+// Returns raw snippets which Hermes then interprets as structured leads.
+async function searchViaDuckDuckGo(query: string): Promise<string> {
+  try {
+    const encoded = encodeURIComponent(query);
+    const res = await fetch(
+      `https://api.duckduckgo.com/?q=${encoded}&format=json&no_html=1&skip_disambig=1`,
+      { headers: { "User-Agent": "SovereignXAudits/1.0 (outreach-agent)" } }
+    );
+    if (!res.ok) return "";
+    const data = await res.json() as {
+      Abstract?: string;
+      AbstractText?: string;
+      RelatedTopics?: Array<{ Text?: string; FirstURL?: string }>;
+      Results?: Array<{ Text?: string; FirstURL?: string }>;
+    };
+    const snippets: string[] = [];
+    if (data.AbstractText) snippets.push(data.AbstractText);
+    for (const t of (data.RelatedTopics ?? []).slice(0, 8)) {
+      if (t.Text) snippets.push(`${t.Text}${t.FirstURL ? ` (${t.FirstURL})` : ""}`);
+    }
+    for (const r of (data.Results ?? []).slice(0, 5)) {
+      if (r.Text) snippets.push(`${r.Text}${r.FirstURL ? ` (${r.FirstURL})` : ""}`);
+    }
+    return snippets.join("\n");
+  } catch {
+    return "";
+  }
+}
+
+async function searchViaHermes(query: string): Promise<ReportItem[]> {
+  try {
+    // First grab real snippets from DuckDuckGo, then have Hermes interpret them
+    const webSnippets = await searchViaDuckDuckGo(query);
+    const prompt = webSnippets
+      ? `You are an outreach intelligence agent for Sovereign X Audits. Using the following real search results, identify 3-5 specific outreach leads. Return ONLY a JSON array, each item: { type: 'PROSPECT'|'PR_OPPORTUNITY'|'COLLAB_LEAD'|'SOCIAL_SIGNAL'|'BRAND_AMPLIFIER', title: string, description: string, url?: string, estimatedValue?: string }\n\nSearch query: ${query}\n\nSearch results:\n${webSnippets}`
+      : `You are an outreach intelligence agent for Sovereign X Audits. Based on your knowledge, identify 3-5 specific outreach opportunities. Topic: ${query}. Return ONLY a JSON array, each item: { type: 'PROSPECT'|'PR_OPPORTUNITY'|'COLLAB_LEAD'|'SOCIAL_SIGNAL'|'BRAND_AMPLIFIER', title: string, description: string, estimatedValue?: string }`;
+    const result = await runHermesQuery(prompt);
+    return parseLeadItems(result);
+  } catch {
+    return [];
+  }
+}
+
+async function webSearch(query: string): Promise<ReportItem[]> {
+  const perplexityKey = process.env.PERPLEXITY_API_KEY;
+  if (perplexityKey) {
+    const results = await searchViaPerplexity(query, perplexityKey);
+    if (results.length > 0) return results;
+  }
+
+  const openaiKey = process.env.OPENAI_API_KEY;
+  if (openaiKey) {
+    const results = await searchViaOpenAI(query, openaiKey);
+    if (results.length > 0) return results;
+  }
+
+  // Always works — DuckDuckGo (free, no key) + Hermes interpretation
+  return searchViaHermes(query);
+}
+
 // ── Outreach Agent ────────────────────────────────────────────────────────────
 
 async function runOutreachScan(): Promise<ReportItem[]> {
-  const perplexityKey = process.env.PERPLEXITY_API_KEY;
+  const queries = [
+    "small businesses struggling with digital presence or brand visibility 2026",
+    "looking for digital audit or brand consultant collaboration partnership 2026",
+    "podcast looking for guests digital marketing brand strategy local business 2026",
+  ];
 
-  if (perplexityKey) {
-    // Real search via Perplexity
-    const queries = [
-      "small businesses struggling with digital presence 2026 site:reddit.com OR site:twitter.com",
-      "looking for digital marketing agency collaboration OR partnership 2026",
-      "podcast looking for guests digital marketing OR SEO OR local business 2026",
-    ];
-
-    const results: ReportItem[] = [];
-
-    for (const query of queries) {
-      try {
-        const res = await fetch("https://api.perplexity.ai/chat/completions", {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${perplexityKey}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            model: "sonar",
-            messages: [
-              {
-                role: "system",
-                content: "You are an outreach intelligence agent. Find real, specific leads and return them as a JSON array. Each item: { type: 'PROSPECT'|'PR_OPPORTUNITY'|'COLLAB_LEAD'|'SOCIAL_SIGNAL'|'BRAND_AMPLIFIER', title: string, description: string, url?: string, handle?: string, estimatedValue?: string }. Return ONLY the JSON array, no other text.",
-              },
-              {
-                role: "user",
-                content: `Search for: ${query}. Return 3-5 specific, real leads as a JSON array.`,
-              },
-            ],
-          }),
-        });
-
-        if (res.ok) {
-          const data = await res.json() as { choices?: Array<{ message?: { content?: string } }> };
-          const content = data.choices?.[0]?.message?.content ?? "[]";
-          const cleaned = content.replace(/```json|```/g, "").trim();
-          const items = JSON.parse(cleaned) as Array<{ type: string; title: string; description: string; url?: string; handle?: string; estimatedValue?: string }>;
-          results.push(...items.slice(0, 5).map(item => ({
-            id: `RI-${crypto.randomUUID()}`,
-            type: (item.type as ReportItem["type"]) ?? "PROSPECT",
-            title: item.title,
-            description: item.description,
-            url: item.url,
-            handle: item.handle,
-            estimatedValue: item.estimatedValue,
-            status: "PENDING" as const,
-          })));
-        }
-      } catch {
-        // Skip failed queries, continue with others
-      }
-    }
-
-    return results;
+  const results: ReportItem[] = [];
+  for (const query of queries) {
+    const items = await webSearch(query);
+    results.push(...items);
   }
 
-  // Placeholder report when no search API is configured
-  return [
-    {
-      id: `RI-${crypto.randomUUID()}`,
-      type: "PROSPECT",
-      title: "Configure search API to activate live scanning",
-      description: "Set PERPLEXITY_API_KEY in your .env.local to enable real-time prospect discovery. The outreach agent will search Reddit, X, LinkedIn, and news sources for leads that match your target profile.",
-      status: "PENDING",
-    },
-    {
-      id: `RI-${crypto.randomUUID()}`,
-      type: "PR_OPPORTUNITY",
-      title: "Outreach agent standing by — API key needed",
-      description: "Once configured, the agent will surface podcast guest slots, newsletter feature opportunities, and press hooks relevant to your brand and services.",
-      status: "PENDING",
-    },
-    {
-      id: `RI-${crypto.randomUUID()}`,
-      type: "COLLAB_LEAD",
-      title: "Partnership discovery requires search integration",
-      description: "The agent will find agencies, freelancers, and complementary services worth partnering with. Add PERPLEXITY_API_KEY to .env.local to activate.",
-      status: "PENDING",
-    },
-  ];
+  if (results.length > 0) return results;
+
+  // True last resort — Hermes reasoning with no search
+  const fallback = await runHermesQuery(
+    "List 5 specific types of businesses or professionals that would benefit most from a premium digital audit or image audit right now. For each, explain why they are a strong prospect and what the estimated engagement value would be. Format as a JSON array: [{ type: 'PROSPECT', title: string, description: string, estimatedValue: string }]"
+  ).catch(() => "[]");
+
+  return parseLeadItems(fallback).length > 0
+    ? parseLeadItems(fallback)
+    : [
+        {
+          id: `RI-${crypto.randomUUID()}`,
+          type: "PROSPECT",
+          title: "Outreach agent running in offline mode",
+          description: "No search API responded. Add PERPLEXITY_API_KEY or OPENAI_API_KEY to enable live web scanning. Hermes reasoning fallback also unavailable.",
+          status: "PENDING",
+        },
+      ];
 }
 
 export async function runOutreachAgent(): Promise<void> {
@@ -355,7 +443,7 @@ export async function runOutreachAgent(): Promise<void> {
 
 // ── Research Agent ────────────────────────────────────────────────────────────
 
-interface PerplexityResearch {
+interface ProspectResearch {
   summary: string;
   onlinePresence: string;
   painPoints: string[];
@@ -363,42 +451,72 @@ interface PerplexityResearch {
   estimatedBudget: string;
 }
 
-async function researchProspect(
-  name: string,
-  serviceInterest: string,
-  apiKey: string
-): Promise<PerplexityResearch | null> {
+async function researchProspect(name: string, serviceInterest: string): Promise<ProspectResearch | null> {
+  const researchPrompt = `Research this prospect for a premium digital audit sales opportunity: "${name}", service interest: "${serviceInterest}". Return a JSON object with: { summary: string, onlinePresence: string, painPoints: string[], opportunities: string[], estimatedBudget: string }. Return ONLY the JSON object, no markdown.`;
+
+  const perplexityKey = process.env.PERPLEXITY_API_KEY;
+  const openaiKey = process.env.OPENAI_API_KEY;
+
+  let content: string | null = null;
+
+  if (perplexityKey) {
+    try {
+      const res = await fetch("https://api.perplexity.ai/chat/completions", {
+        method: "POST",
+        headers: { Authorization: `Bearer ${perplexityKey}`, "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "sonar",
+          messages: [
+            { role: "system", content: "You are a research intelligence agent. Return only valid JSON with no markdown or extra text." },
+            { role: "user", content: researchPrompt },
+          ],
+        }),
+      });
+      if (res.ok) {
+        const data = await res.json() as { choices?: Array<{ message?: { content?: string } }> };
+        content = data.choices?.[0]?.message?.content ?? null;
+      }
+    } catch { /* fall through */ }
+  }
+
+  if (!content && openaiKey) {
+    try {
+      const res = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: { Authorization: `Bearer ${openaiKey}`, "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "gpt-4o-search-preview",
+          web_search_options: {},
+          messages: [
+            { role: "system", content: "You are a research intelligence agent. Search the web and return only valid JSON with no markdown or extra text." },
+            { role: "user", content: researchPrompt },
+          ],
+        }),
+      });
+      if (res.ok) {
+        const data = await res.json() as { choices?: Array<{ message?: { content?: string } }> };
+        content = data.choices?.[0]?.message?.content ?? null;
+      }
+    } catch { /* fall through */ }
+  }
+
+  if (!content) {
+    try {
+      // DuckDuckGo lookup for real snippets, then Hermes interprets
+      const webSnippets = await searchViaDuckDuckGo(`${name} ${serviceInterest} business`);
+      const prompt = webSnippets
+        ? `You are a research intelligence agent. Using the search results below, provide intelligence on this prospect for a premium digital audit engagement: "${name}", interested in "${serviceInterest}". Return ONLY a JSON object: { summary: string, onlinePresence: string, painPoints: string[], opportunities: string[], estimatedBudget: string }\n\nSearch results:\n${webSnippets}`
+        : `You are a research intelligence agent. Based on your knowledge, provide intelligence on this prospect: "${name}", interested in "${serviceInterest}". Return ONLY a JSON object: { summary: string, onlinePresence: string, painPoints: string[], opportunities: string[], estimatedBudget: string }`;
+      content = await runHermesQuery(prompt);
+    } catch { return null; }
+  }
+
   try {
-    const res = await fetch("https://api.perplexity.ai/chat/completions", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        model: "sonar",
-        messages: [
-          {
-            role: "system",
-            content:
-              "You are a research intelligence agent. Return only valid JSON with no markdown or extra text.",
-          },
-          {
-            role: "user",
-            content: `Research this prospect for a digital audit sales opportunity: ${name}, service interest: ${serviceInterest}. Return a JSON object with: { summary: string, onlinePresence: string, painPoints: string[], opportunities: string[], estimatedBudget: string }. Return ONLY the JSON.`,
-          },
-        ],
-      }),
-    });
-
-    if (!res.ok) return null;
-
-    const data = (await res.json()) as {
-      choices?: Array<{ message?: { content?: string } }>;
-    };
-    const content = data.choices?.[0]?.message?.content ?? "";
-    const cleaned = content.replace(/```json|```/g, "").trim();
-    return JSON.parse(cleaned) as PerplexityResearch;
+    const cleaned = (content ?? "").replace(/```json|```/g, "").trim();
+    const start = cleaned.indexOf("{");
+    const end = cleaned.lastIndexOf("}");
+    if (start === -1 || end === -1) return null;
+    return JSON.parse(cleaned.slice(start, end + 1)) as ProspectResearch;
   } catch {
     return null;
   }
@@ -407,92 +525,56 @@ async function researchProspect(
 async function runResearchScan(): Promise<ReportItem[]> {
   const dashboard = await readDashboard();
   const { prospects } = dashboard;
-  const perplexityKey = process.env.PERPLEXITY_API_KEY;
-
-  // Since Prospect has no createdAt, use all prospects (up to 5)
   const targetProspects = prospects.slice(0, 5);
 
-  if (perplexityKey) {
-    const items: ReportItem[] = [];
-
-    for (const prospect of targetProspects) {
-      const research = await researchProspect(
-        prospect.name,
-        prospect.serviceInterest,
-        perplexityKey
-      );
-
-      if (research) {
-        const description = [
-          research.summary,
-          `Online Presence: ${research.onlinePresence}`,
-          research.painPoints.length > 0
-            ? `Pain Points: ${research.painPoints.join(", ")}`
-            : "",
-          research.opportunities.length > 0
-            ? `Opportunities: ${research.opportunities.join(", ")}`
-            : "",
-        ]
-          .filter(Boolean)
-          .join("\n");
-
-        items.push({
-          id: `RI-${crypto.randomUUID()}`,
-          type: "PROSPECT",
-          title: `Research: ${prospect.name}`,
-          description,
-          estimatedValue: research.estimatedBudget || prospect.estimatedValue,
-          status: "PENDING",
-          metadata: {
-            prospectId: prospect.id,
-            serviceInterest: prospect.serviceInterest,
-          },
-        });
-      } else {
-        items.push({
-          id: `RI-${crypto.randomUUID()}`,
-          type: "PROSPECT",
-          title: `Research unavailable: ${prospect.name}`,
-          description: `Could not retrieve research data for ${prospect.name}. Service interest: ${prospect.serviceInterest}. Review manually.`,
-          estimatedValue: prospect.estimatedValue,
-          status: "PENDING",
-          metadata: {
-            prospectId: prospect.id,
-            serviceInterest: prospect.serviceInterest,
-          },
-        });
-      }
-    }
-
-    return items;
-  }
-
-  // No API key — placeholder items
   if (targetProspects.length === 0) {
     return [
       {
         id: `RI-${crypto.randomUUID()}`,
         type: "PROSPECT",
         title: "No prospects to research yet",
-        description:
-          "Add prospects to the dashboard and configure PERPLEXITY_API_KEY to enable automated research scans.",
+        description: "Add prospects to the dashboard to enable automated research scans.",
         status: "PENDING",
       },
     ];
   }
 
-  return targetProspects.map((prospect) => ({
-    id: `RI-${crypto.randomUUID()}`,
-    type: "PROSPECT" as const,
-    title: `Pending research: ${prospect.name}`,
-    description: `Set PERPLEXITY_API_KEY to activate live research for ${prospect.name}. Service interest: ${prospect.serviceInterest}. When active, the agent will return: online presence summary, pain points, opportunities, and estimated budget.`,
-    estimatedValue: prospect.estimatedValue,
-    status: "PENDING" as const,
-    metadata: {
-      prospectId: prospect.id,
-      serviceInterest: prospect.serviceInterest,
-    },
-  }));
+  const items: ReportItem[] = [];
+
+  for (const prospect of targetProspects) {
+    const research = await researchProspect(prospect.name, prospect.serviceInterest);
+
+    if (research) {
+      const description = [
+        research.summary,
+        `Online Presence: ${research.onlinePresence}`,
+        research.painPoints.length > 0 ? `Pain Points: ${research.painPoints.join(", ")}` : "",
+        research.opportunities.length > 0 ? `Opportunities: ${research.opportunities.join(", ")}` : "",
+      ].filter(Boolean).join("\n");
+
+      items.push({
+        id: `RI-${crypto.randomUUID()}`,
+        type: "PROSPECT",
+        title: `Research: ${prospect.name}`,
+        description,
+        estimatedValue: research.estimatedBudget || prospect.estimatedValue,
+        status: "PENDING",
+        metadata: { prospectId: prospect.id, serviceInterest: prospect.serviceInterest },
+      });
+    } else {
+      items.push({
+        id: `RI-${crypto.randomUUID()}`,
+        type: "PROSPECT",
+        title: `Research unavailable: ${prospect.name}`,
+        description: `Could not retrieve research data for ${prospect.name}. Service interest: ${prospect.serviceInterest}. Review manually.`,
+        estimatedValue: prospect.estimatedValue,
+        status: "PENDING",
+        metadata: { prospectId: prospect.id, serviceInterest: prospect.serviceInterest },
+      });
+    }
+  }
+
+  return items;
 }
 
 export async function runResearchAgent(): Promise<void> {
@@ -504,7 +586,7 @@ export async function runResearchAgent(): Promise<void> {
     agentName: "Research Agent",
     reportType: "AUDIT_FINDINGS",
     title: `Research Scan — ${new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}`,
-    summary: `${items.length} prospect${items.length === 1 ? "" : "s"} researched. ${process.env.PERPLEXITY_API_KEY ? "Live intelligence gathered via Perplexity." : "Add PERPLEXITY_API_KEY to activate live research."} Review findings below.`,
+    summary: `${items.length} prospect${items.length === 1 ? "" : "s"} researched. Intelligence gathered via available search APIs and Hermes. Review findings below.`,
     body: "Automated research scan completed. Each item below contains intelligence gathered on a prospect. Use findings to tailor your outreach and audit proposal.",
     status: "UNREAD",
     requiresApproval: false,

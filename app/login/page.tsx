@@ -1,43 +1,21 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/components/auth-context";
 
+type AuthMode = "sign-in" | "request-access";
+
 export default function LoginPage() {
-  const { user, login, loading, isAdmin, error, devBypass, devBypassClient } = useAuth();
+  const { user, login, loading, isAdmin, error } = useAuth();
   const router = useRouter();
-  const showDevBypass =
-    process.env.NODE_ENV !== "production" &&
-    process.env.NEXT_PUBLIC_ENABLE_DEV_BYPASS === "true";
+  const [email, setEmail] = useState("");
+  const [mode, setMode] = useState<AuthMode>("sign-in");
 
   useEffect(() => {
     if (!user || loading) return;
-
-    if (isAdmin) {
-      router.replace("/admin");
-      return;
-    }
-
-    const checkUser = async () => {
-      try {
-        const [auditsRes, ordersRes] = await Promise.all([
-          fetch("/api/audits", { cache: "no-store" }),
-          fetch("/api/orders", { cache: "no-store" }),
-        ]);
-
-        const audits = auditsRes.ok ? ((await auditsRes.json()) as unknown[]) : [];
-        const orders = ordersRes.ok ? ((await ordersRes.json()) as unknown[]) : [];
-
-        const isKnown = audits.length > 0 || orders.length > 0;
-        router.replace(isKnown ? "/portal" : "/access-denied");
-      } catch {
-        router.replace("/access-denied");
-      }
-    };
-
-    void checkUser();
+    router.replace(isAdmin ? "/admin" : "/portal");
   }, [user, loading, isAdmin, router]);
 
   if (loading) {
@@ -48,9 +26,7 @@ export default function LoginPage() {
           <div className="auth-kicker">Secure Session</div>
           <h1>{user ? "Opening Access" : "Initializing Access"}</h1>
           <p className="auth-copy">
-            {user
-              ? "Your Google session is active. Routing you to the correct Sovereign X workspace."
-              : "Verifying browser session and preparing Google authentication."}
+            {user ? "Your session is active. Routing you to the correct Sovereign X workspace." : "Verifying stored session and preparing access."}
           </p>
           <div className="auth-loading-bar" />
         </div>
@@ -64,16 +40,37 @@ export default function LoginPage() {
         <div className="auth-grid-mark" aria-hidden="true" />
         <div className="auth-seal">SX</div>
         <div className="auth-kicker">Sovereign X Audits</div>
-        <h1>Client Portal</h1>
+        <h1>Private Portal</h1>
         <p className="auth-copy">
-          Sign in with the Google account associated with your audit engagement to access your private portal.
+          Invite-only access for approved admin and client emails.
         </p>
+
+        <div className="auth-mode-switch" role="tablist" aria-label="Authentication mode">
+          <button
+            type="button"
+            role="tab"
+            aria-selected={mode === "sign-in"}
+            className={mode === "sign-in" ? "auth-mode-tab active" : "auth-mode-tab"}
+            onClick={() => setMode("sign-in")}
+          >
+            Sign in
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={mode === "request-access"}
+            className={mode === "request-access" ? "auth-mode-tab active" : "auth-mode-tab"}
+            onClick={() => setMode("request-access")}
+          >
+            Request access
+          </button>
+        </div>
 
         {error && (
           <div className="auth-error">
             <span className="error-icon">×</span>
             <div className="error-text">
-              <strong>Authentication Failure</strong>
+              <strong>Access Blocked</strong>
               <p>{error}</p>
             </div>
           </div>
@@ -81,42 +78,47 @@ export default function LoginPage() {
 
         <div className="auth-divider" />
 
-        <button className="auth-google-button" onClick={() => void login()} type="button">
-          <span className="google-mark" aria-hidden="true">G</span>
-          Continue With Google
-        </button>
+        {mode === "sign-in" ? (
+          <form
+            onSubmit={(event) => {
+              event.preventDefault();
+              void login(email);
+            }}
+            style={{ display: "grid", gap: "0.75rem" }}
+          >
+            <label className="auth-label" htmlFor="email">
+              Email address
+            </label>
+            <input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              className="auth-input"
+              autoComplete="email"
+              spellCheck={false}
+              placeholder="you@example.com"
+            />
+            <button className="auth-submit-button" type="submit">
+              Sign in
+            </button>
+          </form>
+        ) : (
+          <div className="auth-request-card">
+            <p className="auth-copy" style={{ marginBottom: "0.75rem" }}>
+              This workspace is invite-only. Ask the administrator to add your email to the approved list, then return here to sign in.
+            </p>
+            <Link className="auth-submit-button" href="/intake" style={{ textAlign: "center" }}>
+              Start Intake
+            </Link>
+          </div>
+        )}
 
         <div className="auth-actions">
           <Link href="/intake">← Back to Intake</Link>
         </div>
 
         <p className="auth-footnote">Authorized access only. BlackFur Capital Group LLC.</p>
-
-        {showDevBypass && (
-          <div style={{ marginTop: "2rem", paddingTop: "1rem", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
-            <p style={{ fontSize: "10px", letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(255,255,255,0.2)", marginBottom: "0.75rem", textAlign: "center" }}>
-              Dev Only — Not visible in production
-            </p>
-            <button
-              className="auth-google-button secondary"
-              onClick={devBypass}
-              type="button"
-              style={{ opacity: 0.5, fontSize: "11px", marginBottom: "0.5rem" }}
-            >
-              <span className="google-mark" aria-hidden="true">🛠️</span>
-              Admin Workstation
-            </button>
-            <button
-              className="auth-google-button secondary"
-              onClick={devBypassClient}
-              type="button"
-              style={{ opacity: 0.5, fontSize: "11px" }}
-            >
-              <span className="google-mark" aria-hidden="true">👤</span>
-              Preview Client Portal
-            </button>
-          </div>
-        )}
       </section>
     </main>
   );

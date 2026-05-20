@@ -7,6 +7,7 @@ import {
   emitDomainEvent,
   listExpenses,
   listKnowledgeAssets,
+  listOrders,
   listWorkflowRuns,
   readDashboard,
   removeQueueItem,
@@ -14,6 +15,7 @@ import {
   updateAudit
 } from "@/lib/server/store";
 import { buildFinanceSummary, getMonthlyExpenseAmount } from "@/lib/finance/calculations";
+import { buildDriveContext } from "@/lib/hermes/drive-tools";
 
 /** Number of prior chat turns to include as context with every query. */
 const CHAT_HISTORY_TURNS = 20;
@@ -263,10 +265,11 @@ class RealHermesAdapter implements HermesGatewayAdapter {
     const chatHistoryTurns = input.source === "telegram" ? TELEGRAM_CHAT_HISTORY_TURNS : CHAT_HISTORY_TURNS;
     const chatHistory = priorMessages.length > 0 ? buildChatHistoryContext(priorMessages, chatHistoryTurns) : undefined;
 
-    const [vaultAssets, finance] = await Promise.all([listKnowledgeAssets(), listExpenses()]);
+    const [vaultAssets, finance, orders] = await Promise.all([listKnowledgeAssets(), listExpenses(), listOrders()]);
     const vaultContext = buildVaultContext(vaultAssets);
     const financeContext = buildFinanceContext(finance);
-    const promptContent = [vaultContext, financeContext, finalMessageContent].filter(Boolean).join("\n\n");
+    const driveContext = await buildDriveContext(orders.map((order) => order.id)).catch(() => "");
+    const promptContent = [vaultContext, financeContext, driveContext, finalMessageContent].filter(Boolean).join("\n\n");
 
     const replyText = await queryHermes(
       buildHermesMessagePrompt({ message: promptContent, source: input.source }),
