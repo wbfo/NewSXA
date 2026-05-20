@@ -16,8 +16,7 @@ export default function SecurityPage() {
         </p>
         <p>
           Audit workflows are processed in an isolated, access-controlled environment. Administrative access
-          is restricted to authorised operators authenticated via Google accounts with strong credential
-          requirements enforced at the identity-provider level.
+          is restricted to authorised operators on the approved email allowlist.
         </p>
         <p>
           Client data is scoped strictly to the individual — each client account can only view records tied

@@ -12,8 +12,20 @@ import { SiteFooter } from "@/components/sections/site-footer";
 import { IntakeInteractive } from "@/components/intake/intake-interactive";
 
 export const metadata: Metadata = {
-  title: "Client Intake",
-  description: "Premium client intake — Digital Audit, Image Audit, and Voice Agent packages. Delivered in 72 hours. AICC Verified.",
+  title: {
+    absolute: "Sovereign X Audits",
+  },
+  description: "Your presence is telling a story. We audit your business, brand, and image and show you exactly what it's costing you.",
+  alternates: {
+    canonical: "https://sxaudits.com/intake",
+  },
+  openGraph: {
+    title: "Sovereign X Audits",
+    description: "Delivered in 72 hours. No discovery call.",
+    url: "https://sxaudits.com/intake",
+    siteName: "Sovereign X Audits",
+    type: "website",
+  },
 };
 
 export default function IntakePage() {

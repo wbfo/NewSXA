@@ -113,7 +113,7 @@ function normalizePersistedState(raw: Partial<PersistedRuntimeState> | null | un
 const REDIS_STATE_KEY = "sx:runtime-state";
 let _redis: RedisType | null = null;
 
-function useRedis() {
+function shouldUseRedisBackend() {
   return Boolean(process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN);
 }
 
@@ -130,20 +130,26 @@ async function getRedis(): Promise<RedisType> {
 
 // ── File backend (local dev) ──────────────────────────────────────────────────
 
+let _inMemoryFallbackState: PersistedRuntimeState = { ...EMPTY_STATE };
+
 async function ensureStateFile() {
-  await mkdir(path.dirname(HERMES_STATE_PATH), { recursive: true });
   try {
-    await readFile(HERMES_STATE_PATH, "utf8");
-  } catch {
-    logger.info({ path: HERMES_STATE_PATH }, "State file not found — initialising with empty state");
-    await writeFile(HERMES_STATE_PATH, `${JSON.stringify(EMPTY_STATE, null, 2)}\n`, "utf8");
+    await mkdir(path.dirname(HERMES_STATE_PATH), { recursive: true });
+    try {
+      await readFile(HERMES_STATE_PATH, "utf8");
+    } catch {
+      logger.info({ path: HERMES_STATE_PATH }, "State file not found — initialising with empty state");
+      await writeFile(HERMES_STATE_PATH, `${JSON.stringify(EMPTY_STATE, null, 2)}\n`, "utf8");
+    }
+  } catch (err) {
+    logger.warn({ err, path: HERMES_STATE_PATH }, "Failed to ensure state file in read-only environment. Operating in-memory.");
   }
 }
 
 // ── Unified read / write ──────────────────────────────────────────────────────
 
 async function readPersistedState(): Promise<PersistedRuntimeState> {
-  if (useRedis()) {
+  if (shouldUseRedisBackend()) {
     try {
       const redis = await getRedis();
       const raw = await redis.get<PersistedRuntimeState>(REDIS_STATE_KEY);
@@ -154,24 +160,33 @@ async function readPersistedState(): Promise<PersistedRuntimeState> {
     }
   }
 
-  await ensureStateFile();
-  const raw = await readFile(HERMES_STATE_PATH, "utf8");
-  if (!raw.trim()) {
-    await writePersistedState(EMPTY_STATE);
-    return { ...EMPTY_STATE };
-  }
-
   try {
-    return normalizePersistedState(JSON.parse(raw) as Partial<PersistedRuntimeState>);
-  } catch {
-    logger.warn({ path: HERMES_STATE_PATH }, "State file was invalid JSON — resetting to empty state");
-    await writePersistedState(EMPTY_STATE);
-    return { ...EMPTY_STATE };
+    await ensureStateFile();
+    const raw = await readFile(HERMES_STATE_PATH, "utf8");
+    if (!raw.trim()) {
+      await writePersistedState(EMPTY_STATE);
+      return { ...EMPTY_STATE };
+    }
+
+    try {
+      const parsed = normalizePersistedState(JSON.parse(raw) as Partial<PersistedRuntimeState>);
+      _inMemoryFallbackState = parsed;
+      return parsed;
+    } catch {
+      logger.warn({ path: HERMES_STATE_PATH }, "State file was invalid JSON — resetting to empty state");
+      await writePersistedState(EMPTY_STATE);
+      return { ...EMPTY_STATE };
+    }
+  } catch (err) {
+    logger.warn({ err, path: HERMES_STATE_PATH }, "Read-only filesystem encountered or file read failed — returning in-memory state");
+    return _inMemoryFallbackState;
   }
 }
 
 async function writePersistedState(state: PersistedRuntimeState) {
-  if (useRedis()) {
+  _inMemoryFallbackState = state;
+
+  if (shouldUseRedisBackend()) {
     try {
       const redis = await getRedis();
       await redis.set(REDIS_STATE_KEY, state);
@@ -180,8 +195,13 @@ async function writePersistedState(state: PersistedRuntimeState) {
     }
     return;
   }
-  await mkdir(path.dirname(HERMES_STATE_PATH), { recursive: true });
-  await writeFile(HERMES_STATE_PATH, `${JSON.stringify(state, null, 2)}\n`, "utf8");
+
+  try {
+    await mkdir(path.dirname(HERMES_STATE_PATH), { recursive: true });
+    await writeFile(HERMES_STATE_PATH, `${JSON.stringify(state, null, 2)}\n`, "utf8");
+  } catch (err) {
+    logger.warn({ err, path: HERMES_STATE_PATH }, "Failed to write persisted state in read-only filesystem. Updated in-memory only.");
+  }
 }
 
 function pushEvent(state: PersistedRuntimeState, event: AgentEvent) {
@@ -238,6 +258,11 @@ export async function listProspects() {
 
 export async function listOrders() {
   return (await readPersistedState()).orders;
+}
+
+export async function getOrder(orderId: string) {
+  const state = await readPersistedState();
+  return state.orders.find((order) => order.id === orderId) ?? null;
 }
 
 export function listToolkit() {
@@ -480,6 +505,23 @@ export async function addOrder(order: ClientOrder) {
     pushEvent(state, event);
     await writePersistedState(state);
     logger.info({ orderId: order.id, customerName: order.customerName }, "Client order added");
+  });
+}
+
+export async function updateOrder(orderId: string, patch: Partial<ClientOrder>) {
+  return withStoreLock(async () => {
+    const state = await readPersistedState();
+    let found = false;
+    state.orders = state.orders.map((order) => {
+      if (order.id !== orderId) return order;
+      found = true;
+      return { ...order, ...patch, id: order.id, submittedAt: order.submittedAt };
+    });
+    if (!found) {
+      throw new Error(`Order ${orderId} not found`);
+    }
+    await writePersistedState(state);
+    logger.info({ orderId, patch }, "Order updated");
   });
 }
 
