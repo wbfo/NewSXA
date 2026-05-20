@@ -6,6 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "paperclip": "node scripts/paperclip.mjs",
+    "dev:full": "node scripts/paperclip.mjs & next dev",
     "lint": "eslint app components lib tests --ext .ts,.tsx",
     "lint:fix": "eslint app components lib tests --ext .ts,.tsx --fix",
     "test": "vitest run",
