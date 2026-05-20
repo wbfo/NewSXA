@@ -8,25 +8,25 @@ import { formatDisplayTime } from "@/lib/utils/time";
 
 const SERVICE_CARDS = [
   {
-    title: "Digital Standard",
+    title: "Sovereign X Digital Audit — Standard",
     icon: "◈",
     desc: "A clean, structured review of the website, conversion friction, and quick wins.",
     bullets: ["Website & content review", "Conversion leaks", "Clear next-step brief"]
   },
   {
-    title: "Digital Deep",
+    title: "Sovereign X Digital Audit — Deep",
     icon: "✦",
     desc: "A more detailed audit with technical notes, competitive context, and revenue impact.",
     bullets: ["Technical analysis", "Competitive context", "ROI-facing findings"]
   },
   {
-    title: "X Image Audit",
+    title: "Sovereign X Image Audit",
     icon: "◎",
     desc: "A premium brand and public-presence review for professionals and creators.",
     bullets: ["Personal brand review", "Public presence audit", "Image alignment"]
   },
   {
-    title: "Voice Agent",
+    title: "Sovereign X Voice Agent",
     icon: "⌁",
     desc: "A deployed voice intake layer for missed calls, booking flow, and client routing.",
     bullets: ["Voice persona", "Calendar + CRM integration", "Monthly management"]
@@ -75,8 +75,8 @@ const AUDIENCE = [
 
 const TIER_OPTIONS = [
   {
-    id: "Digital Standard",
-    name: "Digital Standard",
+    id: "Sovereign X Digital Audit — Standard",
+    name: "Sovereign X Digital Audit — Standard",
     serviceType: "Digital Audit",
     pricePromo: "$500 promo",
     priceReg: "$750 regular",
@@ -85,8 +85,8 @@ const TIER_OPTIONS = [
     selectedTone: "neon-blue"
   },
   {
-    id: "Digital Deep",
-    name: "Digital Deep",
+    id: "Sovereign X Digital Audit — Deep",
+    name: "Sovereign X Digital Audit — Deep",
     serviceType: "Deep Digital Audit",
     pricePromo: "$1,500 promo",
     priceReg: "$2,000 regular",
@@ -95,8 +95,8 @@ const TIER_OPTIONS = [
     selectedTone: "neon-amber"
   },
   {
-    id: "X Image Audit",
-    name: "X Image Audit",
+    id: "Sovereign X Image Audit",
+    name: "Sovereign X Image Audit",
     serviceType: "Image Audit",
     pricePromo: "$350 promo",
     priceReg: "$500 regular",
@@ -105,14 +105,25 @@ const TIER_OPTIONS = [
     selectedTone: "neon-purple"
   },
   {
-    id: "Voice Agent",
-    name: "Voice Agent",
+    id: "Sovereign X Voice Agent",
+    name: "Sovereign X Voice Agent",
     serviceType: "Voice Agent",
     pricePromo: "$1,500+ setup",
     priceReg: "monthly management",
     summary: "Call intake, booking, and after-hours coverage.",
     tags: ["ElevenLabs", "CRM integration", "Analytics dashboard"],
     selectedTone: "neon-blue"
+  },
+  {
+    id: "Sovereign X Growth Blueprint",
+    name: "Sovereign X Growth Blueprint",
+    serviceType: "Growth Blueprint",
+    pricePromo: "$250 promo",
+    priceReg: "$350 regular",
+    summary: "90-day implementation roadmap built from your audit findings.",
+    note: "Available after any completed Sovereign X audit.",
+    tags: ["90-day roadmap", "Audit-specific", "Growth phases"],
+    selectedTone: "neon-purple"
   }
 ];
 
@@ -179,7 +190,7 @@ const EMPTY_FORM = {
   businessName: "",
   email: "",
   phone: "",
-  packageName: "Digital Standard",
+  packageName: "Sovereign X Digital Audit — Standard",
   serviceType: "Digital Audit",
   budget: "",
   hearAbout: "",
@@ -209,6 +220,12 @@ const EMPTY_FORM = {
   wardrobeBudget: "",
   photographyInterest: "",
   wardrobeBlueprintInterest: "",
+  industryField: "",
+  role: "",
+  socialInstagram: "",
+  socialLinkedin: "",
+  socialFacebook: "",
+  socialOther: "",
   monthlyCallVolume: "",
   afterHoursVoicemail: "",
   onlineBooking: "",
@@ -251,36 +268,46 @@ function AnimatedNumber({ target, suffix = "", prefix = "" }: { target: number; 
   return <span ref={ref}>{prefix}{count}{suffix}</span>;
 }
 
-const PRICING_BLOCKS = [
+type PricingRow = { name: string; promo: string; reg?: string; comingSoon?: boolean; rowNote?: string };
+const PRICING_BLOCKS: { title: string; rows: PricingRow[]; blockNote?: string }[] = [
   {
     title: "Sovereign X Digital Audits",
     rows: [
-      { name: "Standard Audit", promo: "$500 promo", reg: "$750 regular" },
-      { name: "Deep Audit", promo: "$1,500 promo", reg: "$2,000 regular" },
-      { name: "Deep + Intake", promo: "$2,000 promo", reg: "$2,500 regular" },
+      { name: "Sovereign X Digital Audit — Standard", promo: "$500 promo", reg: "$750 regular" },
+      { name: "Sovereign X Digital Audit — Deep", promo: "$1,500 promo", reg: "$2,000 regular" },
+      { name: "Sovereign X Digital Audit — Deep + Intake", promo: "$2,000 promo", reg: "$2,500 regular" },
       { name: "Individual / Personal Brand", promo: "$500 promo", reg: "$750 regular" },
-      { name: "Bulk 3–4 individuals", promo: "$350/ea", reg: "" },
-      { name: "Bulk 5–9 individuals", promo: "$300/ea", reg: "" },
+      { name: "Bulk 3–4 individuals", promo: "$350/ea" },
+      { name: "Bulk 5–9 individuals", promo: "$300/ea" },
       { name: "Enterprise per location", promo: "$200/location", reg: "+ $2,000 brand audit" }
     ]
   },
   {
-    title: "X Image Audit",
+    title: "Sovereign X Image Audit",
     rows: [
       { name: "Standard", promo: "$350 promo", reg: "$500 regular" },
       { name: "Public Figure Tier", promo: "$750 promo", reg: "$1,000 regular" },
-      { name: "X Attraction Audit", promo: "$350 promo", reg: "$500 regular" },
-      { name: "Follow-Up Re-Audit", promo: "$150–$200", reg: "" },
-      { name: "Wardrobe Blueprint Add-On", promo: "Available after any audit", reg: "" }
+      { name: "Sovereign X Attraction Audit", promo: "", comingSoon: true },
+      { name: "Sovereign X Image Audit — Follow-Up", promo: "$350" },
+      { name: "Sovereign X Wardrobe Blueprint", promo: "", comingSoon: true }
     ]
   },
   {
-    title: "Voice Agent Services",
+    title: "Sovereign X Strategy — Post-Audit Add-Ons",
     rows: [
-      { name: "Starter", promo: "$1,500 setup + $200/mo", reg: "" },
-      { name: "Standard", promo: "$2,500 setup + $350/mo", reg: "" },
-      { name: "Advanced", promo: "$4,000–$5,000 setup + $500/mo", reg: "" },
-      { name: "Enterprise", promo: "Custom + custom retainer", reg: "" }
+      { name: "Sovereign X Growth Blueprint", promo: "$250 promo", reg: "$350 regular", rowNote: "Available after any completed audit" },
+      { name: "Sovereign X Content Calendar", promo: "$200", rowNote: "Included in Deep Audit" }
+    ],
+    blockNote: "Strategy add-ons are available after any completed Sovereign X audit. Not sold standalone."
+  },
+  {
+    title: "Sovereign X Voice Agent",
+    rows: [
+      { name: "Starter", promo: "$1,500 setup + $200/mo" },
+      { name: "Standard", promo: "$2,500 setup + $350/mo" },
+      { name: "Advanced", promo: "$4,000–$5,000 setup + $500/mo" },
+      { name: "Enterprise", promo: "Custom + custom retainer" },
+      { name: "Sovereign X Website", promo: "$500–$1,500 one-time build", reg: "$150–$200/mo retainer", rowNote: "Complexity-dependent. Quoted per project." }
     ]
   }
 ];
@@ -296,19 +323,19 @@ const TESTIMONIALS = [
     quote: "I had no idea my website was turning away customers. The audit showed me exactly where — and we fixed it within a week. Fully worth it.",
     name: "Marcus T.",
     title: "Restaurant Owner",
-    tier: "Digital Standard"
+    tier: "Sovereign X Digital Audit — Standard"
   },
   {
     quote: "My online presence looked professional to me, but the X Image Audit showed gaps I couldn't see myself. The findings were specific and actionable.",
     name: "Danielle R.",
     title: "Licensed Esthetician & Brand Builder",
-    tier: "X Image Audit"
+    tier: "Sovereign X Image Audit"
   },
   {
     quote: "The Deep Audit gave us a competitive breakdown I didn't expect at this price point. We used the findings to rebuild our entire intake flow.",
     name: "James O.",
     title: "Med Spa Founder",
-    tier: "Digital Deep"
+    tier: "Sovereign X Digital Audit — Deep"
   }
 ];
 
@@ -434,9 +461,9 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
 
   const [form, setForm] = useState(EMPTY_FORM);
 
-  const isDigitalAudit = form.packageName === "Digital Standard" || form.packageName === "Digital Deep";
-  const isImageAudit = form.packageName === "X Image Audit";
-  const isVoiceAgent = form.packageName === "Voice Agent";
+  const isDigitalAudit = form.serviceType === "Digital Audit" || form.serviceType === "Deep Digital Audit";
+  const isImageAudit = form.serviceType === "Image Audit";
+  const isVoiceAgent = form.serviceType === "Voice Agent";
 
   const updateField = (field: keyof typeof form, value: string | string[]) => {
     setForm((current) => ({ ...current, [field]: value }));
@@ -468,7 +495,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
 
     if (isDigitalAudit) {
       sections.push([
-        "DIGITAL AUDIT INTAKE",
+        "SOVEREIGN X DIGITAL AUDIT INTAKE",
         `Website URL: ${form.websiteUrl}`,
         `Industry / field: ${form.industry}`,
         `City and state: ${form.cityState}`,
@@ -481,7 +508,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
 
     if (isImageAudit) {
       sections.push([
-        "X IMAGE AUDIT INTAKE",
+        "SOVEREIGN X IMAGE AUDIT INTAKE",
         `Gender: ${form.gender}`,
         `Age range: ${form.ageRange}`,
         `Height: ${form.height}`,
@@ -696,17 +723,17 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
             <div className="metrics-grid pm-reveal">
               <div className="metric-card metric-card--blue">
                 <div className="metric-label">01 // DELIVERY</div>
-                <div className="metric-value"><AnimatedNumber target={48} suffix=" hrs" /></div>
+                <div className="metric-value">48–72 hrs</div>
                 <div className="metric-desc">Audit turnaround — no waiting weeks for a report</div>
               </div>
               <div className="metric-card metric-card--amber">
                 <div className="metric-label">02 // REVENUE IMPACT</div>
-                <div className="metric-value"><AnimatedNumber prefix="$" target={500} suffix="–$2K" /></div>
+                <div className="metric-value">$500–$2K</div>
                 <div className="metric-desc">Monthly revenue leaked by the average audited business</div>
               </div>
               <div className="metric-card metric-card--purple">
                 <div className="metric-label">03 // COVERAGE</div>
-                <div className="metric-value"><AnimatedNumber target={21} suffix=" sections" /></div>
+                <div className="metric-value">21 sections</div>
                 <div className="metric-desc">Every audit covers 21 diagnostic areas across your digital presence</div>
               </div>
             </div>
@@ -801,6 +828,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                         {tier.priceReg ? <span className="reg">{tier.priceReg}</span> : null}
                       </div>
                       <div className="tier-summary">{tier.summary}</div>
+                      {"note" in tier && tier.note ? <div className="tier-note">{tier.note as string}</div> : null}
                     </div>
                     <div className="tier-tags">
                       {tier.tags.map((tag) => (
@@ -909,7 +937,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
             <div className="deliverables-grid">
               {[
                 {
-                  title: "Digital Audit",
+                  title: "Sovereign X Digital Audit",
                   items: [
                     "21-section written report",
                     "Technical performance scores",
@@ -921,7 +949,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                   ]
                 },
                 {
-                  title: "X Image Audit",
+                  title: "Sovereign X Image Audit",
                   items: [
                     "18-section written report",
                     "Personal Color Analysis Card",
@@ -933,7 +961,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                   ]
                 },
                 {
-                  title: "Voice Agent",
+                  title: "Sovereign X Voice Agent",
                   items: [
                     "Conversation flow design",
                     "Voice persona configuration",
@@ -991,11 +1019,15 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                   <h3>{block.title}</h3>
                   {block.rows.map((row) => (
                     <div key={row.name} className="pricing-row">
-                      <div className="name">{row.name}</div>
-                      <div className="promo">{row.promo}</div>
-                      <div className="reg">{row.reg || ""}</div>
+                      <div className="name">{row.name}{row.rowNote ? <span className="row-note"> — {row.rowNote}</span> : null}</div>
+                      {row.comingSoon
+                        ? <div className="promo"><span className="coming-soon-badge">COMING SOON</span></div>
+                        : <div className="promo">{row.promo}</div>
+                      }
+                      <div className="reg">{row.reg ?? ""}</div>
                     </div>
                   ))}
+                  {block.blockNote ? <div className="block-note">{block.blockNote}</div> : null}
                 </article>
               ))}
 
@@ -1098,10 +1130,11 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                         }
                       }}
                     >
-                      <option>Digital Standard</option>
-                      <option>Digital Deep</option>
-                      <option>X Image Audit</option>
-                      <option>Voice Agent</option>
+                      <option>Sovereign X Digital Audit — Standard</option>
+                      <option>Sovereign X Digital Audit — Deep</option>
+                      <option>Sovereign X Image Audit</option>
+                      <option>Sovereign X Voice Agent</option>
+                      <option>Sovereign X Growth Blueprint</option>
                     </select>
                     <input className="field" placeholder="How did you hear about us?" value={form.hearAbout} onChange={(event) => updateField("hearAbout", event.target.value)} required />
 
@@ -1125,6 +1158,10 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                           <option>Maybe</option>
                         </select>
                         <input className="field" placeholder="Any upcoming deadlines or events?" value={form.deadlines} onChange={(event) => updateField("deadlines", event.target.value)} />
+                        <input className="field" placeholder="Instagram handle" value={form.socialInstagram} onChange={(event) => updateField("socialInstagram", event.target.value)} />
+                        <input className="field" placeholder="LinkedIn profile URL" value={form.socialLinkedin} onChange={(event) => updateField("socialLinkedin", event.target.value)} />
+                        <input className="field" placeholder="Facebook page URL" value={form.socialFacebook} onChange={(event) => updateField("socialFacebook", event.target.value)} />
+                        <input className="field" placeholder="Other social platform + handle" value={form.socialOther} onChange={(event) => updateField("socialOther", event.target.value)} />
                       </>
                     )}
 
@@ -1147,6 +1184,8 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                         </select>
                         <input className="field" placeholder="Height *" value={form.height} onChange={(event) => updateField("height", event.target.value)} required />
                         <input className="field" placeholder="Weight *" value={form.weight} onChange={(event) => updateField("weight", event.target.value)} required />
+                        <input className="field" placeholder="Industry / Field *" value={form.industryField} onChange={(event) => updateField("industryField", event.target.value)} required />
+                        <input className="field" placeholder="Your role or title *" value={form.role} onChange={(event) => updateField("role", event.target.value)} required />
                         <input className="field" placeholder="Instagram handle" value={form.instagram} onChange={(event) => updateField("instagram", event.target.value)} />
                         <input className="field" placeholder="TikTok handle" value={form.tiktok} onChange={(event) => updateField("tiktok", event.target.value)} />
                         <input className="field" placeholder="LinkedIn profile URL" value={form.linkedin} onChange={(event) => updateField("linkedin", event.target.value)} />
