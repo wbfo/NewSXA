@@ -528,34 +528,28 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
     setSuccess("");
 
     try {
-      const response = await fetch("/api/orders", {
+      const response = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          ...form,
+          customerName: form.customerName,
           businessName: form.businessName || form.customerName,
+          email: form.email,
+          phone: form.phone,
+          packageName: form.packageName,
+          serviceType: form.serviceType,
           budget: form.budget || form.wardrobeBudget || form.averageTransactionValue,
           notes: buildExpandedNotes(),
           source: "Sovereign X Landing",
-          status: "NEW"
         })
       });
-      const body = (await response.json()) as { error?: string; order?: { driveUploadLink?: string } };
-      if (!response.ok) {
-        throw new Error(body.error ?? "Order submission failed.");
+      const body = (await response.json()) as { url?: string; error?: string };
+      if (!response.ok) throw new Error(body.error ?? "Order submission failed.");
+      if (body.url) {
+        window.location.href = body.url;
       }
-
-      setForm(EMPTY_FORM);
-      setSelectedTier(TIER_OPTIONS[0].id);
-      setSuccess(
-        body.order?.driveUploadLink
-          ? `Order submitted. Upload your files here: ${body.order.driveUploadLink}`
-          : "Order submitted. It is now flowing into the command center."
-      );
-      setOrders(await fetchOrders());
     } catch (caughtError) {
       setError(caughtError instanceof Error ? caughtError.message : "Order submission failed.");
-    } finally {
       setSubmitting(false);
     }
   };
