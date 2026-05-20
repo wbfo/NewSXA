@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   alternates: { canonical: "https://sxaudits.com" },
@@ -159,10 +160,10 @@ export default function HomePage() {
         {/* Nav */}
         <nav style={{ borderBottom: "1px solid rgba(255,255,255,0.06)", position: "sticky", top: 0, zIndex: 50, background: "rgba(2,6,23,0.94)", backdropFilter: "blur(12px)" }}>
           <div style={{ ...S.wrap, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "1.1rem 1.5rem" }}>
-            <a href="/" style={{ textDecoration: "none", display: "flex", flexDirection: "column", gap: 2 }}>
+            <Link href="/" style={{ textDecoration: "none", display: "flex", flexDirection: "column", gap: 2 }}>
               <span style={{ ...S.mono, color: "#d3ad64", fontWeight: 700, fontSize: "1rem", letterSpacing: "0.08em" }}>Sovereign X Audits</span>
               <span style={{ ...S.mono, color: "#7d766a", fontSize: 9, letterSpacing: "0.25em", textTransform: "uppercase" }}>BlackFur Capital Group LLC</span>
-            </a>
+            </Link>
             <div style={{ display: "flex", gap: "2rem", alignItems: "center" }}>
               <a href="#services" style={{ ...S.mono, color: "#b0a592", fontSize: "0.75rem", textDecoration: "none", letterSpacing: "0.1em" }}>Services</a>
               <a href="#pricing"  style={{ ...S.mono, color: "#b0a592", fontSize: "0.75rem", textDecoration: "none", letterSpacing: "0.1em" }}>Pricing</a>
