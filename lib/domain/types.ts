@@ -105,6 +105,8 @@ export interface Prospect {
   relatedPipelineIds: string[];
 }
 
+export type PaymentStatus = "PENDING" | "PAID" | "FAILED" | "WAIVED";
+
 export interface ClientOrder {
   id: string;
   submittedAt: string;
@@ -118,6 +120,10 @@ export interface ClientOrder {
   notes: string;
   source: string;
   status: OrderStatus;
+  paymentStatus?: PaymentStatus;
+  amountCents?: number;
+  stripeSessionId?: string;
+  paidAt?: string;
   driveRootFolderId?: string;
   driveIntakeFolderId?: string;
   drivePhotosFolderId?: string;

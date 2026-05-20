@@ -63,19 +63,18 @@ export function IntakeInteractive() {
     setError("");
     setSuccess("");
     try {
-      const response = await fetch("/api/orders", {
+      const response = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, source: "Sovereign X Landing", status: "NEW" }),
+        body: JSON.stringify({ ...form, source: "Sovereign X Landing" }),
       });
-      const body = (await response.json()) as { error?: string };
+      const body = (await response.json()) as { url?: string; error?: string };
       if (!response.ok) throw new Error(body.error ?? "Order submission failed.");
-      setForm({ customerName: "", businessName: "", email: "", phone: "", packageName: "Digital Standard", serviceType: "Audit", budget: "", notes: "" });
-      setSelectedTier(TIER_OPTIONS[0].id);
-      setSuccess("Order submitted. It is now flowing into the command center.");
+      if (body.url) {
+        window.location.href = body.url;
+      }
     } catch (caughtError) {
       setError(caughtError instanceof Error ? caughtError.message : "Order submission failed.");
-    } finally {
       setSubmitting(false);
     }
   };
