@@ -30,7 +30,10 @@ const jsonLd = {
     description: "Digital Infrastructure Examination Authority. Sovereign X conducts structured digital infrastructure examinations for founders and capital operators.",
     makesOffer: [
         {
-            "@type": "Offer",
+            "@type": "AggregateOffer",
+            priceCurrency: "USD",
+            lowPrice: 500,
+            highPrice: 2500,
             itemOffered: {
                 "@type": "Service",
                 name: "Sovereign X Digital Audit",
@@ -38,7 +41,10 @@ const jsonLd = {
             }
         },
         {
-            "@type": "Offer",
+            "@type": "AggregateOffer",
+            priceCurrency: "USD",
+            lowPrice: 350,
+            highPrice: 1000,
             itemOffered: {
                 "@type": "Service",
                 name: "Sovereign X Image Audit",
@@ -46,7 +52,10 @@ const jsonLd = {
             }
         },
         {
-            "@type": "Offer",
+            "@type": "AggregateOffer",
+            priceCurrency: "USD",
+            lowPrice: 1500,
+            highPrice: 5000,
             itemOffered: {
                 "@type": "Service",
                 name: "Sovereign X Voice Agent",
