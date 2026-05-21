@@ -2,9 +2,12 @@ import type { Metadata } from "next";
 import "@/app/globals.css";
 import { AuthProvider } from "@/components/auth-context";
 import { ThemeProvider } from "@/components/theme-provider";
+import { getPublicUrl } from "@/lib/config/public-url";
+
+const publicUrl = getPublicUrl();
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://sxaudits.com"),
+  metadataBase: new URL(publicUrl),
   title: {
     default: "Sovereign X Audits — Digital & Image Intelligence Reports",
     template: "%s | Sovereign X Audits",
@@ -39,13 +42,13 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: "https://sxaudits.com",
-    siteName: "Sovereign X Audits",
     title: "Sovereign X Audits — Digital & Image Intelligence Reports",
     description:
       "We audit your business, your brand, and your image — and show you exactly what it's costing you. Delivered in 72 hours.",
+    type: "website",
+    locale: "en_US",
+    url: `${publicUrl}/intake`,
+    siteName: "Sovereign X Audits",
     images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Sovereign X Audits" }],
   },
   twitter: {
@@ -54,7 +57,7 @@ export const metadata: Metadata = {
     description: "We audit your business, your brand, and your image — and show you exactly what it's costing you.",
     images: ["/og-image.png"],
   },
-  alternates: { canonical: "https://sxaudits.com" },
+  alternates: { canonical: `${publicUrl}/intake` },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
