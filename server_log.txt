@@ -1,0 +1,12 @@
+
+> sovereign-x-audits@0.1.0 dev
+> next dev
+
+▲ Next.js 16.1.6 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.1.171:3000
+
+✓ Starting...
+Failed to benchmark file I/O: No such file or directory (os error 2)
+✓ Ready in 1272ms
+ GET / 200 in 1827ms (compile: 1749ms, render: 78ms)
