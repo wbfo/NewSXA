@@ -18,6 +18,7 @@ data/uploads/
 .env
 .env.local
 .env.*.local
+.env.production
 
 # OS
 .DS_Store
@@ -44,6 +45,7 @@ tsconfig.tsbuildinfo
 # Development scratchpad — not for source control
 scratch/
 .tmp/
+.agents/
 
 # Generated analysis / local export artifacts
 .graphify_*.json
