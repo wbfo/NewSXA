@@ -100,8 +100,8 @@ export function SamplesClient() {
           {/* SECTION 1 — PAGE HEADER */}
           <header className="text-center" style={{ display: "flex", flexDirection: "column", alignItems: "center", paddingTop: "0px", paddingBottom: "40px" }}>
             <p
-              style={{ color: "#C8A96E", letterSpacing: "4px" }}
-              className="font-mono text-xs uppercase mb-4"
+              style={{ color: "#C8A96E", letterSpacing: "4px", marginBottom: "48px" }}
+              className="font-mono text-xs uppercase"
             >
               Sample Intelligence Reports · Sovereign X Audits
             </p>
