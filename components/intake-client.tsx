@@ -5,7 +5,7 @@ import Link from "next/link";
 import type { DashboardPayload, ClientOrder } from "@/lib/domain/types";
 import { ThemeProvider, useTheme } from "@/components/theme-provider";
 import { formatDisplayTime } from "@/lib/utils/time";
-
+import { SnippetParallax } from "@/components/snippet-parallax";
 const SERVICE_CARDS = [
   {
     title: "Sovereign X Digital Audit — Standard",
@@ -675,12 +675,21 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
           <div className="wrap">
             <div className="hero-grid">
               <div>
-                <div className="hero-eyebrow pm-animate">
-                  <span>Sovereign X Audits</span>
-                  <span className="dot">•</span>
-                  <span className="gold-tag text-neon-blue border-neon-blue">Digital Superstructure</span>
-                  <span className="dot">•</span>
-                  <span>BlackFur Capital Group LLC</span>
+                <div className="hero-eyebrow pm-animate mb-6">
+                  <div className="hero-eyebrow-track">
+                    <span>Sovereign X Audits</span>
+                    <span className="dot">•</span>
+                    <span className="gold-tag text-neon-blue border-neon-blue">Digital Superstructure</span>
+                    <span className="dot">•</span>
+                    <span>BlackFur Capital Group LLC</span>
+                  </div>
+                  <div className="hero-eyebrow-track" aria-hidden="true">
+                    <span>Sovereign X Audits</span>
+                    <span className="dot">•</span>
+                    <span className="gold-tag text-neon-blue border-neon-blue">Digital Superstructure</span>
+                    <span className="dot">•</span>
+                    <span>BlackFur Capital Group LLC</span>
+                  </div>
                 </div>
                 <h1 className="pm-headline">
                   YOUR PRESENCE IS TELLING A STORY.
@@ -698,6 +707,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                     See What We Audit <span className="arrow">↓</span>
                   </a>
                 </div>
+
                 <div className="hero-credentials pm-animate">
                   <span>Live Pipeline Snapshot</span>
                   <span className="sep">•</span>
@@ -707,10 +717,9 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                 </div>
               </div>
 
+              {/* Unified Responsive Preview Snippet */}
               <div className="hero-stage pm-animate">
-                <div className="hero-stage-grid" />
-                <div className="hero-floor" />
-                <div className="hero-seal-wrap">{heroSeal()}</div>
+                <SnippetParallax />
               </div>
             </div>
           </div>

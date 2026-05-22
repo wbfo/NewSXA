@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
+import { Bebas_Neue, Montserrat, Inter } from "next/font/google";
 import "@/app/globals.css";
 import { AuthProvider } from "@/components/auth-context";
 import { ThemeProvider } from "@/components/theme-provider";
 import { getPublicUrl } from "@/lib/config/public-url";
+
+const bebasNeue = Bebas_Neue({ weight: "400", subsets: ["latin"], variable: "--font-bebas" });
+const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-montserrat" });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 const publicUrl = getPublicUrl();
 
@@ -64,10 +69,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
+      className={`${bebasNeue.variable} ${montserrat.variable} ${inter.variable}`}
       style={{
         ["--font-ibm-plex-mono" as string]: '"IBM Plex Mono", "SFMono-Regular", "Menlo", "Consolas", monospace',
         ["--font-display" as string]: 'Georgia, "Iowan Old Style", "Source Serif Pro", "Times New Roman", serif'
       }}
+
       suppressHydrationWarning
     >
       <body>
