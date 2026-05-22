@@ -15,6 +15,7 @@ export function SiteNav() {
         <div className="nav-links">
           <a href="#hero">Home</a>
           <a href="#services">Services</a>
+          <a href="/samples">Sample Reports</a>
           <a href="#featured">Featured</a>
           <a href="#intake">Intake</a>
         </div>

@@ -118,7 +118,7 @@ export function SnippetParallax() {
         {/* Bottom label cleanly positioned below the snippet in document flow */}
         <div className="mt-1 w-full px-4 text-center z-10 flex justify-center">
           <a
-            href="/samples/snippet"
+            href="/samples#snippet"
             className="font-mono text-[10px] tracking-widest uppercase px-6 py-3 rounded-full transition-all duration-300 backdrop-blur-md inline-block max-w-full truncate hover:bg-neon-blue hover:text-slate-950"
             style={{
               color: "#C8A96E",
@@ -169,7 +169,7 @@ export function SnippetParallax() {
       {/* Bottom label cleanly positioned below the snippet in natural document flow */}
       <div className="mt-6 w-full px-4 text-center z-10 flex justify-center">
         <a
-          href="/samples/snippet"
+          href="/samples#snippet"
           className="font-mono text-[10px] tracking-widest uppercase px-6 py-3 rounded-full transition-all duration-300 backdrop-blur-md inline-block max-w-full hover:bg-neon-blue hover:text-slate-950"
           style={{
             color: "#C8A96E",

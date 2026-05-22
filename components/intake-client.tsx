@@ -618,6 +618,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
           <div className="nav-links">
             <a href="#hero">Home</a>
             <a href="#services">Services</a>
+            <a href="/samples">Sample Reports</a>
             <a href="#featured">Featured</a>
             <a href="#intake">Intake</a>
           </div>
@@ -644,6 +645,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
           <div className="nav-mobile-menu">
             <a href="#hero"     onClick={() => setMenuOpen(false)}>Home</a>
             <a href="#services" onClick={() => setMenuOpen(false)}>Services</a>
+            <a href="/samples"   onClick={() => setMenuOpen(false)}>Sample Reports</a>
             <a href="#featured" onClick={() => setMenuOpen(false)}>Featured</a>
             <a href="#intake"   onClick={() => setMenuOpen(false)}>Intake</a>
             <button
@@ -705,6 +707,16 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                   </a>
                   <a className="btn btn-ghost hover:text-neon-blue" href="#services">
                     See What We Audit <span className="arrow">↓</span>
+                  </a>
+                </div>
+
+                <div className="mt-6">
+                  <a href="/samples"
+                     style={{ color: "#555" }}
+                     className="font-mono text-xs tracking-[3px] 
+                                uppercase underline underline-offset-4 
+                                hover:text-[#C8A96E] transition-colors">
+                    See sample reports first →
                   </a>
                 </div>
 
@@ -1022,7 +1034,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
               <p className="sub">This is what lands in your Google Drive.</p>
             </div>
             <div className="pm-reveal">
-              <a className="sample-featured glass-premium" href="/samples/snippet">
+              <a className="sample-featured glass-premium" href="/samples#snippet">
                 <div className="sample-featured-inner">
                   <div className="sample-featured-body">
                     <div className="label aicc-stamp text-neon-amber border-neon-amber">THE SNIPPET</div>
@@ -1040,26 +1052,38 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
               </a>
             </div>
             <div className="sample-cards pm-reveal">
-              <a className="sample-card glass-premium" href="/samples/digital">
+              <a className="sample-card glass-premium" href="/samples#standard-audit">
                 <div className="label">SOVEREIGN X DIGITAL AUDIT</div>
                 <h4 className="text-white">Sample Business Intelligence Report</h4>
                 <p className="text-subtle">21 sections. Revenue leaks with dollar figures. Technical performance scores. AI readiness analysis. Impact Matrix. Priority roadmap.</p>
                 <span className="aicc-stamp border-neon-blue text-neon-blue" style={{ marginTop: "auto" }}>AICC VERIFIED</span>
-                <span className="sample-cta">View Sample Report →</span>
               </a>
-              <a className="sample-card glass-premium" href="/samples/image">
+              <a className="sample-card glass-premium" href="/samples#standard-audit">
                 <div className="label">SOVEREIGN X IMAGE AUDIT</div>
                 <h4 className="text-white">Sample Personal Brand Report</h4>
                 <p className="text-subtle">18 sections. Color analysis. Social media audit. Brand alignment. Photography readiness score. Priority sequence.</p>
                 <span className="aicc-stamp border-neon-blue text-neon-blue" style={{ marginTop: "auto" }}>AICC VERIFIED</span>
-                <span className="sample-cta">View Sample Report →</span>
               </a>
-              <a className="sample-card glass-premium" href="/samples/voice">
+              <a className="sample-card glass-premium" href="/samples#standard-audit">
                 <div className="label">SOVEREIGN X VOICE AGENT</div>
                 <h4 className="text-white">Sample ROI Analysis</h4>
                 <p className="text-subtle">After-hours lead gap calculation. Annual revenue loss from missed calls. Conversation flow design. Build and deployment plan.</p>
                 <span className="aicc-stamp border-neon-blue text-neon-blue" style={{ marginTop: "auto" }}>AICC VERIFIED</span>
-                <span className="sample-cta">View Sample →</span>
+              </a>
+            </div>
+
+            <div className="text-center mt-12" style={{ display: "flex", justifyContent: "center", marginTop: "3rem" }}>
+              <a href="/samples"
+                 style={{ 
+                   border: "1px solid #C8A96E", 
+                   color: "#C8A96E",
+                   textDecoration: "none"
+                 }}
+                 className="inline-block font-mono text-sm 
+                            tracking-widest uppercase px-10 py-4 
+                            hover:bg-[#C8A96E] hover:text-[#060606] 
+                            transition-all">
+                View All Sample Reports →
               </a>
             </div>
           </div>
