@@ -745,25 +745,6 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
           </div>
         </section>
 
-        <section className="compact section-diagonal">
-          <div className="wrap">
-            <div className="sec-head">
-              <div className="label">Process</div>
-              <h2>What happens after the client clicks submit.</h2>
-              <p className="sub">From the first form field to the final delivered brief — every step is sequenced, logged, and visible in the command center.</p>
-            </div>
-
-            <div className="process-grid">
-              {PROCESS_STEPS.map((step) => (
-                <article key={step.num} className="process-step">
-                  <div className="num">{step.num}</div>
-                  <h4>{step.title}</h4>
-                  <p>{step.text}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
 
         {/* ── HOW IT WORKS Section ── */}
         <section id="how-it-works" style={{ padding: "64px 0 0" }}>
