@@ -174,7 +174,7 @@ const PROCESS_STEPS = [
   {
     num: "03",
     title: "Command center updates",
-    text: "Your audit lands in Google Drive within 72 hours. Clear findings. Dollar figures. A roadmap you can act on today."
+    text: "Your audit lands in Google Drive. Clear findings. Dollar figures. A roadmap you can act on today."
   },
   {
     num: "04",
@@ -326,7 +326,7 @@ const TESTIMONIALS = [
     tier: "Sovereign X Digital Audit — Standard"
   },
   {
-    quote: "My online presence looked professional to me, but the X Image Audit showed gaps I couldn't see myself. The findings were specific and actionable.",
+    quote: "My online presence looked professional to me, but the Sovereign X Image Audit showed gaps I couldn't see myself. The findings were specific and actionable.",
     name: "Danielle R.",
     title: "Licensed Esthetician & Brand Builder",
     tier: "Sovereign X Image Audit"
@@ -675,63 +675,47 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
             ))}
           </div>
           <div className="wrap">
-            <div className="hero-grid">
-              <div>
-                <div className="hero-eyebrow pm-animate mb-6">
-                  <div className="hero-eyebrow-track">
-                    <span>Sovereign X Audits</span>
-                    <span className="dot">•</span>
-                    <span className="gold-tag text-neon-blue border-neon-blue">Digital Superstructure</span>
-                    <span className="dot">•</span>
-                    <span>BlackFur Capital Group LLC</span>
-                  </div>
-                  <div className="hero-eyebrow-track" aria-hidden="true">
-                    <span>Sovereign X Audits</span>
-                    <span className="dot">•</span>
-                    <span className="gold-tag text-neon-blue border-neon-blue">Digital Superstructure</span>
-                    <span className="dot">•</span>
-                    <span>BlackFur Capital Group LLC</span>
-                  </div>
+            <div className="hero-content">
+              <div className="hero-eyebrow pm-animate mb-6">
+                <div className="hero-eyebrow-track">
+                  <span>Sovereign X Audits</span>
+                  <span className="dot">•</span>
+                  <span className="gold-tag text-neon-blue border-neon-blue">Digital Intelligence</span>
+                  <span className="dot">•</span>
+                  <span>BlackFur Capital Group LLC</span>
                 </div>
-                <h1 className="pm-headline">
-                  YOUR PRESENCE IS TELLING A STORY.
-                  <span className="pm-headline-break">IS IT THE RIGHT ONE?</span>
-                </h1>
-                <div className="hero-divider pm-animate bg-neon-blue/20" />
-                <p className="hero-sub pm-animate text-slate-300">
-                  We audit your business, your brand, and your image — and show you exactly what it&apos;s costing you. Delivered in 72 hours. No discovery call.
-                </p>
-                <div className="hero-ctas pm-animate">
-                  <a className="btn btn-primary cta-primary hover:shadow-neon-blue bg-neon-blue text-slate-950 border-neon-blue" href="#intake">
-                    Get Your Audit <span className="arrow">→</span>
-                  </a>
-                  <a className="btn btn-ghost hover:text-neon-blue" href="#services">
-                    See What We Audit <span className="arrow">↓</span>
-                  </a>
-                </div>
-
-                <div className="mt-6">
-                  <a href="/samples"
-                     style={{ color: "#555" }}
-                     className="font-mono text-xs tracking-[3px] 
-                                uppercase underline underline-offset-4 
-                                hover:text-[#C8A96E] transition-colors">
-                    See sample reports first →
-                  </a>
-                </div>
-
-                <div className="hero-credentials pm-animate">
-                  <span>Live Pipeline Snapshot</span>
-                  <span className="sep">•</span>
-                  <span>CRM Integration</span>
-                  <span className="sep">•</span>
-                  <span>AICC Verified</span>
+                <div className="hero-eyebrow-track" aria-hidden="true">
+                  <span>Sovereign X Audits</span>
+                  <span className="dot">•</span>
+                  <span className="gold-tag text-neon-blue border-neon-blue">Digital Intelligence</span>
+                  <span className="dot">•</span>
+                  <span>BlackFur Capital Group LLC</span>
                 </div>
               </div>
+              <h1 className="pm-headline">
+                YOUR PRESENCE IS TELLING A STORY.
+                <span className="pm-headline-break">IS IT THE RIGHT ONE?</span>
+              </h1>
+              <div className="hero-divider pm-animate bg-neon-blue/20" />
+              <p className="hero-sub pm-animate text-slate-300">
+                We audit your business, your brand, and your image — and show you exactly what it&apos;s costing you. No waiting weeks.
+              </p>
 
-              {/* Unified Responsive Preview Snippet */}
-              <div className="hero-stage pm-animate">
-                <SnippetParallax />
+              <div className="hero-ctas pm-animate" style={{ marginTop: "32px" }}>
+                <a className="btn btn-primary cta-primary hover:shadow-neon-blue bg-neon-blue text-slate-950 border-neon-blue" href="#intake">
+                  Start the Audit <span className="arrow">→</span>
+                </a>
+                <a className="btn btn-ghost hover:text-neon-blue" href="#services">
+                  See What We Audit <span className="arrow">↓</span>
+                </a>
+              </div>
+
+              <div className="hero-credentials pm-animate">
+                <span>Licensed</span>
+                <span className="sep">·</span>
+                <span>AICC Verified</span>
+                <span className="sep">·</span>
+                <span>BlackFur Capital Group LLC</span>
               </div>
             </div>
           </div>
@@ -761,107 +745,180 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
           </div>
         </section>
 
-        <section className="compact mt-24">
+        <section className="compact section-diagonal">
           <div className="wrap">
-            <div className="sec-head pm-reveal">
-              <div className="label text-neon-blue border-neon-blue">Workflow Logic</div>
-              <h2 className="text-white">A clear path from intake to verified delivery.</h2>
-              <p className="sub text-slate-400">You submit once. We audit, verify, and deliver the findings in a format you can act on immediately.</p>
+            <div className="sec-head">
+              <div className="label">Process</div>
+              <h2>What happens after the client clicks submit.</h2>
+              <p className="sub">From the first form field to the final delivered brief — every step is sequenced, logged, and visible in the command center.</p>
             </div>
 
-            <div className="pipeline-steps pm-reveal">
-              <article className="pipeline-step pipeline-step--blue">
-                <div className="num">01</div>
-                <h4>Discovery & Intake</h4>
-                <p>You tell us who you are and what you need. We take it from there.</p>
-              </article>
-              <article className="pipeline-step pipeline-step--amber">
-                <div className="num">02</div>
-                <h4>AICC Verification</h4>
-                <p>Every finding goes through a five-stage verification process. Nothing reaches you unless it&apos;s defensible.</p>
-              </article>
-              <article className="pipeline-step pipeline-step--purple">
-                <div className="num">03</div>
-                <h4>Google Drive delivery</h4>
-                <p>Your audit lands in Google Drive within 72 hours. Clear findings. Dollar figures. A roadmap you can act on today.</p>
-              </article>
+            <div className="process-grid">
+              {PROCESS_STEPS.map((step) => (
+                <article key={step.num} className="process-step">
+                  <div className="num">{step.num}</div>
+                  <h4>{step.title}</h4>
+                  <p>{step.text}</p>
+                </article>
+              ))}
             </div>
           </div>
         </section>
 
-        <div className="pm-section-glow" aria-hidden="true" />
-
-        <section id="services">
+        {/* ── HOW IT WORKS Section ── */}
+        <section id="how-it-works" style={{ padding: "64px 0 0" }}>
           <div className="wrap">
-            <div className="sec-head pm-reveal">
-              <div className="label">Service entry points</div>
-              <h2>Four ways a client can step into the system.</h2>
-              <p className="sub">Each tier is designed to match where a client is in their growth process — from a fast structured review to a premium brand and visibility build.</p>
+            {/* ── 3-Node System Flow ── */}
+            <div className="sx-system-flow pm-reveal">
+              <div className="sx-system-node">
+                <div className="sx-system-node-num">01</div>
+                <div className="sx-system-node-label">THE AUDIT</div>
+                <p className="sx-system-node-text">We diagnose your digital infrastructure, brand presence, and revenue leaks.</p>
+              </div>
+              <div className="sx-system-arrow" aria-hidden="true">→</div>
+              <div className="sx-system-node">
+                <div className="sx-system-node-num">02</div>
+                <div className="sx-system-node-label">THE FINDINGS</div>
+                <p className="sx-system-node-text">You receive a verified intelligence report with dollar figures and a priority sequence.</p>
+              </div>
+              <div className="sx-system-arrow" aria-hidden="true">→</div>
+              <div className="sx-system-node">
+                <div className="sx-system-node-num">03</div>
+                <div className="sx-system-node-label">THE FIX</div>
+                <p className="sx-system-node-text">We implement only what the audit prescribes — voice agents, image alignment, web fixes, or local SEO recovery.</p>
+              </div>
             </div>
 
-            <div className="services-grid">
-              {SERVICE_CARDS.map((card) => (
-                <article key={card.title} className="svc-card glass-premium hover:shadow-neon-blue transition-all duration-300">
-                  <div className="icon text-neon-blue">{card.icon}</div>
-                  <div className="label text-neon-amber">{card.title}</div>
-                  <h3 className="text-white">{card.title}</h3>
-                  <p className="desc text-dim">{card.desc}</p>
-                  <ul>
-                    {card.bullets.map((bullet) => (
-                      <li key={bullet} className="text-subtle">{bullet}</li>
-                    ))}
-                  </ul>
-                  <div className="svc-foot">
-                    <span className="text-neon-blue font-medium">Ready to order</span>
-                    <span className="dim">→</span>
-                  </div>
+            {/* ── Philosophy Sentence ── */}
+            <div className="sx-hero-philosophy pm-reveal">
+              <p>We don&apos;t pitch services. We run diagnostics.<br />
+              If the audit finds nothing, you pay for the truth.<br />
+              If it finds leaks, you decide which ones we fix.</p>
+            </div>
+          </div>
+        </section>
+
+        <section className="aicc-block section-diagonal">
+          <div className="wrap">
+            <div className="sec-head aicc-head">
+              <div className="label">AICC method</div>
+              <h2>
+                Generated, critiqued, verified, refined, and specialized through the <span className="accent">AICC</span> workflow.
+              </h2>
+              <a className="aicc-cross-link" href="https://aicouncilconductor.com" target="_blank" rel="noreferrer">
+                Powered by the AI Council Conductor methodology →
+              </a>
+              <p className="sub">Each output passes through a five-stage refinement cycle before it reaches the operator. Defensible analysis, not just fast generation.</p>
+            </div>
+
+            <div className="aicc-flow">
+              {AICC_STEPS.map((step) => (
+                <article key={step.num} className="aicc-step">
+                  <div className="num">{step.num}</div>
+                  <div className="icon-circle">{step.icon}</div>
+                  <h4>{step.title}</h4>
+                  <p>{step.text}</p>
                 </article>
               ))}
             </div>
+          </div>
+        </section>
 
+        <section id="services">
+          <div className="wrap">
 
-            <div className="sec-head">
-              <div className="label">Tier selection</div>
-              <h2>Choose the tier that matches the client before the order is submitted.</h2>
-              <p className="sub">Select the package that fits the engagement. Your choice carries into the intake form automatically.</p>
+            {/* ── Section Header ── */}
+            <div className="sec-head pm-reveal">
+              <div className="label" style={{ color: "var(--gold)", letterSpacing: "4px" }}>THE SYSTEM</div>
+              <h2>The audit is always the entry point.<br />Everything else is prescribed by what it finds.</h2>
             </div>
 
-            <div className="tier-list">
-              {TIER_OPTIONS.map((tier) => {
-                const isSelected = tier.id === selectedTier;
-                return (
-                  <button
-                    key={tier.id}
-                    type="button"
-                    className={`tier-card glass-premium transition-all duration-300 ${isSelected ? "selected shadow-neon-amber border-neon-amber" : "hover:shadow-neon-blue"}`}
-                    onClick={() => pickTier(tier)}
-                  >
-                    <div className="tier-body">
-                      <div className="tier-top">
-                        <h4 className={isSelected ? "text-neon-amber" : ""}>{tier.name}</h4>
-                        <StatusTag
-                          label={isSelected ? "Selected" : "Available"}
-                          tone={isSelected ? (tier.selectedTone as StatusTone) : "muted"}
-                        />
-                      </div>
-                      <div className="price-row">
-                        <span className="promo text-neon-blue">{tier.pricePromo}</span>
-                        {tier.priceReg ? <span className="reg">{tier.priceReg}</span> : null}
-                      </div>
-                      <div className="tier-summary">{tier.summary}</div>
-                      {"note" in tier && tier.note ? <div className="tier-note">{tier.note as string}</div> : null}
-                    </div>
-                    <div className="tier-tags">
-                      {tier.tags.map((tag) => (
-                        <span key={tag} className="chip bg-surface border-border text-subtle">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </button>
-                );
-              })}
+            {/* ── PHASE 1 — DIAGNOSIS ── */}
+            <div className="sx-phase-block sx-phase-1 pm-reveal">
+              <div className="sx-phase-header">
+                <div className="sx-phase-label">PHASE 1 — DIAGNOSIS</div>
+                <div className="sx-phase-subtext">The only way in.</div>
+              </div>
+              <div className="services-grid">
+                <article className="svc-card glass-premium hover:shadow-neon-blue transition-all duration-300">
+                  <div className="icon text-neon-blue">◈</div>
+                  <div className="label text-neon-amber">Standard</div>
+                  <h3 className="text-white">Sovereign X Digital Audit — Standard</h3>
+                  <p className="desc text-dim">A clean, structured review of the website, conversion friction, and quick wins.</p>
+                  <ul>
+                    <li className="text-subtle">Website &amp; content review</li>
+                    <li className="text-subtle">Conversion leaks identified</li>
+                    <li className="text-subtle">Clear next-step brief</li>
+                  </ul>
+                  <div className="svc-foot">
+                    <a href="#intake" style={{ color: "var(--neon-blue)", textDecoration: "none", fontWeight: "500" }}>Start This Audit →</a>
+                  </div>
+                </article>
+                <article className="svc-card glass-premium hover:shadow-neon-blue transition-all duration-300">
+                  <div className="icon text-neon-blue">✦</div>
+                  <div className="label text-neon-amber">Deep</div>
+                  <h3 className="text-white">Sovereign X Digital Audit — Deep</h3>
+                  <p className="desc text-dim">A more detailed audit with technical notes, competitive context, and revenue impact.</p>
+                  <ul>
+                    <li className="text-subtle">Technical analysis</li>
+                    <li className="text-subtle">Competitive context</li>
+                    <li className="text-subtle">ROI-facing findings</li>
+                  </ul>
+                  <div className="svc-foot">
+                    <a href="#intake" style={{ color: "var(--neon-blue)", textDecoration: "none", fontWeight: "500" }}>Start This Audit →</a>
+                  </div>
+                </article>
+                <article className="svc-card glass-premium hover:shadow-neon-blue transition-all duration-300">
+                  <div className="icon text-neon-blue">◎</div>
+                  <div className="label text-neon-amber">Enterprise</div>
+                  <h3 className="text-white">Sovereign X Digital Audit — Enterprise</h3>
+                  <p className="desc text-dim">Multi-location brand audit with full competitive landscape and enterprise revenue mapping.</p>
+                  <ul>
+                    <li className="text-subtle">Per-location analysis</li>
+                    <li className="text-subtle">Full brand-wide audit</li>
+                    <li className="text-subtle">Enterprise roadmap</li>
+                  </ul>
+                  <div className="svc-foot">
+                    <a href="#intake" style={{ color: "var(--neon-blue)", textDecoration: "none", fontWeight: "500" }}>Start This Audit →</a>
+                  </div>
+                </article>
+              </div>
             </div>
+
+            {/* ── PHASE 2 — IMPLEMENTATION ── */}
+            <div className="sx-phase-block sx-phase-2 pm-reveal">
+              <div className="sx-phase-header">
+                <div className="sx-phase-label" style={{ color: "var(--subtle)" }}>PHASE 2 — IMPLEMENTATION</div>
+                <div className="sx-phase-subtext" style={{ color: "var(--subtle)" }}>Unlocks after audit delivery. Prescribed by findings.</div>
+              </div>
+              <div className="sx-phase-gate-note">
+                We don&apos;t sell solutions before we diagnose the problem. Every Phase 2 service is deployed based on what your audit finds.
+              </div>
+              <div className="sx-phase2-grid">
+                <article className="sx-phase2-card">
+                  <div className="sx-phase2-label">Revenue Recovery</div>
+                  <p className="sx-phase2-desc">Digital infrastructure fixes, local SEO recovery, website builds, conversion optimization.</p>
+                  <a href="#intake" className="sx-phase2-cta">Find out if you need this → Start your audit</a>
+                </article>
+                <article className="sx-phase2-card">
+                  <div className="sx-phase2-label">Image Alignment</div>
+                  <p className="sx-phase2-desc">Sovereign X Image Audit, personal brand alignment, photography readiness, presence coaching.</p>
+                  <a href="#intake" className="sx-phase2-cta">Find out if you need this → Start your audit</a>
+                </article>
+                <article className="sx-phase2-card">
+                  <div className="sx-phase2-label">Voice Agent &amp; Systems</div>
+                  <p className="sx-phase2-desc">AI voice agent deployment, after-hours lead capture, CRM integration, calendar automation.</p>
+                  <a href="#intake" className="sx-phase2-cta">Find out if you need this → Start your audit</a>
+                </article>
+                <article className="sx-phase2-card">
+                  <div className="sx-phase2-label">Strategy &amp; Growth</div>
+                  <p className="sx-phase2-desc">Sovereign X Growth Blueprint, Content Calendar, 90-day implementation roadmap.</p>
+                  <a href="#intake" className="sx-phase2-cta">Find out if you need this → Start your audit</a>
+                </article>
+              </div>
+            </div>
+
+
           </div>
         </section>
 
@@ -876,7 +933,6 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                     The page keeps the black-and-gold editorial language from the original design while turning the order flow into a clear client-facing conversion path.
                   </p>
                   <div className="snippet-badges">
-                    <span className="aicc-stamp border-neon-blue text-neon-blue">AICC Verified</span>
                     <span className="stamp">Intake → Order queue</span>
                     <span className="stamp">Light / Dark mode</span>
                   </div>
@@ -922,38 +978,11 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
           </div>
         </section>
 
-
-        <section className="aicc-block section-diagonal">
-          <div className="wrap">
-            <div className="sec-head aicc-head">
-              <div className="label">AICC method</div>
-              <h2>
-                Generated, critiqued, verified, refined, and specialized through the <span className="accent">AICC</span> workflow.
-              </h2>
-              <a className="aicc-cross-link" href="https://aicouncilconductor.com" target="_blank" rel="noreferrer">
-                Powered by the AI Council Conductor methodology →
-              </a>
-              <p className="sub">Each output passes through a five-stage refinement cycle before it reaches the operator. Defensible analysis, not just fast generation.</p>
-            </div>
-
-            <div className="aicc-flow">
-              {AICC_STEPS.map((step) => (
-                <article key={step.num} className="aicc-step">
-                  <div className="num">{step.num}</div>
-                  <div className="icon-circle">{step.icon}</div>
-                  <h4>{step.title}</h4>
-                  <p>{step.text}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
         <section className="white-section" id="deliverables">
           <div className="wrap">
             <div className="white-section-head">
               <div className="label">What Gets Delivered</div>
-              <h2>Seven deliverables. One Google Drive link. 72 hours.</h2>
+              <h2>Seven deliverables. One Google Drive link.</h2>
             </div>
             <div className="deliverables-grid">
               {[
@@ -1006,23 +1035,10 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
           </div>
         </section>
 
-        <section className="compact section-diagonal">
+        {/* ── Snippet Parallax — What Lands in Your Drive ── */}
+        <section className="compact" style={{ paddingBottom: "0" }}>
           <div className="wrap">
-            <div className="sec-head">
-              <div className="label">Process</div>
-              <h2>What happens after the client clicks submit.</h2>
-              <p className="sub">From the first form field to the final delivered brief — every step is sequenced, logged, and visible in the command center.</p>
-            </div>
-
-            <div className="process-grid">
-              {PROCESS_STEPS.map((step) => (
-                <article key={step.num} className="process-step">
-                  <div className="num">{step.num}</div>
-                  <h4>{step.title}</h4>
-                  <p>{step.text}</p>
-                </article>
-              ))}
-            </div>
+            <SnippetParallax />
           </div>
         </section>
 
@@ -1030,60 +1046,23 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
           <div className="wrap">
             <div className="sec-head pm-reveal">
               <div className="label">SEE THE WORK</div>
-              <h2>Sample Intelligence Reports</h2>
-              <p className="sub">This is what lands in your Google Drive.</p>
+              <h2>This Is What a Sovereign X Audit Delivers.</h2>
             </div>
             <div className="pm-reveal">
-              <a className="sample-featured glass-premium" href="/samples#snippet">
+              <a className="sample-featured glass-premium" href="/samples/snippet">
                 <div className="sample-featured-inner">
                   <div className="sample-featured-body">
                     <div className="label aicc-stamp text-neon-amber border-neon-amber">THE SNIPPET</div>
                     <h2 className="text-white">What You Receive Before You Pay a Dollar</h2>
-                    <p className="text-subtle">Before any client commits, we send a free 1-page partial disclosure — 3 verified findings from a real audit of their business or image. No pitch. No pressure. Just the intelligence. This is what that looks like.</p>
+                    <p className="text-subtle">Before any client commits, we send a free partial disclosure — 3 verified findings from a real audit of their business or image. No pitch. No pressure. Just the intelligence.</p>
                     <div className="snippet-badges">
-                      <span className="aicc-stamp border-neon-blue text-neon-blue">AICC VERIFIED</span>
                       <span className="stamp">FREE</span>
                       <span className="stamp">NO STRINGS</span>
                     </div>
                     <span className="btn btn-primary" style={{ display: "inline-block", marginTop: "1rem" }}>View Sample Snippet →</span>
-                    <p className="sample-featured-note">The snippet is sent before any purchase. The full report is what you receive after.</p>
+                    <p className="sample-featured-note">The snippet is sent before any purchase. The full report follows after.</p>
                   </div>
                 </div>
-              </a>
-            </div>
-            <div className="sample-cards pm-reveal">
-              <a className="sample-card glass-premium" href="/samples#standard-audit">
-                <div className="label">SOVEREIGN X DIGITAL AUDIT</div>
-                <h4 className="text-white">Sample Business Intelligence Report</h4>
-                <p className="text-subtle">21 sections. Revenue leaks with dollar figures. Technical performance scores. AI readiness analysis. Impact Matrix. Priority roadmap.</p>
-                <span className="aicc-stamp border-neon-blue text-neon-blue" style={{ marginTop: "auto" }}>AICC VERIFIED</span>
-              </a>
-              <a className="sample-card glass-premium" href="/samples#standard-audit">
-                <div className="label">SOVEREIGN X IMAGE AUDIT</div>
-                <h4 className="text-white">Sample Personal Brand Report</h4>
-                <p className="text-subtle">18 sections. Color analysis. Social media audit. Brand alignment. Photography readiness score. Priority sequence.</p>
-                <span className="aicc-stamp border-neon-blue text-neon-blue" style={{ marginTop: "auto" }}>AICC VERIFIED</span>
-              </a>
-              <a className="sample-card glass-premium" href="/samples#standard-audit">
-                <div className="label">SOVEREIGN X VOICE AGENT</div>
-                <h4 className="text-white">Sample ROI Analysis</h4>
-                <p className="text-subtle">After-hours lead gap calculation. Annual revenue loss from missed calls. Conversation flow design. Build and deployment plan.</p>
-                <span className="aicc-stamp border-neon-blue text-neon-blue" style={{ marginTop: "auto" }}>AICC VERIFIED</span>
-              </a>
-            </div>
-
-            <div className="text-center mt-12" style={{ display: "flex", justifyContent: "center", marginTop: "3rem" }}>
-              <a href="/samples"
-                 style={{ 
-                   border: "1px solid #C8A96E", 
-                   color: "#C8A96E",
-                   textDecoration: "none"
-                 }}
-                 className="inline-block font-mono text-sm 
-                            tracking-widest uppercase px-10 py-4 
-                            hover:bg-[#C8A96E] hover:text-[#060606] 
-                            transition-all">
-                View All Sample Reports →
               </a>
             </div>
           </div>
@@ -1094,44 +1073,106 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
             <div className="sec-head">
               <div className="label">Pricing</div>
               <h2>Transparent pricing. No discovery calls required.</h2>
-              <p className="sub">Every tier is structured for clean delivery, clear scope, and simple next steps.</p>
+              <p className="sub">Phase 1 is always the entry point. Phase 2 is quoted after findings are delivered.</p>
             </div>
 
-            <div className="pricing-block">
-              {PRICING_BLOCKS.map((block) => (
-                <article key={block.title} className="pricing-card">
-                  <h3>{block.title}</h3>
-                  {block.rows.map((row) => (
-                    <div key={row.name} className="pricing-row">
-                      <div className="name">{row.name}{row.rowNote ? <span className="row-note"> — {row.rowNote}</span> : null}</div>
-                      {row.comingSoon
-                        ? <div className="promo"><span className="coming-soon-badge">COMING SOON</span></div>
-                        : <div className="promo">{row.promo}</div>
-                      }
-                      <div className="reg">{row.reg ?? ""}</div>
-                    </div>
-                  ))}
-                  {block.blockNote ? <div className="block-note">{block.blockNote}</div> : null}
-                </article>
-              ))}
-
-              <article className="referral-card">
-                <h3>Referrals</h3>
-                {REFERRALS.map((ref) => (
-                  <div key={ref.name} className="pricing-row">
-                    <div className="name">{ref.name}</div>
-                    <div className="promo">{ref.note}</div>
-                    <div className="reg" />
-                  </div>
-                ))}
-                <div className="promo-notice">
-                  <div className="label">Promo notice</div>
-                  <div className="text">
-                    <p>Promo resets monthly. Orders to the command center should feel like a controlled intake, not a loose contact form.</p>
-                  </div>
+            <div className="sx-pricing-two-col">
+              {/* Column 1 — Phase 1: Diagnosis */}
+              <div className="sx-pricing-col sx-pricing-col-1">
+                <div className="sx-pricing-col-header">
+                  <div className="sx-pricing-col-phase">Phase 1 — Diagnosis</div>
+                  <div className="sx-pricing-col-sub">Start here. Always.</div>
                 </div>
-              </article>
+                <div className="pricing-row">
+                  <div className="name">Sovereign X Digital Audit — Standard</div>
+                  <div className="promo">$500 promo</div>
+                  <div className="reg">$750 regular</div>
+                </div>
+                <div className="pricing-row">
+                  <div className="name">Sovereign X Digital Audit — Deep</div>
+                  <div className="promo">$1,500 promo</div>
+                  <div className="reg">$2,000 regular</div>
+                </div>
+                <div className="pricing-row">
+                  <div className="name">Sovereign X Digital Audit — Deep + Intake</div>
+                  <div className="promo">$2,000 promo</div>
+                  <div className="reg">$2,500 regular</div>
+                </div>
+                <div className="pricing-row">
+                  <div className="name">Sovereign X Image Audit — Standard</div>
+                  <div className="promo">$350 promo</div>
+                  <div className="reg">$500 regular</div>
+                </div>
+                <div className="pricing-row">
+                  <div className="name">Sovereign X Image Audit — Public Figure</div>
+                  <div className="promo">$750 promo</div>
+                  <div className="reg">$1,000 regular</div>
+                </div>
+                <div style={{ marginTop: "24px" }}>
+                  <a href="#intake" className="btn btn-primary" style={{ display: "inline-block" }}>
+                    Start the Audit <span className="arrow">→</span>
+                  </a>
+                </div>
+              </div>
+
+              {/* Column 2 — Phase 2: Post-Audit */}
+              <div className="sx-pricing-col sx-pricing-col-2">
+                <div className="sx-pricing-col-header">
+                  <div className="sx-pricing-col-phase" style={{ color: "var(--subtle)" }}>Phase 2 — Post-Audit</div>
+                  <div className="sx-pricing-col-sub" style={{ color: "var(--subtle)" }}>Quoted after findings. Requires completed audit.</div>
+                </div>
+                <div className="pricing-row">
+                  <div className="name">Sovereign X Growth Blueprint</div>
+                  <div className="promo">$250 promo</div>
+                  <div className="reg">$350 regular</div>
+                </div>
+                <div className="pricing-row">
+                  <div className="name">Sovereign X Content Calendar</div>
+                  <div className="promo">$200</div>
+                  <div className="reg">Included in Deep</div>
+                </div>
+                <div className="pricing-row">
+                  <div className="name">Voice Agent — Starter</div>
+                  <div className="promo">$1,500 setup</div>
+                  <div className="reg">+ $200/mo</div>
+                </div>
+                <div className="pricing-row">
+                  <div className="name">Voice Agent — Standard</div>
+                  <div className="promo">$2,500 setup</div>
+                  <div className="reg">+ $350/mo</div>
+                </div>
+                <div className="pricing-row">
+                  <div className="name">Voice Agent — Advanced</div>
+                  <div className="promo">$4,000–$5,000</div>
+                  <div className="reg">+ $500/mo</div>
+                </div>
+                <div className="pricing-row">
+                  <div className="name">Sovereign X Website</div>
+                  <div className="promo">$500–$1,500 one-time</div>
+                  <div className="reg">$150–$200/mo retainer</div>
+                </div>
+                <div className="block-note" style={{ marginTop: "16px" }}>
+                  Phase 2 services are recommended after audit delivery. If you have existing findings, contact us directly.
+                </div>
+              </div>
             </div>
+
+            <article className="referral-card" style={{ marginTop: "40px" }}>
+              <h3>Referrals</h3>
+              {REFERRALS.map((ref) => (
+                <div key={ref.name} className="pricing-row">
+                  <div className="name">{ref.name}</div>
+                  <div className="promo">{ref.note}</div>
+                  <div className="reg" />
+                </div>
+              ))}
+              <div className="promo-notice">
+                <div className="label">Promo notice</div>
+                <div className="text">
+                  <p>Promo resets monthly. Orders to the command center should feel like a controlled intake, not a loose contact form.</p>
+                </div>
+              </div>
+            </article>
           </div>
         </section>
 
@@ -1162,24 +1203,11 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
 
         <section className="final-cta">
           <div className="wrap">
-            <h2>When the brief feels right, send the order and let the system do the rest.</h2>
-            <p className="sub">
-              The client gets a premium intake experience, and the operator gets a structured queue item with the right package already selected.
-            </p>
+            <h2 style={{ fontFamily: "Georgia, serif", color: "#FFF" }}>Your findings are waiting.</h2>
             <div className="confirm-actions">
-              <a className="btn btn-primary" href="#intake">
-                Submit Intake <span className="arrow">→</span>
+              <a className="btn btn-primary cta-primary hover:shadow-neon-amber bg-neon-amber text-slate-950 border-neon-amber" href="#intake">
+                Start the Audit <span className="arrow">→</span>
               </a>
-              <Link className="btn btn-ghost" href="/login">
-                Client Login
-              </Link>
-            </div>
-            <div className="small">
-              <span>Command queue</span>
-              <span className="sep">•</span>
-              <span>AICC verified</span>
-              <span className="sep">•</span>
-              <span>Light / dark mode</span>
             </div>
           </div>
         </section>
@@ -1368,24 +1396,30 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
             <div className="footer-grid">
               <div className="footer-col">
                 <h5>Sovereign X Audits</h5>
-                <p>BlackFur Capital Group LLC</p>
-                <p>Executive intake, premium audit briefs, and a command center queue that stays easy to operate.</p>
+                <p>Operated by BlackFur Capital Group LLC</p>
+                <p>All payments processed by BlackFur Capital Group LLC</p>
+                <p style={{ marginTop: "8px", fontSize: "12px" }}>
+                  <a href="https://sxaudits.com" style={{ color: "var(--subtle)", textDecoration: "none" }}>sxaudits.com</a>
+                  {" · "}
+                  <a href="https://aicouncilconductor.com" target="_blank" rel="noreferrer" style={{ color: "var(--subtle)", textDecoration: "none" }}>aicouncilconductor.com</a>
+                </p>
               </div>
               <div className="footer-col">
                 <h5>Quick links</h5>
                 <Link href="/login">Client Login</Link>
-                <Link href="#services">Services</Link>
-                <Link href="#intake">Intake</Link>
+                <a href="#services">Services</a>
+                <a href="#intake">Start an Audit</a>
+                <Link href="/samples">Sample Reports</Link>
                 <a href="https://aicouncilconductor.com" target="_blank" rel="noreferrer">AI Council Conductor</a>
               </div>
               <div className="footer-col">
-                <h5>Support</h5>
-                <p>Orders flow into the command center automatically. Light and dark mode are both supported.</p>
-                <p>Promo resets monthly. All submissions stay visible to the operator in the shared queue.</p>
+                <h5>The System</h5>
+                <p>Phase 1 is always the entry point — the audit. Phase 2 services are prescribed by what the audit finds.</p>
+                <p>Promo pricing resets monthly. All audit findings are verified before delivery.</p>
               </div>
             </div>
             <div className="footer-bottom">
-              <span>© 2026 Sovereign X Audits · sxaudits.com</span>
+              <span>© 2026 Sovereign X Audits · Operated by BlackFur Capital Group LLC</span>
               <span>
                 <a href="#hero">Top</a>
                 <a href="#intake">Intake</a>
