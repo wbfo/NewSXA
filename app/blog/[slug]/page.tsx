@@ -195,7 +195,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
       <div style={{
         maxWidth: '720px',
         margin: '0 auto',
-        padding: '80px 40px 48px',
+        padding: '120px 40px 48px',
         borderBottom: '1px solid rgba(255,255,255,0.04)',
       }}>
         {/* Tag + Industry */}

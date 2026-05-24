@@ -22,7 +22,7 @@ export default function BlogIndex() {
       {/* HEADER */}
       <div style={{
         borderBottom: '1px solid rgba(200,169,110,0.15)',
-        padding: '80px 40px 60px',
+        padding: '120px 40px 60px',
         maxWidth: '1100px',
         margin: '0 auto',
       }}>

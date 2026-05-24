@@ -1,6 +1,8 @@
+import { SiteNav } from '@/components/sections/site-nav'
+
 export default function BlogLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div>
+    <div className="sx-intake">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -18,6 +20,7 @@ export default function BlogLayout({ children }: { children: React.ReactNode }) 
           })
         }}
       />
+      <SiteNav />
       {children}
     </div>
   )
