@@ -1444,6 +1444,120 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                     />
                   </div>
 
+                  {/* Dynamic Order Summary Box */}
+                  {(() => {
+                    const currentPackage = TIER_OPTIONS.find(tier => tier.name === form.packageName) || TIER_OPTIONS[0];
+                    return (
+                      <div 
+                        className="order-summary-box"
+                        style={{
+                          background: "rgba(200, 169, 110, 0.03)",
+                          border: "1px solid rgba(200, 169, 110, 0.15)",
+                          borderRadius: "8px",
+                          padding: "20px",
+                          margin: "24px 0",
+                          fontFamily: "var(--font-inter), sans-serif",
+                          boxShadow: "0 4px 20px rgba(0, 0, 0, 0.2)",
+                        }}
+                      >
+                        <div 
+                          style={{ 
+                            fontFamily: "monospace", 
+                            fontSize: "10px", 
+                            color: "#C8A96E", 
+                            letterSpacing: "0.15em", 
+                            fontWeight: "bold",
+                            marginBottom: "12px",
+                            textTransform: "uppercase"
+                          }}
+                        >
+                          Selected Package Summary
+                        </div>
+                        
+                        <div 
+                          style={{ 
+                            display: "flex", 
+                            justifyContent: "space-between", 
+                            alignItems: "baseline",
+                            flexWrap: "wrap",
+                            gap: "10px"
+                          }}
+                        >
+                          <div style={{ fontSize: "15px", fontWeight: 700, color: "#FFFFFF" }}>
+                            {currentPackage.name}
+                          </div>
+                          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                            <span 
+                              style={{ 
+                                color: "#C8A96E", 
+                                fontWeight: "bold", 
+                                fontSize: "16px",
+                                textTransform: "capitalize"
+                              }}
+                            >
+                              {currentPackage.pricePromo}
+                            </span>
+                            {currentPackage.priceReg && (
+                              <span 
+                                style={{ 
+                                  color: "#64748B", 
+                                  textDecoration: "line-through", 
+                                  fontSize: "13px" 
+                                }}
+                              >
+                                {currentPackage.priceReg}
+                              </span>
+                            )}
+                          </div>
+                        </div>
+
+                        <div style={{ height: "1px", background: "rgba(255, 255, 255, 0.08)", margin: "16px 0" }} />
+
+                        <div 
+                          style={{ 
+                            display: "flex", 
+                            alignItems: "center", 
+                            justifyContent: "space-between",
+                            flexWrap: "wrap",
+                            gap: "8px",
+                            fontSize: "13px",
+                            color: "#E2E8F0"
+                          }}
+                        >
+                          <div style={{ display: "flex", alignItems: "center", fontWeight: 500 }}>
+                            Secure checkout via 
+                            <svg 
+                              width="42" 
+                              height="18" 
+                              viewBox="0 0 42 18" 
+                              fill="none" 
+                              xmlns="http://www.w3.org/2000/svg"
+                              style={{ 
+                                color: "#635BFF", 
+                                marginLeft: "6px",
+                                display: "inline-block",
+                                verticalAlign: "middle"
+                              }}
+                              aria-label="Stripe"
+                            >
+                              <path 
+                                d="M8.22 8.35c0-1.28.84-1.92 2.21-1.92.83 0 1.4.2 1.77.41v2.79c-.39.2-1 .4-1.77.4-1.37 0-2.21-.63-2.21-1.68zm3.98 1.25V5.55c-.48-.2-1.12-.34-1.91-.34-2.12 0-3.56 1.13-3.56 3.42 0 2.2 1.34 3.32 3.56 3.32.69 0 1.39-.12 1.91-.37V10.1c-.34.18-.94.27-1.57.27-1.37 0-2.13-.67-2.13-1.85 0-.03 3.7 0 3.7-.02v-.15zm4.84 3.34V9.6c0-1.1.66-1.7 1.63-1.7.27 0 .49.04.66.1V5.37c-.24-.05-.53-.08-.85-.08-.94 0-1.61.54-1.9.1.28V5.37h-1.55v7.57h2.01zm4.31-8.15c0-.52-.42-.92-.95-.92s-.94.4-.94.92c0 .5.41.92.94.92s.95-.41.95-.92zm0 1.34H19.5v6.81h2.01V5.79zm5.35 2.56c0-1.25.82-1.92 2.11-1.92.74 0 1.23.18 1.55.37V4.08c-.4-.15-.93-.27-1.55-.27-2.09 0-3.62 1.16-3.62 3.46 0 2.26 1.48 3.44 3.62 3.44.69 0 1.23-.11 1.55-.27V8.97c-.32.18-.89.28-1.55.28-1.29 0-2.11-.63-2.11-1.9zm5.95 4.59h2.01V9.58c0-.98.53-1.52 1.37-1.52.74 0 1.18.42 1.18 1.32v3.56h2.01V9.08c0-2-.99-3.08-2.69-3.08-.99 0-1.68.49-2.01 1.2V5.79h-1.87v7.15z" 
+                                fill="currentColor" 
+                              />
+                              <path 
+                                d="M1.94 5.37C.92 5.37.24 5.92.24 6.94c0 1.64 2.27 1.37 2.27 2.08 0 .28-.24.47-.73.47-.6 0-1.24-.22-1.62-.43v1.81c.44.2 1.12.35 1.83.35 1.66 0 2.53-.78 2.53-2 0-1.74-2.27-1.39-2.27-2.07 0-.25.22-.44.67-.44.5 0 1.05.15 1.39.3V5.21c-.39-.17-.98-.27-1.6-.27zm37.89 2.98c0-1.28.84-1.92 2.21-1.92.83 0 1.4.2 1.77.41v2.79c-.39.2-1 .4-1.77.4-1.37 0-2.21-.63-2.21-1.68zm3.98 1.25V5.55c-.48-.2-1.12-.34-1.91-.34-2.12 0-3.56 1.13-3.56 3.42 0 2.2 1.34 3.32 3.56 3.32.69 0 1.39-.12 1.91-.37V10.1c-.34.18-.94.27-1.57.27-1.37 0-2.13-.67-2.13-1.85 0-.03 3.7 0 3.7-.02v-.15z" 
+                                fill="currentColor" 
+                              />
+                            </svg>
+                          </div>
+                          <div style={{ color: "#94A3B8", fontSize: "12px", fontStyle: "italic" }}>
+                            After submitting you&apos;ll receive an invoice link within 30 minutes.
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })()}
+
                   <div className="intake-form-actions">
                     <button className="btn btn-primary" type="submit" disabled={submitting}>
                       {submitting ? "Sending…" : "Submit Order"} <span className="arrow">→</span>
