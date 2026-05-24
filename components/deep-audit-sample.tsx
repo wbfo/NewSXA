@@ -287,8 +287,13 @@ export function DeepAuditSample() {
                 <td style={{ padding: '8px 12px', fontSize: '11px', color: '#111827', fontWeight: 600 }}>{rec}</td>
                 <td style={{ padding: '8px 12px', fontSize: '11px', color: '#111827', fontWeight: 700, textAlign: 'center' }}>{effort}</td>
                 <td style={{ padding: '8px 12px', fontSize: '11px', color: '#111827', fontWeight: 700, textAlign: 'center' }}>{impact}</td>
-                <td style={{ padding: '8px 12px' }}>
-                  <span style={{ background: cb, color: cc, fontSize: '10px', fontWeight: 700, padding: '2px 8px', borderRadius: '3px', fontFamily: 'monospace' }}>{cat}</span>
+                <td className="sample-impact-category-cell" style={{ padding: '8px 12px' }}>
+                  <span
+                    className={`sample-impact-category-badge ${cat === 'BIG SWING' ? 'is-big-swing' : 'is-quick-win'}`}
+                    style={{ background: cb, color: cc, fontSize: '10px', fontWeight: 700, padding: '2px 8px', borderRadius: '3px', fontFamily: 'monospace' }}
+                  >
+                    {cat}
+                  </span>
                 </td>
               </tr>
             ))}
