@@ -12,9 +12,9 @@ async function capture() {
     deviceScaleFactor: 2, // Capture at high DPI for super crisp text and assets!
   });
 
-  console.log('Navigating to http://localhost:3000/intake...');
+  console.log('Navigating to http://localhost:3000/...');
   // Navigate and wait until network is idle so everything is loaded
-  await page.goto('http://localhost:3000/intake', {
+  await page.goto('http://localhost:3000/', {
     waitUntil: 'networkidle'
   });
 
