@@ -395,7 +395,6 @@ const PARTICLES = Array.from({ length: 18 }, (_, i) => ({
 function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
   const { theme, toggleTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
-  const [bootDone, setBootDone] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [orders, setOrders] = useState<ClientOrder[]>(initialData.orders);
   const [submitting, setSubmitting] = useState(false);
@@ -417,8 +416,6 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
 
   useEffect(() => {
     startTransition(() => setMounted(true));
-    const t = setTimeout(() => startTransition(() => setBootDone(true)), 2900);
-    return () => clearTimeout(t);
   }, []);
 
   useEffect(() => {
@@ -443,7 +440,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
     );
     els.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
-  }, [bootDone]);
+  }, [mounted]);
 
   useEffect(() => {
     const stream = new EventSource("/api/events/stream");
@@ -581,19 +578,6 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
 
   return (
     <div className="sx-intake" ref={revealRef}>
-      {/* ── Boot Splash ── */}
-      {!bootDone && (
-        <div className="pm-boot">
-          <div className="pm-boot-scan" />
-          <div className="pm-boot-seal">
-            <div className="pm-boot-spinner" />
-            SX
-          </div>
-          <div className="pm-boot-label">Initializing</div>
-          <div className="pm-boot-bar" />
-        </div>
-      )}
-
       {/* ── Ambient Background Orbs ── */}
       <div className="pm-page-bg" aria-hidden="true">
         <div className="pm-orb pm-orb-neon-blue" />
