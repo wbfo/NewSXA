@@ -169,7 +169,7 @@ export function SamplesClient() {
           </header>
 
           <div style={{ display: "flex", flexDirection: "column", gap: "80px", marginBottom: "96px", alignItems: "center" }}>
-            <div id="snippet" style={{ width: "100%", overflowX: "auto", display: "flex", justifyContent: "center" }}>
+            <div id="snippet" style={{ width: "100%", overflowX: "hidden", display: "flex", justifyContent: "center", paddingInline: "12px" }}>
               <SovereignSnippet />
             </div>
             
@@ -182,7 +182,7 @@ export function SamplesClient() {
               </div>
             </div>
 
-            <div id="standard" style={{ width: "100%", overflowX: "auto", display: "flex", justifyContent: "center" }}>
+            <div id="standard" style={{ width: "100%", overflowX: "hidden", display: "flex", justifyContent: "center", paddingInline: "12px" }}>
               <StandardAuditSample />
             </div>
 
@@ -195,7 +195,7 @@ export function SamplesClient() {
               </div>
             </div>
 
-            <div id="deep" style={{ width: "100%", overflowX: "auto", display: "flex", justifyContent: "center" }}>
+            <div id="deep" style={{ width: "100%", overflowX: "hidden", display: "flex", justifyContent: "center", paddingInline: "12px" }}>
               <DeepAuditSample />
             </div>
           </div>
