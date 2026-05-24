@@ -7,6 +7,7 @@ import { ThemeProvider, useTheme } from "@/components/theme-provider";
 import { formatDisplayTime } from "@/lib/utils/time";
 import { ThreeDocumentCarousel } from "@/components/three-document-carousel";
 import { motion, AnimatePresence } from "framer-motion";
+import { SovereignXLogo } from "@/components/sovereign-x-logo";
 
 const containerVariants = {
   hidden: {},
@@ -674,7 +675,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
       <header className={`nav${navScrolled ? " nav--scrolled" : ""}`}>
         <div className="nav-inner">
           <Link href="/intake" className="nav-brand" aria-label="Sovereign X Audits">
-            <span className="sx-seal-mini">SX</span>
+            <SovereignXLogo size={48} color="#C8A96E" className="sx-seal-mini" />
             <span className="nav-brand-text">
               <span className="name">Sovereign X</span>
             </span>
@@ -767,6 +768,21 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                   </div>
                 </motion.div>
 
+                {/* Mobile-Only Logo */}
+                <motion.div
+                  variants={itemVariants}
+                  className="sx-hero-logo-mobile"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 0.92, scale: 1, y: [0, -6, 0] }}
+                  transition={{
+                    opacity: { duration: 1.2, ease: "easeOut" },
+                    scale: { duration: 1.2, ease: "easeOut" },
+                    y: { duration: 6, repeat: Infinity, ease: "easeInOut" }
+                  }}
+                >
+                  <SovereignXLogo size={230} color="#C8A96E" />
+                </motion.div>
+
                 <motion.h1 variants={itemVariants} className="pm-headline">
                   Your presence is telling a story.
                   <span className="pm-headline-break">Is it the right one?</span>
@@ -852,6 +868,18 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                   </span>
                 </motion.div>
               </div>
+              <motion.div
+                className="sx-hero-logo"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 0.92, scale: 1, y: [0, -12, 0] }}
+                transition={{
+                  opacity: { duration: 1.2, ease: "easeOut" },
+                  scale: { duration: 1.2, ease: "easeOut" },
+                  y: { duration: 6, repeat: Infinity, ease: "easeInOut" }
+                }}
+              >
+                <SovereignXLogo size={480} color="#C8A96E" />
+              </motion.div>
             </motion.div>
           </div>
         </section>
@@ -1835,6 +1863,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
           <div className="wrap">
             <div className="footer-grid">
               <div className="footer-col">
+                <SovereignXLogo size={32} color="#C8A96E" className="footer-logo" />
                 <h5>Sovereign X Audits</h5>
                 <p>Operated by BlackFur Capital Group LLC</p>
                 <p>All payments processed by BlackFur Capital Group LLC</p>
