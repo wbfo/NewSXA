@@ -715,6 +715,30 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                     <span>BlackFur Capital Group LLC</span>
                   </div>
                 </motion.div>
+                
+                {/* Mobile-Only Logo */}
+                <motion.div 
+                  variants={itemVariants} 
+                  className="sx-hero-logo-mobile"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ 
+                    opacity: 0.92,
+                    scale: 1,
+                    y: [0, -6, 0]
+                  }}
+                  transition={{
+                    opacity: { duration: 1.2, ease: "easeOut" },
+                    scale: { duration: 1.2, ease: "easeOut" },
+                    y: {
+                      duration: 6,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }
+                  }}
+                >
+                  <SovereignXLogo size={230} color="#C8A96E" />
+                </motion.div>
+
                 <motion.h1 variants={itemVariants} className="pm-headline">
                   YOUR PRESENCE IS TELLING A STORY.
                   <span className="pm-headline-break">IS IT THE RIGHT ONE?</span>
@@ -757,7 +781,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                   }
                 }}
               >
-                <SovereignXLogo size={420} color="#C8A96E" />
+                <SovereignXLogo size={480} color="#C8A96E" />
               </motion.div>
             </motion.div>
           </div>

@@ -5284,7 +5284,7 @@ html[data-theme="light"] .sx-intake .order-business {
 }
 
 .sx-intake .sx-hero-logo {
-  width: min(400px, 34vw);
+  width: min(460px, 39vw);
   aspect-ratio: 437 / 451;
   justify-self: end;
   margin: 0;
@@ -5299,6 +5299,10 @@ html[data-theme="light"] .sx-intake .order-business {
   height: 100%;
 }
 
+.sx-intake .sx-hero-logo-mobile {
+  display: none;
+}
+
 @media (max-width: 860px) {
   .sx-intake .hero-content {
     grid-template-columns: 1fr;
@@ -5309,11 +5313,15 @@ html[data-theme="light"] .sx-intake .order-business {
     gap: 24px;
   }
 
+  .sx-intake .sx-hero-logo-mobile {
+    display: block;
+    width: min(230px, 55vw);
+    margin: 12px auto 20px;
+    filter: drop-shadow(0 0 24px rgba(200, 169, 110, 0.22));
+  }
+
   .sx-intake .sx-hero-logo {
-    width: min(240px, 56vw);
-    justify-self: center;
-    margin-top: 4px;
-    transform: none;
+    display: none !important;
   }
 
   .sx-intake .hero-divider {
