@@ -13,10 +13,10 @@ export function AICCSection() {
         <div className="sec-head aicc-head">
           <div className="label">AICC method</div>
           <h2>
-            Generated, critiqued, verified, refined, and specialized through the <span className="accent">AICC</span> workflow.
+            Five stages. Every finding defended before it reaches you.
           </h2>
           <p className="sub">
-            Each output passes through a five-stage refinement cycle before it reaches the operator. Defensible analysis, not just fast generation.
+            Nothing reaches you unless it&apos;s defensible. Not fast generation — verified intelligence.
           </p>
         </div>
         <div className="aicc-flow">

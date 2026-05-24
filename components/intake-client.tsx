@@ -693,11 +693,33 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
 
           <div className="nav-actions">
             <a href="#intake" className="nav-cta">Start Audit →</a>
-            <button className="btn btn-quiet nav-theme-toggle" type="button" onClick={toggleTheme} aria-label="Toggle theme">
+            <button
+              style={{
+                background: "transparent",
+                border: "none",
+                cursor: "pointer",
+                color: "currentColor",
+                opacity: 0.6,
+                padding: "6px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                transition: "opacity 0.2s",
+              }}
+              type="button"
+              onClick={toggleTheme}
+              aria-label="Toggle theme"
+              onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.opacity = "1"; }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.opacity = "0.6"; }}
+            >
               {mounted && theme === "dark" ? (
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                </svg>
               ) : (
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
               )}
             </button>
           </div>
@@ -721,12 +743,31 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
             <a href="#featured"  onClick={() => setMenuOpen(false)}>Featured</a>
             <a href="#intake"    onClick={() => setMenuOpen(false)}>Start Audit →</a>
             <button
-              className="btn btn-quiet nav-mobile-theme"
+              style={{
+                background: "transparent",
+                border: "none",
+                cursor: "pointer",
+                color: "currentColor",
+                opacity: 0.6,
+                padding: "6px",
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+                transition: "opacity 0.2s",
+              }}
               type="button"
-              onClick={() => { toggleTheme(); setMenuOpen(false); }}
               aria-label="Toggle theme"
+              onClick={() => { toggleTheme(); setMenuOpen(false); }}
             >
-              {mounted && theme === "dark" ? "Light Mode" : "Dark Mode"}
+              {mounted && theme === "dark" ? (
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                </svg>
+              ) : (
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+              )}
             </button>
           </div>
         )}
@@ -896,19 +937,19 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
             <div className="sx-system-flow pm-reveal">
               <div className="sx-system-node">
                 <div className="sx-system-node-num">01</div>
-                <div className="sx-system-node-label">THE AUDIT</div>
+                <div className="sx-system-node-label">The audit</div>
                 <p className="sx-system-node-text">We diagnose your digital infrastructure, brand presence, and revenue leaks.</p>
               </div>
               <div className="sx-system-arrow" aria-hidden="true">→</div>
               <div className="sx-system-node">
                 <div className="sx-system-node-num">02</div>
-                <div className="sx-system-node-label">THE FINDINGS</div>
+                <div className="sx-system-node-label">The findings</div>
                 <p className="sx-system-node-text">You receive a verified intelligence report with dollar figures and a priority sequence.</p>
               </div>
               <div className="sx-system-arrow" aria-hidden="true">→</div>
               <div className="sx-system-node">
                 <div className="sx-system-node-num">03</div>
-                <div className="sx-system-node-label">THE FIX</div>
+                <div className="sx-system-node-label">The fix</div>
                 <p className="sx-system-node-text">We implement only what the audit prescribes — voice agents, image alignment, web fixes, or local SEO recovery.</p>
               </div>
             </div>
@@ -1065,12 +1106,12 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
             <div className="sec-head aicc-head">
               <div className="label">AICC method</div>
               <h2>
-                Generated, critiqued, verified, refined, and specialized through the <span className="accent">AICC</span> workflow.
+                Five stages. Every finding defended before it reaches you.
               </h2>
               <a className="aicc-cross-link" href="https://aicouncilconductor.com" target="_blank" rel="noreferrer">
                 Powered by the AI Council Conductor methodology →
               </a>
-              <p className="sub">Each output passes through a five-stage refinement cycle before it reaches the operator. Defensible analysis, not just fast generation.</p>
+              <p className="sub">Nothing reaches you unless it&apos;s defensible. Not fast generation — verified intelligence.</p>
             </div>
 
             <div className="aicc-flow">
@@ -1246,22 +1287,22 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                   reg="Included in Deep" 
                   description="A fully mapped out content strategy and scheduling matrix tailored to your brand voice, designed to maximize engagement and audience retention."
                 />
-                <PricingAccordionRow 
-                  name="Voice Agent — Starter" 
-                  promo="$1,500 setup" 
-                  reg="+ $200/mo" 
+                <PricingAccordionRow
+                  name="Sovereign X Voice Agent — Starter"
+                  promo="$1,500 setup"
+                  reg="+ $200/mo"
                   description="Implementation of a basic AI voice agent for your business to handle fundamental customer inquiries, appointment setting, and basic routing."
                 />
-                <PricingAccordionRow 
-                  name="Voice Agent — Standard" 
-                  promo="$2,500 setup" 
-                  reg="+ $350/mo" 
+                <PricingAccordionRow
+                  name="Sovereign X Voice Agent — Standard"
+                  promo="$2,500 setup"
+                  reg="+ $350/mo"
                   description="A sophisticated AI voice agent with custom knowledge base integration, capable of handling complex customer service scenarios and detailed product inquiries."
                 />
-                <PricingAccordionRow 
-                  name="Voice Agent — Advanced" 
-                  promo="$4,000–$5,000" 
-                  reg="+ $500/mo" 
+                <PricingAccordionRow
+                  name="Sovereign X Voice Agent — Advanced"
+                  promo="$4,000–$5,000"
+                  reg="+ $500/mo"
                   description="Our most powerful AI voice solution. Fully customized conversational flows, deep CRM integration, dynamic data retrieval, and advanced objection handling."
                 />
                 <PricingAccordionRow 
@@ -1447,6 +1488,45 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
           <div className="wrap">
             <div className="order-layout order-layout--solo">
               <div className="order-summary">
+                {/* ── Promo Countdown ── */}
+                <div style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "10px",
+                  padding: "12px 24px",
+                  background: "rgba(200,169,110,0.06)",
+                  border: "1px solid rgba(200,169,110,0.2)",
+                  borderRadius: "4px",
+                  marginBottom: "32px",
+                  maxWidth: "420px",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                  textAlign: "center",
+                }}>
+                  <div>
+                    <div style={{
+                      color: "#C8A96E",
+                      fontFamily: "monospace",
+                      fontSize: "12px",
+                      letterSpacing: "2px",
+                      textTransform: "uppercase",
+                      fontWeight: 600,
+                    }}>
+                      ⏳ Promo pricing resets in {getDaysUntilReset()} day{getDaysUntilReset() !== 1 ? "s" : ""}
+                    </div>
+                    <div style={{
+                      color: "var(--subtle)",
+                      fontSize: "11px",
+                      fontFamily: "monospace",
+                      letterSpacing: "1px",
+                      marginTop: "4px",
+                    }}>
+                      Slots fill on a first-come basis each month.
+                    </div>
+                  </div>
+                </div>
+
                 <div className="confirm-stage">
                   <div className="confirm-check">⌁</div>
                   <h1>Start your audit</h1>
@@ -1721,49 +1801,6 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                           </div>
                         </div>
 
-                        <div style={{ height: "1px", background: "rgba(255, 255, 255, 0.08)", margin: "16px 0" }} />
-
-                        <div 
-                          style={{ 
-                            display: "flex", 
-                            alignItems: "center", 
-                            justifyContent: "space-between",
-                            flexWrap: "wrap",
-                            gap: "8px",
-                            fontSize: "13px",
-                            color: "#E2E8F0"
-                          }}
-                        >
-                          <div style={{ display: "flex", alignItems: "center", fontWeight: 500 }}>
-                            Secure checkout via 
-                            <svg 
-                              width="42" 
-                              height="18" 
-                              viewBox="0 0 42 18" 
-                              fill="none" 
-                              xmlns="http://www.w3.org/2000/svg"
-                              style={{ 
-                                color: "#635BFF", 
-                                marginLeft: "6px",
-                                display: "inline-block",
-                                verticalAlign: "middle"
-                              }}
-                              aria-label="Stripe"
-                            >
-                              <path 
-                                d="M8.22 8.35c0-1.28.84-1.92 2.21-1.92.83 0 1.4.2 1.77.41v2.79c-.39.2-1 .4-1.77.4-1.37 0-2.21-.63-2.21-1.68zm3.98 1.25V5.55c-.48-.2-1.12-.34-1.91-.34-2.12 0-3.56 1.13-3.56 3.42 0 2.2 1.34 3.32 3.56 3.32.69 0 1.39-.12 1.91-.37V10.1c-.34.18-.94.27-1.57.27-1.37 0-2.13-.67-2.13-1.85 0-.03 3.7 0 3.7-.02v-.15zm4.84 3.34V9.6c0-1.1.66-1.7 1.63-1.7.27 0 .49.04.66.1V5.37c-.24-.05-.53-.08-.85-.08-.94 0-1.61.54-1.9.1.28V5.37h-1.55v7.57h2.01zm4.31-8.15c0-.52-.42-.92-.95-.92s-.94.4-.94.92c0 .5.41.92.94.92s.95-.41.95-.92zm0 1.34H19.5v6.81h2.01V5.79zm5.35 2.56c0-1.25.82-1.92 2.11-1.92.74 0 1.23.18 1.55.37V4.08c-.4-.15-.93-.27-1.55-.27-2.09 0-3.62 1.16-3.62 3.46 0 2.26 1.48 3.44 3.62 3.44.69 0 1.23-.11 1.55-.27V8.97c-.32.18-.89.28-1.55.28-1.29 0-2.11-.63-2.11-1.9zm5.95 4.59h2.01V9.58c0-.98.53-1.52 1.37-1.52.74 0 1.18.42 1.18 1.32v3.56h2.01V9.08c0-2-.99-3.08-2.69-3.08-.99 0-1.68.49-2.01 1.2V5.79h-1.87v7.15z" 
-                                fill="currentColor" 
-                              />
-                              <path 
-                                d="M1.94 5.37C.92 5.37.24 5.92.24 6.94c0 1.64 2.27 1.37 2.27 2.08 0 .28-.24.47-.73.47-.6 0-1.24-.22-1.62-.43v1.81c.44.2 1.12.35 1.83.35 1.66 0 2.53-.78 2.53-2 0-1.74-2.27-1.39-2.27-2.07 0-.25.22-.44.67-.44.5 0 1.05.15 1.39.3V5.21c-.39-.17-.98-.27-1.6-.27zm37.89 2.98c0-1.28.84-1.92 2.21-1.92.83 0 1.4.2 1.77.41v2.79c-.39.2-1 .4-1.77.4-1.37 0-2.21-.63-2.21-1.68zm3.98 1.25V5.55c-.48-.2-1.12-.34-1.91-.34-2.12 0-3.56 1.13-3.56 3.42 0 2.2 1.34 3.32 3.56 3.32.69 0 1.39-.12 1.91-.37V10.1c-.34.18-.94.27-1.57.27-1.37 0-2.13-.67-2.13-1.85 0-.03 3.7 0 3.7-.02v-.15z" 
-                                fill="currentColor" 
-                              />
-                            </svg>
-                          </div>
-                          <div style={{ color: "#94A3B8", fontSize: "12px", fontStyle: "italic" }}>
-                            After submitting you&apos;ll receive an invoice link within 30 minutes.
-                          </div>
-                        </div>
                       </div>
                     );
                   })()}

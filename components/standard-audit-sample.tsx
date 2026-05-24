@@ -70,6 +70,9 @@ export function StandardAuditSample() {
           <div style={{ background: '#E63946', color: '#FFFFFF', fontSize: '10px', fontWeight: 700, letterSpacing: '2px', padding: '3px 10px', borderRadius: '3px', display: 'inline-block', marginTop: '8px' }}>
             HIGH RISK
           </div>
+          <div style={{ color: '#777', fontSize: '12px', fontStyle: 'italic', lineHeight: '1.5', marginTop: '6px', maxWidth: '280px' }}>
+            A score out of 100 measuring how well your digital infrastructure is owned, consistent, and optimized across every platform where your business appears.
+          </div>
         </div>
         <div style={{ color: '#777', fontSize: '12px', maxWidth: '420px', lineHeight: 1.6, fontStyle: 'italic' }}>
           Decades of community trust. Real product quality. Digital infrastructure that is actively working against both. Every piece of reputation equity built lives on platforms the business does not own or control.

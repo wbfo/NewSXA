@@ -6252,3 +6252,23 @@ html[data-theme="light"] .sx-intake h1.pm-headline {
   padding: 60px 40px;
   border-top: 1px solid rgba(255, 255, 255, 0.04);
 }
+
+/* ── FIX 6: Light mode hero + body background ── */
+html[data-theme="light"] body {
+  background-color: #faf9f6;
+}
+
+html[data-theme="light"] .sx-intake .hero {
+  background-color: #faf9f6;
+}
+
+/* ── FIX 7: Light mode ghost button visibility ── */
+html[data-theme="light"] .sx-intake .btn-ghost {
+  border: 1.5px solid #1a1a1a;
+  color: #1a1a1a;
+}
+
+html[data-theme="light"] .sx-intake .btn-ghost:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: #1a1a1a;
+}

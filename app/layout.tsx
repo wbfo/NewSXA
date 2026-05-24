@@ -52,7 +52,7 @@ export const metadata: Metadata = {
       "We audit your business, your brand, and your image — and show you exactly what it's costing you. Delivered in 72 hours.",
     type: "website",
     locale: "en_US",
-    url: `${publicUrl}/intake`,
+    url: publicUrl,
     siteName: "Sovereign X Audits",
     images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Sovereign X Audits" }],
   },
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     description: "We audit your business, your brand, and your image — and show you exactly what it's costing you.",
     images: ["/og-image.png"],
   },
-  alternates: { canonical: `${publicUrl}/intake` },
+  alternates: { canonical: publicUrl },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
