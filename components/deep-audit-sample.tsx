@@ -112,8 +112,8 @@ export function DeepAuditSample() {
             ))}
             <tr style={{ background: '#111827' }}>
               <td colSpan={2} style={{ padding: '10px 12px', color: '#C8A96E', fontSize: '13px', fontWeight: 700, fontFamily: 'monospace' }}>OVERALL</td>
-              <td style={{ padding: '10px 12px' }}>
-                <span style={{ background: '#FFEBEE', color: '#E63946', fontSize: '13px', fontWeight: 800, padding: '3px 10px', borderRadius: '3px', fontFamily: 'monospace' }}>31/100</span>
+              <td className="sample-score-cell" style={{ padding: '10px 12px' }}>
+                <span className="sample-score-badge" style={{ background: '#FFEBEE', color: '#E63946', fontSize: '13px', fontWeight: 800, padding: '3px 10px', borderRadius: '3px', fontFamily: 'monospace' }}>31/100</span>
               </td>
               <td style={{ padding: '10px 12px', color: '#F8FAFC', fontSize: '11px', fontWeight: 600, lineHeight: 1.4 }}>Real expertise. Zero visibility. Fixable with structure.</td>
             </tr>

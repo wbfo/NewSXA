@@ -3424,6 +3424,18 @@ html[data-theme="light"] .sx-intake .nav-mobile-menu {
   color: #c8a96e !important;
 }
 
+.sample-score-cell {
+  width: 96px !important;
+  min-width: 96px !important;
+  white-space: nowrap;
+}
+
+.sample-score-badge {
+  display: inline-block;
+  white-space: nowrap;
+  line-height: 1;
+}
+
 .sample-carousel {
   width: 100%;
   display: flex;
