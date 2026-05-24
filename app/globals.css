@@ -5015,12 +5015,13 @@ html[data-theme="light"] .sx-intake .order-business {
     justify-content: center;
     align-items: center;
     width: 100%;
+    max-width: 100%;
     margin-bottom: 18px;
     flex-wrap: nowrap;
-    overflow: visible;
+    overflow: hidden;
     text-align: center;
-    font-size: clamp(8px, 2.5vw, 11px);
-    letter-spacing: clamp(0.06em, 1.2vw, 0.18em);
+    font-size: clamp(8px, 2.4vw, 10px);
+    letter-spacing: 0.08em;
   }
 
   .sx-intake .hero-eyebrow-track {
