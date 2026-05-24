@@ -589,7 +589,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
       <header className="nav">
         <div className="nav-inner">
           <Link href="/intake" className="nav-brand" aria-label="Sovereign X Audits">
-            <span className="sx-seal-mini">SX</span>
+            <SovereignXLogo size={48} color="#C8A96E" className="sx-seal-mini" />
             <span className="nav-brand-text">
               <span className="name">Sovereign X Audits</span>
               <span className="sub">BlackFur Capital Group LLC</span>
@@ -658,47 +658,46 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
             ))}
           </div>
           <div className="wrap">
-            <div className="hero-content hero-content--split">
-              <div className="hero-content-text">
-              <div className="hero-eyebrow pm-animate mb-6">
-                <div className="hero-eyebrow-track">
-                  <span>Sovereign X Audits</span>
-                  <span className="dot">•</span>
-                  <span>BlackFur Capital Group LLC</span>
+            <div className="hero-content">
+              <div className="hero-copy">
+                <div className="hero-eyebrow pm-animate mb-6">
+                  <div className="hero-eyebrow-track">
+                    <span>Sovereign X Audits</span>
+                    <span className="dot">•</span>
+                    <span>BlackFur Capital Group LLC</span>
+                  </div>
+                  <div className="hero-eyebrow-track" aria-hidden="true">
+                    <span>Sovereign X Audits</span>
+                    <span className="dot">•</span>
+                    <span>BlackFur Capital Group LLC</span>
+                  </div>
                 </div>
-                <div className="hero-eyebrow-track" aria-hidden="true">
-                  <span>Sovereign X Audits</span>
-                  <span className="dot">•</span>
-                  <span>BlackFur Capital Group LLC</span>
+                <h1 className="pm-headline">
+                  YOUR PRESENCE IS TELLING A STORY.
+                  <span className="pm-headline-break">IS IT THE RIGHT ONE?</span>
+                </h1>
+                <div className="hero-divider pm-animate bg-neon-blue/20" />
+                <p className="hero-sub pm-animate text-slate-300">
+                  We audit your business, your brand, and your image — and show you exactly what it&apos;s costing you. No waiting weeks.
+                </p>
+
+                <div className="hero-ctas pm-animate" style={{ marginTop: "32px" }}>
+                  <a className="btn btn-primary cta-primary hover:shadow-neon-blue bg-neon-blue text-slate-950 border-neon-blue" href="#intake">
+                    Start the Audit <span className="arrow">→</span>
+                  </a>
+                  <a className="btn btn-ghost hover:text-neon-blue" href="#services">
+                    See What We Audit <span className="arrow">↓</span>
+                  </a>
+                </div>
+
+                <div className="hero-credentials pm-animate">
+                  <span>Digital Intelligence</span>
+                  <span className="sep">·</span>
+                  <span>AICC Verified</span>
                 </div>
               </div>
-              <h1 className="pm-headline">
-                YOUR PRESENCE IS TELLING A STORY.
-                <span className="pm-headline-break">IS IT THE RIGHT ONE?</span>
-              </h1>
-              <div className="hero-divider pm-animate bg-neon-blue/20" />
-              <p className="hero-sub pm-animate text-slate-300">
-                We audit your business, your brand, and your image — and show you exactly what it&apos;s costing you. No waiting weeks.
-              </p>
-
-              <div className="hero-ctas pm-animate" style={{ marginTop: "32px" }}>
-                <a className="btn btn-primary cta-primary hover:shadow-neon-blue bg-neon-blue text-slate-950 border-neon-blue" href="#intake">
-                  Start the Audit <span className="arrow">→</span>
-                </a>
-                <a className="btn btn-ghost hover:text-neon-blue" href="#services">
-                  See What We Audit <span className="arrow">↓</span>
-                </a>
-              </div>
-
-              <div className="hero-credentials pm-animate">
-                <span>Digital Intelligence</span>
-                <span className="sep">·</span>
-                <span>AICC Verified</span>
-              </div>
-              </div>
-
-              <div className="hero-logo-col pm-animate">
-                <SovereignXLogo size={380} color="#C8A96E" background="transparent" />
+              <div className="sx-hero-logo pm-animate">
+                <SovereignXLogo size={420} color="#C8A96E" />
               </div>
             </div>
           </div>
@@ -1293,6 +1292,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
           <div className="wrap">
             <div className="footer-grid">
               <div className="footer-col">
+                <SovereignXLogo size={32} color="#C8A96E" className="footer-logo" />
                 <h5>Sovereign X Audits</h5>
                 <p>Operated by BlackFur Capital Group LLC</p>
                 <p>All payments processed by BlackFur Capital Group LLC</p>

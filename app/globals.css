@@ -2666,19 +2666,18 @@ html[data-theme="light"] .sx-intake .nav {
   min-width: 0;
 }
 
-.sx-intake .sx-seal-mini {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 1px solid var(--gold-line);
-  display: grid;
-  place-items: center;
-  font-family: var(--serif);
-  color: var(--gold);
-  font-size: 14px;
-  font-style: italic;
-  box-shadow: 0 0 0 1px rgba(211, 173, 100, 0.14) inset;
+.sovereign-x-logo {
+  display: inline-block;
+  width: var(--sx-logo-size);
+  height: var(--sx-logo-size);
   flex-shrink: 0;
+  background: var(--sx-logo-color);
+  mask: url("/sx-logo-vector.svg") center / contain no-repeat;
+  -webkit-mask: url("/sx-logo-vector.svg") center / contain no-repeat;
+}
+
+.sx-intake .sx-seal-mini {
+  filter: drop-shadow(0 0 12px rgba(200, 169, 110, 0.25));
 }
 
 .sx-intake .nav-brand-text {
@@ -4483,6 +4482,12 @@ html[data-theme="light"] .sx-intake .nav-mobile-menu {
   margin-bottom: 40px;
 }
 
+.sx-intake .footer-logo {
+  display: block;
+  margin-bottom: 14px;
+  filter: drop-shadow(0 0 10px rgba(200, 169, 110, 0.2));
+}
+
 .sx-intake .footer-col h5 {
   font-family: var(--mono);
   font-size: 10px;
@@ -4699,7 +4704,8 @@ html[data-theme="light"] .sx-intake .order-business {
   }
 
   .sx-intake .hero {
-    padding: 56px 0 40px !important;
+    padding: 88px 0 40px !important;
+    min-height: auto;
   }
 
 
@@ -4753,7 +4759,7 @@ html[data-theme="light"] .sx-intake .order-business {
   }
 
   .sx-intake .hero {
-    padding: 16px 0 32px !important;
+    padding: calc(92px + env(safe-area-inset-top)) 0 36px !important;
     min-height: unset;
     display: block;
   }
@@ -4998,6 +5004,65 @@ html[data-theme="light"] .sx-intake .order-business {
   z-index: 0;
 }
 .sx-intake .hero > .wrap { position: relative; z-index: 1; flex: 1; width: 100%; }
+
+.sx-intake .hero-content {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(280px, 420px);
+  align-items: center;
+  gap: clamp(32px, 5vw, 72px);
+  width: min(100%, 1180px);
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.sx-intake .hero-copy {
+  min-width: 0;
+  max-width: 720px;
+}
+
+.sx-intake .sx-hero-logo {
+  width: min(400px, 34vw);
+  aspect-ratio: 437 / 451;
+  justify-self: end;
+  margin: 0;
+  opacity: 0.92;
+  transform: translateX(clamp(18px, 4vw, 56px));
+  filter: drop-shadow(0 0 28px rgba(200, 169, 110, 0.26));
+}
+
+.sx-intake .sx-hero-logo .sovereign-x-logo {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 860px) {
+  .sx-intake .hero-content {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    width: 100%;
+    max-width: 800px;
+    gap: 24px;
+  }
+
+  .sx-intake .sx-hero-logo {
+    width: min(240px, 56vw);
+    justify-self: center;
+    margin-top: 4px;
+    transform: none;
+  }
+
+  .sx-intake .hero-divider {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .sx-intake .hero-ctas,
+  .sx-intake .hero-credentials {
+    justify-content: center;
+  }
+}
 
 /* Cinematic hero h1 gradient */
 .sx-intake h1.pm-headline {
@@ -5546,9 +5611,9 @@ html[data-theme="light"] .sx-intake h1.pm-headline {
    New classes for hero flow, philosophy, phases, pricing
 ──────────────────────────────────────────────────── */
 
-/* ── Hero: single-column content container ── */
+/* ── Hero: landing content container ── */
 .sx-intake .hero-content {
-  max-width: 800px;
+  max-width: 1180px;
 }
 
 .sx-intake .hero-content--split {

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { SovereignXLogo } from "@/components/sovereign-x-logo";
 
 export function SiteFooter() {
   return (
@@ -6,6 +7,7 @@ export function SiteFooter() {
       <div className="wrap">
         <div className="footer-grid">
           <div className="footer-col">
+            <SovereignXLogo size={32} color="#C8A96E" className="footer-logo" />
             <h5>Sovereign X Audits</h5>
             <p>BlackFur Capital Group LLC</p>
             <p>Executive intake, premium audit briefs, and a command center queue that stays easy to operate.</p>

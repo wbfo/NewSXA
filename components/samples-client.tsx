@@ -5,6 +5,7 @@ import Link from "next/link";
 import { SovereignSnippet } from "@/components/sovereign-snippet";
 import { StandardAuditSample } from "@/components/standard-audit-sample";
 import { DeepAuditSample } from "@/components/deep-audit-sample";
+import { SovereignXLogo } from "@/components/sovereign-x-logo";
 
 export function SamplesClient() {
   const [theme, setTheme] = useState<"dark" | "light">("dark");
@@ -42,7 +43,7 @@ export function SamplesClient() {
         <header className="nav">
           <div className="nav-inner">
             <Link href="/intake" className="nav-brand" aria-label="Sovereign X Audits">
-              <span className="sx-seal-mini">SX</span>
+              <SovereignXLogo size={48} color="#C8A96E" className="sx-seal-mini" />
               <span className="nav-brand-text">
                 <span className="name">Sovereign X Audits</span>
                 <span className="sub">BlackFur Capital Group LLC</span>
@@ -267,6 +268,7 @@ export function SamplesClient() {
           <div className="wrap">
             <div className="footer-grid">
               <div className="footer-col">
+                <SovereignXLogo size={32} color="#C8A96E" className="footer-logo" />
                 <h5>Sovereign X Audits</h5>
                 <p>BlackFur Capital Group LLC</p>
                 <p>Executive intake, premium audit briefs, and a command center queue that stays easy to operate.</p>
