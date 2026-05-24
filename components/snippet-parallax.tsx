@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { SovereignSnippet } from "@/components/sovereign-snippet";
 
 export function SnippetParallax() {
@@ -69,26 +68,6 @@ export function SnippetParallax() {
   useEffect(() => {
     window.dispatchEvent(new Event("resize"));
   }, [isMobile]);
-
-  // Read page scroll state
-  const { scrollY } = useScroll();
-
-  // Desktop vertical panning scroll mapping:
-  // As the page scrolls down by 500px, the snippet scrolls inside its view up to desktopMaxScroll.
-  const translateYRaw = useTransform(scrollY, (latestScrollY) => {
-    const progress = Math.min(1, Math.max(0, latestScrollY / 500));
-    return -progress * desktopMaxScroll;
-  });
-
-  // Desktop rotate mapping: Starts with a premium -1.5 degree tilt, straightens out as you scroll down by 200px.
-  const rotateRaw = useTransform(scrollY, (latestScrollY) => {
-    const progress = Math.min(1, Math.max(0, latestScrollY / 200));
-    return -1.5 + progress * 1.5;
-  });
-
-  // Spring smoothing for absolute premium fluidity
-  const translateY = useSpring(translateYRaw, { stiffness: 85, damping: 22 });
-  const rotate = useSpring(rotateRaw, { stiffness: 85, damping: 22 });
 
   if (isMobile) {
     return (
