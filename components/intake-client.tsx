@@ -6,7 +6,6 @@ import type { DashboardPayload, ClientOrder } from "@/lib/domain/types";
 import { ThemeProvider, useTheme } from "@/components/theme-provider";
 import { formatDisplayTime } from "@/lib/utils/time";
 import { ThreeDocumentCarousel } from "@/components/three-document-carousel";
-import { SovereignXLogo } from "@/components/sovereign-x-logo";
 import { motion, AnimatePresence } from "framer-motion";
 
 const containerVariants = {
@@ -483,6 +482,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
   const [success, setSuccess] = useState("");
   const [selectedTier, setSelectedTier] = useState(TIER_OPTIONS[0].id);
   const [heroBgY, setHeroBgY] = useState(0);
+  const [navScrolled, setNavScrolled] = useState(false);
   const revealRef = useRef<HTMLDivElement>(null);
   const [showAiccTooltip, setShowAiccTooltip] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
@@ -502,7 +502,10 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
   }, []);
 
   useEffect(() => {
-    const update = () => setHeroBgY(Math.min(180, window.scrollY * 0.3));
+    const update = () => {
+      setHeroBgY(Math.min(180, window.scrollY * 0.3));
+      setNavScrolled(window.scrollY > 10);
+    };
     update();
     window.addEventListener("scroll", update, { passive: true });
     return () => window.removeEventListener("scroll", update);
@@ -668,13 +671,12 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
         <div className="pm-orb pm-orb-neon-purple" />
       </div>
 
-      <header className="nav">
+      <header className={`nav${navScrolled ? " nav--scrolled" : ""}`}>
         <div className="nav-inner">
           <Link href="/intake" className="nav-brand" aria-label="Sovereign X Audits">
-            <SovereignXLogo size={48} color="#C8A96E" className="sx-seal-mini" />
+            <span className="sx-seal-mini">SX</span>
             <span className="nav-brand-text">
-              <span className="name">Sovereign X Audits</span>
-              <span className="sub">BlackFur Capital Group LLC</span>
+              <span className="name">Sovereign X</span>
             </span>
           </Link>
 
@@ -684,14 +686,18 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
             <a href="/samples">Sample Reports</a>
             <Link href="/blog">Intelligence</Link>
             <a href="#featured">Featured</a>
-            <a href="/intake">Intake</a>
           </div>
 
           <div className="nav-spacer" />
 
           <div className="nav-actions">
-            <button className="btn btn-quiet" type="button" onClick={toggleTheme}>
-              {mounted ? (theme === "dark" ? "Light Mode" : "Dark Mode") : "Theme"}
+            <a href="#intake" className="nav-cta">Start Audit →</a>
+            <button className="btn btn-quiet nav-theme-toggle" type="button" onClick={toggleTheme} aria-label="Toggle theme">
+              {mounted && theme === "dark" ? (
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+              ) : (
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+              )}
             </button>
           </div>
 
@@ -712,13 +718,14 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
             <a href="/samples"   onClick={() => setMenuOpen(false)}>Sample Reports</a>
             <Link href="/blog"   onClick={() => setMenuOpen(false)}>Intelligence</Link>
             <a href="#featured"  onClick={() => setMenuOpen(false)}>Featured</a>
-            <a href="/intake"    onClick={() => setMenuOpen(false)}>Intake</a>
+            <a href="#intake"    onClick={() => setMenuOpen(false)}>Start Audit →</a>
             <button
               className="btn btn-quiet nav-mobile-theme"
               type="button"
               onClick={() => { toggleTheme(); setMenuOpen(false); }}
+              aria-label="Toggle theme"
             >
-              {mounted ? (theme === "dark" ? "Light Mode" : "Dark Mode") : "Theme"}
+              {mounted && theme === "dark" ? "Light Mode" : "Dark Mode"}
             </button>
           </div>
         )}
@@ -740,7 +747,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
             ))}
           </div>
           <div className="wrap">
-            <motion.div 
+            <motion.div
               className="hero-content"
               variants={containerVariants}
               initial="hidden"
@@ -759,36 +766,13 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                     <span>BlackFur Capital Group LLC</span>
                   </div>
                 </motion.div>
-                
-                {/* Mobile-Only Logo */}
-                <motion.div 
-                  variants={itemVariants} 
-                  className="sx-hero-logo-mobile"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ 
-                    opacity: 0.92,
-                    scale: 1,
-                    y: [0, -6, 0]
-                  }}
-                  transition={{
-                    opacity: { duration: 1.2, ease: "easeOut" },
-                    scale: { duration: 1.2, ease: "easeOut" },
-                    y: {
-                      duration: 6,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }
-                  }}
-                >
-                  <SovereignXLogo size={230} color="#C8A96E" />
-                </motion.div>
 
                 <motion.h1 variants={itemVariants} className="pm-headline">
-                  YOUR PRESENCE IS TELLING A STORY.
-                  <span className="pm-headline-break">IS IT THE RIGHT ONE?</span>
+                  Your presence is telling a story.
+                  <span className="pm-headline-break">Is it the right one?</span>
                 </motion.h1>
                 <motion.div variants={itemVariants} className="hero-divider bg-neon-blue/20" />
-                <motion.p variants={itemVariants} className="hero-sub text-slate-300">
+                <motion.p variants={itemVariants} className="hero-sub">
                   We audit your business, your brand, and your image — and show you exactly what it&apos;s costing you. No waiting weeks.
                 </motion.p>
 
@@ -804,7 +788,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                 <motion.div variants={itemVariants} className="hero-credentials">
                   <span>Digital Intelligence</span>
                   <span className="sep">·</span>
-                  <span 
+                  <span
                     className="aicc-badge-trigger"
                     style={{
                       position: "relative",
@@ -817,7 +801,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                     onClick={() => setShowAiccTooltip(!showAiccTooltip)}
                   >
                     AICC Verified
-                    
+
                     <AnimatePresence>
                       {showAiccTooltip && (
                         <motion.div
@@ -850,11 +834,11 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                           <div style={{ marginBottom: "8px" }}>
                             5-stage AI verification — no unconfirmed findings delivered. Generate → Critique → Verify → Refine → Specialize.
                           </div>
-                          <a 
-                            href="#aicc" 
-                            style={{ 
-                              color: "#C8A96E", 
-                              textDecoration: "none", 
+                          <a
+                            href="#aicc"
+                            style={{
+                              color: "#C8A96E",
+                              textDecoration: "none",
                               fontWeight: "bold",
                               display: "block",
                               marginTop: "4px"
@@ -868,26 +852,6 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                   </span>
                 </motion.div>
               </div>
-              <motion.div 
-                className="sx-hero-logo"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ 
-                  opacity: 0.92,
-                  scale: 1,
-                  y: [0, -12, 0]
-                }}
-                transition={{
-                  opacity: { duration: 1.2, ease: "easeOut" },
-                  scale: { duration: 1.2, ease: "easeOut" },
-                  y: {
-                    duration: 6,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }
-                }}
-              >
-                <SovereignXLogo size={480} color="#C8A96E" />
-              </motion.div>
             </motion.div>
           </div>
         </section>
@@ -1871,7 +1835,6 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
           <div className="wrap">
             <div className="footer-grid">
               <div className="footer-col">
-                <SovereignXLogo size={32} color="#C8A96E" className="footer-logo" />
                 <h5>Sovereign X Audits</h5>
                 <p>Operated by BlackFur Capital Group LLC</p>
                 <p>All payments processed by BlackFur Capital Group LLC</p>
