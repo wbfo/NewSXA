@@ -599,7 +599,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
             <a href="#hero">Home</a>
             <a href="#services">Services</a>
             <a href="/samples">Sample Reports</a>
-            <a href="/blog">Intelligence</a>
+            <Link href="/blog">Intelligence</Link>
             <a href="#featured">Featured</a>
             <a href="/intake">Intake</a>
           </div>
@@ -627,7 +627,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
             <a href="#hero"     onClick={() => setMenuOpen(false)}>Home</a>
             <a href="#services" onClick={() => setMenuOpen(false)}>Services</a>
             <a href="/samples"   onClick={() => setMenuOpen(false)}>Sample Reports</a>
-            <a href="/blog"      onClick={() => setMenuOpen(false)}>Intelligence</a>
+            <Link href="/blog"   onClick={() => setMenuOpen(false)}>Intelligence</Link>
             <a href="#featured"  onClick={() => setMenuOpen(false)}>Featured</a>
             <a href="/intake"    onClick={() => setMenuOpen(false)}>Intake</a>
             <button

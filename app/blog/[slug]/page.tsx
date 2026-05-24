@@ -1,6 +1,7 @@
 import { getPostBySlug, getAllPosts } from '@/lib/blog'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import { notFound } from 'next/navigation'
+import Link from 'next/link'
 
 export async function generateStaticParams() {
   const posts = getAllPosts()
@@ -306,7 +307,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         borderTop: '1px solid rgba(255,255,255,0.04)',
         paddingTop: '40px',
       }}>
-        <a
+        <Link
           href="/blog"
           style={{
             color: '#444',
@@ -318,7 +319,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
           }}
         >
           ← Back to Intelligence
-        </a>
+        </Link>
       </div>
 
     </main>
