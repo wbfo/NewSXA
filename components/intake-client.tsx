@@ -599,8 +599,9 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
             <a href="#hero">Home</a>
             <a href="#services">Services</a>
             <a href="/samples">Sample Reports</a>
+            <a href="/blog">Intelligence</a>
             <a href="#featured">Featured</a>
-            <a href="#intake">Intake</a>
+            <a href="/intake">Intake</a>
           </div>
 
           <div className="nav-spacer" />
@@ -626,8 +627,9 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
             <a href="#hero"     onClick={() => setMenuOpen(false)}>Home</a>
             <a href="#services" onClick={() => setMenuOpen(false)}>Services</a>
             <a href="/samples"   onClick={() => setMenuOpen(false)}>Sample Reports</a>
-            <a href="#featured" onClick={() => setMenuOpen(false)}>Featured</a>
-            <a href="#intake"   onClick={() => setMenuOpen(false)}>Intake</a>
+            <a href="/blog"      onClick={() => setMenuOpen(false)}>Intelligence</a>
+            <a href="#featured"  onClick={() => setMenuOpen(false)}>Featured</a>
+            <a href="/intake"    onClick={() => setMenuOpen(false)}>Intake</a>
             <button
               className="btn btn-quiet nav-mobile-theme"
               type="button"
@@ -1299,6 +1301,8 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                 <a href="#services">Services</a>
                 <a href="#intake">Start an Audit</a>
                 <Link href="/samples">Sample Reports</Link>
+                <Link href="/blog">Intelligence</Link>
+                <Link href="/terms">Terms of Service</Link>
                 <a href="https://aicouncilconductor.com" target="_blank" rel="noreferrer">AI Council Conductor</a>
               </div>
               <div className="footer-col">

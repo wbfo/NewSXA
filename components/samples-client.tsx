@@ -53,7 +53,9 @@ export function SamplesClient() {
               <Link href="/intake#hero">Home</Link>
               <Link href="/intake#services">Services</Link>
               <Link href="/samples" className="active" style={{ color: "#C8A96E" }}>Sample Reports</Link>
+              <Link href="/blog">Intelligence</Link>
               <Link href="/intake#featured">Featured</Link>
+              <Link href="/intake" className="nav-cta">Start Intake</Link>
               <Link href="/intake#intake">Intake</Link>
             </div>
 
@@ -80,7 +82,9 @@ export function SamplesClient() {
               <Link href="/intake#hero"     onClick={() => setMenuOpen(false)}>Home</Link>
               <Link href="/intake#services" onClick={() => setMenuOpen(false)}>Services</Link>
               <Link href="/samples"         onClick={() => setMenuOpen(false)} style={{ color: "#C8A96E" }}>Sample Reports</Link>
+              <Link href="/blog"            onClick={() => setMenuOpen(false)}>Intelligence</Link>
               <Link href="/intake#featured" onClick={() => setMenuOpen(false)}>Featured</Link>
+              <Link href="/intake"          onClick={() => setMenuOpen(false)}>Intake</Link>
               <Link href="/intake#intake"   onClick={() => setMenuOpen(false)}>Intake</Link>
               <button
                 className="btn btn-quiet nav-mobile-theme"
