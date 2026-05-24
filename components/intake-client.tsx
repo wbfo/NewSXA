@@ -7,6 +7,44 @@ import { ThemeProvider, useTheme } from "@/components/theme-provider";
 import { formatDisplayTime } from "@/lib/utils/time";
 import { ThreeDocumentCarousel } from "@/components/three-document-carousel";
 import { SovereignXLogo } from "@/components/sovereign-x-logo";
+import { motion, AnimatePresence } from "framer-motion";
+
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.08,
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 15 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as const }
+  }
+};
+
+const cardContainerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.06,
+    }
+  }
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 20, scale: 0.98 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const }
+  }
+};
 const SERVICE_CARDS = [
   {
     title: "Sovereign X Digital Audit — Standard",
@@ -658,9 +696,14 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
             ))}
           </div>
           <div className="wrap">
-            <div className="hero-content">
+            <motion.div 
+              className="hero-content"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
               <div className="hero-copy">
-                <div className="hero-eyebrow pm-animate mb-6">
+                <motion.div variants={itemVariants} className="hero-eyebrow mb-6">
                   <div className="hero-eyebrow-track">
                     <span>Sovereign X Audits</span>
                     <span className="dot">•</span>
@@ -671,35 +714,52 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                     <span className="dot">•</span>
                     <span>BlackFur Capital Group LLC</span>
                   </div>
-                </div>
-                <h1 className="pm-headline">
+                </motion.div>
+                <motion.h1 variants={itemVariants} className="pm-headline">
                   YOUR PRESENCE IS TELLING A STORY.
                   <span className="pm-headline-break">IS IT THE RIGHT ONE?</span>
-                </h1>
-                <div className="hero-divider pm-animate bg-neon-blue/20" />
-                <p className="hero-sub pm-animate text-slate-300">
+                </motion.h1>
+                <motion.div variants={itemVariants} className="hero-divider bg-neon-blue/20" />
+                <motion.p variants={itemVariants} className="hero-sub text-slate-300">
                   We audit your business, your brand, and your image — and show you exactly what it&apos;s costing you. No waiting weeks.
-                </p>
+                </motion.p>
 
-                <div className="hero-ctas pm-animate" style={{ marginTop: "32px" }}>
+                <motion.div variants={itemVariants} className="hero-ctas" style={{ marginTop: "32px" }}>
                   <a className="btn btn-primary cta-primary hover:shadow-neon-blue bg-neon-blue text-slate-950 border-neon-blue" href="#intake">
                     Start the Audit <span className="arrow">→</span>
                   </a>
                   <a className="btn btn-ghost hover:text-neon-blue" href="#services">
                     See What We Audit <span className="arrow">↓</span>
                   </a>
-                </div>
+                </motion.div>
 
-                <div className="hero-credentials pm-animate">
+                <motion.div variants={itemVariants} className="hero-credentials">
                   <span>Digital Intelligence</span>
                   <span className="sep">·</span>
                   <span>AICC Verified</span>
-                </div>
+                </motion.div>
               </div>
-              <div className="sx-hero-logo pm-animate">
+              <motion.div 
+                className="sx-hero-logo"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ 
+                  opacity: 0.92,
+                  scale: 1,
+                  y: [0, -12, 0]
+                }}
+                transition={{
+                  opacity: { duration: 1.2, ease: "easeOut" },
+                  scale: { duration: 1.2, ease: "easeOut" },
+                  y: {
+                    duration: 6,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }
+                }}
+              >
                 <SovereignXLogo size={420} color="#C8A96E" />
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
         </section>
 
@@ -751,13 +811,23 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
             </div>
 
             {/* ── PHASE 1 — DIAGNOSIS ── */}
-            <div className="sx-phase-block sx-phase-1 pm-reveal">
+            <motion.div 
+              className="sx-phase-block sx-phase-1"
+              variants={cardContainerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+            >
               <div className="sx-phase-header">
                 <div className="sx-phase-label">PHASE 1 — DIAGNOSIS</div>
                 <div className="sx-phase-subtext">The only way in.</div>
               </div>
               <div className="services-grid">
-                <article className="svc-card glass-premium hover:shadow-neon-blue transition-all duration-300">
+                <motion.article 
+                  className="svc-card glass-premium hover:shadow-neon-blue"
+                  variants={cardVariants}
+                  whileHover={{ y: -8, scale: 1.01, borderColor: "rgba(200, 169, 110, 0.45)" }}
+                >
                   <div className="icon text-neon-blue">◈</div>
                   <div className="label text-neon-amber">Standard</div>
                   <h3 className="text-white">Sovereign X Digital Audit — Standard</h3>
@@ -770,8 +840,12 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                   <div className="svc-foot">
                     <a href="#intake" style={{ color: "var(--neon-blue)", textDecoration: "none", fontWeight: "500" }}>Start This Audit →</a>
                   </div>
-                </article>
-                <article className="svc-card glass-premium hover:shadow-neon-blue transition-all duration-300">
+                </motion.article>
+                <motion.article 
+                  className="svc-card glass-premium hover:shadow-neon-blue"
+                  variants={cardVariants}
+                  whileHover={{ y: -8, scale: 1.01, borderColor: "rgba(200, 169, 110, 0.45)" }}
+                >
                   <div className="icon text-neon-blue">✦</div>
                   <div className="label text-neon-amber">Deep</div>
                   <h3 className="text-white">Sovereign X Digital Audit — Deep</h3>
@@ -784,8 +858,12 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                   <div className="svc-foot">
                     <a href="#intake" style={{ color: "var(--neon-blue)", textDecoration: "none", fontWeight: "500" }}>Start This Audit →</a>
                   </div>
-                </article>
-                <article className="svc-card glass-premium hover:shadow-neon-blue transition-all duration-300">
+                </motion.article>
+                <motion.article 
+                  className="svc-card glass-premium hover:shadow-neon-blue"
+                  variants={cardVariants}
+                  whileHover={{ y: -8, scale: 1.01, borderColor: "rgba(200, 169, 110, 0.45)" }}
+                >
                   <div className="icon text-neon-blue">◎</div>
                   <div className="label text-neon-amber">Enterprise</div>
                   <h3 className="text-white">Sovereign X Digital Audit — Enterprise</h3>
@@ -798,12 +876,18 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                   <div className="svc-foot">
                     <a href="#intake" style={{ color: "var(--neon-blue)", textDecoration: "none", fontWeight: "500" }}>Start This Audit →</a>
                   </div>
-                </article>
+                </motion.article>
               </div>
-            </div>
+            </motion.div>
 
             {/* ── PHASE 2 — IMPLEMENTATION ── */}
-            <div className="sx-phase-block sx-phase-2 pm-reveal">
+            <motion.div 
+              className="sx-phase-block sx-phase-2"
+              variants={cardContainerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+            >
               <div className="sx-phase-header">
                 <div className="sx-phase-label" style={{ color: "var(--subtle)" }}>PHASE 2 — IMPLEMENTATION</div>
                 <div className="sx-phase-subtext" style={{ color: "var(--subtle)" }}>Unlocks after audit delivery. Prescribed by findings.</div>
@@ -812,28 +896,44 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                 We don&apos;t sell solutions before we diagnose the problem. Every Phase 2 service is deployed based on what your audit finds.
               </div>
               <div className="sx-phase2-grid">
-                <article className="sx-phase2-card">
+                <motion.article 
+                  className="sx-phase2-card"
+                  variants={cardVariants}
+                  whileHover={{ y: -4, scale: 1.005, borderColor: "rgba(200, 169, 110, 0.25)" }}
+                >
                   <div className="sx-phase2-label">Revenue Recovery</div>
                   <p className="sx-phase2-desc">Digital infrastructure fixes, local SEO recovery, website builds, conversion optimization.</p>
                   <a href="#intake" className="sx-phase2-cta">Find out if you need this → Start your audit</a>
-                </article>
-                <article className="sx-phase2-card">
+                </motion.article>
+                <motion.article 
+                  className="sx-phase2-card"
+                  variants={cardVariants}
+                  whileHover={{ y: -4, scale: 1.005, borderColor: "rgba(200, 169, 110, 0.25)" }}
+                >
                   <div className="sx-phase2-label">Image Alignment</div>
                   <p className="sx-phase2-desc">Sovereign X Image Audit, personal brand alignment, photography readiness, presence coaching.</p>
                   <a href="#intake" className="sx-phase2-cta">Find out if you need this → Start your audit</a>
-                </article>
-                <article className="sx-phase2-card">
+                </motion.article>
+                <motion.article 
+                  className="sx-phase2-card"
+                  variants={cardVariants}
+                  whileHover={{ y: -4, scale: 1.005, borderColor: "rgba(200, 169, 110, 0.25)" }}
+                >
                   <div className="sx-phase2-label">Voice Agent &amp; Systems</div>
                   <p className="sx-phase2-desc">AI voice agent deployment, after-hours lead capture, CRM integration, calendar automation.</p>
                   <a href="#intake" className="sx-phase2-cta">Find out if you need this → Start your audit</a>
-                </article>
-                <article className="sx-phase2-card">
+                </motion.article>
+                <motion.article 
+                  className="sx-phase2-card"
+                  variants={cardVariants}
+                  whileHover={{ y: -4, scale: 1.005, borderColor: "rgba(200, 169, 110, 0.25)" }}
+                >
                   <div className="sx-phase2-label">Strategy &amp; Growth</div>
                   <p className="sx-phase2-desc">Sovereign X Growth Blueprint, Content Calendar, 90-day implementation roadmap.</p>
                   <a href="#intake" className="sx-phase2-cta">Find out if you need this → Start your audit</a>
-                </article>
+                </motion.article>
               </div>
-            </div>
+            </motion.div>
 
 
           </div>
@@ -1147,102 +1247,150 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                     </select>
                     <input className="field" placeholder="How did you hear about us?" value={form.hearAbout} onChange={(event) => updateField("hearAbout", event.target.value)} required />
 
-                    {(isDigitalAudit || isVoiceAgent) && (
-                      <>
-                        <input className="field" placeholder="Business name *" value={form.businessName} onChange={(event) => updateField("businessName", event.target.value)} required />
-                        <input className="field" placeholder="Website URL *" value={form.websiteUrl} onChange={(event) => updateField("websiteUrl", event.target.value)} required />
-                        <input className="field" placeholder={isVoiceAgent ? "Industry *" : "Industry / field *"} value={form.industry} onChange={(event) => updateField("industry", event.target.value)} required />
-                      </>
-                    )}
+                    <AnimatePresence initial={false}>
+                      {(isDigitalAudit || isVoiceAgent) && (
+                        <motion.div
+                          key="digital-voice-block"
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                          style={{
+                            gridColumn: "span 2",
+                            display: "grid",
+                            gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+                            gap: "12px",
+                            width: "100%",
+                            overflow: "hidden"
+                          }}
+                        >
+                          <input className="field" placeholder="Business name *" value={form.businessName} onChange={(event) => updateField("businessName", event.target.value)} required />
+                          <input className="field" placeholder="Website URL *" value={form.websiteUrl} onChange={(event) => updateField("websiteUrl", event.target.value)} required />
+                          <input className="field" placeholder={isVoiceAgent ? "Industry *" : "Industry / field *"} value={form.industry} onChange={(event) => updateField("industry", event.target.value)} required style={{ gridColumn: "span 2" }} />
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
 
-                    {isDigitalAudit && (
-                      <>
-                        <input className="field" placeholder="City and state *" value={form.cityState} onChange={(event) => updateField("cityState", event.target.value)} required />
-                        <input className="field" placeholder="Number of locations *" value={form.locations} onChange={(event) => updateField("locations", event.target.value)} required />
-                        <textarea className="field field-textarea" placeholder="Biggest current challenge *" value={form.biggestChallenge} onChange={(event) => updateField("biggestChallenge", event.target.value)} rows={3} required />
-                        <select className="field" value={form.aiImplementation} onChange={(event) => updateField("aiImplementation", event.target.value)} required>
-                          <option value="">Considering AI implementation? *</option>
-                          <option>Yes</option>
-                          <option>No</option>
-                          <option>Maybe</option>
-                        </select>
-                        <input className="field" placeholder="Any upcoming deadlines or events?" value={form.deadlines} onChange={(event) => updateField("deadlines", event.target.value)} />
-                        <input className="field" placeholder="Instagram handle" value={form.socialInstagram} onChange={(event) => updateField("socialInstagram", event.target.value)} />
-                        <input className="field" placeholder="LinkedIn profile URL" value={form.socialLinkedin} onChange={(event) => updateField("socialLinkedin", event.target.value)} />
-                        <input className="field" placeholder="Facebook page URL" value={form.socialFacebook} onChange={(event) => updateField("socialFacebook", event.target.value)} />
-                        <input className="field" placeholder="Other social platform + handle" value={form.socialOther} onChange={(event) => updateField("socialOther", event.target.value)} />
-                      </>
-                    )}
+                    <AnimatePresence initial={false}>
+                      {isDigitalAudit && (
+                        <motion.div
+                          key="digital-exclusive-block"
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                          style={{
+                            gridColumn: "span 2",
+                            display: "grid",
+                            gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+                            gap: "12px",
+                            width: "100%",
+                            overflow: "hidden"
+                          }}
+                        >
+                          <input className="field" placeholder="City and state *" value={form.cityState} onChange={(event) => updateField("cityState", event.target.value)} required />
+                          <input className="field" placeholder="Number of locations *" value={form.locations} onChange={(event) => updateField("locations", event.target.value)} required />
+                          <textarea className="field field-textarea" placeholder="Biggest current challenge *" value={form.biggestChallenge} onChange={(event) => updateField("biggestChallenge", event.target.value)} rows={3} required style={{ gridColumn: "span 2" }} />
+                          <select className="field" value={form.aiImplementation} onChange={(event) => updateField("aiImplementation", event.target.value)} required style={{ gridColumn: "span 2" }}>
+                            <option value="">Considering AI implementation? *</option>
+                            <option>Yes</option>
+                            <option>No</option>
+                            <option>Maybe</option>
+                          </select>
+                          <input className="field" placeholder="Any upcoming deadlines or events?" value={form.deadlines} onChange={(event) => updateField("deadlines", event.target.value)} />
+                          <input className="field" placeholder="Instagram handle" value={form.socialInstagram} onChange={(event) => updateField("socialInstagram", event.target.value)} />
+                          <input className="field" placeholder="LinkedIn profile URL" value={form.socialLinkedin} onChange={(event) => updateField("socialLinkedin", event.target.value)} />
+                          <input className="field" placeholder="Facebook page URL" value={form.socialFacebook} onChange={(event) => updateField("socialFacebook", event.target.value)} />
+                          <input className="field" placeholder="Other social platform + handle" value={form.socialOther} onChange={(event) => updateField("socialOther", event.target.value)} style={{ gridColumn: "span 2" }} />
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
 
-                    {isImageAudit && (
-                      <>
-                        <select className="field" value={form.gender} onChange={(event) => updateField("gender", event.target.value)} required>
-                          <option value="">Gender *</option>
-                          <option>Man</option>
-                          <option>Woman</option>
-                          <option>Non-binary</option>
-                          <option>Prefer not to say</option>
-                        </select>
-                        <select className="field" value={form.ageRange} onChange={(event) => updateField("ageRange", event.target.value)} required>
-                          <option value="">Age range *</option>
-                          <option>18–24</option>
-                          <option>25–34</option>
-                          <option>35–44</option>
-                          <option>45–54</option>
-                          <option>55+</option>
-                        </select>
-                        <input className="field" placeholder="Height *" value={form.height} onChange={(event) => updateField("height", event.target.value)} required />
-                        <input className="field" placeholder="Weight *" value={form.weight} onChange={(event) => updateField("weight", event.target.value)} required />
-                        <input className="field" placeholder="Industry / Field *" value={form.industryField} onChange={(event) => updateField("industryField", event.target.value)} required />
-                        <input className="field" placeholder="Your role or title *" value={form.role} onChange={(event) => updateField("role", event.target.value)} required />
-                        <input className="field" placeholder="Instagram handle" value={form.instagram} onChange={(event) => updateField("instagram", event.target.value)} />
-                        <input className="field" placeholder="TikTok handle" value={form.tiktok} onChange={(event) => updateField("tiktok", event.target.value)} />
-                        <input className="field" placeholder="LinkedIn profile URL" value={form.linkedin} onChange={(event) => updateField("linkedin", event.target.value)} />
-                        <input className="field" placeholder="YouTube channel" value={form.youtube} onChange={(event) => updateField("youtube", event.target.value)} />
-                        <input className="field" placeholder="X / Twitter handle" value={form.twitter} onChange={(event) => updateField("twitter", event.target.value)} />
-                        <input className="field" placeholder="Any other platform + handle" value={form.otherPlatform} onChange={(event) => updateField("otherPlatform", event.target.value)} />
-                        <div className="field checkbox-field">
-                          <div className="checkbox-title">Most important platforms</div>
-                          <div className="checkbox-grid">
-                            {PLATFORM_OPTIONS.map((platform) => (
-                              <label key={platform}><input type="checkbox" checked={form.importantPlatforms.includes(platform)} onChange={() => togglePlatform(platform)} /> {platform}</label>
-                            ))}
+                    <AnimatePresence initial={false}>
+                      {isImageAudit && (
+                        <motion.div
+                          key="image-exclusive-block"
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                          style={{
+                            gridColumn: "span 2",
+                            display: "grid",
+                            gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+                            gap: "12px",
+                            width: "100%",
+                            overflow: "hidden"
+                          }}
+                        >
+                          <select className="field" value={form.gender} onChange={(event) => updateField("gender", event.target.value)} required>
+                            <option value="">Gender *</option>
+                            <option>Man</option>
+                            <option>Woman</option>
+                            <option>Non-binary</option>
+                            <option>Prefer not to say</option>
+                          </select>
+                          <select className="field" value={form.ageRange} onChange={(event) => updateField("ageRange", event.target.value)} required>
+                            <option value="">Age range *</option>
+                            <option>18–24</option>
+                            <option>25–34</option>
+                            <option>35–44</option>
+                            <option>45–54</option>
+                            <option>55+</option>
+                          </select>
+                          <input className="field" placeholder="Height *" value={form.height} onChange={(event) => updateField("height", event.target.value)} required />
+                          <input className="field" placeholder="Weight *" value={form.weight} onChange={(event) => updateField("weight", event.target.value)} required />
+                          <input className="field" placeholder="Industry / Field *" value={form.industryField} onChange={(event) => updateField("industryField", event.target.value)} required />
+                          <input className="field" placeholder="Your role or title *" value={form.role} onChange={(event) => updateField("role", event.target.value)} required />
+                          <input className="field" placeholder="Instagram handle" value={form.instagram} onChange={(event) => updateField("instagram", event.target.value)} />
+                          <input className="field" placeholder="TikTok handle" value={form.tiktok} onChange={(event) => updateField("tiktok", event.target.value)} />
+                          <input className="field" placeholder="LinkedIn profile URL" value={form.linkedin} onChange={(event) => updateField("linkedin", event.target.value)} />
+                          <input className="field" placeholder="YouTube channel" value={form.youtube} onChange={(event) => updateField("youtube", event.target.value)} />
+                          <input className="field" placeholder="X / Twitter handle" value={form.twitter} onChange={(event) => updateField("twitter", event.target.value)} />
+                          <input className="field" placeholder="Any other platform + handle" value={form.otherPlatform} onChange={(event) => updateField("otherPlatform", event.target.value)} />
+                          <div className="field checkbox-field" style={{ gridColumn: "span 2" }}>
+                            <div className="checkbox-title">Most important platforms</div>
+                            <div className="checkbox-grid">
+                              {PLATFORM_OPTIONS.map((platform) => (
+                                <label key={platform}><input type="checkbox" checked={form.importantPlatforms.includes(platform)} onChange={() => togglePlatform(platform)} /> {platform}</label>
+                              ))}
+                            </div>
                           </div>
-                        </div>
-                        <textarea className="field field-textarea" placeholder="What do you want your image to communicate? *" value={form.imageCommunication} onChange={(event) => updateField("imageCommunication", event.target.value)} rows={3} required />
-                        <textarea className="field field-textarea" placeholder="Biggest current image concerns *" value={form.imageConcerns} onChange={(event) => updateField("imageConcerns", event.target.value)} rows={3} required />
-                        <input className="field" placeholder="Upcoming events or shoots?" value={form.imageEvents} onChange={(event) => updateField("imageEvents", event.target.value)} />
-                        <textarea className="field field-textarea" placeholder="People whose style you admire" value={form.styleAdmire} onChange={(event) => updateField("styleAdmire", event.target.value)} rows={3} />
-                        <textarea className="field field-textarea" placeholder="Describe the energy you want to project" value={form.desiredEnergy} onChange={(event) => updateField("desiredEnergy", event.target.value)} rows={3} />
-                        <select className="field" value={form.wardrobeBudget} onChange={(event) => updateField("wardrobeBudget", event.target.value)}>
-                          <option value="">Wardrobe budget range</option>
-                          <option>$0–$250</option>
-                          <option>$250–$750</option>
-                          <option>$750–$1,500</option>
-                          <option>$1,500+</option>
-                        </select>
-                        <select className="field" value={form.photographyInterest} onChange={(event) => updateField("photographyInterest", event.target.value)}>
-                          <option value="">Interested in photography session after audit?</option>
-                          <option>Yes</option>
-                          <option>Possibly</option>
-                          <option>No</option>
-                        </select>
-                        <select className="field" value={form.wardrobeBlueprintInterest} onChange={(event) => updateField("wardrobeBlueprintInterest", event.target.value)}>
-                          <option value="">Interested in Wardrobe Blueprint add-on?</option>
-                          <option>Yes</option>
-                          <option>Possibly</option>
-                          <option>No</option>
-                          <option>Tell me more</option>
-                        </select>
-                        <div className="photo-notice">
-                          <strong>Photo submission after payment confirmation</strong>
-                          <p>After payment confirmation you will receive a Google Drive upload link for photo submission.</p>
-                          <p>Required: full body front in natural light, full body side, face close-up in natural light, and 3 current outfit photos.</p>
-                          <p>For Instagram and TikTok, submit 6–10 feed screenshots as part of your image dump for social media analysis.</p>
-                          <p>Color analysis requires a natural light face close-up. Body type analysis requires accurate height and weight. Sections without complete data are marked directional.</p>
-                        </div>
-                      </>
-                    )}
+                          <textarea className="field field-textarea" placeholder="What do you want your image to communicate? *" value={form.imageCommunication} onChange={(event) => updateField("imageCommunication", event.target.value)} rows={3} required style={{ gridColumn: "span 2" }} />
+                          <textarea className="field field-textarea" placeholder="Biggest current image concerns *" value={form.imageConcerns} onChange={(event) => updateField("imageConcerns", event.target.value)} rows={3} required style={{ gridColumn: "span 2" }} />
+                          <input className="field" placeholder="Upcoming events or shoots?" value={form.imageEvents} onChange={(event) => updateField("imageEvents", event.target.value)} style={{ gridColumn: "span 2" }} />
+                          <textarea className="field field-textarea" placeholder="People whose style you admire" value={form.styleAdmire} onChange={(event) => updateField("styleAdmire", event.target.value)} rows={3} style={{ gridColumn: "span 2" }} />
+                          <textarea className="field field-textarea" placeholder="Describe the energy you want to project" value={form.desiredEnergy} onChange={(event) => updateField("desiredEnergy", event.target.value)} rows={3} style={{ gridColumn: "span 2" }} />
+                          <select className="field" value={form.wardrobeBudget} onChange={(event) => updateField("wardrobeBudget", event.target.value)} style={{ gridColumn: "span 2" }}>
+                            <option value="">Wardrobe budget range</option>
+                            <option>$0–$250</option>
+                            <option>$250–$750</option>
+                            <option>$750–$1,500</option>
+                            <option>$1,500+</option>
+                          </select>
+                          <select className="field" value={form.photographyInterest} onChange={(event) => updateField("photographyInterest", event.target.value)} style={{ gridColumn: "span 2" }}>
+                            <option value="">Interested in photography session after audit?</option>
+                            <option>Yes</option>
+                            <option>Possibly</option>
+                            <option>No</option>
+                          </select>
+                          <select className="field" value={form.wardrobeBlueprintInterest} onChange={(event) => updateField("wardrobeBlueprintInterest", event.target.value)} style={{ gridColumn: "span 2" }}>
+                            <option value="">Interested in Wardrobe Blueprint add-on?</option>
+                            <option>Yes</option>
+                            <option>Possibly</option>
+                            <option>No</option>
+                            <option>Tell me more</option>
+                          </select>
+                          <div className="photo-notice" style={{ gridColumn: "span 2" }}>
+                            <strong>Photo submission after payment confirmation</strong>
+                            <p>After payment confirmation you will receive a Google Drive upload link for photo submission.</p>
+                            <p>Required: full body front in natural light, full body side, face close-up in natural light, and 3 current outfit photos.</p>
+                            <p>For Instagram and TikTok, submit 6–10 feed screenshots as part of your image dump for social media analysis.</p>
+                            <p>Color analysis requires a natural light face close-up. Body type analysis requires accurate height and weight. Sections without complete data are marked directional.</p>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
 
                     {isVoiceAgent && (
                       <>
