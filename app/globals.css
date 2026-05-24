@@ -5066,9 +5066,12 @@ html[data-theme="light"] .sx-intake .order-business {
 
 /* Cinematic hero h1 gradient */
 .sx-intake h1.pm-headline {
+  font-family: var(--font-bebas), var(--font-display), Impact, sans-serif;
+  font-weight: 400;
   font-size: clamp(30px, 4.2vw, 68px) !important;
-  line-height: 1.08 !important;
-  letter-spacing: -0.02em;
+  line-height: 1.04 !important;
+  letter-spacing: 0.03em;
+  text-wrap: balance;
   background: linear-gradient(160deg, #ffffff 0%, #e8e2d8 55%, #cfc8bc 100%);
   background-size: 200% 200%;
   -webkit-background-clip: text;
