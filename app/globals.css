@@ -4960,7 +4960,7 @@ html[data-theme="light"] .sx-intake .order-business {
   background: rgba(4, 4, 4, 0.7) !important;
   backdrop-filter: blur(24px) saturate(160%) !important;
   border-bottom: 1px solid rgba(211, 173, 100, 0.1) !important;
-  position: relative;
+  position: fixed !important;
 }
 .pm-nav-glow {
   position: absolute;
