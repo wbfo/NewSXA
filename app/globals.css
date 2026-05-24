@@ -5011,31 +5011,31 @@ html[data-theme="light"] .sx-intake .order-business {
   }
 
   .sx-intake .hero-eyebrow {
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    gap: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
     margin-bottom: 18px;
     flex-wrap: nowrap;
-    overflow: hidden;
-    width: 100%;
-    position: relative;
-    mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+    overflow: visible;
+    text-align: center;
+    font-size: clamp(8px, 2.5vw, 11px);
+    letter-spacing: clamp(0.06em, 1.2vw, 0.18em);
   }
 
   .sx-intake .hero-eyebrow-track {
     display: flex;
-    flex-shrink: 0;
-    gap: 10px;
+    justify-content: center;
     align-items: center;
+    gap: 8px;
     white-space: nowrap;
-    animation: marquee-eyebrow 16s linear infinite;
-    padding-right: 32px;
+    flex-shrink: 0;
+    animation: none !important;
+    padding-right: 0 !important;
   }
 
   .sx-intake .hero-eyebrow-track[aria-hidden="true"] {
-    display: flex; /* override desktop hidden rule — needed for loop */
-    animation-delay: -8s;
+    display: none !important;
   }
 
   .sx-intake .hero-eyebrow span {
@@ -5045,11 +5045,6 @@ html[data-theme="light"] .sx-intake .order-business {
   .sx-intake .hero-eyebrow .dot {
     color: var(--gold);
     flex-shrink: 0;
-  }
-
-  @keyframes marquee-eyebrow {
-    0% { transform: translateX(0%); }
-    100% { transform: translateX(-100%); }
   }
 
   .sx-intake .hero-divider {
