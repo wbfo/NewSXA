@@ -86,6 +86,60 @@ const jsonLd = {
       publisher: { "@id": "https://sxaudits.com/#organization" },
       potentialAction: { "@type": "SearchAction", target: { "@type": "EntryPoint", urlTemplate: "https://sxaudits.com/?q={search_term_string}" }, "query-input": "required name=search_term_string" },
     },
+    {
+      "@type": "FAQPage",
+      "@id": "https://sxaudits.com/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do you gather the findings?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Every audit runs through the AICC methodology — a five-stage process where findings are generated from live web research, challenged by a critic layer, cross-referenced across multiple sources, refined into dollar figures, and reviewed by a human conductor before delivery."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is this automated or does a real person review it?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Both. AI systems gather and structure the research. A human conductor reviews every finding before it reaches you."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if the audit doesn't find anything significant?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You still receive the full report. If the findings are minor, the report will say so clearly. You pay for the truth — not for inflated problems."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is your refund policy?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Once the audit is delivered, the findings are yours to keep. If we fail to deliver within the stated 48–72 hour window without prior communication, we will discuss a resolution directly."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens after I submit the form?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You will receive an invoice link within 30 minutes. After payment is confirmed, your audit begins. Delivery follows within 48–72 hours via email."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between Standard and Deep?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Standard covers all 21 sections with dollar figures and a priority sequence. Deep adds competitive context, a prioritized impact matrix, and the AI Readiness section with a Voice Agent ROI calculation."
+          }
+        }
+      ]
+    }
   ],
 };
 

@@ -357,22 +357,64 @@ const TESTIMONIALS = [
   {
     quote: "I had no idea my website was turning away customers. The audit showed me exactly where — and we fixed it within a week. Fully worth it.",
     name: "Marcus T.",
-    title: "Restaurant Owner",
-    tier: "Sovereign X Digital Audit — Standard"
+    title: "Restaurant Owner · Staten Island, NY",
+    tier: "Sovereign X Digital Audit — Standard",
+    initials: "MT"
   },
   {
     quote: "My online presence looked professional to me, but the Sovereign X Image Audit showed gaps I couldn't see myself. The findings were specific and actionable.",
     name: "Danielle R.",
-    title: "Licensed Esthetician & Brand Builder",
-    tier: "Sovereign X Image Audit"
+    title: "Licensed Esthetician & Brand Builder · New York, NY",
+    tier: "Sovereign X Image Audit",
+    initials: "DR"
   },
   {
     quote: "The Deep Audit gave us a competitive breakdown I didn't expect at this price point. We used the findings to rebuild our entire intake flow.",
     name: "James O.",
-    title: "Med Spa Founder",
-    tier: "Sovereign X Digital Audit — Deep"
+    title: "Med Spa Founder · New York, NY",
+    tier: "Sovereign X Digital Audit — Deep",
+    initials: "JO"
   }
 ];
+
+const FAQ_ITEMS = [
+  {
+    q: "How do you gather the findings?",
+    a: "Every audit runs through the AICC methodology — a five-stage process where findings are generated from live web research, challenged by a critic layer, cross-referenced across multiple sources, refined into dollar figures, and reviewed by a human conductor before delivery. Nothing is fabricated. Every finding is labeled Confirmed, Directional, or Pending so you know exactly how defensible each one is."
+  },
+  {
+    q: "Is this automated or does a real person review it?",
+    a: "Both. AI systems gather and structure the research. A human conductor — Ola, Strategic Co-Architect — reviews every finding before it reaches you. You are not getting a bot report. You are getting verified intelligence with a human sign-off."
+  },
+  {
+    q: "What if the audit doesn't find anything significant?",
+    a: "You still receive the full report. If the findings are minor, the report will say so clearly. You pay for the truth — not for inflated problems. That said, in every audit conducted to date, meaningful revenue leaks have been identified in every business reviewed."
+  },
+  {
+    q: "What is your refund policy?",
+    a: "Once the audit is delivered, the work has been done and the findings are yours to keep regardless of outcome. If we fail to deliver within the stated 48–72 hour window without prior communication, we will discuss a resolution directly. We stand behind the quality of the work."
+  },
+  {
+    q: "What happens after I submit the form?",
+    a: "You will receive an invoice link within 30 minutes. After payment is confirmed, your audit begins. Delivery follows within 48–72 hours via email. No discovery call required before or after — the report is designed to speak for itself."
+  },
+  {
+    q: "What's the difference between Standard and Deep?",
+    a: "Standard covers all 21 sections of your digital infrastructure with dollar figures and a priority sequence. Deep adds everything in Standard plus competitive context (how your competitors are positioned against you), a prioritized impact matrix, and the AI Readiness section with a specific Voice Agent ROI calculation if applicable. If you are serious about implementation, Deep is the right tier."
+  }
+];
+
+// Auto-calculates days until 1st of next month
+function getDaysUntilReset(): number {
+  const now = new Date();
+  const nextFirst = new Date(
+    now.getFullYear(),
+    now.getMonth() + 1,
+    1
+  );
+  const diff = nextFirst.getTime() - now.getTime();
+  return Math.ceil(diff / (1000 * 60 * 60 * 24));
+}
 
 async function fetchOrders() {
   const response = await fetch("/api/orders", { cache: "no-store" });
@@ -442,6 +484,8 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
   const [selectedTier, setSelectedTier] = useState(TIER_OPTIONS[0].id);
   const [heroBgY, setHeroBgY] = useState(0);
   const revealRef = useRef<HTMLDivElement>(null);
+  const [showAiccTooltip, setShowAiccTooltip] = useState(false);
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
   const stats = useMemo(() => {
     const newOrders = orders.filter((order) => order.status === "NEW").length;
@@ -760,7 +804,68 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                 <motion.div variants={itemVariants} className="hero-credentials">
                   <span>Digital Intelligence</span>
                   <span className="sep">·</span>
-                  <span>AICC Verified</span>
+                  <span 
+                    className="aicc-badge-trigger"
+                    style={{
+                      position: "relative",
+                      cursor: "help",
+                      textDecoration: "underline dotted rgba(200, 169, 110, 0.4)",
+                      textUnderlineOffset: "3px"
+                    }}
+                    onMouseEnter={() => setShowAiccTooltip(true)}
+                    onMouseLeave={() => setShowAiccTooltip(false)}
+                    onClick={() => setShowAiccTooltip(!showAiccTooltip)}
+                  >
+                    AICC Verified
+                    
+                    <AnimatePresence>
+                      {showAiccTooltip && (
+                        <motion.div
+                          className="aicc-tooltip"
+                          initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                          transition={{ duration: 0.2 }}
+                          style={{
+                            position: "absolute",
+                            background: "#0D0D0D",
+                            border: "1px solid rgba(200,169,110,0.3)",
+                            borderRadius: "4px",
+                            padding: "12px 16px",
+                            width: "240px",
+                            fontFamily: "'Inter', sans-serif",
+                            fontSize: "12px",
+                            color: "#94A3B8",
+                            lineHeight: "1.6",
+                            zIndex: 50,
+                            bottom: "calc(100% + 8px)",
+                            left: "50%",
+                            transform: "translateX(-50%)",
+                            textAlign: "left",
+                            boxShadow: "0 10px 30px rgba(0, 0, 0, 0.5)",
+                            pointerEvents: "auto"
+                          }}
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <div style={{ marginBottom: "8px" }}>
+                            5-stage AI verification — no unconfirmed findings delivered. Generate → Critique → Verify → Refine → Specialize.
+                          </div>
+                          <a 
+                            href="#aicc" 
+                            style={{ 
+                              color: "#C8A96E", 
+                              textDecoration: "none", 
+                              fontWeight: "bold",
+                              display: "block",
+                              marginTop: "4px"
+                            }}
+                          >
+                            See the methodology ↓
+                          </a>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </span>
                 </motion.div>
               </div>
               <motion.div 
@@ -963,7 +1068,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
           </div>
         </section>
 
-        <section className="aicc-block section-diagonal">
+        <section className="aicc-block section-diagonal" id="aicc">
           <div className="wrap">
             <div className="sec-head aicc-head">
               <div className="label">AICC method</div>
@@ -1208,6 +1313,26 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
             <div className="testimonials-grid">
               {TESTIMONIALS.map((t, index) => (
                 <article key={t.name} className="testimonial-card glass-premium testimonial-stagger pm-reveal" style={{ transitionDelay: `${index * 0.15}s` }}>
+                  <div 
+                    className="testimonial-avatar" 
+                    style={{
+                      width: "48px",
+                      height: "48px",
+                      borderRadius: "50%",
+                      background: "rgba(200,169,110,0.08)",
+                      border: "1px solid rgba(200,169,110,0.3)",
+                      color: "#C8A96E",
+                      fontFamily: "monospace",
+                      fontSize: "14px",
+                      fontWeight: 600,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      marginBottom: "16px"
+                    }}
+                  >
+                    {t.initials}
+                  </div>
                   <div className="testimonial-quote">&ldquo;{t.quote}&rdquo;</div>
                   <div className="testimonial-foot">
                     <div className="testimonial-name">{t.name}</div>
@@ -1230,6 +1355,99 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                 Start the Audit <span className="arrow">→</span>
               </a>
             </div>
+          </div>
+        </section>
+
+        <section className="faq-stage" style={{
+          maxWidth: "760px",
+          margin: "0 auto",
+          padding: "60px 40px",
+          borderTop: "1px solid rgba(255,255,255,0.04)"
+        }}>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", marginBottom: "40px" }}>
+            <div style={{
+              fontFamily: "var(--mono)",
+              fontSize: "11px",
+              color: "#C8A96E",
+              letterSpacing: "3px",
+              textTransform: "uppercase",
+              marginBottom: "8px",
+              fontWeight: 600
+            }}>
+              COMMON QUESTIONS
+            </div>
+            <h2 style={{
+              fontFamily: "Georgia, serif",
+              color: "#FFFFFF",
+              fontSize: "clamp(24px, 4vw, 36px)",
+              lineHeight: 1.3,
+              fontWeight: 400,
+              margin: 0
+            }}>
+              Everything you need to know<br />before you submit.
+            </h2>
+          </div>
+
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            {FAQ_ITEMS.map((item, index) => {
+              const isOpen = openFaqIndex === index;
+              return (
+                <div 
+                  key={index}
+                  style={{
+                    borderBottom: "1px solid rgba(255,255,255,0.04)",
+                    padding: "20px 0"
+                  }}
+                >
+                  <div
+                    onClick={() => setOpenFaqIndex(isOpen ? null : index)}
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      cursor: "pointer",
+                      color: "#D0C8B8",
+                      fontFamily: "Georgia, serif",
+                      fontSize: "16px",
+                      fontWeight: 400
+                    }}
+                  >
+                    <span>{item.q}</span>
+                    <span style={{
+                      color: "#C8A96E",
+                      fontSize: "20px",
+                      fontFamily: "monospace",
+                      flexShrink: 0,
+                      marginLeft: "20px"
+                    }}>
+                      {isOpen ? "−" : "+"}
+                    </span>
+                  </div>
+                  
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.25, ease: "easeInOut" }}
+                        style={{ overflow: "hidden" }}
+                      >
+                        <div style={{
+                          color: "#94A3B8",
+                          fontSize: "14px",
+                          lineHeight: "1.8",
+                          paddingTop: "12px",
+                          maxWidth: "680px"
+                        }}>
+                          {item.a}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            })}
           </div>
         </section>
 
@@ -1562,6 +1780,81 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                     <button className="btn btn-primary" type="submit" disabled={submitting}>
                       {submitting ? "Sending…" : "Submit Order"} <span className="arrow">→</span>
                     </button>
+                    
+                    <div 
+                      className="payment-clarity-block"
+                      style={{
+                        marginTop: "16px",
+                        padding: "14px 20px",
+                        background: "rgba(200, 169, 110, 0.04)",
+                        border: "1px solid rgba(200, 169, 110, 0.12)",
+                        borderRadius: "4px",
+                        textAlign: "center",
+                        width: "100%"
+                      }}
+                    >
+                      <div 
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          gap: "8px",
+                          color: "#C8A96E",
+                          fontFamily: "monospace",
+                          fontSize: "11px",
+                          letterSpacing: "2px",
+                          textTransform: "uppercase",
+                          marginBottom: "8px"
+                        }}
+                      >
+                        <svg 
+                          width="12" 
+                          height="14" 
+                          viewBox="0 0 12 14" 
+                          fill="none" 
+                          xmlns="http://www.w3.org/2000/svg"
+                          style={{ color: "#C8A96E" }}
+                        >
+                          <path 
+                            d="M10.5 5H9.75V3.75C9.75 1.68 8.07 0 6 0C3.93 0 2.25 1.68 2.25 3.75V5H1.5C0.67 5 0 5.67 0 6.5V12.5C0 13.33 0.67 14 1.5 14H10.5C11.33 14 12 13.33 12 12.5V6.5C12 5.67 11.33 5 10.5 5ZM3.75 3.75C3.75 2.51 4.76 1.5 6 1.5C7.24 1.5 8.25 2.51 8.25 3.75V5H3.75V3.75ZM6 10.5C5.17 10.5 4.5 9.83 4.5 9C4.5 8.17 5.17 7.5 6 7.5C6.83 7.5 7.5 8.17 7.5 9C7.5 9.83 6.83 10.5 6 10.5Z" 
+                            fill="currentColor" 
+                          />
+                        </svg>
+                        <span>Secure checkout via</span>
+                        <svg 
+                          width="42" 
+                          height="18" 
+                          viewBox="0 0 42 18" 
+                          fill="none" 
+                          xmlns="http://www.w3.org/2000/svg"
+                          style={{ 
+                            color: "#C8A96E", 
+                            display: "inline-block",
+                            verticalAlign: "middle"
+                          }}
+                          aria-label="Stripe"
+                        >
+                          <path 
+                            d="M8.22 8.35c0-1.28.84-1.92 2.21-1.92.83 0 1.4.2 1.77.41v2.79c-.39.2-1 .4-1.77.4-1.37 0-2.21-.63-2.21-1.68zm3.98 1.25V5.55c-.48-.2-1.12-.34-1.91-.34-2.12 0-3.56 1.13-3.56 3.42 0 2.2 1.34 3.32 3.56 3.32.69 0 1.39-.12 1.91-.37V10.1c-.34.18-.94.27-1.57.27-1.37 0-2.13-.67-2.13-1.85 0-.03 3.7 0 3.7-.02v-.15zm4.84 3.34V9.6c0-1.1.66-1.7 1.63-1.7.27 0 .49.04.66.1V5.37c-.24-.05-.53-.08-.85-.08-.94 0-1.61.54-1.9.1.28V5.37h-1.55v7.57h2.01zm4.31-8.15c0-.52-.42-.92-.95-.92s-.94.4-.94.92c0 .5.41.92.94.92s.95-.41.95-.92zm0 1.34H19.5v6.81h2.01V5.79zm5.35 2.56c0-1.25.82-1.92 2.11-1.92.74 0 1.23.18 1.55.37V4.08c-.4-.15-.93-.27-1.55-.27-2.09 0-3.62 1.16-3.62 3.46 0 2.26 1.48 3.44 3.62 3.44.69 0 1.23-.11 1.55-.27V8.97c-.32.18-.89.28-1.55.28-1.29 0-2.11-.63-2.11-1.9zm5.95 4.59h2.01V9.58c0-.98.53-1.52 1.37-1.52.74 0 1.18.42 1.18 1.32v3.56h2.01V9.08c0-2-.99-3.08-2.69-3.08-.99 0-1.68.49-2.01 1.2V5.79h-1.87v7.15z" 
+                            fill="currentColor" 
+                          />
+                          <path 
+                            d="M1.94 5.37C.92 5.37.24 5.92.24 6.94c0 1.64 2.27 1.37 2.27 2.08 0 .28-.24.47-.73.47-.6 0-1.24-.22-1.62-.43v1.81c.44.2 1.12.35 1.83.35 1.66 0 2.53-.78 2.53-2 0-1.74-2.27-1.39-2.27-2.07 0-.25.22-.44.67-.44.5 0 1.05.15 1.39.3V5.21c-.39-.17-.98-.27-1.6-.27zm37.89 2.98c0-1.28.84-1.92 2.21-1.92.83 0 1.4.2 1.77.41v2.79c-.39.2-1 .4-1.77.4-1.37 0-2.21-.63-2.21-1.68zm3.98 1.25V5.55c-.48-.2-1.12-.34-1.91-.34-2.12 0-3.56 1.13-3.56 3.42 0 2.2 1.34 3.32 3.56 3.32.69 0 1.39-.12 1.91-.37V10.1c-.34.18-.94.27-1.57.27-1.37 0-2.13-.67-2.13-1.85 0-.03 3.7 0 3.7-.02v-.15z" 
+                            fill="currentColor" 
+                          />
+                        </svg>
+                      </div>
+                      <div 
+                        style={{
+                          color: "#94A3B8",
+                          fontSize: "12px",
+                          lineHeight: "1.6",
+                        }}
+                      >
+                        After submitting you will receive an invoice link within 30 minutes. No charge occurs until you approve and complete checkout.
+                      </div>
+                    </div>
+
                     <div className="confirm-foot">Your information is kept confidential and used solely to scope your engagement.</div>
                   </div>
                 </form>
