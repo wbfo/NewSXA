@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { IntakeClient } from "@/components/intake-client";
-import { readDashboard } from "@/lib/server/store";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -80,15 +79,14 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
 };
 
-export default async function IntakePage() {
-  const data = await readDashboard();
+export default function IntakePage() {
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <IntakeClient initialData={{ ...data, orders: [] }} />
+      <IntakeClient initialData={{ orders: [], summary: { monthlyReceived: 0, survivalTarget: 1 } } as any} />
     </>
   );
 }
