@@ -6,10 +6,6 @@ export function SovereignSnippet() {
       style={{
         width: "900px",
         maxWidth: "100%",
-        backgroundColor: "#0A1628", // --snippet-bg-dark
-        borderRadius: "8px",
-        overflow: "hidden",
-        boxShadow: "0 24px 80px rgba(0,0,0,0.6)",
         fontFamily: "var(--font-inter), sans-serif",
         color: "#FFFFFF",
         margin: "0 auto",
@@ -18,7 +14,7 @@ export function SovereignSnippet() {
       {/* SECTION 1 — HEADER BAR */}
       <div
         style={{
-          backgroundColor: "#0A1628",
+          backgroundColor: "transparent",
           padding: "20px 28px",
           display: "flex",
           justifyContent: "space-between",
@@ -90,7 +86,7 @@ export function SovereignSnippet() {
       {/* SECTION 2 — PARTIAL DISCLOSURE BAR */}
       <div
         style={{
-          backgroundColor: "#FEF3C7",
+          backgroundColor: "transparent",
           padding: "14px 28px",
           display: "flex",
           alignItems: "center",
@@ -110,7 +106,7 @@ export function SovereignSnippet() {
       {/* SECTION 3 — PERSONAL ADDRESS BLOCK */}
       <div
         style={{
-          backgroundColor: "#0A1628",
+          backgroundColor: "transparent",
           padding: "20px 28px",
           display: "flex",
           gap: "16px",
@@ -122,7 +118,7 @@ export function SovereignSnippet() {
           style={{
             width: "48px",
             height: "48px",
-            backgroundColor: "#2563EB",
+            backgroundColor: "transparent",
             borderRadius: "50%",
             display: "flex",
             alignItems: "center",
@@ -171,7 +167,7 @@ export function SovereignSnippet() {
       {/* SECTION 4 — THREE FINDING CARDS */}
       <div
         style={{
-          backgroundColor: "#0A1628",
+          backgroundColor: "transparent",
           padding: "20px 28px",
           display: "grid",
           gridTemplateColumns: "repeat(3, 1fr)",
@@ -181,7 +177,7 @@ export function SovereignSnippet() {
         {/* CARD 01 */}
         <div
           style={{
-            backgroundColor: "#FFFFFF",
+            backgroundColor: "transparent",
             borderRadius: "8px",
             padding: "20px",
             borderTop: "4px solid #E63946",
@@ -201,7 +197,7 @@ export function SovereignSnippet() {
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
               <div
                 style={{
-                  backgroundColor: "#E63946",
+                  backgroundColor: "transparent",
                   color: "#FFFFFF",
                   borderRadius: "50%",
                   width: "28px",
@@ -303,7 +299,7 @@ export function SovereignSnippet() {
           <div
             style={{
               marginTop: "auto",
-              backgroundColor: "#FEF2F2",
+              backgroundColor: "transparent",
               borderRadius: "6px",
               padding: "14px",
               borderLeft: "3px solid #E63946",
@@ -373,7 +369,7 @@ export function SovereignSnippet() {
         {/* CARD 02 */}
         <div
           style={{
-            backgroundColor: "#FFFFFF",
+            backgroundColor: "transparent",
             borderRadius: "8px",
             padding: "20px",
             borderTop: "4px solid #2563EB",
@@ -393,7 +389,7 @@ export function SovereignSnippet() {
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
               <div
                 style={{
-                  backgroundColor: "#2563EB",
+                  backgroundColor: "transparent",
                   color: "#FFFFFF",
                   borderRadius: "50%",
                   width: "28px",
@@ -449,7 +445,7 @@ export function SovereignSnippet() {
 
           <div
             style={{
-              backgroundColor: "#EFF6FF",
+              backgroundColor: "transparent",
               borderRadius: "6px",
               padding: "12px",
               display: "flex",
@@ -465,7 +461,7 @@ export function SovereignSnippet() {
                 (closed review platform)
               </div>
             </div>
-            <div style={{ width: "1px", backgroundColor: "#BFDBFE" }} />
+            <div style={{ width: "1px", backgroundColor: "transparent" }} />
             <div style={{ flex: 1 }}>
               <div style={{ color: "#374151", fontWeight: "bold", fontSize: "16px" }}>
                 19 reviews
@@ -502,7 +498,7 @@ export function SovereignSnippet() {
           <div
             style={{
               marginTop: "auto",
-              backgroundColor: "#EFF6FF",
+              backgroundColor: "transparent",
               borderRadius: "6px",
               padding: "14px",
               borderLeft: "3px solid #2563EB",
@@ -573,7 +569,7 @@ export function SovereignSnippet() {
         {/* CARD 03 */}
         <div
           style={{
-            backgroundColor: "#FFFFFF",
+            backgroundColor: "transparent",
             borderRadius: "8px",
             padding: "20px",
             borderTop: "4px solid #F97316",
@@ -593,7 +589,7 @@ export function SovereignSnippet() {
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
               <div
                 style={{
-                  backgroundColor: "#F97316",
+                  backgroundColor: "transparent",
                   color: "#FFFFFF",
                   borderRadius: "50%",
                   width: "28px",
@@ -650,7 +646,7 @@ export function SovereignSnippet() {
 
           <div
             style={{
-              backgroundColor: "#FFFFFF",
+              backgroundColor: "transparent",
               border: "1px solid #E5E7EB",
               borderRadius: "4px",
               padding: "10px",
@@ -663,7 +659,7 @@ export function SovereignSnippet() {
               style={{
                 width: "24px",
                 height: "24px",
-                backgroundColor: "#FF1A1A",
+                backgroundColor: "transparent",
                 color: "#FFFFFF",
                 borderRadius: "4px",
                 display: "flex",
@@ -683,7 +679,7 @@ export function SovereignSnippet() {
             </div>
             <div
               style={{
-                backgroundColor: "#FEF2F2",
+                backgroundColor: "transparent",
                 border: "1px solid #FECACA",
                 borderRadius: "4px",
                 padding: "4px 8px",
@@ -732,7 +728,7 @@ export function SovereignSnippet() {
           <div
             style={{
               marginTop: "auto",
-              backgroundColor: "#FFF7ED",
+              backgroundColor: "transparent",
               borderRadius: "6px",
               padding: "14px",
               borderLeft: "3px solid #F97316",
@@ -804,7 +800,7 @@ export function SovereignSnippet() {
       {/* SECTION 5 — TOTAL IMPACT BAR */}
       <div
         style={{
-          backgroundColor: "#111827",
+          backgroundColor: "transparent",
           padding: "24px 28px",
           display: "grid",
           gridTemplateColumns: "1.2fr 1fr 1fr",
@@ -898,7 +894,7 @@ export function SovereignSnippet() {
       {/* SECTION 6 — BOTTOM SECTION */}
       <div
         style={{
-          backgroundColor: "#0A1628",
+          backgroundColor: "transparent",
           padding: "24px 28px",
           display: "flex",
           gap: "32px",
@@ -917,7 +913,7 @@ export function SovereignSnippet() {
               { icon: "⭐", text: "Brand Identity & Consistency — acquisition naming audit, cross-platform NAP alignment" },
               { icon: "📱", text: "Social Media Infrastructure — location-level presence, content cadence, engagement signals" },
               { icon: "🔍", text: "Local SEO & AI Visibility — per-location GBP audit, hours accuracy, competitor positioning" },
-              { icon: "⚙️", text: "Systems, Automation & Revenue Leaks — review equity, intake, deptlon, funnels, referral systems" },
+              { icon: "⚙️", text: "Systems, Automation & Revenue Leaks — review equity, intake, deployment, funnels, referral systems" },
               { icon: "🤖", text: "AI Workforce Deployment — specific roles and processes where AI agents reduce cost and increase output" },
             ].map((item, i) => (
               <div key={i} style={{ display: "flex", gap: "8px", fontSize: "11px", color: "#9CA3AF", lineHeight: 1.4 }}>
@@ -945,7 +941,7 @@ export function SovereignSnippet() {
             <div
               style={{
                 flex: 1,
-                backgroundColor: "#1E3A5F",
+                backgroundColor: "transparent",
                 borderRadius: "8px",
                 padding: "16px",
                 border: "1px solid rgba(37,99,235,0.4)",
@@ -973,7 +969,7 @@ export function SovereignSnippet() {
             <div
               style={{
                 flex: 1,
-                backgroundColor: "#2D1B69",
+                backgroundColor: "transparent",
                 borderRadius: "8px",
                 padding: "16px",
                 border: "1px solid rgba(124,58,237,0.4)",
@@ -999,10 +995,10 @@ export function SovereignSnippet() {
                 ))}
               </div>
               <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
-                <div style={{ backgroundColor: "#1A0F3C", borderRadius: "4px", color: "#A78BFA", fontSize: "9px", padding: "4px 8px", fontWeight: "bold" }}>
+                <div style={{ backgroundColor: "transparent", borderRadius: "4px", color: "#A78BFA", fontSize: "9px", padding: "4px 8px", fontWeight: "bold" }}>
                   FULL 140-LOCATION AUDIT: $35,000
                 </div>
-                <div style={{ backgroundColor: "#1A0F3C", borderRadius: "4px", color: "#A78BFA", fontSize: "9px", padding: "4px 8px", fontWeight: "bold" }}>
+                <div style={{ backgroundColor: "transparent", borderRadius: "4px", color: "#A78BFA", fontSize: "9px", padding: "4px 8px", fontWeight: "bold" }}>
                   PILOT 10 LOCATIONS AT $3,500
                 </div>
               </div>
@@ -1014,7 +1010,7 @@ export function SovereignSnippet() {
       {/* SECTION 7 — FOOTER CTA BAR */}
       <div
         style={{
-          backgroundColor: "#111827",
+          backgroundColor: "transparent",
           padding: "20px 28px",
           display: "grid",
           gridTemplateColumns: "1fr 1fr 1fr",
@@ -1065,7 +1061,7 @@ export function SovereignSnippet() {
       {/* SECTION 8 — SIGNATURE BAR */}
       <div
         style={{
-          backgroundColor: "#0A1628",
+          backgroundColor: "transparent",
           padding: "14px 28px",
           borderTop: "1px solid rgba(255,255,255,0.1)",
           display: "flex",
@@ -1074,7 +1070,7 @@ export function SovereignSnippet() {
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          <div style={{ width: "24px", height: "24px", borderRadius: "50%", backgroundColor: "#4B5563" }}></div>
+          <div style={{ width: "24px", height: "24px", borderRadius: "50%", backgroundColor: "transparent" }}></div>
           <div>
             <div style={{ color: "#FFFFFF", fontSize: "11px", fontWeight: 500 }}>
               Ola · Strategic Co-Architect

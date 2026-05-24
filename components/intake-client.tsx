@@ -5,7 +5,7 @@ import Link from "next/link";
 import type { DashboardPayload, ClientOrder } from "@/lib/domain/types";
 import { ThemeProvider, useTheme } from "@/components/theme-provider";
 import { formatDisplayTime } from "@/lib/utils/time";
-import { SnippetParallax } from "@/components/snippet-parallax";
+import { ThreeDocumentCarousel } from "@/components/three-document-carousel";
 const SERVICE_CARDS = [
   {
     title: "Sovereign X Digital Audit — Standard",
@@ -312,11 +312,7 @@ const PRICING_BLOCKS: { title: string; rows: PricingRow[]; blockNote?: string }[
   }
 ];
 
-const REFERRALS = [
-  { name: "Any audit referral", note: "$100 gift card within 48hrs" },
-  { name: "Photography referral", note: "10–15% of gig value" },
-  { name: "Styling referral", note: "10–15% of gig value" }
-];
+// Referrals are rendered inline below
 
 const TESTIMONIALS = [
   {
@@ -680,14 +676,10 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                 <div className="hero-eyebrow-track">
                   <span>Sovereign X Audits</span>
                   <span className="dot">•</span>
-                  <span className="gold-tag text-neon-blue border-neon-blue">Digital Intelligence</span>
-                  <span className="dot">•</span>
                   <span>BlackFur Capital Group LLC</span>
                 </div>
                 <div className="hero-eyebrow-track" aria-hidden="true">
                   <span>Sovereign X Audits</span>
-                  <span className="dot">•</span>
-                  <span className="gold-tag text-neon-blue border-neon-blue">Digital Intelligence</span>
                   <span className="dot">•</span>
                   <span>BlackFur Capital Group LLC</span>
                 </div>
@@ -711,11 +703,9 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
               </div>
 
               <div className="hero-credentials pm-animate">
-                <span>Licensed</span>
+                <span>Digital Intelligence</span>
                 <span className="sep">·</span>
                 <span>AICC Verified</span>
-                <span className="sep">·</span>
-                <span>BlackFur Capital Group LLC</span>
               </div>
             </div>
           </div>
@@ -723,31 +713,11 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
 
         <div className="pm-section-glow" aria-hidden="true" />
 
-        <section className="compact section-diagonal">
-          <div className="wrap">
-            <div className="metrics-grid pm-reveal">
-              <div className="metric-card metric-card--blue">
-                <div className="metric-label">01 // DELIVERY</div>
-                <div className="metric-value">48–72 hrs</div>
-                <div className="metric-desc">Audit turnaround — no waiting weeks for a report</div>
-              </div>
-              <div className="metric-card metric-card--amber">
-                <div className="metric-label">02 // REVENUE IMPACT</div>
-                <div className="metric-value">$500–$2K</div>
-                <div className="metric-desc">Monthly revenue leaked by the average audited business</div>
-              </div>
-              <div className="metric-card metric-card--purple">
-                <div className="metric-label">03 // COVERAGE</div>
-                <div className="metric-value">21 sections</div>
-                <div className="metric-desc">Every audit covers 21 diagnostic areas across your digital presence</div>
-              </div>
-            </div>
-          </div>
-        </section>
+
 
 
         {/* ── HOW IT WORKS Section ── */}
-        <section id="how-it-works" style={{ padding: "64px 0 0" }}>
+        <section id="how-it-works" style={{ padding: "16px 0 0" }}>
           <div className="wrap">
             {/* ── 3-Node System Flow ── */}
             <div className="sx-system-flow pm-reveal">
@@ -775,32 +745,6 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
               <p>We don&apos;t pitch services. We run diagnostics.<br />
               If the audit finds nothing, you pay for the truth.<br />
               If it finds leaks, you decide which ones we fix.</p>
-            </div>
-          </div>
-        </section>
-
-        <section className="aicc-block section-diagonal">
-          <div className="wrap">
-            <div className="sec-head aicc-head">
-              <div className="label">AICC method</div>
-              <h2>
-                Generated, critiqued, verified, refined, and specialized through the <span className="accent">AICC</span> workflow.
-              </h2>
-              <a className="aicc-cross-link" href="https://aicouncilconductor.com" target="_blank" rel="noreferrer">
-                Powered by the AI Council Conductor methodology →
-              </a>
-              <p className="sub">Each output passes through a five-stage refinement cycle before it reaches the operator. Defensible analysis, not just fast generation.</p>
-            </div>
-
-            <div className="aicc-flow">
-              {AICC_STEPS.map((step) => (
-                <article key={step.num} className="aicc-step">
-                  <div className="num">{step.num}</div>
-                  <div className="icon-circle">{step.icon}</div>
-                  <h4>{step.title}</h4>
-                  <p>{step.text}</p>
-                </article>
-              ))}
             </div>
           </div>
         </section>
@@ -903,67 +847,39 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
           </div>
         </section>
 
-        <section className="compact" id="featured">
+        <section className="aicc-block section-diagonal">
           <div className="wrap">
-            <a className="snippet-card glass-premium hover:shadow-neon-purple transition-all duration-300" href="#intake">
-              <div className="snippet-grid">
-                <div className="snippet-body">
-                  <span className="label aicc-stamp text-neon-purple border-neon-purple">Featured intake</span>
-                  <h2 className="snippet-title text-white">A premium intake experience that feels like an executive brief.</h2>
-                  <p className="snippet-desc text-subtle">
-                    The page keeps the black-and-gold editorial language from the original design while turning the order flow into a clear client-facing conversion path.
-                  </p>
-                  <div className="snippet-badges">
-                    <span className="stamp">Intake → Order queue</span>
-                    <span className="stamp">Light / Dark mode</span>
-                  </div>
-                  <div className="snippet-cta-wrap">
-                    <span className="btn btn-primary hover:shadow-neon-blue">
-                      Start Intake <span className="arrow">→</span>
-                    </span>
-                    <p className="snippet-note">
-                      Orders flow straight into the command center with a live event, a queue item, and a visible status card.
-                    </p>
-                  </div>
-                </div>
+            <div className="sec-head aicc-head">
+              <div className="label">AICC method</div>
+              <h2>
+                Generated, critiqued, verified, refined, and specialized through the <span className="accent">AICC</span> workflow.
+              </h2>
+              <a className="aicc-cross-link" href="https://aicouncilconductor.com" target="_blank" rel="noreferrer">
+                Powered by the AI Council Conductor methodology →
+              </a>
+              <p className="sub">Each output passes through a five-stage refinement cycle before it reaches the operator. Defensible analysis, not just fast generation.</p>
+            </div>
 
-                <div className="snippet-preview preview-float">
-                  <div className="snippet-preview-doc">
-                    <div className="doc-head">
-                      <div className="doc-badge">SX</div>
-                      <div>
-                        <div className="doc-eyebrow">Preview document</div>
-                        <div className="doc-title">Three things the audit surfaces immediately</div>
-                      </div>
-                    </div>
-                    {FINDINGS.map((finding) => (
-                      <div key={finding.id} className="doc-finding">
-                        <div className="doc-num">{finding.id}</div>
-                        <div>
-                          <div className="doc-finding-label">{finding.label}</div>
-                          <div className="doc-finding-amount">{finding.amount}</div>
-                          <div className="mono-subtle" style={{ marginTop: 4, lineHeight: 1.6 }}>
-                            {finding.detail}
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                    <div className="doc-foot">
-                      <span>Delivered within the command system</span>
-                      <span>{initialData.summary.month} intake view</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </a>
+            <div className="aicc-flow">
+              {AICC_STEPS.map((step) => (
+                <article key={step.num} className="aicc-step">
+                  <div className="num">{step.num}</div>
+                  <div className="icon-circle">{step.icon}</div>
+                  <h4>{step.title}</h4>
+                  <p>{step.text}</p>
+                </article>
+              ))}
+            </div>
           </div>
         </section>
+
+
 
         <section className="white-section" id="deliverables">
           <div className="wrap">
             <div className="white-section-head">
               <div className="label">What Gets Delivered</div>
-              <h2>Seven deliverables. One Google Drive link.</h2>
+              <h2>Seven deliverables. One delivery.</h2>
             </div>
             <div className="deliverables-grid">
               {[
@@ -1017,34 +933,32 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
         </section>
 
         {/* ── Snippet Parallax — What Lands in Your Drive ── */}
-        <section className="compact" style={{ paddingBottom: "0" }}>
+        <section className="compact" id="samples" style={{ paddingBottom: "0" }}>
           <div className="wrap">
-            <SnippetParallax />
+            <ThreeDocumentCarousel />
           </div>
         </section>
 
-        <section className="compact section-diagonal" id="samples">
+        <section className="compact section-diagonal">
           <div className="wrap">
-            <div className="sec-head pm-reveal">
-              <div className="label">SEE THE WORK</div>
-              <h2>This Is What a Sovereign X Audit Delivers.</h2>
-            </div>
-            <div className="pm-reveal">
-              <a className="sample-featured glass-premium" href="/samples/snippet">
-                <div className="sample-featured-inner">
-                  <div className="sample-featured-body">
-                    <div className="label aicc-stamp text-neon-amber border-neon-amber">THE SNIPPET</div>
-                    <h2 className="text-white">What You Receive Before You Pay a Dollar</h2>
-                    <p className="text-subtle">Before any client commits, we send a free partial disclosure — 3 verified findings from a real audit of their business or image. No pitch. No pressure. Just the intelligence.</p>
-                    <div className="snippet-badges">
-                      <span className="stamp">FREE</span>
-                      <span className="stamp">NO STRINGS</span>
-                    </div>
-                    <span className="btn btn-primary" style={{ display: "inline-block", marginTop: "1rem" }}>View Sample Snippet →</span>
-                    <p className="sample-featured-note">The snippet is sent before any purchase. The full report follows after.</p>
-                  </div>
-                </div>
-              </a>
+
+
+            <div className="metrics-grid pm-reveal">
+              <div className="metric-card metric-card--blue">
+                <div className="metric-label">01 // DELIVERY</div>
+                <div className="metric-value">48–72 hrs</div>
+                <div className="metric-desc">Audit turnaround — no waiting weeks for a report</div>
+              </div>
+              <div className="metric-card metric-card--amber">
+                <div className="metric-label">02 // REVENUE IMPACT</div>
+                <div className="metric-value">$500–$2K</div>
+                <div className="metric-desc">Monthly revenue leaked by the average audited business</div>
+              </div>
+              <div className="metric-card metric-card--purple">
+                <div className="metric-label">03 // COVERAGE</div>
+                <div className="metric-value">21 sections</div>
+                <div className="metric-desc">Every audit covers 21 diagnostic areas across your digital presence</div>
+              </div>
             </div>
           </div>
         </section>
@@ -1064,31 +978,36 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                   <div className="sx-pricing-col-phase">Phase 1 — Diagnosis</div>
                   <div className="sx-pricing-col-sub">Start here. Always.</div>
                 </div>
-                <div className="pricing-row">
-                  <div className="name">Sovereign X Digital Audit — Standard</div>
-                  <div className="promo">$500 promo</div>
-                  <div className="reg">$750 regular</div>
-                </div>
-                <div className="pricing-row">
-                  <div className="name">Sovereign X Digital Audit — Deep</div>
-                  <div className="promo">$1,500 promo</div>
-                  <div className="reg">$2,000 regular</div>
-                </div>
-                <div className="pricing-row">
-                  <div className="name">Sovereign X Digital Audit — Deep + Intake</div>
-                  <div className="promo">$2,000 promo</div>
-                  <div className="reg">$2,500 regular</div>
-                </div>
-                <div className="pricing-row">
-                  <div className="name">Sovereign X Image Audit — Standard</div>
-                  <div className="promo">$350 promo</div>
-                  <div className="reg">$500 regular</div>
-                </div>
-                <div className="pricing-row">
-                  <div className="name">Sovereign X Image Audit — Public Figure</div>
-                  <div className="promo">$750 promo</div>
-                  <div className="reg">$1,000 regular</div>
-                </div>
+                <PricingAccordionRow 
+                  name="Sovereign X Digital Audit — Standard" 
+                  promo="$500 promo" 
+                  reg="$750 regular" 
+                  description="A comprehensive 21-section analysis covering your domain authority, technical SEO, brand visibility, and core digital assets to identify major revenue leaks."
+                />
+                <PricingAccordionRow 
+                  name="Sovereign X Digital Audit — Deep" 
+                  promo="$1,500 promo" 
+                  reg="$2,000 regular" 
+                  description="Everything in Standard plus competitive context, prioritized impact matrix, and AI workforce readiness to prepare your operations for automation."
+                />
+                <PricingAccordionRow 
+                  name="Sovereign X Digital Audit — Deep + Intake" 
+                  promo="$2,000 promo" 
+                  reg="$2,500 regular" 
+                  description="Includes the Deep Audit and a complete restructuring of your client intake process to maximize conversion rates and operational efficiency."
+                />
+                <PricingAccordionRow 
+                  name="Sovereign X Image Audit — Standard" 
+                  promo="$350 promo" 
+                  reg="$500 regular" 
+                  description="A meticulous review of your public brand image, aesthetic consistency, and content messaging across all active social and professional channels."
+                />
+                <PricingAccordionRow 
+                  name="Sovereign X Image Audit — Public Figure" 
+                  promo="$750 promo" 
+                  reg="$1,000 regular" 
+                  description="An exhaustive multi-platform audit designed for high-profile individuals, focusing on reputation management, PR vulnerability, and premium brand positioning."
+                />
                 <div style={{ marginTop: "24px" }}>
                   <a href="#intake" className="btn btn-primary" style={{ display: "inline-block" }}>
                     Start the Audit <span className="arrow">→</span>
@@ -1102,36 +1021,42 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                   <div className="sx-pricing-col-phase" style={{ color: "var(--subtle)" }}>Phase 2 — Post-Audit</div>
                   <div className="sx-pricing-col-sub" style={{ color: "var(--subtle)" }}>Quoted after findings. Requires completed audit.</div>
                 </div>
-                <div className="pricing-row">
-                  <div className="name">Sovereign X Growth Blueprint</div>
-                  <div className="promo">$250 promo</div>
-                  <div className="reg">$350 regular</div>
-                </div>
-                <div className="pricing-row">
-                  <div className="name">Sovereign X Content Calendar</div>
-                  <div className="promo">$200</div>
-                  <div className="reg">Included in Deep</div>
-                </div>
-                <div className="pricing-row">
-                  <div className="name">Voice Agent — Starter</div>
-                  <div className="promo">$1,500 setup</div>
-                  <div className="reg">+ $200/mo</div>
-                </div>
-                <div className="pricing-row">
-                  <div className="name">Voice Agent — Standard</div>
-                  <div className="promo">$2,500 setup</div>
-                  <div className="reg">+ $350/mo</div>
-                </div>
-                <div className="pricing-row">
-                  <div className="name">Voice Agent — Advanced</div>
-                  <div className="promo">$4,000–$5,000</div>
-                  <div className="reg">+ $500/mo</div>
-                </div>
-                <div className="pricing-row">
-                  <div className="name">Sovereign X Website</div>
-                  <div className="promo">$500–$1,500 one-time</div>
-                  <div className="reg">$150–$200/mo retainer</div>
-                </div>
+                <PricingAccordionRow 
+                  name="Sovereign X Growth Blueprint" 
+                  promo="$250 promo" 
+                  reg="$350 regular" 
+                  description="A customized, step-by-step strategic roadmap to systematically implement all audit findings and optimize your digital presence for maximum revenue growth."
+                />
+                <PricingAccordionRow 
+                  name="Sovereign X Content Calendar" 
+                  promo="$200" 
+                  reg="Included in Deep" 
+                  description="A fully mapped out content strategy and scheduling matrix tailored to your brand voice, designed to maximize engagement and audience retention."
+                />
+                <PricingAccordionRow 
+                  name="Voice Agent — Starter" 
+                  promo="$1,500 setup" 
+                  reg="+ $200/mo" 
+                  description="Implementation of a basic AI voice agent for your business to handle fundamental customer inquiries, appointment setting, and basic routing."
+                />
+                <PricingAccordionRow 
+                  name="Voice Agent — Standard" 
+                  promo="$2,500 setup" 
+                  reg="+ $350/mo" 
+                  description="A sophisticated AI voice agent with custom knowledge base integration, capable of handling complex customer service scenarios and detailed product inquiries."
+                />
+                <PricingAccordionRow 
+                  name="Voice Agent — Advanced" 
+                  promo="$4,000–$5,000" 
+                  reg="+ $500/mo" 
+                  description="Our most powerful AI voice solution. Fully customized conversational flows, deep CRM integration, dynamic data retrieval, and advanced objection handling."
+                />
+                <PricingAccordionRow 
+                  name="Sovereign X Website" 
+                  promo="$500–$1,500 one-time" 
+                  reg="$150–$200/mo retainer" 
+                  description="A high-performance, conversion-optimized landing page or website designed according to Sovereign X standards, complete with ongoing technical maintenance."
+                />
                 <div className="block-note" style={{ marginTop: "16px" }}>
                   Phase 2 services are recommended after audit delivery. If you have existing findings, contact us directly.
                 </div>
@@ -1140,17 +1065,16 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
 
             <article className="referral-card" style={{ marginTop: "40px" }}>
               <h3>Referrals</h3>
-              {REFERRALS.map((ref) => (
-                <div key={ref.name} className="pricing-row">
-                  <div className="name">{ref.name}</div>
-                  <div className="promo">{ref.note}</div>
-                  <div className="reg" />
-                </div>
-              ))}
+              <PricingAccordionRow 
+                name="Any audit referral" 
+                promo="$100 gift card within 48hrs" 
+                reg="" 
+                description="When you refer a new client who successfully completes an audit, we will send you a $100 gift card of your choice within 48 hours of their payment processing. There is no cap on the number of referral rewards you can earn."
+              />
               <div className="promo-notice">
                 <div className="label">Promo notice</div>
                 <div className="text">
-                  <p>Promo resets monthly. Orders to the command center should feel like a controlled intake, not a loose contact form.</p>
+                  <p>Promotional pricing resets on the 1st of each month. Limited slots available.</p>
                 </div>
               </div>
             </article>
@@ -1201,7 +1125,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                   <div className="confirm-check">⌁</div>
                   <h1>Start your audit</h1>
                 <div className="summary">
-                  Fill out the full intake below. Your audit brief routes into the command center and delivery moves through Google Drive.
+                  Fill out the full intake below. Your audit brief routes directly into the command center. Delivery follows within 48–72 hours.
                 </div>
                 </div>
 
@@ -1410,6 +1334,42 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
           </div>
         </footer>
       </main>
+    </div>
+  );
+}
+
+function PricingAccordionRow({ name, promo, reg, description }: any) {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <div style={{ borderBottom: "1px dashed var(--border)", padding: "14px 0" }}>
+      <div 
+        className="pricing-row" 
+        onClick={() => setIsOpen(!isOpen)} 
+        style={{ cursor: "pointer", borderBottom: "none", padding: 0 }}
+      >
+        <div className="name" style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          <span style={{ 
+            transform: isOpen ? "rotate(90deg)" : "rotate(0deg)", 
+            transition: "transform 0.2s ease", 
+            fontSize: "10px", 
+            color: "var(--gold)", 
+            display: "inline-block" 
+          }}>▶</span>
+          {name}
+        </div>
+        <div className="promo">{promo}</div>
+        <div className="reg">{reg}</div>
+      </div>
+      <div style={{ 
+        maxHeight: isOpen ? "500px" : "0", 
+        overflow: "hidden", 
+        transition: "max-height 0.3s ease, opacity 0.3s ease",
+        opacity: isOpen ? 1 : 0
+      }}>
+        <div style={{ paddingTop: "12px", paddingLeft: "20px", fontSize: "14px", color: "var(--subtle)", lineHeight: "1.6" }}>
+          {description}
+        </div>
+      </div>
     </div>
   );
 }

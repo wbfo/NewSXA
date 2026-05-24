@@ -74,7 +74,7 @@ export function PricingSection() {
             <div className="promo-notice">
               <div className="label">Promo notice</div>
               <div className="text">
-                <p>Promo resets monthly. Orders to the command center should feel like a controlled intake, not a loose contact form.</p>
+                <p>Promotional pricing resets on the 1st of each month. Limited slots available.</p>
               </div>
             </div>
           </article>

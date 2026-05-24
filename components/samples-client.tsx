@@ -3,7 +3,8 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { SovereignSnippet } from "@/components/sovereign-snippet";
-import { StandardAuditExample } from "@/components/standard-audit-example";
+import { StandardAuditSample } from "@/components/standard-audit-sample";
+import { DeepAuditSample } from "@/components/deep-audit-sample";
 
 export function SamplesClient() {
   const [theme, setTheme] = useState<"dark" | "light">("dark");
@@ -118,14 +119,14 @@ export function SamplesClient() {
               className="mx-auto mb-10"
             >
               Every Sovereign X Audit delivers verified intelligence with dollar figures attached. 
-              No filler. No generic recommendations. Below is a sample snippet and a sample standard 
-              audit — both based on real research, anonymized for this page.
+              No filler. No generic recommendations. Below is a sample snippet and two sample 
+              audits — based on real research, anonymized for this page.
             </p>
 
-            {/* Two anchor links to jump to each section */}
-            <div style={{ display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap" }}>
+            {/* THREE SAMPLE CARDS / LINKS */}
+            <div style={{ display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap", marginBottom: "40px" }}>
               <a
-                href="#snippet"
+                href="/samples/snippet"
                 style={{
                   border: "1px solid rgba(200, 169, 110, 0.2)",
                   color: "#C8A96E",
@@ -133,10 +134,10 @@ export function SamplesClient() {
                 }}
                 className="font-mono text-xs tracking-widest uppercase px-6 py-3 hover:border-[#C8A96E] transition-colors"
               >
-                The Snippet ↓
+                Snippet Card
               </a>
               <a
-                href="#standard-audit"
+                href="#standard"
                 style={{
                   background: "#C8A96E",
                   color: "#060606",
@@ -145,138 +146,54 @@ export function SamplesClient() {
                 }}
                 className="font-mono text-xs tracking-widest uppercase px-6 py-3 hover:opacity-90 transition-opacity"
               >
-                Standard Audit Example ↓
+                Standard Card ↓
+              </a>
+              <a
+                href="#deep"
+                style={{
+                  background: "#7C3AED",
+                  color: "#FFF",
+                  fontWeight: "bold",
+                  textDecoration: "none",
+                }}
+                className="font-mono text-xs tracking-widest uppercase px-6 py-3 hover:opacity-90 transition-opacity"
+              >
+                Deep Card ↓
               </a>
             </div>
           </header>
 
-          {/* SECTION 2 — THE SNIPPET */}
-          <section id="snippet" style={{ marginBottom: "96px", paddingTop: "40px" }}>
-            {/* Section label */}
-            <div style={{ marginBottom: "40px" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "12px" }}>
-                <span
-                  style={{ color: "#C8A96E", letterSpacing: "4px" }}
-                  className="font-mono text-xs uppercase"
-                >
-                  01 / The Snippet
-                </span>
-                <div
-                  style={{
-                    background: "rgba(200, 169, 110, 0.15)",
-                    color: "#C8A96E",
-                    fontFamily: "monospace",
-                    fontSize: "10px",
-                    letterSpacing: "2px",
-                    textTransform: "uppercase",
-                    padding: "4px 12px",
-                    border: "1px solid rgba(200, 169, 110, 0.2)"
-                  }}
-                >
-                  Free · Sent Before Any Purchase
-                </div>
-              </div>
-              <h2
-                style={{ color: "#D0C8B8", fontFamily: "var(--font-display)" }}
-                className="text-2xl mb-3 text-white font-serif"
-              >
-                What you receive before you pay a dollar.
-              </h2>
-              <p style={{ color: "#777", maxWidth: "600px", fontSize: "14px", lineHeight: "1.6" }}>
-                Before any client commits, we send a free one-page partial disclosure — 3 verified 
-                findings from a real intelligence review of their business. No pitch. No pressure. 
-                Just what we found.
-              </p>
-            </div>
-
-            {/* The existing SovereignSnippet component */}
-            <div style={{ overflowX: "auto" }} className="glass-premium p-6 rounded-md">
+          <div style={{ display: "flex", flexDirection: "column", gap: "80px", marginBottom: "96px", alignItems: "center" }}>
+            <div id="snippet" style={{ width: "100%", overflowX: "auto", display: "flex", justifyContent: "center" }}>
               <SovereignSnippet />
             </div>
-          </section>
-
-          {/* SECTION 3 — DIVIDER */}
-          <div style={{ position: "relative", marginTop: "80px", marginBottom: "80px" }}>
-            {/* Gold horizontal rule */}
-            <div
-              style={{
-                background: "#C8A96E",
-                height: "1px",
-                opacity: 0.2,
-              }}
-            />
             
-            {/* Center label */}
-            <div
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <span
-                style={{
-                  background: "#060606",
-                  color: "#555",
-                  padding: "0 20px",
-                  letterSpacing: "4px"
-                }}
-                className="font-mono text-xs uppercase"
-              >
-                The Full Report
-              </span>
+            <div style={{ position: "relative", width: "100%", padding: "40px 0" }}>
+              <div style={{ background: "#C8A96E", height: "1px", opacity: 0.2 }} />
+              <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <span style={{ background: "#060606", color: "#555", padding: "0 20px", letterSpacing: "4px" }} className="font-mono text-xs uppercase">
+                  Standard Audit
+                </span>
+              </div>
+            </div>
+
+            <div id="standard" style={{ width: "100%", overflowX: "auto", display: "flex", justifyContent: "center" }}>
+              <StandardAuditSample />
+            </div>
+
+            <div style={{ position: "relative", width: "100%", padding: "40px 0" }}>
+              <div style={{ background: "#C8A96E", height: "1px", opacity: 0.2 }} />
+              <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <span style={{ background: "#060606", color: "#555", padding: "0 20px", letterSpacing: "4px" }} className="font-mono text-xs uppercase">
+                  Deep Audit
+                </span>
+              </div>
+            </div>
+
+            <div id="deep" style={{ width: "100%", overflowX: "auto", display: "flex", justifyContent: "center" }}>
+              <DeepAuditSample />
             </div>
           </div>
-
-          {/* SECTION 4 — STANDARD AUDIT EXAMPLE */}
-          <section id="standard-audit" style={{ marginBottom: "96px", paddingTop: "40px" }}>
-            {/* Section label */}
-            <div style={{ marginBottom: "40px" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "12px" }}>
-                <span
-                  style={{ color: "#C8A96E", letterSpacing: "4px" }}
-                  className="font-mono text-xs uppercase"
-                >
-                  02 / Standard Audit
-                </span>
-                <div
-                  style={{
-                    background: "rgba(200, 169, 110, 0.15)",
-                    color: "#C8A96E",
-                    fontFamily: "monospace",
-                    fontSize: "10px",
-                    letterSpacing: "2px",
-                    textTransform: "uppercase",
-                    padding: "4px 12px",
-                    border: "1px solid rgba(200, 169, 110, 0.2)"
-                  }}
-                >
-                  $500 Promo · 21 Sections · 72hr Delivery
-                </div>
-              </div>
-              <h2
-                style={{ color: "#D0C8B8", fontFamily: "var(--font-display)" }}
-                className="text-2xl mb-3 text-white font-serif"
-              >
-                The complete intelligence report.
-              </h2>
-              <p style={{ color: "#777", maxWidth: "600px", fontSize: "14px", lineHeight: "1.6" }}>
-                Below is a redacted excerpt from a real Sovereign X Digital Audit — Standard tier. 
-                Client details anonymized. Every finding, dollar figure, and section structure is 
-                representative of what gets delivered.
-              </p>
-            </div>
-
-            {/* The audit example component */}
-            <div style={{ overflowX: "auto" }}>
-              <StandardAuditExample />
-            </div>
-          </section>
 
           {/* SECTION 5 — BOTTOM CTA */}
           <section
