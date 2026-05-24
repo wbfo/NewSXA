@@ -14,7 +14,7 @@ export function DeepAuditSample() {
     >
 
       {/* HEADER */}
-      <div style={{
+      <div className="sample-report-dark sample-report-flex" style={{
         background: '#0A1628',
         padding: '20px 28px',
         borderBottom: '1px solid rgba(200,169,110,0.2)',
@@ -55,7 +55,7 @@ export function DeepAuditSample() {
       </div>
 
       {/* SCORE BANNER */}
-      <div style={{
+      <div className="sample-report-dark sample-report-flex" style={{
         background: '#111827',
         padding: '20px 28px',
         display: 'flex',
@@ -155,7 +155,7 @@ export function DeepAuditSample() {
       </div>
 
       {/* KEY FINDINGS */}
-      <div style={{ padding: '0 28px 20px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+      <div className="sample-report-grid sample-report-grid-2" style={{ padding: '0 28px 20px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
 
         {/* Finding 01 */}
         <div style={{ background: '#FFFFFF', borderRadius: '6px', borderTop: '3px solid #E63946', padding: '16px' }}>
@@ -235,7 +235,7 @@ export function DeepAuditSample() {
       </div>
 
       {/* IMPACT BAR */}
-      <div style={{ background: '#111827', padding: '20px 28px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '20px' }}>
+      <div className="sample-report-dark sample-report-flex" style={{ background: '#111827', padding: '20px 28px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '20px' }}>
         <div>
           <div style={{ color: '#9CA3AF', fontSize: '10px', letterSpacing: '3px', textTransform: 'uppercase', fontFamily: 'monospace', marginBottom: '4px' }}>Total Revenue Impact</div>
           <div style={{ color: '#E63946', fontSize: '36px', fontWeight: 900, letterSpacing: '-1px', lineHeight: 1 }}>$400K+</div>
@@ -262,7 +262,7 @@ export function DeepAuditSample() {
       </div>
 
       {/* IMPACT MATRIX — DEEP EXCLUSIVE */}
-      <div style={{ padding: '20px 28px 0', background: '#0D0D0D' }}>
+      <div className="sample-report-dark" style={{ padding: '20px 28px 0', background: '#0D0D0D' }}>
         <div style={{ color: '#C8A96E', fontSize: '10px', letterSpacing: '3px', textTransform: 'uppercase', fontFamily: 'monospace', marginBottom: '12px' }}>
           19 / The Impact Matrix <span style={{ color: '#7C3AED', background: '#F3E5F5', padding: '2px 8px', borderRadius: '3px', fontSize: '9px', marginLeft: '8px' }}>DEEP EXCLUSIVE</span>
         </div>
@@ -297,7 +297,7 @@ export function DeepAuditSample() {
       </div>
 
       {/* FOOTER */}
-      <div style={{ background: '#0A1628', padding: '14px 28px', borderTop: '1px solid rgba(255,255,255,0.05)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div className="sample-report-dark sample-report-flex sample-report-footer" style={{ background: '#0A1628', padding: '14px 28px', borderTop: '1px solid rgba(255,255,255,0.05)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div style={{ color: '#C8A96E', fontSize: '11px' }}>Ola · Strategic Co-Architect · Sovereign X Audits · BlackFur Capital Group LLC</div>
         <div style={{ color: '#555', fontSize: '10px', fontFamily: 'monospace', textAlign: 'right' }}>
           SAMPLE DOCUMENT — SOVEREIGN X AUDITS<br />

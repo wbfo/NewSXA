@@ -14,7 +14,7 @@ export function StandardAuditSample() {
     >
 
       {/* HEADER */}
-      <div style={{
+      <div className="sample-report-dark sample-report-flex" style={{
         background: '#0A1628',
         padding: '20px 28px',
         borderBottom: '1px solid rgba(200,169,110,0.2)',
@@ -52,7 +52,7 @@ export function StandardAuditSample() {
       </div>
 
       {/* SCORE BANNER */}
-      <div style={{
+      <div className="sample-report-dark sample-report-flex" style={{
         background: '#111827',
         padding: '20px 28px',
         display: 'flex',
@@ -119,7 +119,7 @@ export function StandardAuditSample() {
       </div>
 
       {/* THREE FINDINGS */}
-      <div style={{ padding: '24px 28px', display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '14px' }}>
+      <div className="sample-report-grid sample-report-grid-3" style={{ padding: '24px 28px', display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '14px' }}>
 
         {/* Finding 01 */}
         <div style={{ background: '#FFFFFF', borderRadius: '6px', borderTop: '3px solid #E63946', padding: '16px' }}>
@@ -189,7 +189,7 @@ export function StandardAuditSample() {
       </div>
 
       {/* IMPACT BAR */}
-      <div style={{ background: '#111827', padding: '20px 28px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '20px' }}>
+      <div className="sample-report-dark sample-report-flex" style={{ background: '#111827', padding: '20px 28px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '20px' }}>
         <div>
           <div style={{ color: '#9CA3AF', fontSize: '10px', letterSpacing: '3px', textTransform: 'uppercase', fontFamily: 'monospace', marginBottom: '4px' }}>Total Revenue Impact</div>
           <div style={{ color: '#E63946', fontSize: '36px', fontWeight: 900, letterSpacing: '-1px', lineHeight: 1 }}>$65K–$120K</div>
@@ -216,11 +216,11 @@ export function StandardAuditSample() {
       </div>
 
       {/* PRIORITY SEQUENCE */}
-      <div style={{ padding: '20px 28px', background: '#0D0D0D' }}>
+      <div className="sample-report-dark" style={{ padding: '20px 28px', background: '#0D0D0D' }}>
         <div style={{ color: '#C8A96E', fontSize: '10px', letterSpacing: '3px', textTransform: 'uppercase', fontFamily: 'monospace', marginBottom: '14px' }}>
           20 / The Priority Sequence
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+        <div className="sample-report-grid sample-report-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
           {[
             ['IMMEDIATE', 'Register the domain', 'Under $15. Available today.', '#E63946'],
             ['IMMEDIATE', 'Claim and remove duplicate Yelp listing', 'Wrong address sending customers elsewhere.', '#E63946'],
@@ -237,7 +237,7 @@ export function StandardAuditSample() {
       </div>
 
       {/* FOOTER */}
-      <div style={{ background: '#0A1628', padding: '14px 28px', borderTop: '1px solid rgba(255,255,255,0.05)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div className="sample-report-dark sample-report-flex sample-report-footer" style={{ background: '#0A1628', padding: '14px 28px', borderTop: '1px solid rgba(255,255,255,0.05)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div style={{ color: '#C8A96E', fontSize: '11px' }}>Ola · Strategic Co-Architect · Sovereign X Audits · BlackFur Capital Group LLC</div>
         <div style={{ color: '#555', fontSize: '10px', fontFamily: 'monospace', textAlign: 'right' }}>
           SAMPLE DOCUMENT — SOVEREIGN X AUDITS<br />

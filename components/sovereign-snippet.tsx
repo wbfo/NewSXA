@@ -170,6 +170,7 @@ export function SovereignSnippet() {
 
       {/* SECTION 4 — THREE FINDING CARDS */}
       <div
+        className="snippet-three-cards"
         style={{
           backgroundColor: "transparent",
           padding: "20px 28px",
@@ -898,6 +899,7 @@ export function SovereignSnippet() {
 
       {/* SECTION 6 — BOTTOM SECTION */}
       <div
+        className="snippet-options-section"
         style={{
           backgroundColor: "transparent",
           padding: "24px 28px",

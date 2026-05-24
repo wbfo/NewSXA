@@ -3388,6 +3388,34 @@ html[data-theme="light"] .sx-intake .nav-mobile-menu {
   word-break: break-word;
 }
 
+.sample-report [style*="#777"],
+.sample-report [style*="#9CA3AF"],
+.sample-report [style*="#6B7280"],
+.sample-report [style*="#555"] {
+  color: #1f2937 !important;
+}
+
+.sample-report-dark,
+.sample-report-dark [style*="#FFFFFF"],
+.sample-report-dark [style*="#FFF"] {
+  color: #f8fafc !important;
+}
+
+.sample-report-dark [style*="#777"],
+.sample-report-dark [style*="#9CA3AF"],
+.sample-report-dark [style*="#6B7280"],
+.sample-report-dark [style*="#555"] {
+  color: #cbd5e1 !important;
+}
+
+.sample-report-dark [style*="#D1FAE5"] {
+  color: #d1fae5 !important;
+}
+
+.sample-report-dark [style*="#FECACA"] {
+  color: #fecaca !important;
+}
+
 .sample-carousel {
   width: 100%;
   display: flex;
@@ -3441,6 +3469,28 @@ html[data-theme="light"] .sx-intake .nav-mobile-menu {
     max-width: 100%;
   }
 
+  .sample-report-dark.sample-report-flex,
+  .sample-report-footer {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 14px !important;
+  }
+
+  .sample-report-grid,
+  .sample-report-grid-2,
+  .sample-report-grid-3 {
+    grid-template-columns: 1fr !important;
+  }
+
+  .sample-report table {
+    font-size: 10px;
+  }
+
+  .sample-report td,
+  .sample-report th {
+    padding: 7px 8px !important;
+  }
+
   .sample-report-snippet .snippet-three-cards,
   .sample-report-snippet .snippet-impact-grid,
   .sample-report-snippet .snippet-footer-grid {
@@ -3448,10 +3498,19 @@ html[data-theme="light"] .sx-intake .nav-mobile-menu {
   }
 
   .sample-report-snippet .snippet-header-bar,
-  .sample-report-snippet .snippet-address-block {
+  .sample-report-snippet .snippet-address-block,
+  .sample-report-snippet .snippet-options-section {
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
+  }
+
+  .sample-report-snippet .snippet-options-section > div {
+    width: 100% !important;
+  }
+
+  .sample-report-snippet .snippet-options-section > div:last-child > div:last-child {
+    flex-direction: column;
   }
 
   .sample-report-snippet .snippet-header-bar {
