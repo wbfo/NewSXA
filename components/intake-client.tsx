@@ -892,7 +892,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                     "AI Readiness & Voice Agent assessment",
                     "Impact Matrix",
                     "Fix-It Checklist",
-                    "Delivered to your Google Drive"
+                    "Delivered within 48–72 hours"
                   ]
                 },
                 {
