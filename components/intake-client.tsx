@@ -6,6 +6,7 @@ import type { DashboardPayload, ClientOrder } from "@/lib/domain/types";
 import { ThemeProvider, useTheme } from "@/components/theme-provider";
 import { formatDisplayTime } from "@/lib/utils/time";
 import { ThreeDocumentCarousel } from "@/components/three-document-carousel";
+import { SovereignXLogo } from "@/components/sovereign-x-logo";
 const SERVICE_CARDS = [
   {
     title: "Sovereign X Digital Audit — Standard",
@@ -657,7 +658,8 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
             ))}
           </div>
           <div className="wrap">
-            <div className="hero-content">
+            <div className="hero-content hero-content--split">
+              <div className="hero-content-text">
               <div className="hero-eyebrow pm-animate mb-6">
                 <div className="hero-eyebrow-track">
                   <span>Sovereign X Audits</span>
@@ -692,6 +694,11 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                 <span>Digital Intelligence</span>
                 <span className="sep">·</span>
                 <span>AICC Verified</span>
+              </div>
+              </div>
+
+              <div className="hero-logo-col pm-animate">
+                <SovereignXLogo size={380} color="#C8A96E" background="transparent" />
               </div>
             </div>
           </div>

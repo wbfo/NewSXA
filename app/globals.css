@@ -5551,6 +5551,35 @@ html[data-theme="light"] .sx-intake h1.pm-headline {
   max-width: 800px;
 }
 
+.sx-intake .hero-content--split {
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 48px;
+  align-items: center;
+}
+
+.sx-intake .hero-content-text {
+  min-width: 0;
+}
+
+.sx-intake .hero-logo-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.92;
+  filter: drop-shadow(0 0 40px rgba(200, 169, 110, 0.18));
+}
+
+@media (max-width: 900px) {
+  .sx-intake .hero-content--split {
+    grid-template-columns: 1fr;
+  }
+  .sx-intake .hero-logo-col {
+    display: none;
+  }
+}
+
 /* ── 3-Node System Flow ── */
 .sx-intake .sx-system-flow {
   display: flex;
