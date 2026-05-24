@@ -8,7 +8,7 @@ export function SovereignSnippet() {
         width: "100%",
         maxWidth: "900px",
         fontFamily: "var(--font-inter), sans-serif",
-        color: "#FFFFFF",
+        color: "#111827",
         margin: "0 auto",
       }}
     >
@@ -25,7 +25,7 @@ export function SovereignSnippet() {
         }}
       >
         <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
-          <span style={{ color: "#FFFFFF", fontSize: "12px", fontWeight: 600 }}>
+          <span style={{ color: "#111827", fontSize: "12px", fontWeight: 600 }}>
             Sovereign X Audits
           </span>
           <span style={{ color: "#C8A96E", fontSize: "11px" }}>
@@ -42,7 +42,7 @@ export function SovereignSnippet() {
               letterSpacing: "0.02em",
             }}
           >
-            <span style={{ color: "#FFFFFF" }}>SOVEREIGN INTELLIGENCE </span>
+            <span style={{ color: "#111827" }}>SOVEREIGN INTELLIGENCE </span>
             <span style={{ color: "#F5C518" }}>SNIPPET</span>
           </h1>
           <div
@@ -58,7 +58,7 @@ export function SovereignSnippet() {
           </div>
           <div
             style={{
-              color: "#FFFFFF",
+              color: "#111827",
               fontSize: "10px",
               marginTop: "4px",
               opacity: 0.8,
@@ -136,7 +136,7 @@ export function SovereignSnippet() {
             height="24"
             viewBox="0 0 24 24"
             fill="none"
-            stroke="white"
+            stroke="#111827"
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -146,7 +146,7 @@ export function SovereignSnippet() {
           </svg>
         </div>
         <div>
-          <div style={{ color: "#FFFFFF", fontSize: "14px", lineHeight: 1.6 }}>
+          <div style={{ color: "#111827", fontSize: "14px", lineHeight: 1.6 }}>
             <span style={{ fontWeight: "bold", fontSize: "16px", marginRight: "6px" }}>
               [CLIENT NAME],
             </span>
@@ -203,7 +203,7 @@ export function SovereignSnippet() {
               <div
                 style={{
                   backgroundColor: "transparent",
-                  color: "#FFFFFF",
+                  color: "#111827",
                   borderRadius: "50%",
                   width: "28px",
                   height: "28px",
@@ -395,7 +395,7 @@ export function SovereignSnippet() {
               <div
                 style={{
                   backgroundColor: "transparent",
-                  color: "#FFFFFF",
+                  color: "#111827",
                   borderRadius: "50%",
                   width: "28px",
                   height: "28px",
@@ -595,7 +595,7 @@ export function SovereignSnippet() {
               <div
                 style={{
                   backgroundColor: "transparent",
-                  color: "#FFFFFF",
+                  color: "#111827",
                   borderRadius: "50%",
                   width: "28px",
                   height: "28px",
@@ -665,7 +665,7 @@ export function SovereignSnippet() {
                 width: "24px",
                 height: "24px",
                 backgroundColor: "transparent",
-                color: "#FFFFFF",
+                color: "#111827",
                 borderRadius: "4px",
                 display: "flex",
                 alignItems: "center",
@@ -830,7 +830,7 @@ export function SovereignSnippet() {
             </svg>
             <span
               style={{
-                color: "#FFFFFF",
+                color: "#111827",
                 fontWeight: "bold",
                 fontSize: "13px",
                 letterSpacing: "0.1em",
@@ -852,7 +852,7 @@ export function SovereignSnippet() {
           </div>
           <div
             style={{
-              color: "#FFFFFF",
+              color: "#111827",
               fontWeight: "bold",
               fontSize: "14px",
               letterSpacing: "0.1em",
@@ -867,13 +867,13 @@ export function SovereignSnippet() {
             NOT CAUSED BY:
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-            <div style={{ color: "#FFFFFF", fontSize: "13px", display: "flex", gap: "8px" }}>
+            <div style={{ color: "#111827", fontSize: "13px", display: "flex", gap: "8px" }}>
               <span style={{ color: "#16A34A" }}>✓</span> Clinical quality
             </div>
-            <div style={{ color: "#FFFFFF", fontSize: "13px", display: "flex", gap: "8px" }}>
+            <div style={{ color: "#111827", fontSize: "13px", display: "flex", gap: "8px" }}>
               <span style={{ color: "#16A34A" }}>✓</span> Staff performance
             </div>
-            <div style={{ color: "#FFFFFF", fontSize: "13px", display: "flex", gap: "8px" }}>
+            <div style={{ color: "#111827", fontSize: "13px", display: "flex", gap: "8px" }}>
               <span style={{ color: "#16A34A" }}>✓</span> Team dedication
             </div>
           </div>
@@ -884,13 +884,13 @@ export function SovereignSnippet() {
             CAUSED BY:
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-            <div style={{ color: "#FFFFFF", fontSize: "13px", display: "flex", gap: "8px" }}>
+            <div style={{ color: "#111827", fontSize: "13px", display: "flex", gap: "8px" }}>
               <span style={{ color: "#E63946" }}>✗</span> Visibility gaps
             </div>
-            <div style={{ color: "#FFFFFF", fontSize: "13px", display: "flex", gap: "8px" }}>
+            <div style={{ color: "#111827", fontSize: "13px", display: "flex", gap: "8px" }}>
               <span style={{ color: "#E63946" }}>✗</span> System misalignment
             </div>
-            <div style={{ color: "#FFFFFF", fontSize: "13px", display: "flex", gap: "8px" }}>
+            <div style={{ color: "#111827", fontSize: "13px", display: "flex", gap: "8px" }}>
               <span style={{ color: "#E63946" }}>✗</span> Infrastructure failures
             </div>
           </div>
@@ -908,7 +908,7 @@ export function SovereignSnippet() {
         }}
       >
         <div style={{ width: "38%" }}>
-          <div style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "14px" }}>
+          <div style={{ color: "#111827", fontWeight: "bold", fontSize: "14px" }}>
             THESE ARE 3 OF 14 FINDINGS.
           </div>
           <div style={{ color: "#9CA3AF", fontSize: "12px", fontStyle: "italic", marginBottom: "16px" }}>
@@ -934,7 +934,7 @@ export function SovereignSnippet() {
         <div style={{ width: "62%" }}>
           <div
             style={{
-              color: "#FFFFFF",
+              color: "#111827",
               fontWeight: "bold",
               fontSize: "14px",
               letterSpacing: "0.1em",
@@ -957,7 +957,7 @@ export function SovereignSnippet() {
               <div style={{ color: "#38BDF8", marginBottom: "8px" }}>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><path d="M9 22v-4h6v4"></path><path d="M8 6h.01"></path><path d="M16 6h.01"></path><path d="M12 6h.01"></path><path d="M12 10h.01"></path><path d="M12 14h.01"></path><path d="M16 10h.01"></path><path d="M16 14h.01"></path><path d="M8 10h.01"></path><path d="M8 14h.01"></path></svg>
               </div>
-              <div style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "11px", marginBottom: "8px" }}>
+              <div style={{ color: "#111827", fontWeight: "bold", fontSize: "11px", marginBottom: "8px" }}>
                 SOVEREIGN X DIGITAL AUDIT — DEEP
               </div>
               <div style={{ color: "#38BDF8", fontWeight: "bold", fontSize: "15px", marginBottom: "12px" }}>
@@ -985,7 +985,7 @@ export function SovereignSnippet() {
               <div style={{ color: "#A78BFA", marginBottom: "8px" }}>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3h18v18H3z"></path><path d="M3 9h18"></path><path d="M3 15h18"></path><path d="M9 3v18"></path><path d="M15 3v18"></path></svg>
               </div>
-              <div style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "11px", marginBottom: "8px" }}>
+              <div style={{ color: "#111827", fontWeight: "bold", fontSize: "11px", marginBottom: "8px" }}>
                 SOVEREIGN X DIGITAL AUDIT — ENTERPRISE
               </div>
               <div style={{ color: "#A78BFA", fontWeight: "bold", fontSize: "20px" }}>
@@ -1029,7 +1029,7 @@ export function SovereignSnippet() {
           <div style={{ color: "#C8A96E", marginBottom: "8px" }}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
           </div>
-          <div style={{ color: "#FFFFFF", fontWeight: "bold", fontSize: "12px", marginBottom: "4px" }}>
+          <div style={{ color: "#111827", fontWeight: "bold", fontSize: "12px", marginBottom: "4px" }}>
             THE NEXT STEP IS A 30-MINUTE CONVERSATION.
           </div>
           <div style={{ color: "#9CA3AF", fontSize: "10px", lineHeight: 1.5 }}>
@@ -1080,7 +1080,7 @@ export function SovereignSnippet() {
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
           <div style={{ width: "24px", height: "24px", borderRadius: "50%", backgroundColor: "transparent" }}></div>
           <div>
-            <div style={{ color: "#FFFFFF", fontSize: "11px", fontWeight: 500 }}>
+            <div style={{ color: "#111827", fontSize: "11px", fontWeight: 500 }}>
               Ola · Strategic Co-Architect
             </div>
             <div style={{ color: "#9CA3AF", fontSize: "10px" }}>
