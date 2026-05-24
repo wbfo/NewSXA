@@ -3416,6 +3416,14 @@ html[data-theme="light"] .sx-intake .nav-mobile-menu {
   color: #fecaca !important;
 }
 
+.sample-impact-matrix-table td {
+  color: #111827 !important;
+}
+
+.sample-impact-matrix-table thead td {
+  color: #c8a96e !important;
+}
+
 .sample-carousel {
   width: 100%;
   display: flex;

@@ -115,7 +115,7 @@ export function DeepAuditSample() {
               <td style={{ padding: '10px 12px' }}>
                 <span style={{ background: '#FFEBEE', color: '#E63946', fontSize: '13px', fontWeight: 800, padding: '3px 10px', borderRadius: '3px', fontFamily: 'monospace' }}>31/100</span>
               </td>
-              <td style={{ padding: '10px 12px', color: '#9CA3AF', fontSize: '11px', fontStyle: 'italic' }}>Real expertise. Zero visibility. Fixable with structure.</td>
+              <td style={{ padding: '10px 12px', color: '#F8FAFC', fontSize: '11px', fontWeight: 600, lineHeight: 1.4 }}>Real expertise. Zero visibility. Fixable with structure.</td>
             </tr>
           </tbody>
         </table>
@@ -266,7 +266,7 @@ export function DeepAuditSample() {
         <div style={{ color: '#C8A96E', fontSize: '10px', letterSpacing: '3px', textTransform: 'uppercase', fontFamily: 'monospace', marginBottom: '12px' }}>
           19 / The Impact Matrix <span style={{ color: '#7C3AED', background: '#F3E5F5', padding: '2px 8px', borderRadius: '3px', fontSize: '9px', marginLeft: '8px' }}>DEEP EXCLUSIVE</span>
         </div>
-        <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '20px' }}>
+        <table className="sample-impact-matrix-table" style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '20px', background: '#FFFFFF' }}>
           <thead>
             <tr style={{ background: '#1A1A2E' }}>
               {['Recommendation', 'Effort', 'Impact', 'Category'].map(h => (
@@ -284,9 +284,9 @@ export function DeepAuditSample() {
               ['Deploy voice agent for after-hours capture', 'Medium', 'Critical', 'BIG SWING', '#E65100', '#FFF8E1'],
             ].map(([rec, effort, impact, cat, cc, cb]) => (
               <tr key={rec} style={{ background: cat === 'QUICK WIN' ? '#FFFFFF' : '#F5F5F5', borderBottom: '1px solid #E5E7EB' }}>
-                <td style={{ padding: '8px 12px', fontSize: '11px', color: '#1A1A1A' }}>{rec}</td>
-                <td style={{ padding: '8px 12px', fontSize: '11px', color: '#555', textAlign: 'center' }}>{effort}</td>
-                <td style={{ padding: '8px 12px', fontSize: '11px', color: '#555', textAlign: 'center' }}>{impact}</td>
+                <td style={{ padding: '8px 12px', fontSize: '11px', color: '#111827', fontWeight: 600 }}>{rec}</td>
+                <td style={{ padding: '8px 12px', fontSize: '11px', color: '#111827', fontWeight: 700, textAlign: 'center' }}>{effort}</td>
+                <td style={{ padding: '8px 12px', fontSize: '11px', color: '#111827', fontWeight: 700, textAlign: 'center' }}>{impact}</td>
                 <td style={{ padding: '8px 12px' }}>
                   <span style={{ background: cb, color: cc, fontSize: '10px', fontWeight: 700, padding: '2px 8px', borderRadius: '3px', fontFamily: 'monospace' }}>{cat}</span>
                 </td>
