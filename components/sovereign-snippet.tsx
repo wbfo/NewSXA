@@ -3,9 +3,10 @@ import React from "react";
 export function SovereignSnippet() {
   return (
     <div
+      className="sample-report sample-report-snippet"
       style={{
-        width: "900px",
-        maxWidth: "100%",
+        width: "100%",
+        maxWidth: "900px",
         fontFamily: "var(--font-inter), sans-serif",
         color: "#FFFFFF",
         margin: "0 auto",
@@ -13,6 +14,7 @@ export function SovereignSnippet() {
     >
       {/* SECTION 1 — HEADER BAR */}
       <div
+        className="snippet-header-bar"
         style={{
           backgroundColor: "transparent",
           padding: "20px 28px",
@@ -85,6 +87,7 @@ export function SovereignSnippet() {
 
       {/* SECTION 2 — PARTIAL DISCLOSURE BAR */}
       <div
+        className="snippet-disclosure-bar"
         style={{
           backgroundColor: "transparent",
           padding: "14px 28px",
@@ -105,6 +108,7 @@ export function SovereignSnippet() {
 
       {/* SECTION 3 — PERSONAL ADDRESS BLOCK */}
       <div
+        className="snippet-address-block"
         style={{
           backgroundColor: "transparent",
           padding: "20px 28px",
@@ -799,6 +803,7 @@ export function SovereignSnippet() {
 
       {/* SECTION 5 — TOTAL IMPACT BAR */}
       <div
+        className="snippet-impact-grid"
         style={{
           backgroundColor: "transparent",
           padding: "24px 28px",
@@ -1009,6 +1014,7 @@ export function SovereignSnippet() {
 
       {/* SECTION 7 — FOOTER CTA BAR */}
       <div
+        className="snippet-footer-grid"
         style={{
           backgroundColor: "transparent",
           padding: "20px 28px",

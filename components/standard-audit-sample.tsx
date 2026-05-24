@@ -4,11 +4,14 @@
 
 export function StandardAuditSample() {
   return (
-    <div style={{
-      width: '900px',
-      maxWidth: '92vw',
-      fontFamily: "'Inter', 'DM Sans', system-ui, sans-serif",
-    }}>
+    <div
+      className="sample-report sample-report-standard"
+      style={{
+        width: '100%',
+        maxWidth: '900px',
+        fontFamily: "'Inter', 'DM Sans', system-ui, sans-serif",
+      }}
+    >
 
       {/* HEADER */}
       <div style={{

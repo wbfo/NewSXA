@@ -11,6 +11,7 @@ export function SamplesClient() {
   const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [mounted, setMounted] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSample, setActiveSample] = useState<"snippet" | "standard" | "deep">("snippet");
 
   useEffect(() => {
     const saved = localStorage.getItem("sx-theme") as "dark" | "light" | null;
@@ -168,35 +169,42 @@ export function SamplesClient() {
             </div>
           </header>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: "80px", marginBottom: "96px", alignItems: "center" }}>
-            <div id="snippet" style={{ width: "100%", overflowX: "hidden", display: "flex", justifyContent: "center", paddingInline: "12px" }}>
-              <SovereignSnippet />
-            </div>
-            
-            <div style={{ position: "relative", width: "100%", padding: "40px 0" }}>
-              <div style={{ background: "#C8A96E", height: "1px", opacity: 0.2 }} />
-              <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <span style={{ background: "#060606", color: "#555", padding: "0 20px", letterSpacing: "4px" }} className="font-mono text-xs uppercase">
-                  Standard Audit
-                </span>
+          <div style={{ display: "flex", flexDirection: "column", gap: "24px", marginBottom: "96px", alignItems: "center" }}>
+            <div className="sample-carousel">
+              <div className="sample-carousel-frame">
+                {activeSample === "snippet" && (
+                  <div id="snippet" style={{ width: "100%", paddingInline: "12px" }}>
+                    <SovereignSnippet />
+                  </div>
+                )}
+                {activeSample === "standard" && (
+                  <div id="standard" style={{ width: "100%", paddingInline: "12px" }}>
+                    <StandardAuditSample />
+                  </div>
+                )}
+                {activeSample === "deep" && (
+                  <div id="deep" style={{ width: "100%", paddingInline: "12px" }}>
+                    <DeepAuditSample />
+                  </div>
+                )}
               </div>
-            </div>
 
-            <div id="standard" style={{ width: "100%", overflowX: "hidden", display: "flex", justifyContent: "center", paddingInline: "12px" }}>
-              <StandardAuditSample />
-            </div>
-
-            <div style={{ position: "relative", width: "100%", padding: "40px 0" }}>
-              <div style={{ background: "#C8A96E", height: "1px", opacity: 0.2 }} />
-              <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <span style={{ background: "#060606", color: "#555", padding: "0 20px", letterSpacing: "4px" }} className="font-mono text-xs uppercase">
-                  Deep Audit
-                </span>
+              <div className="sample-carousel-dots" aria-label="Sample report navigation">
+                {[
+                  { id: "snippet", label: "Snippet" },
+                  { id: "standard", label: "Standard Audit" },
+                  { id: "deep", label: "Deep Audit" },
+                ].map((item) => (
+                  <button
+                    key={item.id}
+                    type="button"
+                    className="sample-carousel-dot"
+                    aria-label={`Show ${item.label}`}
+                    aria-pressed={activeSample === item.id}
+                    onClick={() => setActiveSample(item.id as typeof activeSample)}
+                  />
+                ))}
               </div>
-            </div>
-
-            <div id="deep" style={{ width: "100%", overflowX: "hidden", display: "flex", justifyContent: "center", paddingInline: "12px" }}>
-              <DeepAuditSample />
             </div>
           </div>
 
