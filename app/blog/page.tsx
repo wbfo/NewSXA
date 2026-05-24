@@ -10,6 +10,14 @@ export default function BlogIndex() {
 
   return (
     <main style={{ background: '#060606', minHeight: '100vh' }}>
+      <style>{`
+        .blog-article-hover {
+          transition: opacity 0.2s;
+        }
+        .blog-article-hover:hover {
+          opacity: 0.75 !important;
+        }
+      `}</style>
 
       {/* HEADER */}
       <div style={{
@@ -58,7 +66,7 @@ export default function BlogIndex() {
             href={`/blog/${post.slug}`}
             style={{ textDecoration: 'none', display: 'block' }}
           >
-            <article style={{
+            <article className="blog-article-hover" style={{
               borderBottom: '1px solid rgba(255,255,255,0.04)',
               padding: '40px 0',
               display: 'grid',
@@ -66,11 +74,7 @@ export default function BlogIndex() {
               gap: '40px',
               alignItems: 'start',
               cursor: 'pointer',
-              transition: 'opacity 0.2s',
-            }}
-            onMouseEnter={e => e.currentTarget.style.opacity = '0.75'}
-            onMouseLeave={e => e.currentTarget.style.opacity = '1'}
-            >
+            }}>
               <div>
                 {/* Tag + Industry */}
                 <div style={{
