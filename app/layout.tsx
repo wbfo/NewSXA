@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import { Bebas_Neue, Montserrat, Inter } from "next/font/google";
+import localFont from "next/font/local";
 import "@/app/globals.css";
 import { AuthProvider } from "@/components/auth-context";
 import { ThemeProvider } from "@/components/theme-provider";
 import { getPublicUrl } from "@/lib/config/public-url";
 
-const bebasNeue = Bebas_Neue({ weight: "400", subsets: ["latin"], variable: "--font-bebas" });
-const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-montserrat" });
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const bebasNeue = localFont({ src: "../public/fonts/bebas-neue-400.woff2", variable: "--font-bebas", display: "swap" });
+const montserrat = localFont({ src: "../public/fonts/montserrat-latin.woff2", variable: "--font-montserrat", display: "swap" });
+const inter = localFont({ src: "../public/fonts/inter-latin.woff2", variable: "--font-inter", display: "swap" });
 
 const publicUrl = getPublicUrl();
 

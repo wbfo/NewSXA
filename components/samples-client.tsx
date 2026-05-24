@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, startTransition } from "react";
 import Link from "next/link";
 import { SovereignSnippet } from "@/components/sovereign-snippet";
 import { StandardAuditSample } from "@/components/standard-audit-sample";
@@ -12,12 +12,12 @@ export function SamplesClient() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
     const saved = localStorage.getItem("sx-theme") as "dark" | "light" | null;
-    if (saved) {
-      setTheme(saved);
-      document.documentElement.setAttribute("data-theme", saved);
-    }
+    startTransition(() => {
+      setMounted(true);
+      if (saved) setTheme(saved);
+    });
+    if (saved) document.documentElement.setAttribute("data-theme", saved);
   }, []);
 
   const toggleTheme = () => {
