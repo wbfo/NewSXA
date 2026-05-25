@@ -741,7 +741,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
             <a href="/samples"   onClick={() => setMenuOpen(false)}>Sample Reports</a>
             <Link href="/blog"   onClick={() => setMenuOpen(false)}>Intelligence</Link>
             <a href="#featured"  onClick={() => setMenuOpen(false)}>Featured</a>
-            <a href="#intake"    onClick={() => setMenuOpen(false)}>Start Audit →</a>
+            <a href="#intake" className="nav-mobile-cta" onClick={() => setMenuOpen(false)}>Start Audit →</a>
             <button
               style={{
                 background: "transparent",

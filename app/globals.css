@@ -2813,6 +2813,48 @@ html[data-theme="light"] .sx-intake .nav.nav--scrolled {
 
 .sx-intake .nav-mobile-menu a:hover { color: var(--text); }
 
+.sx-intake .nav-mobile-menu .nav-mobile-cta {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  background: var(--gold);
+  color: #060606 !important;
+  padding: 12px 20px;
+  margin-top: 14px;
+  border: 1px solid var(--gold);
+  border-bottom: 1px solid var(--gold) !important;
+  box-shadow: 0 4px 20px rgba(211, 173, 100, 0.25);
+  transition: all 0.22s ease-in-out;
+  text-shadow: none;
+}
+
+.sx-intake .nav-mobile-menu .nav-mobile-cta:hover,
+.sx-intake .nav-mobile-menu .nav-mobile-cta:active {
+  background: #ede6d4;
+  border-color: #ede6d4;
+  color: #060606 !important;
+  box-shadow: 0 0 25px rgba(211, 173, 100, 0.45);
+  transform: scale(1.015);
+}
+
+html[data-theme="light"] .sx-intake .nav-mobile-menu .nav-mobile-cta {
+  background: var(--gold);
+  color: #f4f0e8 !important;
+  border-color: var(--gold);
+}
+
+html[data-theme="light"] .sx-intake .nav-mobile-menu .nav-mobile-cta:hover,
+html[data-theme="light"] .sx-intake .nav-mobile-menu .nav-mobile-cta:active {
+  background: var(--text);
+  border-color: var(--text);
+  color: var(--bg) !important;
+}
+
 .sx-intake .nav-mobile-theme {
   margin-top: 8px;
   align-self: flex-start;
