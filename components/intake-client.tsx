@@ -1569,8 +1569,9 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                           animate={{ opacity: 1, height: "auto" }}
                           exit={{ opacity: 0, height: 0 }}
                           transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                          className="intake-sub-grid"
                           style={{
-                            gridColumn: "span 2",
+                            gridColumn: "1 / -1",
                             display: "grid",
                             gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
                             gap: "12px",
@@ -1593,8 +1594,9 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                           animate={{ opacity: 1, height: "auto" }}
                           exit={{ opacity: 0, height: 0 }}
                           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                          className="intake-sub-grid"
                           style={{
-                            gridColumn: "span 2",
+                            gridColumn: "1 / -1",
                             display: "grid",
                             gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
                             gap: "12px",
@@ -1628,8 +1630,9 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                           animate={{ opacity: 1, height: "auto" }}
                           exit={{ opacity: 0, height: 0 }}
                           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                          className="intake-sub-grid"
                           style={{
-                            gridColumn: "span 2",
+                            gridColumn: "1 / -1",
                             display: "grid",
                             gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
                             gap: "12px",
