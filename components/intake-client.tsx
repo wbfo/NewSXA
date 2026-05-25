@@ -1158,7 +1158,95 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
           </div>
         </section>
 
-
+        <section className="conductor-block" style={{
+          padding: "60px 40px",
+          maxWidth: "760px",
+          margin: "0 auto",
+        }}>
+          <div style={{
+            fontFamily: "var(--mono)",
+            fontSize: "11px",
+            color: "#C8A96E",
+            letterSpacing: "4px",
+            textTransform: "uppercase",
+            marginBottom: "16px",
+            fontWeight: 600
+          }}>
+            ABOUT THE CONDUCTOR
+          </div>
+          <h2 style={{
+            fontFamily: "Georgia, serif",
+            color: "#FFFFFF",
+            fontSize: "clamp(24px, 4vw, 36px)",
+            lineHeight: 1.3,
+            fontWeight: 400,
+            marginBottom: "32px",
+            letterSpacing: "-0.5px"
+          }}>
+            The intelligence is verified.<br />
+            The person behind it is real.
+          </h2>
+          <div style={{
+            borderLeft: "2px solid #C8A96E",
+            paddingLeft: "24px",
+            display: "flex",
+            flexDirection: "column",
+            gap: "20px"
+          }}>
+            <p style={{
+              color: "#94A3B8",
+              fontSize: "15px",
+              lineHeight: "1.8",
+              margin: 0
+            }}>
+              Abimbola Olaitan — known as Ola — is a New York-based
+              AI systems architect and the creator of the AI Council
+              Conductor methodology, the five-stage multi-model
+              verification framework that powers every Sovereign X audit.
+            </p>
+            <p style={{
+              color: "#94A3B8",
+              fontSize: "15px",
+              lineHeight: "1.8",
+              margin: 0
+            }}>
+              Before building Sovereign X Audits, Ola spent years
+              developing AI orchestration systems for high-stakes
+              decision-making. The same rigor now applied to every
+              business intelligence and personal brand audit
+              delivered under this brand.
+            </p>
+            <p style={{
+              color: "#94A3B8",
+              fontSize: "15px",
+              lineHeight: "1.8",
+              margin: 0
+            }}>
+              Every finding that reaches you has been generated,
+              critiqued, verified, refined, and specialized.
+              That is not a marketing claim. It is the architecture.
+            </p>
+            <div style={{ marginTop: "8px" }}>
+              <a 
+                href="https://aicouncilconductor.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                style={{
+                  color: "#C8A96E",
+                  fontFamily: "var(--mono)",
+                  fontSize: "12px",
+                  letterSpacing: "1px",
+                  textDecoration: "none",
+                  fontWeight: 600,
+                  transition: "opacity 0.2s"
+                }}
+                className="aicc-cross-link"
+              >
+                → Learn more about the methodology at aicouncilconductor.com
+              </a>
+            </div>
+          </div>
+        </section>
 
         <section className="white-section" id="deliverables">
           <div className="wrap">
@@ -1934,8 +2022,15 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                 <SovereignXLogo size={32} color="#C8A96E" className="footer-logo" />
                 <h5>Sovereign X Audits</h5>
                 <p>Operated by BlackFur Capital Group LLC</p>
+                <p>New York, NY</p>
                 <p>All payments processed by BlackFur Capital Group LLC</p>
-                <p style={{ marginTop: "8px", fontSize: "12px" }}>
+                <p style={{ fontSize: "11px", color: "#333", lineHeight: "1.4", marginTop: "4px", marginBottom: "4px" }}>
+                  Not affiliated with any audit firm or entity operating under similar names.
+                </p>
+                <p style={{ fontSize: "12px", color: "var(--subtle)", margin: "4px 0" }}>
+                  Contact: <a href="mailto:sxabfcg@gmail.com" style={{ color: "inherit", textDecoration: "none" }}>sxabfcg@gmail.com</a>
+                </p>
+                <p style={{ marginTop: "12px", fontSize: "12px" }}>
                   <a href="https://sxaudits.com" style={{ color: "var(--subtle)", textDecoration: "none" }}>sxaudits.com</a>
                   {" · "}
                   <a href="https://aicouncilconductor.com" target="_blank" rel="noreferrer" style={{ color: "var(--subtle)", textDecoration: "none" }}>aicouncilconductor.com</a>

@@ -261,17 +261,17 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
             "description": frontmatter.description,
             "author": {
               "@type": "Person",
-              "name": "Abimbola Olaitan",
-              "url": "https://aicouncilconductor.com",
-              "affiliation": {
-                "@type": "Organization",
-                "name": "AI Council Conductor LLC"
-              }
+              "name": "Ola Olaitan",
+              "url": "https://aicouncilconductor.com/about"
             },
             "publisher": {
               "@type": "Organization",
               "name": "Sovereign X Audits",
-              "url": "https://sxaudits.com"
+              "url": "https://sxaudits.com",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://sxaudits.com/og-image.png"
+              }
             },
             "datePublished": frontmatter.date,
             "dateModified": frontmatter.date,
