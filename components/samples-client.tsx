@@ -12,9 +12,11 @@ export function SamplesClient() {
   const [mounted, setMounted] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSample, setActiveSample] = useState<"snippet" | "standard" | "deep">("snippet");
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
+      if (isPaused) return;
       setActiveSample((prev) => {
         if (prev === "snippet") return "standard";
         if (prev === "standard") return "deep";
@@ -22,7 +24,7 @@ export function SamplesClient() {
       });
     }, 3000);
     return () => clearInterval(interval);
-  }, []);
+  }, [isPaused]);
 
   useEffect(() => {
     const saved = localStorage.getItem("sx-theme") as "dark" | "light" | null;
@@ -181,7 +183,13 @@ export function SamplesClient() {
           </header>
 
           <div style={{ display: "flex", flexDirection: "column", gap: "24px", marginBottom: "96px", alignItems: "center" }}>
-            <div className="sample-carousel">
+            <div 
+              className="sample-carousel"
+              onMouseEnter={() => setIsPaused(true)}
+              onMouseLeave={() => setIsPaused(false)}
+              onTouchStart={() => setIsPaused(true)}
+              onTouchEnd={() => setIsPaused(false)}
+            >
               <div className="sample-carousel-frame">
                 {activeSample === "snippet" && (
                   <div id="snippet" style={{ width: "100%", paddingInline: "12px" }}>

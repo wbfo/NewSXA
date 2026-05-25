@@ -40,6 +40,7 @@ function ScrollSnapDoc({ children, label, title, description, badge, badgeColor,
 export function ThreeDocumentCarousel() {
   const containerRef = useRef<HTMLDivElement>(null)
   const [activeIndex, setActiveIndex] = useState(0)
+  const [isPaused, setIsPaused] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -56,6 +57,7 @@ export function ThreeDocumentCarousel() {
 
   useEffect(() => {
     const interval = setInterval(() => {
+      if (isPaused) return;
       setActiveIndex((prev) => {
         const next = prev === 2 ? 0 : prev + 1
         if (containerRef.current) {
@@ -68,7 +70,7 @@ export function ThreeDocumentCarousel() {
       })
     }, 3000)
     return () => clearInterval(interval)
-  }, [])
+  }, [isPaused])
 
   const scrollToIndex = (index: number) => {
     if (!containerRef.current) return
@@ -92,6 +94,10 @@ export function ThreeDocumentCarousel() {
       {/* Horizontal Scroll Snap Container */}
       <div 
         ref={containerRef}
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+        onTouchStart={() => setIsPaused(true)}
+        onTouchEnd={() => setIsPaused(false)}
         style={{
           display: "flex",
           overflowX: "auto",
