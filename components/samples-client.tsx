@@ -20,7 +20,7 @@ export function SamplesClient() {
         if (prev === "standard") return "deep";
         return "snippet";
       });
-    }, 8000);
+    }, 3000);
     return () => clearInterval(interval);
   }, []);
 

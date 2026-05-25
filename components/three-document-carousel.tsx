@@ -66,7 +66,7 @@ export function ThreeDocumentCarousel() {
         }
         return next
       })
-    }, 8000)
+    }, 3000)
     return () => clearInterval(interval)
   }, [])
 
