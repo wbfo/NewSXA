@@ -96,7 +96,7 @@ export function Navigation({ activeSection }: { activeSection?: string }) {
           <span className="brand-emblem-inner">SX</span>
         </div>
         <div className="brand-info">
-          <div className="brand-name">Sovereign X Audits</div>
+          <div className="brand-name">Sovereign X</div>
           <div className="brand-tag">{isAdmin ? "Admin Command" : "Client Portal"}</div>
         </div>
       </div>

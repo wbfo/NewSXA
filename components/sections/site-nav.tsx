@@ -6,10 +6,10 @@ export function SiteNav() {
   return (
     <header className="nav">
       <div className="nav-inner">
-        <Link href="/intake" className="nav-brand" aria-label="Sovereign X Audits">
+        <Link href="/intake" className="nav-brand" aria-label="Sovereign X">
           <SovereignXLogo size={48} color="#C8A96E" className="sx-seal-mini" />
           <span className="nav-brand-text">
-            <span className="name">Sovereign X Audits</span>
+            <span className="name">Sovereign X</span>
             <span className="sub">BlackFur Capital Group LLC</span>
           </span>
         </Link>

@@ -705,7 +705,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
 
       <header className={`nav${navScrolled ? " nav--scrolled" : ""}`}>
         <div className="nav-inner">
-          <Link href="/intake" className="nav-brand" aria-label="Sovereign X Audits">
+          <Link href="/intake" className="nav-brand" aria-label="Sovereign X">
             <SovereignXLogo size={48} color="#C8A96E" className="sx-seal-mini" />
             <span className="nav-brand-text">
               <span className="name">Sovereign X</span>

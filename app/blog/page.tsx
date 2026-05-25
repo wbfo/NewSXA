@@ -37,7 +37,7 @@ export default function BlogIndex() {
             letterSpacing: '4px',
             textTransform: 'uppercase',
           }}>
-            Sovereign X Audits · Intelligence
+            Sovereign X · Intelligence
           </p>
           <ThemeToggle />
         </div>

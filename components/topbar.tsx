@@ -37,7 +37,7 @@ export function TopBar({ dashboard }: { dashboard?: DashboardPayload }) {
     <header className={`topbar ${isCompact ? "topbar-compact" : ""}`}>
       <div className="hero-brand">
         <div className="hero-eyebrow">
-          {isAdmin ? "Sovereign X Audits · Survival Systems Active" : "Sovereign X Audits · Client Access Portal"}
+          {isAdmin ? "Sovereign X · Survival Systems Active" : "Sovereign X · Client Access Portal"}
         </div>
         <div className="hero-title">
           {isAdmin ? "The Conductor's Command Center" : `Welcome, ${user?.displayName || "Client"}`}
