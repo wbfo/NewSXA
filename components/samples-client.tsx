@@ -38,7 +38,7 @@ export function SamplesClient() {
         <div className="pm-orb pm-orb-neon-purple" />
       </div>
 
-      <main style={{ backgroundColor: "#060606", minHeight: "100vh", color: "#D0C8B8" }}>
+      <main style={{ backgroundColor: "var(--bg)", minHeight: "100vh", color: "var(--text)" }}>
         
         {/* ── NAVIGATION HEADER ── */}
         <header className="nav">
@@ -114,14 +114,14 @@ export function SamplesClient() {
             </p>
 
             <h1
-              style={{ color: "#D0C8B8", fontFamily: "var(--font-display)" }}
-              className="text-4xl md:text-5xl mb-6 text-white font-serif"
+              style={{ color: "var(--text)", fontFamily: "var(--font-display)" }}
+              className="text-4xl md:text-5xl mb-6 font-serif"
             >
               This is what you receive.
             </h1>
 
             <p
-              style={{ color: "#777", maxWidth: "560px", fontSize: "15px", lineHeight: "1.6" }}
+              style={{ color: "var(--subtle)", maxWidth: "560px", fontSize: "15px", lineHeight: "1.6" }}
               className="mx-auto mb-10"
             >
               Every Sovereign X Audit delivers verified intelligence with dollar figures attached. 
@@ -227,14 +227,14 @@ export function SamplesClient() {
             </p>
 
             <h2
-              style={{ color: "#D0C8B8", fontFamily: "var(--font-display)" }}
-              className="text-2xl mb-4 text-white font-serif"
+              style={{ color: "var(--text)", fontFamily: "var(--font-display)" }}
+              className="text-2xl mb-4 font-serif"
             >
               Your findings are waiting.
             </h2>
 
             <p
-              style={{ color: "#777", fontSize: "14px", lineHeight: "1.6" }}
+              style={{ color: "var(--subtle)", fontSize: "14px", lineHeight: "1.6" }}
               className="text-sm mb-10 max-w-md mx-auto"
             >
               Every audit starts with intelligence first. No pitch. No pressure. Just what the data shows.

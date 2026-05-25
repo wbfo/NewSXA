@@ -1,4 +1,6 @@
+// Cache bust
 import { getAllPosts } from '@/lib/blog'
+import { ThemeToggle } from '@/components/ui/theme-toggle'
 
 export const metadata = {
   title: 'Sovereign X Intelligence — sxaudits.com',
@@ -9,7 +11,7 @@ export default function BlogIndex() {
   const posts = getAllPosts()
 
   return (
-    <main style={{ background: '#060606', minHeight: '100vh' }}>
+    <main style={{ background: 'var(--bg)', minHeight: '100vh' }}>
       <style>{`
         .blog-article-hover {
           transition: opacity 0.2s;
@@ -20,24 +22,27 @@ export default function BlogIndex() {
       `}</style>
 
       {/* HEADER */}
-      <div style={{
-        borderBottom: '1px solid rgba(200,169,110,0.15)',
-        padding: '120px 40px 60px',
+      <div className="mobile-padding-wrapper" style={{
+        borderBottom: '1px solid var(--gold-glow)',
+        paddingTop: '120px',
+        paddingBottom: '60px',
         maxWidth: '1100px',
         margin: '0 auto',
       }}>
-        <p style={{
-          color: '#C8A96E',
-          fontFamily: 'monospace',
-          fontSize: '11px',
-          letterSpacing: '4px',
-          textTransform: 'uppercase',
-          marginBottom: '16px',
-        }}>
-          Sovereign X Audits · Intelligence
-        </p>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
+          <p style={{
+            color: 'var(--gold)',
+            fontFamily: 'monospace',
+            fontSize: '11px',
+            letterSpacing: '4px',
+            textTransform: 'uppercase',
+          }}>
+            Sovereign X Audits · Intelligence
+          </p>
+          <ThemeToggle />
+        </div>
         <h1 style={{
-          color: '#D0C8B8',
+          color: 'var(--text)',
           fontFamily: 'Georgia, serif',
           fontSize: 'clamp(32px, 5vw, 52px)',
           fontWeight: 400,
@@ -48,7 +53,7 @@ export default function BlogIndex() {
           Sovereign X Intelligence
         </h1>
         <p style={{
-          color: '#555',
+          color: 'var(--subtle)',
           fontSize: '15px',
           lineHeight: 1.8,
           maxWidth: '560px',
@@ -59,20 +64,16 @@ export default function BlogIndex() {
       </div>
 
       {/* POST LIST */}
-      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 40px 80px' }}>
+      <div className="mobile-padding-wrapper" style={{ maxWidth: '1100px', margin: '0 auto', paddingBottom: '80px' }}>
         {posts.map((post: any) => (
           <a
             key={post.slug}
             href={`/blog/${post.slug}`}
             style={{ textDecoration: 'none', display: 'block' }}
           >
-            <article className="blog-article-hover" style={{
-              borderBottom: '1px solid rgba(255,255,255,0.04)',
+            <article className="blog-article-hover blog-index-article" style={{
+              borderBottom: '1px solid var(--border)',
               padding: '40px 0',
-              display: 'grid',
-              gridTemplateColumns: '1fr auto',
-              gap: '40px',
-              alignItems: 'start',
               cursor: 'pointer',
             }}>
               <div>
@@ -84,7 +85,7 @@ export default function BlogIndex() {
                   marginBottom: '12px',
                 }}>
                   <span style={{
-                    color: '#C8A96E',
+                    color: 'var(--gold)',
                     fontFamily: 'monospace',
                     fontSize: '10px',
                     letterSpacing: '3px',
@@ -92,9 +93,9 @@ export default function BlogIndex() {
                   }}>
                     {post.tag}
                   </span>
-                  <span style={{ color: '#333', fontSize: '10px' }}>·</span>
+                  <span style={{ color: 'var(--dim)', fontSize: '10px' }}>·</span>
                   <span style={{
-                    color: '#444',
+                    color: 'var(--dim)',
                     fontFamily: 'monospace',
                     fontSize: '10px',
                     letterSpacing: '2px',
@@ -106,7 +107,7 @@ export default function BlogIndex() {
 
                 {/* Title */}
                 <h2 style={{
-                  color: '#D0C8B8',
+                  color: 'var(--text)',
                   fontFamily: 'Georgia, serif',
                   fontSize: 'clamp(18px, 2.5vw, 24px)',
                   fontWeight: 400,
@@ -119,7 +120,7 @@ export default function BlogIndex() {
 
                 {/* Description */}
                 <p style={{
-                  color: '#555',
+                  color: 'var(--subtle)',
                   fontSize: '14px',
                   lineHeight: 1.7,
                   maxWidth: '600px',
@@ -130,16 +131,17 @@ export default function BlogIndex() {
 
               {/* Stakes badge */}
               <div style={{
-                background: 'rgba(200,169,110,0.06)',
-                border: '1px solid rgba(200,169,110,0.15)',
+                background: 'var(--bg-glow)',
+                border: '1px solid var(--gold-glow)',
                 borderRadius: '4px',
                 padding: '12px 16px',
                 textAlign: 'center',
-                whiteSpace: 'nowrap',
+                maxWidth: '260px',
+                whiteSpace: 'normal',
                 flexShrink: 0,
               }}>
                 <div style={{
-                  color: '#555',
+                  color: 'var(--subtle)',
                   fontFamily: 'monospace',
                   fontSize: '9px',
                   letterSpacing: '2px',
@@ -149,10 +151,11 @@ export default function BlogIndex() {
                   What&apos;s at stake
                 </div>
                 <div style={{
-                  color: '#C8A96E',
+                  color: 'var(--gold)',
                   fontFamily: 'monospace',
-                  fontSize: '14px',
-                  fontWeight: 600,
+                  fontSize: '13px',
+                  fontWeight: 700,
+                  lineHeight: 1.4,
                 }}>
                   {post.stakes}
                 </div>
@@ -164,13 +167,14 @@ export default function BlogIndex() {
       </div>
 
       {/* BOTTOM CTA */}
-      <div style={{
+      <div className="mobile-padding-wrapper" style={{
         textAlign: 'center',
-        padding: '60px 40px',
-        borderTop: '1px solid rgba(255,255,255,0.04)',
+        paddingTop: '60px',
+        paddingBottom: '60px',
+        borderTop: '1px solid var(--border)',
       }}>
         <p style={{
-          color: '#555',
+          color: 'var(--subtle)',
           fontFamily: 'monospace',
           fontSize: '11px',
           letterSpacing: '3px',
@@ -182,8 +186,8 @@ export default function BlogIndex() {
         <a
           href="/intake"
           style={{
-            background: '#C8A96E',
-            color: '#060606',
+            background: 'var(--gold)',
+            color: 'var(--bg)',
             fontFamily: 'monospace',
             fontSize: '12px',
             letterSpacing: '3px',

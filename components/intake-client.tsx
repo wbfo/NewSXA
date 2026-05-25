@@ -6,7 +6,7 @@ import type { DashboardPayload, ClientOrder } from "@/lib/domain/types";
 import { ThemeProvider, useTheme } from "@/components/theme-provider";
 import { formatDisplayTime } from "@/lib/utils/time";
 import { ThreeDocumentCarousel } from "@/components/three-document-carousel";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useInView, animate } from "framer-motion";
 import { SovereignXLogo } from "@/components/sovereign-x-logo";
 
 const containerVariants = {
@@ -23,9 +23,32 @@ const itemVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as const }
+    transition: {
+      type: "spring",
+      stiffness: 100,
+      damping: 15,
+    }
   }
 };
+
+function AnimatedCounter({ value, prefix = "", suffix = "", duration = 1.5 }: { value: number, prefix?: string, suffix?: string, duration?: number }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "0px 0px -50px 0px" });
+  const [display, setDisplay] = useState(0);
+
+  useEffect(() => {
+    if (isInView) {
+      const controls = animate(0, value, {
+        duration,
+        ease: "easeOut",
+        onUpdate: (v) => setDisplay(Math.floor(v))
+      });
+      return controls.stop;
+    }
+  }, [isInView, value, duration]);
+
+  return <span ref={ref}>{prefix}{display}{suffix}</span>;
+}
 
 const cardContainerVariants = {
   hidden: {},
@@ -169,31 +192,31 @@ const TIER_OPTIONS = [
 const AICC_STEPS = [
   {
     num: "01",
-    icon: "◈",
+    icon: "🎯",
     title: "Generator",
     text: "Pulls every available signal about your business, brand, or image from across the web."
   },
   {
     num: "02",
-    icon: "◉",
+    icon: "🔍",
     title: "Critic",
     text: "Challenges every finding. If it's not defensible with real data, it doesn't make it into your report."
   },
   {
     num: "03",
-    icon: "✦",
+    icon: "✓",
     title: "Verifier",
     text: "Cross-references findings across multiple sources. Confirmed, directional, or pending — every finding is labeled honestly."
   },
   {
     num: "04",
-    icon: "◎",
+    icon: "✨",
     title: "Refiner",
     text: "Converts raw findings into clear dollar figures and specific recommendations you can act on immediately."
   },
   {
     num: "05",
-    icon: "⬡",
+    icon: "💎",
     title: "Specialist",
     text: "Adds the industry context that makes the findings specific to your world — not generic advice that fits everyone."
   }
@@ -514,19 +537,27 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
 
   // Scroll-reveal observer
   useEffect(() => {
-    const els = document.querySelectorAll(".pm-reveal");
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("pm-visible");
-          }
-        });
-      },
-      { threshold: 0.12 }
-    );
-    els.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
+    let observer: IntersectionObserver;
+    const timer = setTimeout(() => {
+      const els = document.querySelectorAll(".pm-reveal");
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("pm-visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12 }
+      );
+      els.forEach((el) => observer.observe(el));
+    }, 150);
+    
+    return () => {
+      clearTimeout(timer);
+      if (observer) observer.disconnect();
+    };
   }, [mounted]);
 
   useEffect(() => {
@@ -869,14 +900,14 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                           transition={{ duration: 0.2 }}
                           style={{
                             position: "absolute",
-                            background: "#0D0D0D",
+                            background: "var(--surface)",
                             border: "1px solid rgba(200,169,110,0.3)",
                             borderRadius: "4px",
                             padding: "12px 16px",
                             width: "240px",
                             fontFamily: "'Inter', sans-serif",
                             fontSize: "12px",
-                            color: "#94A3B8",
+                            color: "var(--subtle)",
                             lineHeight: "1.6",
                             zIndex: 50,
                             bottom: "calc(100% + 8px)",
@@ -1200,17 +1231,17 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
             <div className="metrics-grid pm-reveal">
               <div className="metric-card metric-card--blue">
                 <div className="metric-label">01 // DELIVERY</div>
-                <div className="metric-value">48–72 hrs</div>
+                <div className="metric-value">48–<AnimatedCounter value={72} suffix=" hrs" /></div>
                 <div className="metric-desc">Audit turnaround — no waiting weeks for a report</div>
               </div>
               <div className="metric-card metric-card--amber">
                 <div className="metric-label">02 // REVENUE IMPACT</div>
-                <div className="metric-value">$500–$2K</div>
+                <div className="metric-value">$<AnimatedCounter value={500} />–$<AnimatedCounter value={2} suffix="K" duration={1} /></div>
                 <div className="metric-desc">Monthly revenue leaked by the average audited business</div>
               </div>
               <div className="metric-card metric-card--purple">
                 <div className="metric-label">03 // COVERAGE</div>
-                <div className="metric-value">21 sections</div>
+                <div className="metric-value"><AnimatedCounter value={21} suffix=" sections" /></div>
                 <div className="metric-desc">Every audit covers 21 diagnostic areas across your digital presence</div>
               </div>
             </div>
@@ -1382,7 +1413,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
 
         <section className="final-cta">
           <div className="wrap">
-            <h2 style={{ fontFamily: "Georgia, serif", color: "#FFF" }}>Your findings are waiting.</h2>
+            <h2 style={{ fontFamily: "Georgia, serif", color: "var(--text)" }}>Your findings are waiting.</h2>
             <div className="confirm-actions">
               <a className="btn btn-primary cta-primary hover:shadow-neon-amber bg-neon-amber text-slate-950 border-neon-amber" href="#intake">
                 Start the Audit <span className="arrow">→</span>
@@ -1411,7 +1442,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
             </div>
             <h2 style={{
               fontFamily: "Georgia, serif",
-              color: "#FFFFFF",
+              color: "var(--text)",
               fontSize: "clamp(24px, 4vw, 36px)",
               lineHeight: 1.3,
               fontWeight: 400,
@@ -1528,8 +1559,10 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                 </div>
 
                 <div className="confirm-stage">
-                  <div className="confirm-check">⌁</div>
-                  <h1>Start your audit</h1>
+                  <div style={{ animation: "pm-glow-pulse 2.5s ease infinite", marginBottom: "28px", display: "inline-flex" }}>
+                    <SovereignXLogo size={88} color="#C8A96E" />
+                  </div>
+                  <h1 style={{ fontFamily: "var(--font-bebas), Impact, sans-serif", letterSpacing: "0.04em", fontWeight: 400, textTransform: "uppercase", fontSize: "clamp(32px, 4vw, 48px)" }}>Start your audit</h1>
                 <div className="summary">
                   Fill out the full intake below. Your audit brief routes directly into the command center. Delivery follows within 48–72 hours.
                 </div>
@@ -1542,6 +1575,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                     <input className="field" placeholder="Phone / WhatsApp" value={form.phone} onChange={(event) => updateField("phone", event.target.value)} />
                     <select
                       className="field"
+                      style={{ border: "1px solid #C8A96E", color: "#C8A96E", backgroundColor: "rgba(200,169,110,0.05)", fontWeight: 600 }}
                       value={form.packageName}
                       onChange={(event) => {
                         const packageName = event.target.value;
@@ -1569,11 +1603,9 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                           animate={{ opacity: 1, height: "auto" }}
                           exit={{ opacity: 0, height: 0 }}
                           transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                          className="intake-sub-grid"
+                          className="intake-sub-grid grid-responsive-2"
                           style={{
                             gridColumn: "1 / -1",
-                            display: "grid",
-                            gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
                             gap: "12px",
                             width: "100%",
                             overflow: "hidden"
@@ -1594,11 +1626,9 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                           animate={{ opacity: 1, height: "auto" }}
                           exit={{ opacity: 0, height: 0 }}
                           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                          className="intake-sub-grid"
+                          className="intake-sub-grid grid-responsive-2"
                           style={{
                             gridColumn: "1 / -1",
-                            display: "grid",
-                            gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
                             gap: "12px",
                             width: "100%",
                             overflow: "hidden"
@@ -1613,11 +1643,11 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                             <option>No</option>
                             <option>Maybe</option>
                           </select>
-                          <input className="field" placeholder="Any upcoming deadlines or events?" value={form.deadlines} onChange={(event) => updateField("deadlines", event.target.value)} />
+                          <input className="field" placeholder="Any upcoming deadlines or events?" value={form.deadlines} onChange={(event) => updateField("deadlines", event.target.value)} style={{ gridColumn: "span 2" }} />
                           <input className="field" placeholder="Instagram handle" value={form.socialInstagram} onChange={(event) => updateField("socialInstagram", event.target.value)} />
                           <input className="field" placeholder="LinkedIn profile URL" value={form.socialLinkedin} onChange={(event) => updateField("socialLinkedin", event.target.value)} />
                           <input className="field" placeholder="Facebook page URL" value={form.socialFacebook} onChange={(event) => updateField("socialFacebook", event.target.value)} />
-                          <input className="field" placeholder="Other social platform + handle" value={form.socialOther} onChange={(event) => updateField("socialOther", event.target.value)} style={{ gridColumn: "span 2" }} />
+                          <input className="field" placeholder="Other social platform + handle" value={form.socialOther} onChange={(event) => updateField("socialOther", event.target.value)} />
                         </motion.div>
                       )}
                     </AnimatePresence>
@@ -1630,11 +1660,9 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                           animate={{ opacity: 1, height: "auto" }}
                           exit={{ opacity: 0, height: 0 }}
                           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                          className="intake-sub-grid"
+                          className="intake-sub-grid grid-responsive-2"
                           style={{
                             gridColumn: "1 / -1",
-                            display: "grid",
-                            gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
                             gap: "12px",
                             width: "100%",
                             overflow: "hidden"
@@ -1776,7 +1804,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                             gap: "10px"
                           }}
                         >
-                          <div style={{ fontSize: "15px", fontWeight: 700, color: "#FFFFFF" }}>
+                          <div style={{ fontSize: "15px", fontWeight: 700, color: "var(--text)" }}>
                             {currentPackage.name}
                           </div>
                           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
