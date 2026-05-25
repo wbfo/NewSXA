@@ -54,6 +54,22 @@ export function ThreeDocumentCarousel() {
     }
   }, [])
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => {
+        const next = prev === 2 ? 0 : prev + 1
+        if (containerRef.current) {
+          containerRef.current.scrollTo({
+            left: next * containerRef.current.clientWidth,
+            behavior: "smooth"
+          })
+        }
+        return next
+      })
+    }, 8000)
+    return () => clearInterval(interval)
+  }, [])
+
   const scrollToIndex = (index: number) => {
     if (!containerRef.current) return
     containerRef.current.scrollTo({

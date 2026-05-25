@@ -14,6 +14,17 @@ export function SamplesClient() {
   const [activeSample, setActiveSample] = useState<"snippet" | "standard" | "deep">("snippet");
 
   useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveSample((prev) => {
+        if (prev === "snippet") return "standard";
+        if (prev === "standard") return "deep";
+        return "snippet";
+      });
+    }, 8000);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
     const saved = localStorage.getItem("sx-theme") as "dark" | "light" | null;
     startTransition(() => {
       setMounted(true);
@@ -105,7 +116,7 @@ export function SamplesClient() {
         <div style={{ maxWidth: "1100px", margin: "0 auto", paddingLeft: "24px", paddingRight: "24px", paddingTop: "12px" }}>
           
           {/* SECTION 1 — PAGE HEADER */}
-          <header className="text-center" style={{ display: "flex", flexDirection: "column", alignItems: "center", paddingTop: "0px", paddingBottom: "40px" }}>
+          <header className="text-center" style={{ display: "flex", flexDirection: "column", alignItems: "center", paddingTop: "120px", paddingBottom: "40px" }}>
             <p
               style={{ color: "#C8A96E", letterSpacing: "4px", marginBottom: "48px" }}
               className="font-mono text-xs uppercase"
