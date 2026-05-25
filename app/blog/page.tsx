@@ -1,6 +1,7 @@
 // Cache bust
 import { getAllPosts } from '@/lib/blog'
 import { ThemeToggle } from '@/components/ui/theme-toggle'
+import Link from 'next/link'
 
 export const metadata = {
   title: 'Sovereign X Intelligence — sxaudits.com',
@@ -19,6 +20,12 @@ export default function BlogIndex() {
         .blog-article-hover:hover {
           opacity: 0.75 !important;
         }
+        .back-btn-hover {
+          transition: color 0.2s;
+        }
+        .back-btn-hover:hover {
+          color: var(--gold) !important;
+        }
       `}</style>
 
       {/* HEADER */}
@@ -29,6 +36,22 @@ export default function BlogIndex() {
         maxWidth: '1100px',
         margin: '0 auto',
       }}>
+        <div style={{ marginBottom: '24px' }}>
+          <Link
+            href="/"
+            style={{
+              color: 'var(--subtle)',
+              fontFamily: 'monospace',
+              fontSize: '11px',
+              letterSpacing: '3px',
+              textTransform: 'uppercase',
+              textDecoration: 'none',
+            }}
+            className="back-btn-hover"
+          >
+            ← Back to Home
+          </Link>
+        </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
           <p style={{
             color: 'var(--gold)',
