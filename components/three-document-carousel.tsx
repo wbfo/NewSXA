@@ -56,8 +56,9 @@ export function ThreeDocumentCarousel() {
   }, [])
 
   useEffect(() => {
+    if (isPaused) return;
+    
     const interval = setInterval(() => {
-      if (isPaused) return;
       setActiveIndex((prev) => {
         const next = prev === 2 ? 0 : prev + 1
         if (containerRef.current) {
@@ -68,7 +69,8 @@ export function ThreeDocumentCarousel() {
         }
         return next
       })
-    }, 3000)
+    }, 4000)
+    
     return () => clearInterval(interval)
   }, [isPaused])
 
@@ -81,7 +83,12 @@ export function ThreeDocumentCarousel() {
   }
 
   return (
-    <div style={{ paddingBottom: "40px" }}>
+    <div 
+      style={{ paddingBottom: "40px" }}
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onTouchStart={() => setIsPaused(true)}
+    >
 
       <div className="text-center py-16 px-6">
         <p className="font-mono text-xs tracking-[4px] uppercase mb-4" style={{ color: "#C8A96E" }}>See The Work</p>
@@ -94,10 +101,6 @@ export function ThreeDocumentCarousel() {
       {/* Horizontal Scroll Snap Container */}
       <div 
         ref={containerRef}
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
-        onTouchStart={() => setIsPaused(true)}
-        onTouchEnd={() => setIsPaused(false)}
         style={{
           display: "flex",
           overflowX: "auto",

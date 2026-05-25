@@ -15,14 +15,14 @@ export function SamplesClient() {
   const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
+    if (isPaused) return;
     const interval = setInterval(() => {
-      if (isPaused) return;
       setActiveSample((prev) => {
         if (prev === "snippet") return "standard";
         if (prev === "standard") return "deep";
         return "snippet";
       });
-    }, 3000);
+    }, 4000);
     return () => clearInterval(interval);
   }, [isPaused]);
 
@@ -182,14 +182,13 @@ export function SamplesClient() {
             </div>
           </header>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: "24px", marginBottom: "96px", alignItems: "center" }}>
-            <div 
-              className="sample-carousel"
-              onMouseEnter={() => setIsPaused(true)}
-              onMouseLeave={() => setIsPaused(false)}
-              onTouchStart={() => setIsPaused(true)}
-              onTouchEnd={() => setIsPaused(false)}
-            >
+          <div 
+            style={{ display: "flex", flexDirection: "column", gap: "24px", marginBottom: "96px", alignItems: "center" }}
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+            onTouchStart={() => setIsPaused(true)}
+          >
+            <div className="sample-carousel">
               <div className="sample-carousel-frame">
                 {activeSample === "snippet" && (
                   <div id="snippet" style={{ width: "100%", paddingInline: "12px" }}>
