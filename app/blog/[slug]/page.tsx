@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ThemeToggle } from '@/components/ui/theme-toggle'
 import { ShareButtons } from '@/components/share-buttons'
+import { ImageZoom } from '@/components/image-zoom'
 
 export async function generateStaticParams() {
   const posts = getAllPosts()
@@ -85,7 +86,7 @@ const components = {
     <li style={{ marginBottom: '8px' }} {...props} />
   ),
   img: (props: any) => (
-    <img style={{
+    <ImageZoom style={{
       maxWidth: '100%',
       height: 'auto',
       borderRadius: '8px',
