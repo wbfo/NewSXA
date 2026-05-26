@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 // Cache bust
 import Link from 'next/link'
 import { ThemeToggle } from '@/components/ui/theme-toggle'
+import { ShareButtons } from '@/components/share-buttons'
 
 export async function generateStaticParams() {
   const posts = getAllPosts()
@@ -352,36 +353,44 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
           </div>
         </div>
 
-        {/* Byline */}
+        {/* Byline & Share */}
         <div style={{
           display: 'flex',
+          justifyContent: 'space-between',
           alignItems: 'center',
-          gap: '16px',
+          flexWrap: 'wrap',
+          gap: '24px',
           paddingBottom: '32px',
           borderBottom: '1px solid var(--border)',
           marginBottom: '32px',
         }}>
-          <div style={{
-            width: '40px',
-            height: '40px',
-            borderRadius: '50%',
-            background: 'rgba(200,169,110,0.1) url(/images/author.jpg) center/cover no-repeat',
-            border: '1px solid var(--border)',
-            flexShrink: 0,
-          }}>
-          </div>
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-              <span style={{ color: 'var(--text)', fontSize: '15px', fontWeight: 600 }}>Abimbola Olaitan</span>
-              <span style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#10B981', fontSize: '11px', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '1px' }}>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-                AICC Verified
-              </span>
+          {/* Author Info */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+            <div style={{
+              width: '40px',
+              height: '40px',
+              borderRadius: '50%',
+              background: 'rgba(200,169,110,0.1) url(/images/author.jpg) center/cover no-repeat',
+              border: '1px solid var(--border)',
+              flexShrink: 0,
+            }}>
             </div>
-            <div style={{ color: 'var(--subtle)', fontSize: '13px' }}>
-              Founder, AI Council Conductor LLC · 5 min read · May 2026
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
+                <span style={{ color: 'var(--text)', fontSize: '15px', fontWeight: 600 }}>Abimbola Olaitan</span>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#10B981', fontSize: '11px', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '1px' }}>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+                  AICC Verified
+                </span>
+              </div>
+              <div style={{ color: 'var(--subtle)', fontSize: '13px' }}>
+                Founder, AI Council Conductor LLC · 5 min read · May 2026
+              </div>
             </div>
           </div>
+
+          {/* Share Buttons */}
+          <ShareButtons title={frontmatter.title} url={`https://sxaudits.com/blog/${resolvedParams.slug}`} />
         </div>
 
         {/* CTA #1 (Early Hook) */}
