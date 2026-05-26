@@ -705,7 +705,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
 
       <header className={`nav${navScrolled ? " nav--scrolled" : ""}`}>
         <div className="nav-inner">
-          <Link href="/intake" className="nav-brand" aria-label="Sovereign X">
+          <Link href="/" className="nav-brand" aria-label="Sovereign X">
             <SovereignXLogo size={48} color="#C8A96E" className="sx-seal-mini" />
             <span className="nav-brand-text">
               <span className="name">Sovereign X</span>
@@ -713,17 +713,16 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
           </Link>
 
           <div className="nav-links">
-            <a href="#hero">Home</a>
-            <a href="#services">Services</a>
-            <a href="/samples">Sample Reports</a>
+            <Link href="/#hero">Home</Link>
+            <Link href="/#services">Services</Link>
+            <Link href="/samples">Sample Reports</Link>
             <Link href="/blog">Intelligence</Link>
-            <a href="#featured">Featured</a>
           </div>
 
           <div className="nav-spacer" />
 
           <div className="nav-actions">
-            <a href="#intake" className="nav-cta">Start Audit →</a>
+            <Link href="/#intake" className="nav-cta">Start Audit →</Link>
             <button
               style={{
                 background: "transparent",
@@ -767,12 +766,11 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
 
         {menuOpen && (
           <div className="nav-mobile-menu">
-            <a href="#hero"     onClick={() => setMenuOpen(false)}>Home</a>
-            <a href="#services" onClick={() => setMenuOpen(false)}>Services</a>
-            <a href="/samples"   onClick={() => setMenuOpen(false)}>Sample Reports</a>
-            <Link href="/blog"   onClick={() => setMenuOpen(false)}>Intelligence</Link>
-            <a href="#featured"  onClick={() => setMenuOpen(false)}>Featured</a>
-            <a href="#intake" className="nav-mobile-cta" onClick={() => setMenuOpen(false)}>Start Audit →</a>
+            <Link href="/#hero"     onClick={() => setMenuOpen(false)}>Home</Link>
+            <Link href="/#services" onClick={() => setMenuOpen(false)}>Services</Link>
+            <Link href="/samples"   onClick={() => setMenuOpen(false)}>Sample Reports</Link>
+            <Link href="/blog"      onClick={() => setMenuOpen(false)}>Intelligence</Link>
+            <Link href="/#intake" className="nav-mobile-cta" onClick={() => setMenuOpen(false)}>Start Audit →</Link>
             <button
               style={{
                 background: "transparent",

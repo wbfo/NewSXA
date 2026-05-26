@@ -56,7 +56,7 @@ export function SamplesClient() {
         {/* ── NAVIGATION HEADER ── */}
         <header className="nav">
           <div className="nav-inner">
-            <Link href="/intake" className="nav-brand" aria-label="Sovereign X">
+            <Link href="/" className="nav-brand" aria-label="Sovereign X">
               <SovereignXLogo size={48} color="#C8A96E" className="sx-seal-mini" />
               <span className="nav-brand-text">
                 <span className="name">Sovereign X</span>
@@ -65,13 +65,11 @@ export function SamplesClient() {
             </Link>
 
             <div className="nav-links">
-              <Link href="/intake#hero">Home</Link>
-              <Link href="/intake#services">Services</Link>
+              <Link href="/#hero">Home</Link>
+              <Link href="/#services">Services</Link>
               <Link href="/samples" className="active" style={{ color: "#C8A96E" }}>Sample Reports</Link>
               <Link href="/blog">Intelligence</Link>
-              <Link href="/intake#featured">Featured</Link>
-              <Link href="/intake" className="nav-cta">Start Intake</Link>
-              <Link href="/intake#intake">Intake</Link>
+              <Link href="/#intake" className="nav-cta">Start Intake</Link>
             </div>
 
             <div className="nav-spacer" />
@@ -94,13 +92,11 @@ export function SamplesClient() {
 
           {menuOpen && (
             <div className="nav-mobile-menu">
-              <Link href="/intake#hero"     onClick={() => setMenuOpen(false)}>Home</Link>
-              <Link href="/intake#services" onClick={() => setMenuOpen(false)}>Services</Link>
-              <Link href="/samples"         onClick={() => setMenuOpen(false)} style={{ color: "#C8A96E" }}>Sample Reports</Link>
-              <Link href="/blog"            onClick={() => setMenuOpen(false)}>Intelligence</Link>
-              <Link href="/intake#featured" onClick={() => setMenuOpen(false)}>Featured</Link>
-              <Link href="/intake"          onClick={() => setMenuOpen(false)}>Intake</Link>
-              <Link href="/intake#intake"   onClick={() => setMenuOpen(false)}>Intake</Link>
+              <Link href="/#hero"     onClick={() => setMenuOpen(false)}>Home</Link>
+              <Link href="/#services" onClick={() => setMenuOpen(false)}>Services</Link>
+              <Link href="/samples"   onClick={() => setMenuOpen(false)} style={{ color: "#C8A96E" }}>Sample Reports</Link>
+              <Link href="/blog"      onClick={() => setMenuOpen(false)}>Intelligence</Link>
+              <Link href="/#intake" className="nav-mobile-cta" onClick={() => setMenuOpen(false)}>Start Intake</Link>
               <button
                 className="btn btn-quiet nav-mobile-theme"
                 type="button"
@@ -117,6 +113,23 @@ export function SamplesClient() {
         {/* ── PAGE CONTENT CONTAINER ── */}
         <div style={{ maxWidth: "1100px", margin: "0 auto", paddingLeft: "24px", paddingRight: "24px", paddingTop: "12px" }}>
           
+          <div style={{ paddingTop: "120px", marginBottom: "-80px" }}>
+            <Link
+              href="/"
+              style={{
+                color: 'var(--subtle)',
+                fontFamily: 'monospace',
+                fontSize: '11px',
+                letterSpacing: '3px',
+                textTransform: 'uppercase',
+                textDecoration: 'none',
+              }}
+              className="hover:text-[#C8A96E] transition-colors"
+            >
+              ← Back to Home
+            </Link>
+          </div>
+
           {/* SECTION 1 — PAGE HEADER */}
           <header className="text-center" style={{ display: "flex", flexDirection: "column", alignItems: "center", paddingTop: "120px", paddingBottom: "40px" }}>
             <p

@@ -6,7 +6,7 @@ export function SiteNav() {
   return (
     <header className="nav">
       <div className="nav-inner">
-        <Link href="/intake" className="nav-brand" aria-label="Sovereign X">
+        <Link href="/" className="nav-brand" aria-label="Sovereign X">
           <SovereignXLogo size={48} color="#C8A96E" className="sx-seal-mini" />
           <span className="nav-brand-text">
             <span className="name">Sovereign X</span>
@@ -14,12 +14,11 @@ export function SiteNav() {
           </span>
         </Link>
         <div className="nav-links">
-          <a href="#hero">Home</a>
-          <a href="#services">Services</a>
-          <a href="/samples">Sample Reports</a>
+          <Link href="/#hero">Home</Link>
+          <Link href="/#services">Services</Link>
+          <Link href="/samples">Sample Reports</Link>
           <Link href="/blog">Intelligence</Link>
-          <a href="#featured">Featured</a>
-          <a href="#intake">Intake</a>
+          <Link href="/#intake">Intake</Link>
         </div>
         <div className="nav-spacer" />
         <div className="nav-actions">
