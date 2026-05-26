@@ -1,10 +1,18 @@
 import type { Metadata } from "next";
+import { SiteNav } from "@/components/sections/site-nav";
 
 export const metadata: Metadata = {
-  title: "Voice Agent Services — Sovereign X Audits",
+  title: { absolute: "Voice Agent Services — Sovereign X Audits" },
   description:
     "ElevenLabs-powered voice agents for law firms, dental practices, med spas, and any business losing revenue to missed after-hours calls. Setup from $1,500.",
   alternates: { canonical: "https://sxaudits.com/voice-agents" },
+  openGraph: {
+    title: "Voice Agents for Law Firms, Dental & Medical Practices — Sovereign X Audits",
+    description: "Stop losing revenue to missed after-hours calls. ElevenLabs-powered voice agents deployed in days. Setup from $1,500.",
+    url: "https://sxaudits.com/voice-agents",
+    siteName: "Sovereign X Audits",
+    type: "website",
+  },
 };
 
 const TIERS = [
@@ -37,7 +45,9 @@ const USE_CASES = [
 
 export default function VoiceAgentsPage() {
   return (
-    <main style={{ background: "#020617", color: "#e7e0d2", minHeight: "100vh" }}>
+    <>
+    <SiteNav />
+    <main style={{ background: "#020617", color: "#e7e0d2", minHeight: "100vh", paddingTop: "72px" }}>
       <section style={{ maxWidth: 900, margin: "0 auto", padding: "6rem 1.5rem 4rem" }}>
         <p style={{ fontFamily: "monospace", fontSize: 10, letterSpacing: "0.4em", color: "#d3ad64", textTransform: "uppercase", marginBottom: "1.5rem" }}>
           Voice Agent Services
@@ -87,5 +97,25 @@ export default function VoiceAgentsPage() {
         </a>
       </section>
     </main>
+    <footer style={{ background: "#020617", borderTop: "1px solid rgba(255,255,255,0.06)", padding: "40px", textAlign: "center" }}>
+      <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+        <p style={{ fontFamily: "monospace", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#444", marginBottom: "12px" }}>
+          Sovereign X Audits · BlackFur Capital Group LLC
+        </p>
+        <div style={{ display: "flex", gap: "24px", justifyContent: "center", flexWrap: "wrap" }}>
+          {(["Home /", "Services /#services", "Intelligence /blog", "Sample Reports /samples", "Intake /intake", "Privacy /privacy", "Terms /terms"]).map((item) => {
+            const lastSpace = item.lastIndexOf(" ");
+            const label = item.slice(0, lastSpace);
+            const href = item.slice(lastSpace + 1);
+            return (
+              <a key={href} href={href} style={{ fontFamily: "monospace", fontSize: "10px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#555", textDecoration: "none" }}>
+                {label}
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </footer>
+    </>
   );
 }

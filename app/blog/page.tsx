@@ -4,8 +4,16 @@ import { ThemeToggle } from '@/components/ui/theme-toggle'
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Sovereign X Intelligence — sxaudits.com',
+  title: 'Sovereign X Intelligence',
   description: 'What is actually happening out there. Real findings. Real markets. Real stakes.',
+  alternates: { canonical: 'https://sxaudits.com/blog' },
+  openGraph: {
+    title: 'Sovereign X Intelligence — Field Reports from the Audit Floor',
+    description: 'Real findings from real audits. Revenue leaks, AI visibility gaps, and digital infrastructure failures — documented with dollar figures.',
+    url: 'https://sxaudits.com/blog',
+    siteName: 'Sovereign X Audits',
+    type: 'website',
+  },
 }
 
 export default function BlogIndex() {

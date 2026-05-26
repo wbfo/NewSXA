@@ -1,10 +1,17 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Digital Business Audit — Sovereign X Audits",
+  title: { absolute: "Digital Business Audit — Sovereign X Audits" },
   description:
     "A 21-section digital intelligence report that shows businesses exactly where their online presence is broken, what it's costing them, and what to fix first. Delivered in 72 hours.",
   alternates: { canonical: "https://sxaudits.com/digital-audit" },
+  openGraph: {
+    title: "Digital Business Audit — Sovereign X Audits",
+    description: "A 21-section digital intelligence report. Revenue leaks identified. Dollar figures attached. Delivered in 72 hours.",
+    url: "https://sxaudits.com/digital-audit",
+    siteName: "Sovereign X Audits",
+    type: "website",
+  },
 };
 
 const SECTIONS = [

@@ -1,10 +1,17 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Personal Brand & Image Audit — Sovereign X Audits",
+  title: { absolute: "Personal Brand & Image Audit — Sovereign X Audits" },
   description:
     "An 18-section personal brand intelligence report for professionals, creatives, executives, and public figures. See exactly what your image is communicating — and what it's costing you.",
   alternates: { canonical: "https://sxaudits.com/image-audit" },
+  openGraph: {
+    title: "Personal Brand & Image Audit — Sovereign X Audits",
+    description: "18 sections. Your image, your presence, your gaps — with dollar figures attached. For professionals, creatives, and executives.",
+    url: "https://sxaudits.com/image-audit",
+    siteName: "Sovereign X Audits",
+    type: "website",
+  },
 };
 
 const SECTIONS = [
