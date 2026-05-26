@@ -84,6 +84,16 @@ const components = {
   li: (props: any) => (
     <li style={{ marginBottom: '8px' }} {...props} />
   ),
+  img: (props: any) => (
+    <img style={{
+      maxWidth: '100%',
+      height: 'auto',
+      borderRadius: '8px',
+      border: '1px solid var(--border)',
+      margin: '48px 0',
+      boxShadow: 'var(--shadow-card)',
+    }} {...props} />
+  ),
 
   // FINDING BOX — use in MDX as <Finding label="FINDING 01" title="..." cost="...">
   Finding: ({ label, title, cost, children }: any) => (
