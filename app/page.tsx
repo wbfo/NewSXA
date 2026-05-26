@@ -19,7 +19,7 @@ const jsonLd = {
         addressRegion: "NY",
         addressCountry: "US",
       },
-      contactPoint: { "@type": "ContactPoint", email: "sxabfcg@gmail.com", contactType: "customer service", areaServed: "US" },
+      contactPoint: { "@type": "ContactPoint", email: "sxa@sxaudits.com", contactType: "customer service", areaServed: "US" },
       sameAs: ["https://aicouncilconductor.com"],
     },
     {

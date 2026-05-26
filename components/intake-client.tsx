@@ -2026,7 +2026,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                   Not affiliated with any audit firm or entity operating under similar names.
                 </p>
                 <p style={{ fontSize: "12px", color: "var(--subtle)", margin: "4px 0" }}>
-                  Contact: <a href="mailto:sxabfcg@gmail.com" style={{ color: "inherit", textDecoration: "none" }}>sxabfcg@gmail.com</a>
+                  Contact: <a href="mailto:sxa@sxaudits.com" style={{ color: "inherit", textDecoration: "none" }}>sxa@sxaudits.com</a>
                 </p>
                 <p style={{ marginTop: "12px", fontSize: "12px" }}>
                   <a href="https://sxaudits.com" style={{ color: "var(--subtle)", textDecoration: "none" }}>sxaudits.com</a>

@@ -9,7 +9,7 @@
     "providers": {
       "googleSignIn": {
         "oAuthBrandDisplayName": "Sovereign X Audits",
-        "supportEmail": "support@sxaudits.com"
+        "supportEmail": "sxa@sxaudits.com"
       }
     }
   }

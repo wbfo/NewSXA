@@ -109,8 +109,8 @@ export default function IntakeSuccessPage() {
 
         <p style={{ color: "var(--subtle, #777)", fontSize: "0.75rem", margin: 0 }}>
           Questions? Email{" "}
-          <a href="mailto:ops@sxaudits.com" style={{ color: "inherit" }}>
-            ops@sxaudits.com
+          <a href="mailto:sxa@sxaudits.com" style={{ color: "inherit" }}>
+            sxa@sxaudits.com
           </a>
         </p>
       </div>
