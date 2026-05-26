@@ -2299,6 +2299,7 @@ select {
 .intake-form-actions {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 12px;
   flex-wrap: wrap;
   grid-column: 1 / -1;
@@ -4002,6 +4003,7 @@ html[data-theme="light"] .sx-intake .nav-mobile-menu {
 .sx-intake .intake-form-actions {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 12px;
   flex-wrap: wrap;
   margin-top: 14px;
