@@ -302,6 +302,23 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         margin: '0 auto',
         paddingTop: '120px',
       }}>
+        {/* Back Button */}
+        <div style={{ marginBottom: '32px' }}>
+          <Link href="/blog" style={{
+            color: 'var(--subtle)',
+            fontFamily: 'monospace',
+            fontSize: '11px',
+            letterSpacing: '3px',
+            textTransform: 'uppercase',
+            textDecoration: 'none',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '8px',
+          }}>
+            ← Back to Intelligence
+          </Link>
+        </div>
+
         {/* Category Tag & Theme Toggle */}
         <div style={{
           display: 'flex',
