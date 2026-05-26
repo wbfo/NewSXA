@@ -1249,8 +1249,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
         <section className="white-section" id="deliverables">
           <div className="wrap">
             <div className="white-section-head">
-              <div className="label">What Gets Delivered</div>
-              <h2>Seven deliverables. One delivery.</h2>
+              <h2>What Gets Delivered</h2>
             </div>
             <div className="deliverables-grid">
               {[
