@@ -205,7 +205,7 @@ const components = {
 
   // CTA BOX — use in MDX as <AuditCTA>
   AuditCTA: ({ headline, sub }: any) => (
-    <div className="mobile-padding-wrapper" style={{
+    <div className="mobile-padding-wrapper blog-cta-audit" style={{
       borderTop: '1px solid var(--border)',
       borderBottom: '1px solid var(--border)',
       paddingTop: '40px',
@@ -442,7 +442,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         </div>
 
         {/* CTA #1 (Early Hook) */}
-        <div className="mobile-padding-wrapper" style={{
+        <div className="mobile-padding-wrapper blog-cta-early-hook" style={{
           border: '1px solid var(--gold-glow)',
           borderRadius: '4px',
           background: 'var(--bg-glow)',
@@ -456,7 +456,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
           justifyContent: 'space-between',
           gap: '24px',
         }}>
-          <div style={{
+          <div className="blog-cta-early-hook-text" style={{
             color: 'var(--subtle)',
             fontSize: '15px',
             lineHeight: 1.6,
@@ -464,7 +464,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
           }}>
             Not sure if this applies to your business? We run the diagnostic before you spend a dollar.
           </div>
-          <a href="/intake" style={{
+          <a href="/intake" className="blog-cta-early-hook-button" style={{
             background: 'var(--gold)',
             color: 'var(--bg)',
             fontFamily: 'monospace',

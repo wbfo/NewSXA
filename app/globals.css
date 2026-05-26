@@ -6397,3 +6397,41 @@ html[data-theme="light"] .sx-intake .btn-ghost:hover {
   background: rgba(0, 0, 0, 0.05);
   color: #1a1a1a;
 }
+
+/* blog cta early-hook mobile centering */
+@media (max-width: 768px) {
+  .blog-cta-early-hook {
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+  .blog-cta-early-hook-text {
+    max-width: 100% !important;
+    text-align: center !important;
+  }
+  .blog-cta-early-hook-button {
+    width: 100% !important;
+    text-align: center !important;
+    display: block !important;
+  }
+}
+
+/* blog cta audit-cta mobile centering */
+@media (max-width: 768px) {
+  .blog-cta-audit {
+    text-align: center !important;
+  }
+  .blog-cta-audit p {
+    text-align: center !important;
+  }
+  .blog-cta-audit a {
+    display: block !important;
+    width: 100% !important;
+    max-width: 300px !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+  }
+}
+
+
