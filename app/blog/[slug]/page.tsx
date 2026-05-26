@@ -31,6 +31,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       siteName: 'Sovereign X Audits',
       authors: ['Abimbola Olaitan'],
       publishedTime: frontmatter.date,
+      images: frontmatter.ogImage ? [{ url: frontmatter.ogImage }] : [],
     }
   }
 }
@@ -326,6 +327,25 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
           </div>
           <ThemeToggle />
         </div>
+
+        {/* Hero Image */}
+        {frontmatter.heroImage && (
+          <div style={{ marginBottom: '40px' }}>
+            <img 
+              src={frontmatter.heroImage} 
+              alt={frontmatter.title} 
+              style={{
+                width: '100%',
+                height: 'auto',
+                borderRadius: '8px',
+                border: '1px solid var(--border)',
+                boxShadow: 'var(--shadow-card)',
+                aspectRatio: '16/9',
+                objectFit: 'cover'
+              }}
+            />
+          </div>
+        )}
 
         {/* Title */}
         <h1 style={{
