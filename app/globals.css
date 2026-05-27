@@ -4620,7 +4620,7 @@ html[data-theme="light"] .sx-intake .nav-mobile-menu {
 .sx-intake .deliverable-column h3 {
   font-family: Georgia, serif !important;
   font-size: 20px !important;
-  color: #FFFFFF !important;
+  color: #0D0D0D !important;
   margin-bottom: 8px !important;
   text-transform: none !important;
   letter-spacing: normal !important;
@@ -4628,7 +4628,7 @@ html[data-theme="light"] .sx-intake .nav-mobile-menu {
 
 .sx-intake .deliverable-column .deliverable-lead {
   font-size: 14px !important;
-  color: #777777 !important;
+  color: #555555 !important;
   line-height: 1.7 !important;
   margin-bottom: 24px !important;
   border-bottom: 1px solid rgba(200, 169, 110, 0.1) !important;
@@ -4645,7 +4645,7 @@ html[data-theme="light"] .sx-intake .nav-mobile-menu {
 }
 
 .sx-intake .deliverable-column li {
-  color: #9A9080 !important;
+  color: #4A453C !important;
   font-size: 14px !important;
   line-height: 1.8 !important;
 }
