@@ -1299,17 +1299,8 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
           </div>
         </section>
 
-        {/* ── Snippet Parallax — What Lands in Your Drive ── */}
-        <section className="compact" id="samples" style={{ paddingBottom: "0" }}>
-          <div className="wrap">
-            <ThreeDocumentCarousel />
-          </div>
-        </section>
-
         <section className="compact section-diagonal">
           <div className="wrap">
-
-
             <div className="metrics-grid pm-reveal">
               <div className="metric-card metric-card--blue">
                 <div className="metric-label">01 // DELIVERY</div>
@@ -1327,6 +1318,13 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                 <div className="metric-desc">Every audit covers 21 diagnostic areas across your digital presence</div>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* ── Snippet Parallax — What Lands in Your Drive ── */}
+        <section className="compact" id="samples" style={{ paddingBottom: "0" }}>
+          <div className="wrap">
+            <ThreeDocumentCarousel />
           </div>
         </section>
 
