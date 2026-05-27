@@ -1255,50 +1255,47 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
               {[
                 {
                   title: "Sovereign X Digital Audit",
+                  lead: "A complete written verdict on your business — what's broken, what it's costing you, and what to fix first.",
                   items: [
                     "21-section written report",
-                    "Technical performance scores",
                     "Revenue leak analysis with dollar figures",
-                    "AI Readiness & Voice Agent assessment",
-                    "Impact Matrix",
-                    "Fix-It Checklist",
+                    "Technical performance scores",
+                    "AI readiness & voice agent assessment",
+                    "Impact matrix",
+                    "Fix-it checklist",
                     "Delivered within 48–72 hours"
                   ]
                 },
                 {
                   title: "Sovereign X Image Audit",
+                  lead: "An honest outside read on what your presence is actually communicating — not what you think it is.",
                   items: [
                     "18-section written report",
-                    "Personal Color Analysis Card",
-                    "Hairstyle Analysis Card",
-                    "Outfit Analysis Card",
-                    "Grooming Guide (Men) / Makeup Guide (Women)",
-                    "Scent Profile Card",
-                    "Quick Reference Card"
-                  ]
-                },
-                {
-                  title: "Sovereign X Voice Agent",
-                  items: [
-                    "Conversation flow design",
-                    "Voice persona configuration",
-                    "ElevenLabs deployment",
-                    "Calendar + CRM integration",
-                    "Branded client portal",
-                    "Monthly management",
-                    "Usage analytics dashboard"
+                    "Personal color analysis card",
+                    "Hairstyle analysis card",
+                    "Outfit direction card",
+                    "Grooming guide (Men) / Makeup guide (Women)",
+                    "Scent profile card",
+                    "Quick reference card"
                   ]
                 }
               ].map((column) => (
                 <article key={column.title} className="deliverable-column">
                   <h3>{column.title}</h3>
+                  <p className="deliverable-lead">{column.lead}</p>
                   <ul>
-                    {column.items.map((item) => <li key={item}>✦ {item}</li>)}
+                    {column.items.map((item) => (
+                      <li key={item}>
+                        <span className="bullet-star">✦</span>{item}
+                      </li>
+                    ))}
                   </ul>
                 </article>
               ))}
             </div>
-            <a className="btn white-cta" href="#intake">Start Your Audit <span className="arrow">→</span></a>
+            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '40px' }}>
+              <a className="btn white-cta" href="#intake">Start Your Audit <span className="arrow">→</span></a>
+            </div>
           </div>
         </section>
 
