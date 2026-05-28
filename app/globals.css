@@ -5131,6 +5131,13 @@ html[data-theme="light"] .sx-intake .order-business {
   }
 
   .sx-intake .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+
+  /* Hide theme toggle on mobile, keep CTA visible */
+  .sx-intake .nav-actions > button {
     display: none;
   }
 
