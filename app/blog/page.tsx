@@ -2,6 +2,7 @@
 import { getAllPosts } from '@/lib/blog'
 import { ThemeToggle } from '@/components/ui/theme-toggle'
 import Link from 'next/link'
+import { BlogIndexClient } from '@/components/blog-index-client'
 
 export const metadata = {
   title: 'Intelligence — Sovereign X Audits',
@@ -103,107 +104,7 @@ export default function BlogIndex() {
       </div>
 
       {/* POST LIST */}
-      <div className="mobile-padding-wrapper" style={{ maxWidth: '1100px', margin: '0 auto', paddingBottom: '80px' }}>
-        {posts.map((post: any) => (
-          <a
-            key={post.slug}
-            href={`/blog/${post.slug}`}
-            style={{ textDecoration: 'none', display: 'block' }}
-          >
-            <article className="blog-article-hover blog-index-article" style={{
-              borderBottom: '1px solid var(--border)',
-              padding: '40px 0',
-              cursor: 'pointer',
-            }}>
-              <div>
-                {/* Tag + Industry */}
-                <div style={{
-                  display: 'flex',
-                  gap: '12px',
-                  alignItems: 'center',
-                  marginBottom: '12px',
-                }}>
-                  <span style={{
-                    color: 'var(--gold)',
-                    fontFamily: 'monospace',
-                    fontSize: '10px',
-                    letterSpacing: '3px',
-                    textTransform: 'uppercase',
-                  }}>
-                    {post.tag}
-                  </span>
-                  <span style={{ color: 'var(--dim)', fontSize: '10px' }}>·</span>
-                  <span style={{
-                    color: 'var(--dim)',
-                    fontFamily: 'monospace',
-                    fontSize: '10px',
-                    letterSpacing: '2px',
-                    textTransform: 'uppercase',
-                  }}>
-                    {post.industry}
-                  </span>
-                </div>
-
-                {/* Title */}
-                <h2 style={{
-                  color: 'var(--text)',
-                  fontFamily: 'Georgia, serif',
-                  fontSize: 'clamp(18px, 2.5vw, 24px)',
-                  fontWeight: 400,
-                  lineHeight: 1.35,
-                  marginBottom: '12px',
-                  letterSpacing: '-0.3px',
-                }}>
-                  {post.title}
-                </h2>
-
-                {/* Description */}
-                <p style={{
-                  color: 'var(--subtle)',
-                  fontSize: '14px',
-                  lineHeight: 1.7,
-                  maxWidth: '600px',
-                }}>
-                  {post.description}
-                </p>
-              </div>
-
-              {/* Stakes badge */}
-              <div style={{
-                background: 'var(--bg-glow)',
-                border: '1px solid var(--gold-glow)',
-                borderRadius: '4px',
-                padding: '12px 16px',
-                textAlign: 'center',
-                maxWidth: '260px',
-                whiteSpace: 'normal',
-                flexShrink: 0,
-              }}>
-                <div style={{
-                  color: 'var(--subtle)',
-                  fontFamily: 'monospace',
-                  fontSize: '9px',
-                  letterSpacing: '2px',
-                  textTransform: 'uppercase',
-                  marginBottom: '6px',
-                }}>
-                  What&apos;s at stake
-                </div>
-                <div style={{
-                  color: 'var(--gold)',
-                  fontFamily: 'monospace',
-                  fontSize: '13px',
-                  fontWeight: 700,
-                  lineHeight: 1.4,
-                }}>
-                  {post.stakes}
-                </div>
-              </div>
-
-            </article>
-          </a>
-        ))}
-      </div>
+      <BlogIndexClient posts={posts} />
 
       {/* BOTTOM CTA */}
       <div className="mobile-padding-wrapper" style={{
