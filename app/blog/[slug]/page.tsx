@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const canonicalUrl = `https://sxaudits.com/blog/${resolvedParams.slug}`
   
   return {
-    title: `${frontmatter.title} | Sovereign X Audits`,
+    title: `${frontmatter.metaTitle || frontmatter.title} | Sovereign X Audits`,
     description: frontmatter.description,
     alternates: {
       canonical: canonicalUrl,
