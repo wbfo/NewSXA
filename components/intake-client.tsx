@@ -1252,73 +1252,31 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
               <h2>What Gets Delivered</h2>
             </div>
             <div className="deliverables-grid">
-              {[
-                {
-                  title: "Sovereign X Digital Audit — Standard",
-                  lead: "A complete written verdict on your business — what's broken, what it's costing you, and what to fix first.",
-                  items: [
-                    "14-section intelligence report",
-                    "The Sovereignty Scorecard — your digital score out of 100",
-                    "Domain security & ownership analysis",
-                    "Desktop and mobile performance with revenue impact",
-                    "Website & conversion architecture audit",
-                    "Brand identity & consistency review",
-                    "Local presence — NAP, Google Business Profile, Local SEO",
-                    "Social media infrastructure analysis",
-                    "Revenue leaks & missed contact touchpoints",
-                    "AI search visibility — ChatGPT, Perplexity, Google AI Overview",
-                    "Reputation management across all review platforms",
-                    "Competitive context — 1 to 2 direct competitors",
-                    "Impact Matrix with embedded priority sequence",
-                    "Delivered within 48–72 hours"
-                  ],
-                  bonus: {
-                    title: "★ STANDARD BONUS",
-                    text: "Three sections delivered at full Deep depth:\nLocal Presence · AI Search Visibility · Reputation Management"
-                  }
-                },
-                {
-                  title: "Sovereign X Digital Audit — Deep",
-                  lead: "Everything in Standard at full depth — plus the intelligence layer that tells you exactly what your competitors know that you don't.",
-                  items: [
-                    "All 14 Standard sections at full execution depth",
-                    "★ Local Presence — full competitive GBP analysis",
-                    "★ AI Search Visibility — schema roadmap, llms.txt, AI citation tracking",
-                    "★ Reputation Management — full competitor comparison & migration roadmap",
-                    "Competitive context — 4 to 5 competitors with full intelligence per competitor",
-                    "Owned Audience & Communication audit",
-                    "Press & PR Opportunity Map with named outlets",
-                    "AI Readiness & Voice Agent ROI calculation",
-                    "Total Revenue Impact synthesis — how every finding compounds",
-                    "Standalone Priority Sequence — every action sequenced with recovery estimates",
-                    "90-Day Roadmap — phased implementation with milestones, owners, costs",
-                    "Priority Hotline — 30-day direct access to Ola post-delivery",
-                    "Delivered within 48–72 hours"
-                  ]
-                }
-              ].map((column) => (
-                <article key={column.title} className="deliverable-column">
-                  <h3>{column.title}</h3>
-                  <p className="deliverable-lead">{column.lead}</p>
-                  <ul>
-                    {column.items.map((item) => {
-                      const isStar = item.startsWith("★");
-                      const cleanedItem = isStar ? item.substring(1).trim() : item;
-                      return (
-                        <li key={item}>
-                          <span className="bullet-star">{isStar ? "★" : "✦"}</span>{cleanedItem}
-                        </li>
-                      );
-                    })}
-                  </ul>
-                  {column.bonus && (
-                    <div className="deliverable-bonus-block">
-                      <div style={{ fontWeight: "bold", marginBottom: "4px" }}>{column.bonus.title}</div>
-                      <div>{column.bonus.text}</div>
-                    </div>
-                  )}
-                </article>
-              ))}
+              {/* STANDARD CARD */}
+              <article className="deliverable-column">
+                <h3>Sovereign X Digital Audit — Standard</h3>
+                <p className="deliverable-lead">
+                  "A complete written verdict on your business — what's broken, what it's costing you, and what to fix first. Covers 14 diagnostic areas across your full digital presence. Three sections delivered at full Deep depth as a bonus."
+                </p>
+                <div style={{ fontSize: "14px", color: "#555555", lineHeight: "1.7", marginBottom: "20px" }}>
+                  Delivered within 48–72 hours.
+                </div>
+                <div className="deliverable-bonus-block">
+                  <div style={{ fontWeight: "bold", marginBottom: "4px" }}>★ STANDARD BONUS</div>
+                  <div>Local Presence · AI Search Visibility · Reputation Management — at full Deep depth.</div>
+                </div>
+              </article>
+
+              {/* DEEP CARD */}
+              <article className="deliverable-column">
+                <h3>Sovereign X Digital Audit — Deep</h3>
+                <p className="deliverable-lead">
+                  "Everything in Standard at full depth — plus the intelligence layer that tells you exactly what your competitors know that you don't. Covers all 20 sections. Includes standalone Priority Sequence, 90-Day Roadmap, and 30-day Priority Hotline access to Ola."
+                </p>
+                <div style={{ fontSize: "14px", color: "#555555", lineHeight: "1.7", marginBottom: "20px" }}>
+                  Delivered within 48–72 hours.
+                </div>
+              </article>
             </div>
             <div style={{ textAlign: "center", marginTop: "32px", fontSize: "14px", color: "var(--subtle)", fontFamily: "monospace", letterSpacing: "1px" }}>
               30-Day Check-In included with every audit — Standard and Deep.
