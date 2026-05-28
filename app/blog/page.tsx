@@ -79,7 +79,6 @@ export default function BlogIndex() {
           }}>
             Sovereign X · Intelligence
           </p>
-          <ThemeToggle />
         </div>
         <h1 style={{
           color: 'var(--text)',

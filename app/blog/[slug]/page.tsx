@@ -319,7 +319,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
           </Link>
         </div>
 
-        {/* Category Tag & Theme Toggle */}
+        {/* Category Tag */}
         <div style={{
           display: 'flex',
           justifyContent: 'space-between',
@@ -342,7 +342,6 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
               {frontmatter.tag} · {frontmatter.industry}
             </span>
           </div>
-          <ThemeToggle />
         </div>
 
         {/* Hero Image */}
