@@ -157,34 +157,13 @@ const TIER_OPTIONS = [
     selectedTone: "neon-amber"
   },
   {
-    id: "Sovereign X Image Audit",
-    name: "Sovereign X Image Audit",
-    serviceType: "Image Audit",
-    pricePromo: "$350 promo",
-    priceReg: "$500 regular",
-    summary: "Premium brand presentation for public-facing clients.",
-    tags: ["Personal brand", "Public presence", "Image alignment"],
-    selectedTone: "neon-purple"
-  },
-  {
-    id: "Sovereign X Voice Agent",
-    name: "Sovereign X Voice Agent",
-    serviceType: "Voice Agent",
-    pricePromo: "$1,500+ setup",
-    priceReg: "monthly management",
-    summary: "Call intake, booking, and after-hours coverage.",
-    tags: ["ElevenLabs", "CRM integration", "Analytics dashboard"],
-    selectedTone: "neon-blue"
-  },
-  {
-    id: "Sovereign X Growth Blueprint",
-    name: "Sovereign X Growth Blueprint",
-    serviceType: "Growth Blueprint",
-    pricePromo: "$250 promo",
-    priceReg: "$350 regular",
-    summary: "90-day implementation roadmap built from your audit findings.",
-    note: "Available after any completed Sovereign X audit.",
-    tags: ["90-day roadmap", "Audit-specific", "Growth phases"],
+    id: "Sovereign X Digital Audit — Deep + Intake",
+    name: "Sovereign X Digital Audit — Deep + Intake",
+    serviceType: "Deep Digital Audit + Intake",
+    pricePromo: "$2,000 promo",
+    priceReg: "$2,500 regular",
+    summary: "Complete digital architecture review with advanced intake system engineering.",
+    tags: ["Technical analysis", "Intake engine", "Competitive comparison"],
     selectedTone: "neon-purple"
   }
 ];
@@ -1672,10 +1651,9 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                         }
                       }}
                     >
+                      <option>Sovereign X Digital Audit — Standard</option>
                       <option>Sovereign X Digital Audit — Deep</option>
-                      <option>Sovereign X Image Audit</option>
-                      <option>Sovereign X Voice Agent</option>
-                      <option>Sovereign X Growth Blueprint</option>
+                      <option>Sovereign X Digital Audit — Deep + Intake</option>
                     </select>
 
                     {/* Primary Contact Details */}

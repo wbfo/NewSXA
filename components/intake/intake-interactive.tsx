@@ -22,13 +22,13 @@ const TIER_OPTIONS = [
     tags: ["Technical analysis", "Competitive context", "ROI-facing findings"],
   },
   {
-    id: "X Image Audit",
-    name: "X Image Audit",
-    serviceType: "Image Audit",
-    pricePromo: "$350 promo",
-    priceReg: "$500 regular",
-    summary: "Premium brand presentation for public-facing clients.",
-    tags: ["Personal brand", "Public presence", "Image alignment"],
+    id: "Digital Deep + Intake",
+    name: "Digital Deep + Intake",
+    serviceType: "Deep Digital Audit + Intake",
+    pricePromo: "$2,000 promo",
+    priceReg: "$2,500 regular",
+    summary: "Complete digital architecture review with advanced intake system engineering.",
+    tags: ["Technical analysis", "Intake engine", "Competitive comparison"],
   },
 ];
 
@@ -175,8 +175,7 @@ export function IntakeInteractive() {
                   >
                     <option>Digital Standard</option>
                     <option>Digital Deep</option>
-                    <option>X Image Audit</option>
-                    <option>Voice Agent</option>
+                    <option>Digital Deep + Intake</option>
                   </select>
                   <input className="field" placeholder="Service type" value={form.serviceType} onChange={(e) => updateField("serviceType", e.target.value)} />
                   <input className="field" placeholder="Budget / target value" value={form.budget} onChange={(e) => updateField("budget", e.target.value)} />
