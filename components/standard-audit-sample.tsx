@@ -1,6 +1,6 @@
 import React from 'react';
 
-// StandardAuditSample.tsx (overwritten from StandardAuditSample_1.tsx)
+// StandardAuditSample.tsx
 // Sovereign X Digital Audit — Standard · All 14 Sections
 // Anonymized · Staten Island Specialty Food Market
 
@@ -37,30 +37,38 @@ const SectionRow = ({ num, label, score, finding, scoreBg, scoreColor, blurred =
   </tr>
 );
 
-const FindingCard = ({ num, icon, title, bullets, cost, costColor, borderColor, bgColor, blurred = false }: any) => (
-  <div style={{ background: '#FFFFFF', borderRadius: '6px', borderTop: `3px solid ${borderColor}`, padding: '16px', position: 'relative', overflow: 'hidden' }}>
-    {blurred && (
-      <div style={{ position: 'absolute', inset: 0, background: 'rgba(255,255,255,0.6)', backdropFilter: 'blur(6px)', zIndex: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <span style={{ background: '#0A1628', color: '#C8A96E', fontSize: '10px', fontFamily: 'monospace', letterSpacing: '2px', padding: '6px 14px', borderRadius: '3px', border: '1px solid #C8A96E' }}>FULL REPORT ONLY</span>
-      </div>
-    )}
-    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px' }}>
-      <span style={{ background: borderColor, color: '#FFF', borderRadius: '50%', width: '22px', height: '22px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '11px', fontWeight: 700 }}>{num}</span>
-      <span style={{ fontSize: '14px' }}>{icon}</span>
+const BlurredSectionContent = ({ title, bullets }: { title: string, bullets: string[] }) => (
+  <div style={{ background: '#1A1A2E', borderRadius: '6px', padding: '16px', display: 'flex', flexDirection: 'column', gap: '12px', width: '100%' }}>
+    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div style={{ fontSize: '11px', fontWeight: 'bold', color: '#C8A96E', letterSpacing: '1px', textTransform: 'uppercase', fontFamily: 'monospace' }}>ANALYSIS DETAILED VIEW</div>
+      <div style={{ background: '#E63946', width: '8px', height: '8px', borderRadius: '50%' }}></div>
     </div>
-    <div style={{ color: borderColor, fontSize: '12px', fontWeight: 800, textTransform: 'uppercase', lineHeight: 1.3, marginBottom: '8px' }}>{title}</div>
-    <ul style={{ padding: 0, margin: '0 0 10px', listStyle: 'none', fontSize: '11px', color: '#374151', lineHeight: 1.5, display: 'flex', flexDirection: 'column', gap: '5px' }}>
-      {bullets.map((b: string, i: number) => <li key={i} style={{ display: 'flex', gap: '6px' }}><span style={{ color: borderColor, flexShrink: 0 }}>•</span><span>{b}</span></li>)}
-    </ul>
-    <div style={{ background: bgColor, borderLeft: `3px solid ${borderColor}`, borderRadius: '0 4px 4px 0', padding: '10px' }}>
-      <div style={{ color: '#374151', fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', marginBottom: '3px' }}>What This Costs</div>
-      <div style={{ color: costColor, fontSize: '18px', fontWeight: 900, fontFamily: 'monospace' }}>{cost}</div>
+    <div style={{ fontSize: '14px', fontWeight: 800, color: '#FFFFFF', textTransform: 'uppercase' }}>{title}</div>
+    <div style={{ fontSize: '11px', color: '#9CA3AF', lineHeight: 1.6 }}>
+      Comprehensive diagnostic analysis executed across multiple scanning indices. The systems evaluated have surfaced multiple vulnerabilities, NAP discrepancies, and platform-level optimization deficits.
+    </div>
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '10px' }}>
+      {bullets.map((b, i) => (
+        <div key={i} style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '4px', padding: '10px' }}>
+          <div style={{ color: '#C8A96E', fontSize: '9px', fontWeight: 'bold', fontFamily: 'monospace' }}>METRIC #{i+1}</div>
+          <div style={{ fontSize: '12px', color: '#FFFFFF', fontWeight: 600, marginTop: '2px' }}>{b}</div>
+        </div>
+      ))}
+    </div>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginTop: '4px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '10px', color: '#777' }}>
+        <span>INFRASTRUCTURE DEVIATION</span>
+        <span>74%</span>
+      </div>
+      <div style={{ background: '#222', height: '6px', borderRadius: '3px', overflow: 'hidden' }}>
+        <div style={{ background: '#E63946', width: '74%', height: '100%' }}></div>
+      </div>
     </div>
   </div>
 );
 
 const SectionBlock = ({ sectionNum, sectionTitle, blurred = false, children }: any) => (
-  <div style={{ padding: '16px 28px 0', position: 'relative' }}>
+  <div className="standard-block-container" style={{ padding: '16px 28px 0', position: 'relative' }}>
     <div style={{ color: '#C8A96E', fontSize: '10px', letterSpacing: '3px', textTransform: 'uppercase', fontFamily: 'monospace', marginBottom: '8px', display: 'flex', alignItems: 'center' }}>
       {sectionNum} / {sectionTitle}
       {blurred && <BlurBadge />}
@@ -73,27 +81,51 @@ const SectionBlock = ({ sectionNum, sectionTitle, blurred = false, children }: a
 
 export function StandardAuditSample() {
   return (
-    <div style={{
+    <div className="standard-container" style={{
       width: '900px', maxWidth: '92vw',
       background: '#0A1628',
       borderRadius: '8px', overflow: 'hidden',
       boxShadow: '0 24px 80px rgba(0,0,0,0.7)',
       fontFamily: "'Inter', 'DM Sans', system-ui, sans-serif",
+      margin: '0 auto',
     }}>
+      <style dangerouslySetInnerHTML={{ __html: `
+        .standard-header { display: flex; justify-content: space-between; align-items: flex-start; }
+        .standard-score-bar { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+        .standard-block-container { padding: 16px 28px 0; }
+        .standard-local-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+        .standard-revenue-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .standard-ai-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+        .standard-impact-bar { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+        .standard-footer { display: flex; justify-content: space-between; align-items: center; }
+
+        @media (max-width: 768px) {
+          .standard-header { flex-direction: column !important; gap: 12px !important; padding: 16px !important; }
+          .standard-score-bar { flex-direction: column !important; align-items: flex-start !important; gap: 16px !important; padding: 16px !important; }
+          .standard-block-container { padding: 16px 16px 0 !important; }
+          .standard-local-grid { grid-template-columns: 1fr !important; }
+          .standard-revenue-grid { grid-template-columns: 1fr !important; }
+          .standard-ai-grid { grid-template-columns: 1fr !important; }
+          .standard-impact-bar { flex-direction: column !important; align-items: flex-start !important; gap: 16px !important; padding: 16px !important; }
+          .standard-impact-bar > div:last-child { flex-direction: column !important; gap: 12px !important; }
+          .standard-footer { flex-direction: column !important; gap: 12px !important; padding: 16px !important; text-align: left !important; }
+          .standard-footer > div { text-align: left !important; }
+        }
+      `}} />
 
       {/* HEADER */}
-      <div style={{ background: '#0A1628', padding: '20px 28px', borderBottom: '1px solid rgba(200,169,110,0.2)', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+      <div className="standard-header" style={{ background: '#0A1628', padding: '20px 28px', borderBottom: '1px solid rgba(200,169,110,0.2)' }}>
         <div>
           <div style={{ color: '#C8A96E', fontSize: '11px', fontWeight: 600, letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '6px' }}>Sovereign X Audits · BlackFur Capital Group LLC</div>
           <div style={{ fontSize: '22px', fontWeight: 800, color: '#FFFFFF', letterSpacing: '-0.5px', lineHeight: 1.2 }}>SOVEREIGN X DIGITAL AUDIT<span style={{ color: '#C8A96E' }}> — STANDARD</span></div>
           <div style={{ color: '#38BDF8', fontSize: '12px', marginTop: '6px', letterSpacing: '1px' }}>[Staten Island Specialty Food Market] · Staten Island, NY · Butcher / Specialty Food · May 2026</div>
           <div style={{ color: '#777', fontSize: '11px', marginTop: '4px' }}>Sovereign X Audits · BlackFur Capital Group LLC</div>
         </div>
-        <div style={{ border: '1px solid #C8A96E', color: '#C8A96E', fontSize: '10px', letterSpacing: '2px', padding: '4px 12px', borderRadius: '4px', fontFamily: 'monospace' }}>AICC Verified</div>
+        <div style={{ border: '1px solid #C8A96E', color: '#C8A96E', fontSize: '10px', letterSpacing: '2px', padding: '4px 12px', borderRadius: '4px', fontFamily: 'monospace', whiteSpace: 'nowrap' }}>AICC Verified</div>
       </div>
 
       {/* SCORE */}
-      <div style={{ background: '#111827', padding: '20px 28px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '20px' }}>
+      <div className="standard-score-bar" style={{ background: '#111827', padding: '20px 28px' }}>
         <div>
           <div style={{ color: '#555', fontSize: '10px', letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '6px', fontFamily: 'monospace' }}>Digital Sovereignty Score</div>
           <div style={{ fontSize: '56px', fontWeight: 900, color: '#E63946', lineHeight: 1, letterSpacing: '-2px' }}>31<span style={{ fontSize: '24px', color: '#555', fontWeight: 400 }}>/100</span></div>
@@ -116,70 +148,62 @@ export function StandardAuditSample() {
       </SectionBlock>
 
       {/* SECTION 02 — SOVEREIGNTY SCORECARD */}
-      <div style={{ padding: '16px 28px 0' }}>
+      <div className="standard-block-container" style={{ padding: '16px 28px 0' }}>
         <div style={{ color: '#C8A96E', fontSize: '10px', letterSpacing: '3px', textTransform: 'uppercase', fontFamily: 'monospace', marginBottom: '12px' }}>02 / The Sovereignty Scorecard</div>
-        <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-          <thead>
-            <tr style={{ background: '#111827' }}>
-              {['', 'DIMENSION', 'SCORE', 'CORE FINDING'].map((h, i) => (
-                <td key={i} style={{ padding: '8px 12px', color: '#C8A96E', fontSize: '10px', letterSpacing: '2px', fontFamily: 'monospace', fontWeight: 700, textTransform: 'uppercase', width: i === 0 ? '32px' : i === 2 ? '80px' : 'auto' }}>{h}</td>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            <SectionRow num="1" label="🌐 Website & Domain" score="1/10" finding="No domain. No website. Zero owned web presence." scoreBg="#FFEBEE" scoreColor="#E63946" />
-            <SectionRow num="2" label="🎨 Brand Identity" score="3/10" finding="Five name variants. No story. No digital home for brand equity." scoreBg="#FFF8E1" scoreColor="#E65100" />
-            <SectionRow num="3" label="📱 Social Media" score="1/10" finding="No dedicated accounts. 16k related account unconnected." scoreBg="#FFEBEE" scoreColor="#E63946" />
-            <SectionRow num="4" label="🔍 Local SEO / NAP" score="2/10" finding="Duplicate listing. Wrong address indexed. Hours discrepancy." scoreBg="#FFEBEE" scoreColor="#E63946" />
-            <SectionRow num="5" label="⚙️ Systems & Automation" score="1/10" finding="No pre-order, no list, no intake, no holiday infrastructure." scoreBg="#FFEBEE" scoreColor="#E63946" />
-            <SectionRow num="6" label="🤖 AI Search / GEO" score="2/10" finding="Unclaimed GBP with 134 reviews. No website. No schema." scoreBg="#FFEBEE" scoreColor="#E63946" />
-            <tr style={{ background: '#111827' }}>
-              <td colSpan={2} style={{ padding: '10px 12px', color: '#C8A96E', fontSize: '13px', fontWeight: 700, fontFamily: 'monospace' }}>OVERALL</td>
-              <td style={{ padding: '10px 12px' }}><span style={{ background: '#FFEBEE', color: '#E63946', fontSize: '13px', fontWeight: 800, padding: '3px 10px', borderRadius: '3px', fontFamily: 'monospace' }}>31/100</span></td>
-              <td style={{ padding: '10px 12px', color: '#9CA3AF', fontSize: '11px', fontStyle: 'italic' }}>Real product. Real trust. Infrastructure working against both.</td>
-            </tr>
-          </tbody>
-        </table>
+        <div style={{ overflowX: 'auto', width: '100%' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: '600px' }}>
+            <thead>
+              <tr style={{ background: '#111827' }}>
+                {['', 'DIMENSION', 'SCORE', 'CORE FINDING'].map((h, i) => (
+                  <td key={i} style={{ padding: '8px 12px', color: '#C8A96E', fontSize: '10px', letterSpacing: '2px', fontFamily: 'monospace', fontWeight: 700, textTransform: 'uppercase', width: i === 0 ? '32px' : i === 2 ? '80px' : 'auto' }}>{h}</td>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              <SectionRow num="1" label="🌐 Website & Domain" score="1/10" finding="No domain. No website. Zero owned web presence." scoreBg="#FFEBEE" scoreColor="#E63946" />
+              <SectionRow num="2" label="🎨 Brand Identity" score="3/10" finding="Five name variants. No story. No digital home for brand equity." scoreBg="#FFF8E1" scoreColor="#E65100" />
+              <SectionRow num="3" label="📱 Social Media" score="1/10" finding="No dedicated accounts. 16k related account unconnected." scoreBg="#FFEBEE" scoreColor="#E63946" />
+              <SectionRow num="4" label="🔍 Local SEO / NAP" score="2/10" finding="Duplicate listing. Wrong address indexed. Hours discrepancy." scoreBg="#FFEBEE" scoreColor="#E63946" />
+              <SectionRow num="5" label="⚙️ Systems & Automation" score="1/10" finding="No pre-order, no list, no intake, no holiday infrastructure." scoreBg="#FFEBEE" scoreColor="#E63946" />
+              <SectionRow num="6" label="🤖 AI Search / GEO" score="2/10" finding="Unclaimed GBP with 134 reviews. No website. No schema." scoreBg="#FFEBEE" scoreColor="#E63946" />
+              <tr style={{ background: '#111827' }}>
+                <td colSpan={2} style={{ padding: '10px 12px', color: '#C8A96E', fontSize: '13px', fontWeight: 700, fontFamily: 'monospace' }}>OVERALL</td>
+                <td style={{ padding: '10px 12px' }}><span style={{ background: '#FFEBEE', color: '#E63946', fontSize: '13px', fontWeight: 800, padding: '3px 10px', borderRadius: '3px', fontFamily: 'monospace' }}>31/100</span></td>
+                <td style={{ padding: '10px 12px', color: '#9CA3AF', fontSize: '11px', fontStyle: 'italic' }}>Real product. Real trust. Infrastructure working against both.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
       {/* SECTIONS 03-07 — BLURRED */}
       <SectionBlock sectionNum="03" sectionTitle="Domain Security & Ownership" blurred={true}>
-        <div style={{ background: '#1A1A2E', borderRadius: '4px', padding: '14px', height: '60px' }}>
-          <div style={{ color: '#9CA3AF', fontSize: '12px' }}>Domain registration status, ownership verification, SSL certificate, name variation analysis...</div>
-        </div>
+        <BlurredSectionContent title="DNS Security Protocols & Registrar Analysis" bullets={["DNSSEC Status: INACTIVE", "SSL Certificate Status: NULL", "Registrar Expiry Alert", "Name Variant Protection"]} />
       </SectionBlock>
 
       <SectionBlock sectionNum="04" sectionTitle="Technical Performance — Desktop" blurred={true}>
-        <div style={{ background: '#1A1A2E', borderRadius: '4px', padding: '14px', height: '60px' }}>
-          <div style={{ color: '#9CA3AF', fontSize: '12px' }}>Google PageSpeed Insights scores, Core Web Vitals, revenue impact calculation...</div>
-        </div>
+        <BlurredSectionContent title="Google Core Web Vitals Desktop Diagnostic" bullets={["Largest Contentful Paint: 3.8s", "Cumulative Layout Shift", "First Input Delay", "Server Response Time"]} />
       </SectionBlock>
 
       <SectionBlock sectionNum="05" sectionTitle="Mobile Performance & Revenue Impact" blurred={true}>
-        <div style={{ background: '#1A1A2E', borderRadius: '4px', padding: '14px', height: '60px' }}>
-          <div style={{ color: '#9CA3AF', fontSize: '12px' }}>Mobile PageSpeed scores, Core Web Vitals, ADA compliance, mobile journey audit...</div>
-        </div>
+        <BlurredSectionContent title="Mobile Journey Friction & Mobile-First Indexing" bullets={["LCP Mobile Indexing", "Friction Indexing Score", "Viewport Scaling Check", "Revenue Leak Estimate"]} />
       </SectionBlock>
 
       <SectionBlock sectionNum="06" sectionTitle="Website & Conversion Architecture" blurred={true}>
-        <div style={{ background: '#1A1A2E', borderRadius: '4px', padding: '14px', height: '60px' }}>
-          <div style={{ color: '#9CA3AF', fontSize: '12px' }}>Navigation audit, CTA hierarchy, trust elements, technology stack, AI tools assessment...</div>
-        </div>
+        <BlurredSectionContent title="Conversion Funnel Deficits & Contact Flow Audit" bullets={["Autofill Support Check", "Form Field Friction", "CTA Position Above Fold", "Technology Stack Score"]} />
       </SectionBlock>
 
       <SectionBlock sectionNum="07" sectionTitle="Brand Identity & Consistency" blurred={true}>
-        <div style={{ background: '#1A1A2E', borderRadius: '4px', padding: '14px', height: '60px' }}>
-          <div style={{ color: '#9CA3AF', fontSize: '12px' }}>Logo consistency, brand voice, differentiation analysis, founder personal brand integration...</div>
-        </div>
+        <BlurredSectionContent title="Directory Brand Equity & Consistency Index" bullets={["Logo Aspect Variations", "Brand Narrative Audit", "Font Type Uniformity", "Founder Personal Bridge"]} />
       </SectionBlock>
 
       {/* SECTION 08 — LOCAL PRESENCE — VISIBLE (BONUS) */}
-      <div style={{ padding: '16px 28px 0' }}>
+      <div className="standard-block-container" style={{ padding: '16px 28px 0' }}>
         <div style={{ color: '#C8A96E', fontSize: '10px', letterSpacing: '3px', textTransform: 'uppercase', fontFamily: 'monospace', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '8px' }}>
           08 / Local Presence & Discoverability
           <span style={{ background: 'rgba(200,169,110,0.1)', border: '1px solid rgba(200,169,110,0.3)', color: '#C8A96E', fontSize: '9px', fontFamily: 'monospace', letterSpacing: '1px', padding: '2px 8px', borderRadius: '3px' }}>★ STANDARD BONUS</span>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '12px', marginBottom: '8px' }}>
+        <div className="standard-local-grid" style={{ gap: '12px', marginBottom: '8px' }}>
           {[
             { label: 'NAP CONSISTENCY', value: '4 inconsistencies', sub: 'Across Google, Yelp, Facebook, Apple Maps', color: '#E63946' },
             { label: 'GOOGLE BUSINESS PROFILE', value: 'Unclaimed', sub: '134 reviews — none being responded to', color: '#E63946' },
@@ -201,14 +225,12 @@ export function StandardAuditSample() {
 
       {/* SECTION 09 — SOCIAL MEDIA — BLURRED */}
       <SectionBlock sectionNum="09" sectionTitle="Social Media Infrastructure" blurred={true}>
-        <div style={{ background: '#1A1A2E', borderRadius: '4px', padding: '14px', height: '60px' }}>
-          <div style={{ color: '#9CA3AF', fontSize: '12px' }}>Platform presence audit, follower counts, engagement rates, posting cadence, UGC analysis...</div>
-        </div>
+        <BlurredSectionContent title="Multi-Platform Engagement & Feed Indexing" bullets={["UGC Content Velocity", "Follower-to-Patient Ratio", "Instagram API Status", "LinkedIn Post Cadence"]} />
       </SectionBlock>
 
       {/* SECTION 10 — REVENUE LEAKS — VISIBLE */}
       <SectionBlock sectionNum="10" sectionTitle="Revenue Leaks & Systems">
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '8px' }}>
+        <div className="standard-revenue-grid" style={{ gap: '12px', marginBottom: '8px' }}>
           {[
             { label: 'AFTER-HOURS COVERAGE', value: 'Voicemail only', sub: 'No after-hours capture system', color: '#E63946' },
             { label: 'PRE-ORDER SYSTEM', value: 'Does not exist', sub: 'Holiday demand not captured', color: '#E63946' },
@@ -225,12 +247,12 @@ export function StandardAuditSample() {
       </SectionBlock>
 
       {/* SECTION 11 — AI SEARCH — VISIBLE (BONUS) */}
-      <div style={{ padding: '16px 28px 0' }}>
+      <div className="standard-block-container" style={{ padding: '16px 28px 0' }}>
         <div style={{ color: '#C8A96E', fontSize: '10px', letterSpacing: '3px', textTransform: 'uppercase', fontFamily: 'monospace', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '8px' }}>
           11 / AI Search & GEO Visibility
           <span style={{ background: 'rgba(200,169,110,0.1)', border: '1px solid rgba(200,169,110,0.3)', color: '#C8A96E', fontSize: '9px', fontFamily: 'monospace', letterSpacing: '1px', padding: '2px 8px', borderRadius: '3px' }}>★ STANDARD BONUS</span>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '12px', marginBottom: '8px' }}>
+        <div className="standard-ai-grid" style={{ gap: '12px', marginBottom: '8px' }}>
           {[
             { platform: 'ChatGPT', result: 'Not found', detail: 'No AI-generated mention in any query' },
             { platform: 'Perplexity', result: 'Not found', detail: 'Competitors cited. This business was not.' },
@@ -246,99 +268,101 @@ export function StandardAuditSample() {
       </div>
 
       {/* SECTION 12 — REPUTATION — VISIBLE (BONUS) */}
-      <div style={{ padding: '16px 28px 0' }}>
+      <div className="standard-block-container" style={{ padding: '16px 28px 0' }}>
         <div style={{ color: '#C8A96E', fontSize: '10px', letterSpacing: '3px', textTransform: 'uppercase', fontFamily: 'monospace', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '8px' }}>
           12 / Reputation Management
           <span style={{ background: 'rgba(200,169,110,0.1)', border: '1px solid rgba(200,169,110,0.3)', color: '#C8A96E', fontSize: '9px', fontFamily: 'monospace', letterSpacing: '1px', padding: '2px 8px', borderRadius: '3px' }}>★ STANDARD BONUS</span>
         </div>
-        <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '8px' }}>
-          <thead>
-            <tr style={{ background: '#111827' }}>
-              {['PLATFORM', 'RATING', 'REVIEWS', 'VELOCITY', 'UNANSWERED'].map(h => (
-                <td key={h} style={{ padding: '7px 10px', color: '#C8A96E', fontSize: '10px', letterSpacing: '1px', fontFamily: 'monospace', fontWeight: 700 }}>{h}</td>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {[
-              ['Google', '4.2 ★', '134', '~2/mo', '87%'],
-              ['Yelp', '3.0 ★', '48', '<1/mo', '94%'],
-              ['Facebook', '4.5 ★', '23', '<1/mo', '100%'],
-            ].map(([p, r, rv, v, u], i) => (
-              <tr key={p} style={{ background: i % 2 === 0 ? '#FFFFFF' : '#F5F5F5' }}>
-                <td style={{ padding: '7px 10px', fontSize: '12px', fontWeight: 600, color: '#1A1A1A' }}>{p}</td>
-                <td style={{ padding: '7px 10px', fontSize: '12px', color: '#374151' }}>{r}</td>
-                <td style={{ padding: '7px 10px', fontSize: '12px', color: '#374151' }}>{rv}</td>
-                <td style={{ padding: '7px 10px', fontSize: '12px', color: '#374151' }}>{v}</td>
-                <td style={{ padding: '7px 10px' }}><span style={{ background: '#FFEBEE', color: '#E63946', fontSize: '11px', fontWeight: 700, padding: '2px 6px', borderRadius: '3px' }}>{u}</span></td>
+        <div style={{ overflowX: 'auto', width: '100%' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '8px', minWidth: '500px' }}>
+            <thead>
+              <tr style={{ background: '#111827' }}>
+                {['PLATFORM', 'RATING', 'REVIEWS', 'VELOCITY', 'UNANSWERED'].map(h => (
+                  <td key={h} style={{ padding: '7px 10px', color: '#C8A96E', fontSize: '10px', letterSpacing: '1px', fontFamily: 'monospace', fontWeight: 700 }}>{h}</td>
+                ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {[
+                ['Google', '4.2 ★', '134', '~2/mo', '87%'],
+                ['Yelp', '3.0 ★', '48', '<1/mo', '94%'],
+                ['Facebook', '4.5 ★', '23', '<1/mo', '100%'],
+              ].map(([p, r, rv, v, u], i) => (
+                <tr key={p} style={{ background: i % 2 === 0 ? '#FFFFFF' : '#F5F5F5' }}>
+                  <td style={{ padding: '7px 10px', fontSize: '12px', fontWeight: 600, color: '#1A1A1A' }}>{p}</td>
+                  <td style={{ padding: '7px 10px', fontSize: '12px', color: '#374151' }}>{r}</td>
+                  <td style={{ padding: '7px 10px', fontSize: '12px', color: '#374151' }}>{rv}</td>
+                  <td style={{ padding: '7px 10px', fontSize: '12px', color: '#374151' }}>{v}</td>
+                  <td style={{ padding: '7px 10px' }}><span style={{ background: '#FFEBEE', color: '#E63946', fontSize: '11px', fontWeight: 700, padding: '2px 6px', borderRadius: '3px' }}>{u}</span></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       {/* SECTION 13 — COMPETITIVE CONTEXT — BLURRED */}
       <SectionBlock sectionNum="13" sectionTitle="Competitive Context" blurred={true}>
-        <div style={{ background: '#1A1A2E', borderRadius: '4px', padding: '14px', height: '60px' }}>
-          <div style={{ color: '#9CA3AF', fontSize: '12px' }}>1–2 competitor analysis, key data points, competitive gaps, recommended actions...</div>
-        </div>
+        <BlurredSectionContent title="Market Density Share & Regional Gaps" bullets={["Competitor Search Share", "Directory Dominance", "AI Citation Index", "Local SEO Rank Gaps"]} />
       </SectionBlock>
 
       {/* SECTION 14 — IMPACT MATRIX — PARTIAL */}
-      <div style={{ padding: '16px 28px' }}>
+      <div className="standard-block-container" style={{ padding: '16px 28px' }}>
         <div style={{ color: '#C8A96E', fontSize: '10px', letterSpacing: '3px', textTransform: 'uppercase', fontFamily: 'monospace', marginBottom: '12px' }}>14 / Impact Matrix</div>
-        <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '12px' }}>
-          <thead>
-            <tr style={{ background: '#111827' }}>
-              {['RECOMMENDATION', 'EFFORT', 'IMPACT', 'CATEGORY'].map(h => (
-                <td key={h} style={{ padding: '8px 12px', color: '#C8A96E', fontSize: '10px', letterSpacing: '1px', fontFamily: 'monospace', fontWeight: 700 }}>{h}</td>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {[
-              ['Register the domain — available today for under $15', 'Low', 'Critical', 'QUICK WIN', '#1B5E20', '#E8F5E9'],
-              ['Claim and correct the duplicate Yelp listing', 'Low', 'Critical', 'QUICK WIN', '#1B5E20', '#E8F5E9'],
-              ['Update hours across all platforms', 'Low', 'High', 'QUICK WIN', '#1B5E20', '#E8F5E9'],
-            ].map(([rec, effort, impact, cat, cc, cb]) => (
-              <tr key={rec} style={{ background: '#FFFFFF', borderBottom: '1px solid #E5E7EB' }}>
-                <td style={{ padding: '8px 12px', fontSize: '11px', color: '#1A1A1A' }}>{rec}</td>
-                <td style={{ padding: '8px 12px', fontSize: '11px', color: '#555', textAlign: 'center' }}>{effort}</td>
-                <td style={{ padding: '8px 12px', fontSize: '11px', color: '#555', textAlign: 'center' }}>{impact}</td>
-                <td style={{ padding: '8px 12px' }}><span style={{ background: cb, color: cc, fontSize: '10px', fontWeight: 700, padding: '2px 8px', borderRadius: '3px', fontFamily: 'monospace' }}>{cat}</span></td>
+        <div style={{ overflowX: 'auto', width: '100%' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '12px', minWidth: '600px' }}>
+            <thead>
+              <tr style={{ background: '#111827' }}>
+                {['RECOMMENDATION', 'EFFORT', 'IMPACT', 'CATEGORY'].map(h => (
+                  <td key={h} style={{ padding: '8px 12px', color: '#C8A96E', fontSize: '10px', letterSpacing: '1px', fontFamily: 'monospace', fontWeight: 700 }}>{h}</td>
+                ))}
               </tr>
-            ))}
-            <tr>
-              <td colSpan={4} style={{ padding: '0' }}>
-                <div style={{ filter: 'blur(5px)', userSelect: 'none', pointerEvents: 'none' }}>
-                  {[
-                    ['Build a simple website with hours, location, brand story', 'Low', 'High', 'BIG SWING', '#E65100', '#FFF8E1'],
-                    ['Claim Google Business Profile and optimize all fields', 'Low', 'Critical', 'QUICK WIN', '#1B5E20', '#E8F5E9'],
-                    ['Launch Instagram with product photography', 'Medium', 'High', 'BIG SWING', '#E65100', '#FFF8E1'],
-                    ['Build pre-order system for holiday season', 'Medium', 'High', 'BIG SWING', '#E65100', '#FFF8E1'],
-                  ].map(([rec, effort, impact, cat, cc, cb]) => (
-                    <div key={rec} style={{ display: 'grid', gridTemplateColumns: '1fr auto auto auto', gap: '8px', padding: '8px 12px', background: '#F9F9F9', borderBottom: '1px solid #E5E7EB' }}>
-                      <span style={{ fontSize: '11px', color: '#1A1A1A' }}>{rec}</span>
-                      <span style={{ fontSize: '11px', color: '#555', textAlign: 'center', minWidth: '60px' }}>{effort}</span>
-                      <span style={{ fontSize: '11px', color: '#555', textAlign: 'center', minWidth: '60px' }}>{impact}</span>
-                      <span style={{ background: cb, color: cc, fontSize: '10px', fontWeight: 700, padding: '2px 8px', borderRadius: '3px', fontFamily: 'monospace', minWidth: '80px', textAlign: 'center' }}>{cat}</span>
-                    </div>
-                  ))}
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {[
+                ['Register the domain — available today for under $15', 'Low', 'Critical', 'QUICK WIN', '#1B5E20', '#E8F5E9'],
+                ['Claim and correct the duplicate Yelp listing', 'Low', 'Critical', 'QUICK WIN', '#1B5E20', '#E8F5E9'],
+                ['Update hours across all platforms', 'Low', 'High', 'QUICK WIN', '#1B5E20', '#E8F5E9'],
+              ].map(([rec, effort, impact, cat, cc, cb]) => (
+                <tr key={rec} style={{ background: '#FFFFFF', borderBottom: '1px solid #E5E7EB' }}>
+                  <td style={{ padding: '8px 12px', fontSize: '11px', color: '#1A1A1A', fontWeight: 600 }}>{rec}</td>
+                  <td style={{ padding: '8px 12px', fontSize: '11px', color: '#555', textAlign: 'center' }}>{effort}</td>
+                  <td style={{ padding: '8px 12px', fontSize: '11px', color: '#555', textAlign: 'center' }}>{impact}</td>
+                  <td style={{ padding: '8px 12px' }}><span style={{ background: cb, color: cc, fontSize: '10px', fontWeight: 700, padding: '2px 8px', borderRadius: '3px', fontFamily: 'monospace' }}>{cat}</span></td>
+                </tr>
+              ))}
+              <tr>
+                <td colSpan={4} style={{ padding: '0' }}>
+                  <div style={{ filter: 'blur(5px)', userSelect: 'none', pointerEvents: 'none' }}>
+                    {[
+                      ['Build a simple website with hours, location, brand story', 'Low', 'High', 'BIG SWING', '#E65100', '#FFF8E1'],
+                      ['Claim Google Business Profile and optimize all fields', 'Low', 'Critical', 'QUICK WIN', '#1B5E20', '#E8F5E9'],
+                      ['Launch Instagram with product photography', 'Medium', 'High', 'BIG SWING', '#E65100', '#FFF8E1'],
+                      ['Build pre-order system for holiday season', 'Medium', 'High', 'BIG SWING', '#E65100', '#FFF8E1'],
+                    ].map(([rec, effort, impact, cat, cc, cb]) => (
+                      <div key={rec} style={{ display: 'grid', gridTemplateColumns: '1fr auto auto auto', gap: '8px', padding: '8px 12px', background: '#F9F9F9', borderBottom: '1px solid #E5E7EB' }}>
+                        <span style={{ fontSize: '11px', color: '#1A1A1A' }}>{rec}</span>
+                        <span style={{ fontSize: '11px', color: '#555', textAlign: 'center', minWidth: '60px' }}>{effort}</span>
+                        <span style={{ fontSize: '11px', color: '#555', textAlign: 'center', minWidth: '60px' }}>{impact}</span>
+                        <span style={{ background: cb, color: cc, fontSize: '10px', fontWeight: 700, padding: '2px 8px', borderRadius: '3px', fontFamily: 'monospace', minWidth: '80px', textAlign: 'center' }}>{cat}</span>
+                      </div>
+                    ))}
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
       {/* TOTAL IMPACT */}
-      <div style={{ background: '#111827', padding: '20px 28px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '20px' }}>
+      <div className="standard-impact-bar" style={{ background: '#111827', padding: '20px 28px' }}>
         <div>
           <div style={{ color: '#9CA3AF', fontSize: '10px', letterSpacing: '3px', textTransform: 'uppercase', fontFamily: 'monospace', marginBottom: '4px' }}>Total Revenue Impact</div>
           <div style={{ color: '#E63946', fontSize: '36px', fontWeight: 900, letterSpacing: '-1px', lineHeight: 1 }}>$65K–$120K</div>
           <div style={{ color: '#9CA3AF', fontSize: '11px', fontWeight: 600, marginTop: '4px', letterSpacing: '2px' }}>PER YEAR</div>
         </div>
-        <div style={{ display: 'flex', gap: '32px' }}>
+        <div style={{ display: 'flex', gap: '32px', flexWrap: 'wrap' }}>
           <div>
             <div style={{ color: '#16A34A', fontSize: '10px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '6px' }}>Not Caused By:</div>
             {['Product quality', 'Community trust', 'Staff dedication'].map(t => (
@@ -355,7 +379,7 @@ export function StandardAuditSample() {
       </div>
 
       {/* FOOTER */}
-      <div style={{ background: '#0A1628', padding: '14px 28px', borderTop: '1px solid rgba(255,255,255,0.05)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div className="standard-footer" style={{ background: '#0A1628', padding: '14px 28px', borderTop: '1px solid rgba(255,255,255,0.05)', flexWrap: 'wrap', gap: '10px' }}>
         <div style={{ color: '#C8A96E', fontSize: '11px' }}>Ola · Strategic Co-Architect · Sovereign X Audits · BlackFur Capital Group LLC</div>
         <div style={{ color: '#555', fontSize: '10px', fontFamily: 'monospace', textAlign: 'right' }}>
           SAMPLE DOCUMENT — SOVEREIGN X AUDITS<br/>

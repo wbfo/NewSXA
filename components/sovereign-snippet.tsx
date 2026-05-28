@@ -1,6 +1,6 @@
 import React from 'react';
 
-// SovereignSnippet.tsx (overwritten from SnippetSample.tsx)
+// SovereignSnippet.tsx
 // Sovereign X Intelligence Snippet — Sample
 // Anonymized · Multi-Location Healthcare Group
 
@@ -13,27 +13,47 @@ export function SovereignSnippet() {
     ) : content;
 
   return (
-    <div style={{
+    <div className="snippet-container" style={{
       width: '900px', maxWidth: '92vw',
       background: '#FFFFFF',
       borderRadius: '8px', overflow: 'hidden',
       boxShadow: '0 24px 80px rgba(0,0,0,0.7)',
       fontFamily: "'Inter', 'DM Sans', system-ui, sans-serif",
       color: '#111827',
+      margin: '0 auto',
     }}>
+      <style dangerouslySetInnerHTML={{ __html: `
+        .snippet-header { display: flex; justify-content: space-between; align-items: center; }
+        .snippet-disclosure { display: flex; gap: 12px; align-items: flex-start; }
+        .snippet-address { display: flex; gap: 14px; }
+        .snippet-findings-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+        .snippet-impact-bar { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+        .snippet-details-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 24px; }
+
+        @media (max-width: 768px) {
+          .snippet-header { flex-direction: column !important; align-items: flex-start !important; gap: 12px !important; padding: 16px !important; }
+          .snippet-header > div:last-child { margin-top: 8px !important; }
+          .snippet-disclosure { padding: 12px 16px !important; }
+          .snippet-address { padding: 16px !important; flex-direction: column !important; gap: 12px !important; }
+          .snippet-findings-grid { grid-template-columns: 1fr !important; padding: 16px !important; gap: 16px !important; }
+          .snippet-impact-bar { flex-direction: column !important; align-items: flex-start !important; gap: 16px !important; padding: 16px !important; }
+          .snippet-impact-bar > div:last-child { flex-direction: column !important; gap: 12px !important; }
+          .snippet-details-grid { grid-template-columns: 1fr !important; padding: 16px !important; gap: 20px !important; }
+        }
+      `}} />
 
       {/* HEADER BAR */}
-      <div style={{ background: '#0A1628', padding: '16px 28px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div className="snippet-header" style={{ background: '#0A1628', padding: '16px 28px' }}>
         <div>
           <div style={{ color: '#C8A96E', fontSize: '11px', fontWeight: 600, letterSpacing: '3px', textTransform: 'uppercase' }}>Sovereign X Audits · BlackFur Capital Group LLC</div>
           <div style={{ color: '#FFFFFF', fontSize: '20px', fontWeight: 800, marginTop: '4px', letterSpacing: '-0.5px' }}>SOVEREIGN INTELLIGENCE <span style={{ color: '#C8A96E' }}>SNIPPET</span></div>
           <div style={{ color: '#38BDF8', fontSize: '11px', marginTop: '4px' }}>Multi-Location Healthcare Group · New York, NY · Multi-Location DSO · May 2026</div>
         </div>
-        <div style={{ border: '1px solid #C8A96E', color: '#C8A96E', fontSize: '10px', letterSpacing: '2px', padding: '4px 12px', borderRadius: '4px', fontFamily: 'monospace' }}>AICC Verified</div>
+        <div style={{ border: '1px solid #C8A96E', color: '#C8A96E', fontSize: '10px', letterSpacing: '2px', padding: '4px 12px', borderRadius: '4px', fontFamily: 'monospace', whiteSpace: 'nowrap' }}>AICC Verified</div>
       </div>
 
       {/* DISCLOSURE */}
-      <div style={{ background: '#FFFBEB', padding: '12px 28px', display: 'flex', gap: '12px', alignItems: 'flex-start', borderBottom: '1px solid #FCD34D' }}>
+      <div className="snippet-disclosure" style={{ background: '#FFFBEB', padding: '12px 28px', borderBottom: '1px solid #FCD34D' }}>
         <span style={{ fontSize: '18px' }}>⚠️</span>
         <div style={{ fontSize: '12px', color: '#92400E', lineHeight: 1.5 }}>
           <strong>PARTIAL DISCLOSURE:</strong> This document contains 3 of 20 findings identified in a full intelligence review of this organization's digital footprint. A complete Sovereign X Audit is available upon request.
@@ -41,7 +61,7 @@ export function SovereignSnippet() {
       </div>
 
       {/* PERSONAL ADDRESS */}
-      <div style={{ padding: '20px 28px', display: 'flex', gap: '14px', borderBottom: '1px solid #F3F4F6' }}>
+      <div className="snippet-address" style={{ padding: '20px 28px', borderBottom: '1px solid #F3F4F6' }}>
         <div style={{ width: '40px', height: '40px', background: '#F3F4F6', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B7280" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         </div>
@@ -54,7 +74,7 @@ export function SovereignSnippet() {
       </div>
 
       {/* THREE FINDINGS */}
-      <div style={{ padding: '20px 28px', display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px' }}>
+      <div className="snippet-findings-grid" style={{ padding: '20px 28px' }}>
 
         {/* Finding 01 */}
         <div style={{ background: '#FFFFFF', borderRadius: '6px', borderTop: '4px solid #E63946', padding: '16px', boxShadow: '0 2px 8px rgba(0,0,0,0.08)', display: 'flex', flexDirection: 'column' }}>
@@ -143,7 +163,7 @@ export function SovereignSnippet() {
       </div>
 
       {/* IMPACT BAR */}
-      <div style={{ background: '#111827', padding: '20px 28px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '20px' }}>
+      <div className="snippet-impact-bar" style={{ background: '#111827', padding: '20px 28px' }}>
         <div>
           <div style={{ color: '#9CA3AF', fontSize: '10px', letterSpacing: '3px', textTransform: 'uppercase', fontFamily: 'monospace', marginBottom: '4px' }}>Total Revenue Impact</div>
           <div style={{ color: '#E63946', fontSize: '40px', fontWeight: 900, letterSpacing: '-2px', lineHeight: 1 }}>$680K–$970K</div>
@@ -166,7 +186,7 @@ export function SovereignSnippet() {
       </div>
 
       {/* FINDINGS COUNT + COVERAGE */}
-      <div style={{ padding: '20px 28px', display: 'grid', gridTemplateColumns: '1fr 1.6fr', gap: '24px' }}>
+      <div className="snippet-details-grid" style={{ padding: '20px 28px' }}>
         <div>
           <div style={{ color: '#111827', fontWeight: 700, fontSize: '14px', marginBottom: '4px' }}>THESE ARE 3 OF 20 FINDINGS.</div>
           <div style={{ color: '#9CA3AF', fontSize: '12px', fontStyle: 'italic', marginBottom: '12px' }}>The full Sovereign X Audit covers:</div>
@@ -180,7 +200,7 @@ export function SovereignSnippet() {
               ['🤖', 'AI Workforce Deployment — specific roles where AI reduces cost and increases output'],
             ].map(([icon, text]) => (
               <div key={text} style={{ display: 'flex', gap: '8px', fontSize: '11px', color: '#9CA3AF', lineHeight: 1.4 }}>
-                <span>{icon}</span><span>{text}</span>
+                <span style={{ flexShrink: 0 }}>{icon}</span><span>{text}</span>
               </div>
             ))}
           </div>
@@ -190,12 +210,12 @@ export function SovereignSnippet() {
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '12px' }}>
           <div style={{ color: '#111827', fontWeight: 700, fontSize: '14px', letterSpacing: '0.05em' }}>THE NEXT STEP IS A 30-MINUTE CONVERSATION.</div>
           <div style={{ color: '#6B7280', fontSize: '12px', lineHeight: 1.6 }}>No commitment, no pressure — just the full picture of what the data shows and what the priority sequence looks like to fix it.</div>
-          <div style={{ display: 'flex', gap: '24px', alignItems: 'center', marginTop: '4px' }}>
-            <div style={{ textAlign: 'center' }}>
+          <div style={{ display: 'flex', gap: '24px', alignItems: 'center', marginTop: '4px', flexWrap: 'wrap' }}>
+            <div style={{ textAlign: 'left', minWidth: '140px' }}>
               <div style={{ color: '#6B7280', fontSize: '10px', fontWeight: 700 }}>THIS CONVERSATION COSTS:</div>
               <div style={{ color: '#16A34A', fontSize: '28px', fontWeight: 900, fontFamily: 'monospace' }}>$0</div>
             </div>
-            <div style={{ textAlign: 'center' }}>
+            <div style={{ textAlign: 'left', minWidth: '180px' }}>
               <div style={{ color: '#6B7280', fontSize: '10px', fontWeight: 700 }}>THE STATUS QUO COSTS:</div>
               <div style={{ color: '#E63946', fontSize: '18px', fontWeight: 900, fontFamily: 'monospace' }}>$680K–$970K/YR</div>
             </div>
@@ -204,7 +224,7 @@ export function SovereignSnippet() {
       </div>
 
       {/* FOOTER */}
-      <div style={{ background: '#0A1628', padding: '14px 28px', borderTop: '1px solid rgba(255,255,255,0.05)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div style={{ background: '#0A1628', padding: '14px 28px', borderTop: '1px solid rgba(255,255,255,0.05)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
         <div style={{ color: '#C8A96E', fontSize: '11px' }}>Ola · Strategic Co-Architect · Sovereign X Audits · BlackFur Capital Group LLC</div>
         <div style={{ color: '#555', fontSize: '10px', fontFamily: 'monospace', textAlign: 'right' }}>
           SAMPLE DOCUMENT — SOVEREIGN X AUDITS<br/>
