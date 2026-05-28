@@ -423,7 +423,7 @@ const FAQ_ITEMS = [
   },
   {
     q: "What's the difference between Standard and Deep?",
-    a: "Standard covers all 21 sections of your digital infrastructure with dollar figures and a priority sequence. Deep adds everything in Standard plus competitive context (how your competitors are positioned against you), a prioritized impact matrix, and the AI Readiness section with a specific Voice Agent ROI calculation if applicable. If you are serious about implementation, Deep is the right tier."
+    a: "Both tiers cover the same 20-section framework. The difference is depth of execution and what's included. Standard ($750) covers 14 sections with real findings and dollar figures on every gap identified. You receive the Sovereignty Scorecard, a full Impact Matrix, and an embedded priority sequence. Three sections — Local Presence, AI Search Visibility, and Reputation Management — are delivered at the same depth as Deep. Deep ($2,000) covers all 20 sections at full depth. You get everything in Standard plus: competitive intelligence on 4–5 direct competitors, your owned audience and communication analysis, a Press & PR Opportunity Map with named outlets, a full AI Readiness assessment with Voice Agent ROI calculation, a Total Revenue Impact synthesis showing how every finding compounds, a standalone Priority Sequence, a full 90-Day Roadmap, and 30-day direct access to Ola via the Priority Hotline. Both tiers include the 30-Day Check-In."
   }
 ];
 
@@ -1024,9 +1024,9 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                   <h3 className="text-white">Sovereign X Digital Audit — Standard</h3>
                   <p className="desc text-dim">A clean, structured review of the website, conversion friction, and quick wins.</p>
                   <ul>
-                    <li className="text-subtle">Website &amp; content review</li>
-                    <li className="text-subtle">Conversion leaks identified</li>
-                    <li className="text-subtle">Clear next-step brief</li>
+                    <li className="text-subtle">14 diagnostic sections covered</li>
+                    <li className="text-subtle">Revenue leaks with dollar figures</li>
+                    <li className="text-subtle">Impact matrix with priority sequence</li>
                   </ul>
                   <div className="svc-foot">
                     <a href="#intake" style={{ color: "var(--neon-blue)", textDecoration: "none", fontWeight: "500" }}>Start This Audit →</a>
@@ -1042,9 +1042,9 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                   <h3 className="text-white">Sovereign X Digital Audit — Deep</h3>
                   <p className="desc text-dim">A more detailed audit with technical notes, competitive context, and revenue impact.</p>
                   <ul>
-                    <li className="text-subtle">Technical analysis</li>
-                    <li className="text-subtle">Competitive context</li>
-                    <li className="text-subtle">ROI-facing findings</li>
+                    <li className="text-subtle">All 14 sections at full depth</li>
+                    <li className="text-subtle">4–5 competitor intelligence brief</li>
+                    <li className="text-subtle">90-day roadmap + priority hotline</li>
                   </ul>
                   <div className="svc-foot">
                     <a href="#intake" style={{ color: "var(--neon-blue)", textDecoration: "none", fontWeight: "500" }}>Start This Audit →</a>
@@ -1254,29 +1254,46 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
             <div className="deliverables-grid">
               {[
                 {
-                  title: "Sovereign X Digital Audit",
+                  title: "Sovereign X Digital Audit — Standard",
                   lead: "A complete written verdict on your business — what's broken, what it's costing you, and what to fix first.",
                   items: [
-                    "21-section written report",
-                    "Revenue leak analysis with dollar figures",
-                    "Technical performance scores",
-                    "AI readiness & voice agent assessment",
-                    "Impact matrix",
-                    "Fix-it checklist",
+                    "14-section intelligence report",
+                    "The Sovereignty Scorecard — your digital score out of 100",
+                    "Domain security & ownership analysis",
+                    "Desktop and mobile performance with revenue impact",
+                    "Website & conversion architecture audit",
+                    "Brand identity & consistency review",
+                    "Local presence — NAP, Google Business Profile, Local SEO",
+                    "Social media infrastructure analysis",
+                    "Revenue leaks & missed contact touchpoints",
+                    "AI search visibility — ChatGPT, Perplexity, Google AI Overview",
+                    "Reputation management across all review platforms",
+                    "Competitive context — 1 to 2 direct competitors",
+                    "Impact Matrix with embedded priority sequence",
                     "Delivered within 48–72 hours"
-                  ]
+                  ],
+                  bonus: {
+                    title: "★ STANDARD BONUS",
+                    text: "Three sections delivered at full Deep depth:\nLocal Presence · AI Search Visibility · Reputation Management"
+                  }
                 },
                 {
-                  title: "Sovereign X Image Audit",
-                  lead: "An honest outside read on what your presence is actually communicating — not what you think it is.",
+                  title: "Sovereign X Digital Audit — Deep",
+                  lead: "Everything in Standard at full depth — plus the intelligence layer that tells you exactly what your competitors know that you don't.",
                   items: [
-                    "18-section written report",
-                    "Personal color analysis card",
-                    "Hairstyle analysis card",
-                    "Outfit direction card",
-                    "Grooming guide (Men) / Makeup guide (Women)",
-                    "Scent profile card",
-                    "Quick reference card"
+                    "All 14 Standard sections at full execution depth",
+                    "★ Local Presence — full competitive GBP analysis",
+                    "★ AI Search Visibility — schema roadmap, llms.txt, AI citation tracking",
+                    "★ Reputation Management — full competitor comparison & migration roadmap",
+                    "Competitive context — 4 to 5 competitors with full intelligence per competitor",
+                    "Owned Audience & Communication audit",
+                    "Press & PR Opportunity Map with named outlets",
+                    "AI Readiness & Voice Agent ROI calculation",
+                    "Total Revenue Impact synthesis — how every finding compounds",
+                    "Standalone Priority Sequence — every action sequenced with recovery estimates",
+                    "90-Day Roadmap — phased implementation with milestones, owners, costs",
+                    "Priority Hotline — 30-day direct access to Ola post-delivery",
+                    "Delivered within 48–72 hours"
                   ]
                 }
               ].map((column) => (
@@ -1284,16 +1301,29 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                   <h3>{column.title}</h3>
                   <p className="deliverable-lead">{column.lead}</p>
                   <ul>
-                    {column.items.map((item) => (
-                      <li key={item}>
-                        <span className="bullet-star">✦</span>{item}
-                      </li>
-                    ))}
+                    {column.items.map((item) => {
+                      const isStar = item.startsWith("★");
+                      const cleanedItem = isStar ? item.substring(1).trim() : item;
+                      return (
+                        <li key={item}>
+                          <span className="bullet-star">{isStar ? "★" : "✦"}</span>{cleanedItem}
+                        </li>
+                      );
+                    })}
                   </ul>
+                  {column.bonus && (
+                    <div className="deliverable-bonus-block">
+                      <div style={{ fontWeight: "bold", marginBottom: "4px" }}>{column.bonus.title}</div>
+                      <div>{column.bonus.text}</div>
+                    </div>
+                  )}
                 </article>
               ))}
             </div>
-            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '40px' }}>
+            <div style={{ textAlign: "center", marginTop: "32px", fontSize: "14px", color: "var(--subtle)", fontFamily: "monospace", letterSpacing: "1px" }}>
+              30-Day Check-In included with every audit — Standard and Deep.
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '24px' }}>
               <a className="btn white-cta" href="#intake">Start Your Audit <span className="arrow">→</span></a>
             </div>
           </div>
@@ -1314,8 +1344,8 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
               </div>
               <div className="metric-card metric-card--purple">
                 <div className="metric-label">03 // COVERAGE</div>
-                <div className="metric-value"><AnimatedCounter value={21} suffix=" sections" /></div>
-                <div className="metric-desc">Every audit covers 21 diagnostic areas across your digital presence</div>
+                <div className="metric-value">14–20 sections</div>
+                <div className="metric-desc">Standard covers 14 diagnostic areas. Deep covers all 20.</div>
               </div>
             </div>
           </div>
@@ -1366,13 +1396,20 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                   promo="$350 promo" 
                   reg="$500 regular" 
                   description="A meticulous review of your public brand image, aesthetic consistency, and content messaging across all active social and professional channels."
+                  comingSoon={true}
+                  opacity={0.5}
                 />
                 <PricingAccordionRow 
                   name="Sovereign X Image Audit — Public Figure" 
                   promo="$750 promo" 
                   reg="$1,000 regular" 
                   description="An exhaustive multi-platform audit designed for high-profile individuals, focusing on reputation management, PR vulnerability, and premium brand positioning."
+                  comingSoon={true}
+                  opacity={0.5}
                 />
+                <div className="block-note" style={{ marginTop: "12px", opacity: 0.8, fontSize: "11px", marginBottom: "16px" }}>
+                  Image Audit is currently in limited availability. Contact us directly to inquire.
+                </div>
                 <div style={{ marginTop: "24px" }}>
                   <a href="#intake" className="btn btn-primary" style={{ display: "inline-block" }}>
                     Start the Audit <span className="arrow">→</span>
@@ -1398,6 +1435,35 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                   reg="Included in Deep" 
                   description="A fully mapped out content strategy and scheduling matrix tailored to your brand voice, designed to maximize engagement and audience retention."
                 />
+                <PricingAccordionRow 
+                  name="Sovereign X Social Direction Guide" 
+                  promo="$300 promo" 
+                  reg="$400 regular" 
+                  description="A comprehensive playbook establishing your visual style, core content pillars, platform-specific formatting guidelines, and exact grid direction to build a cohesive, premium social brand."
+                />
+                <PricingAccordionRow 
+                  name="Sovereign X Press & EPK Package" 
+                  promo="$350 promo" 
+                  reg="$500 regular" 
+                  description="A fully structured Electronic Press Kit including your professional biography, media asset folders, interview questions, and a targeted PR map to secure premium press placements."
+                />
+                <div 
+                  className="deliverable-bonus-block" 
+                  style={{ 
+                    marginTop: "20px", 
+                    marginBottom: "20px", 
+                    borderLeftColor: "var(--neon-blue)",
+                    background: "rgba(0, 180, 216, 0.04)"
+                  }}
+                >
+                  <div style={{ fontWeight: "bold", fontSize: "12px", color: "var(--neon-blue)", fontFamily: "monospace", letterSpacing: "1px", marginBottom: "4px" }}>
+                    ★ SOVEREIGN X PROFESSIONAL BUNDLE
+                  </div>
+                  <div style={{ fontSize: "11px", color: "var(--subtle)", lineHeight: "1.5" }}>
+                    All four strategy add-ons together: <strong style={{ color: "#FFF" }}>$900 promo</strong> / $1,200 regular.<br />
+                    <span style={{ color: "var(--neon-blue)" }}>Saves $200 vs individual pricing.</span> Available after any completed audit.
+                  </div>
+                </div>
                 <PricingAccordionRow
                   name="Sovereign X Voice Agent — Starter"
                   promo="$1,500 setup"
@@ -1421,6 +1487,22 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                   promo="$500–$1,500 one-time" 
                   reg="$150–$200/mo retainer" 
                   description="A high-performance, conversion-optimized landing page or website designed according to Sovereign X standards, complete with ongoing technical maintenance."
+                />
+                <PricingAccordionRow 
+                  name="Sovereign X Competitor Vulnerability Report" 
+                  promo="Pricing TBD" 
+                  reg="" 
+                  description="A specialized post-audit intelligence brief mapping your direct competitors' digital architecture weaknesses, organic gaps, and target opportunities."
+                  comingSoon={true}
+                  opacity={0.5}
+                />
+                <PricingAccordionRow 
+                  name="Sovereign X AI Compliance Audit" 
+                  promo="Healthcare · Legal · Finance" 
+                  reg="" 
+                  description="A rigorous regulatory and security compliance audit for generative AI pipelines, specialized tools, and LLM deployments in high-stakes industries."
+                  comingSoon={true}
+                  opacity={0.5}
                 />
                 <div className="block-note" style={{ marginTop: "16px" }}>
                   Phase 2 services are recommended after audit delivery. If you have existing findings, contact us directly.
@@ -2059,16 +2141,16 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
   );
 }
 
-function PricingAccordionRow({ name, promo, reg, description }: any) {
+function PricingAccordionRow({ name, promo, reg, description, comingSoon, opacity }: any) {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div style={{ borderBottom: "1px dashed var(--border)", padding: "14px 0" }}>
+    <div style={{ borderBottom: "1px dashed var(--border)", padding: "14px 0", opacity: opacity ?? 1 }}>
       <div 
         className="pricing-row" 
         onClick={() => setIsOpen(!isOpen)} 
         style={{ cursor: "pointer", borderBottom: "none", padding: 0 }}
       >
-        <div className="name" style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+        <div className="name" style={{ display: "flex", alignItems: "center", gap: "10px", flexWrap: "wrap" }}>
           <span style={{ 
             transform: isOpen ? "rotate(90deg)" : "rotate(0deg)", 
             transition: "transform 0.2s ease", 
@@ -2077,6 +2159,21 @@ function PricingAccordionRow({ name, promo, reg, description }: any) {
             display: "inline-block" 
           }}>▶</span>
           {name}
+          {comingSoon && (
+            <span style={{ 
+              color: "#C8A96E", 
+              fontFamily: "monospace", 
+              fontSize: "9px", 
+              letterSpacing: "1px", 
+              border: "1px solid rgba(200, 169, 110, 0.3)", 
+              background: "rgba(200, 169, 110, 0.05)",
+              padding: "1px 6px", 
+              borderRadius: "2px",
+              marginLeft: "4px"
+            }}>
+              COMING SOON
+            </span>
+          )}
         </div>
         <div className="promo">{promo}</div>
         <div className="reg">{reg}</div>

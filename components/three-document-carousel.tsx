@@ -131,8 +131,8 @@ export function ThreeDocumentCarousel() {
         <ScrollSnapDoc 
           label="02 / Sovereign X Digital Audit — Standard" 
           title="The Complete Intelligence Report"
-          description="A comprehensive 21-section analysis of your entire digital presence. We expose every hidden revenue leak, broken system, and visibility gap that is quietly draining your business."
-          badge="$500 PROMO · 21 SECTIONS · 48–72 HRS" 
+          description="A comprehensive 14-section intelligence report covering your full digital presence — with dollar figures on every finding."
+          badge="$500 PROMO · 14 SECTIONS · 48–72 HRS" 
           badgeColor="#C8A96E" 
           ctaText="Start a Standard Audit" 
           ctaHref="/intake"

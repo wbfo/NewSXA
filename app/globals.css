@@ -6454,4 +6454,18 @@ html[data-theme="light"] .sx-intake .btn-ghost:hover {
   }
 }
 
+/* deliverables card bonus block premium styling */
+.sx-intake .deliverable-bonus-block {
+  background: rgba(200, 169, 110, 0.06) !important;
+  border-left: 3px solid #C8A96E !important;
+  padding: 14px 20px !important;
+  margin-top: 20px !important;
+  color: #C8A96E !important;
+  font-family: var(--mono) !important;
+  font-size: 12px !important;
+  white-space: pre-line !important;
+  line-height: 1.5 !important;
+}
+
+
 
