@@ -715,6 +715,8 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
           <div className="nav-links">
             <Link href="/#hero">Home</Link>
             <Link href="/#services">Services</Link>
+            <Link href="/#pricing">Pricing</Link>
+            <Link href="/#faq">FAQ</Link>
             <Link href="/samples">Sample Reports</Link>
             <Link href="/blog">Intelligence</Link>
           </div>
@@ -739,6 +741,8 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
           <div className="nav-mobile-menu">
             <Link href="/#hero"     onClick={() => setMenuOpen(false)}>Home</Link>
             <Link href="/#services" onClick={() => setMenuOpen(false)}>Services</Link>
+            <Link href="/#pricing"  onClick={() => setMenuOpen(false)}>Pricing</Link>
+            <Link href="/#faq"      onClick={() => setMenuOpen(false)}>FAQ</Link>
             <Link href="/samples"   onClick={() => setMenuOpen(false)}>Sample Reports</Link>
             <Link href="/blog"      onClick={() => setMenuOpen(false)}>Intelligence</Link>
             <Link href="/#intake" className="nav-mobile-cta" onClick={() => setMenuOpen(false)}>Start Audit →</Link>
@@ -1276,7 +1280,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
           </div>
         </section>
 
-        <section className="compact">
+        <section className="compact" id="pricing">
           <div className="wrap">
             <div className="sec-head">
               <div className="label">Pricing</div>
@@ -1502,7 +1506,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
           </div>
         </section>
 
-        <section className="faq-stage" style={{
+        <section className="faq-stage" id="faq" style={{
           maxWidth: "760px",
           margin: "0 auto",
           padding: "60px 40px",
