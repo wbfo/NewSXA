@@ -5,7 +5,7 @@
 
 ## About
 Sovereign X Audits provides three core services:
-1. Sovereign X Digital Audit — a 21-section business intelligence report
+1. Sovereign X Digital Audit — a 14–20 section business intelligence report
 2. X Image Audit — an 18-section personal brand intelligence report
 3. Voice Agent Services — ElevenLabs-powered voice agents for businesses
 
@@ -18,7 +18,7 @@ Reports are delivered via Google Drive within 72 hours of intake completion.
 - Standard: $500 promotional / $750 regular
 - Deep: $1,500 promotional / $2,000 regular
 - Deep + Intake: $2,000 promotional / $2,500 regular
-- Covers: 21 sections including technical performance, revenue leaks,
+- Covers: 14 to 20 sections including technical performance, revenue leaks,
   NAP consistency, AI search visibility, reputation management,
   social media infrastructure, and AI readiness assessment
 - Best for: law firms, dental practices, medical practices,

@@ -540,13 +540,13 @@ export function StandardAuditExample() {
             }}
           >
             <div style={{ fontWeight: "bold", color: "#666", marginBottom: "8px" }}>
-              — 18 additional sections redacted from this sample —
+              — 11 additional sections redacted from this sample —
             </div>
-            The complete Sovereign X Digital Audit — Standard covers all 21 sections including Domain
-            Security, Technical Performance, Mobile Accessibility, Brand Identity, Social Media
-            Infrastructure, Audience Ownership, Revenue Leaks, AI Search Visibility, Reputation Management,
-            Email & SMS Strategy, Press & PR, Competitive Context, the Sovereignty Scorecard, What This
-            All Adds Up To, the Priority Sequence, and the Next Step.
+            The complete Sovereign X Digital Audit — Standard covers all 14 sections including Domain
+            Security & Ownership, Technical Performance (Desktop & Mobile), Website & Conversion
+            Architecture, Brand Identity, Local Presence (Local SEO, GBP, NAP), Social Media Infrastructure,
+            Revenue Leaks & Systems, AI Search Visibility, Reputation Management, Competitive Context,
+            the Sovereignty Scorecard, and the Impact Matrix with embedded priority sequence.
             <div style={{ marginTop: "8px", color: "#C8A96E" }}>
               Delivered to your Google Drive within 72 hours. AICC Verified. No discovery call required.
             </div>

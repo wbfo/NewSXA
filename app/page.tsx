@@ -142,7 +142,7 @@ const jsonLd = {
           "name": "What is the difference between Standard and Deep?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Standard covers all 21 sections with dollar figures and a priority sequence. Deep adds competitive context, a prioritized impact matrix, and the AI Readiness section with a Voice Agent ROI calculation."
+            "text": "Both tiers cover the same 20-section framework. Standard covers 14 sections with real findings and dollar figures on every gap identified, plus three sections at full Deep depth. Deep covers all 20 sections at full depth plus competitive intelligence, a standalone priority sequence, and 90-day roadmap."
           }
         }
       ]

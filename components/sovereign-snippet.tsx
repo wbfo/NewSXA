@@ -99,7 +99,7 @@ export function SovereignSnippet() {
         <div style={{ color: "#D97706", fontSize: "20px" }}>⚠️</div>
         <div style={{ color: "#92400E", fontSize: "13px", lineHeight: 1.5 }}>
           <strong>PARTIAL DISCLOSURE: </strong>
-          This document contains 3 of 14 findings identified in a full intelligence review
+          This document contains 3 of 20 findings identified in a full intelligence review
           of Multi-Location Healthcare Group's digital footprint — not just the corporate
           brand and multi-location network. A complete Sovereign Audit is available upon
           request.
@@ -909,7 +909,7 @@ export function SovereignSnippet() {
       >
         <div style={{ width: "38%" }}>
           <div style={{ color: "#111827", fontWeight: "bold", fontSize: "14px" }}>
-            THESE ARE 3 OF 14 FINDINGS.
+            THESE ARE 3 OF 20 FINDINGS.
           </div>
           <div style={{ color: "#9CA3AF", fontSize: "12px", fontStyle: "italic", marginBottom: "16px" }}>
             The full Sovereign X Audit covers:
@@ -964,7 +964,7 @@ export function SovereignSnippet() {
                 $1,500 PROMO / $2,000 REGULAR
               </div>
               <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                {["Corporate brand", "21 sections", "Revenue leak estimates", "Priority sequence", "Delivered in 72 hours"].map(item => (
+                {["Corporate brand", "20 sections", "Revenue leak estimates", "Priority sequence", "Delivered in 72 hours"].map(item => (
                   <div key={item} style={{ color: "#9CA3AF", fontSize: "10px", display: "flex", gap: "6px" }}>
                     <span style={{ color: "#38BDF8" }}>✓</span> {item}
                   </div>

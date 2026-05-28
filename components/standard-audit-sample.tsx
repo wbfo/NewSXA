@@ -218,10 +218,10 @@ export function StandardAuditSample() {
         </div>
       </div>
 
-      {/* PRIORITY SEQUENCE */}
+      {/* IMPACT MATRIX (EMBEDDED PRIORITY SEQUENCE) */}
       <div className="sample-report-dark" style={{ padding: '20px 28px', background: '#0D0D0D' }}>
         <div style={{ color: '#C8A96E', fontSize: '10px', letterSpacing: '3px', textTransform: 'uppercase', fontFamily: 'monospace', marginBottom: '14px' }}>
-          20 / The Priority Sequence
+          14 / Impact Matrix
         </div>
         <div className="sample-report-grid sample-report-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
           {[
