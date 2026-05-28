@@ -3909,7 +3909,7 @@ html[data-theme="light"] .sx-intake .nav-mobile-menu {
 .sx-intake .intake-form-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
+  gap: 20px;
 }
 
 .sx-intake .field {
@@ -3918,10 +3918,22 @@ html[data-theme="light"] .sx-intake .nav-mobile-menu {
   background: var(--surface);
   border: 1px solid var(--border);
   color: var(--text);
-  padding: 16px 20px;
-  font-size: 15px;
+  padding: 18px 24px;
+  font-size: 16px;
   outline: none;
   border-radius: 0;
+}
+
+.sx-intake select.field {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23C8A96E' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 20px center !important;
+  background-size: 16px !important;
+  padding-right: 48px !important;
+  cursor: pointer;
 }
 
 .sx-intake .field::placeholder {
@@ -5129,8 +5141,10 @@ html[data-theme="light"] .sx-intake .order-business {
 
 
   .sx-intake .intake-form-grid,
+  .sx-intake .intake-sub-grid,
   .sx-intake .order-summary-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
   }
 
   .sx-intake .hero {

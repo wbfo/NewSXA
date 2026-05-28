@@ -1706,6 +1706,30 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
 
                 <form className="order-form" onSubmit={submitOrder}>
                   <div className="intake-form-grid">
+                    {/* SELECT PACKAGE (Standard option removed) */}
+                    <div style={{ gridColumn: "1 / -1", marginBottom: "4px" }}>
+                      <label style={{ color: "#C8A96E", fontSize: "11px", fontFamily: "var(--mono)", letterSpacing: "1.5px", textTransform: "uppercase", fontWeight: 600 }}>Select Package Option *</label>
+                    </div>
+                    <select
+                      className="field"
+                      style={{ border: "1px solid #C8A96E", color: "#C8A96E", backgroundColor: "rgba(200,169,110,0.05)", fontWeight: 600, gridColumn: "1 / -1", marginBottom: "12px" }}
+                      value={form.packageName}
+                      onChange={(event) => {
+                        const packageName = event.target.value;
+                        updateField("packageName", packageName);
+                        const matchedTier = TIER_OPTIONS.find((tier) => tier.name === packageName);
+                        if (matchedTier) {
+                          setSelectedTier(matchedTier.id);
+                          updateField("serviceType", matchedTier.serviceType);
+                        }
+                      }}
+                    >
+                      <option>Sovereign X Digital Audit — Deep</option>
+                      <option>Sovereign X Image Audit</option>
+                      <option>Sovereign X Voice Agent</option>
+                      <option>Sovereign X Growth Blueprint</option>
+                    </select>
+
                     {/* Primary Contact Details */}
                     <input className="field" placeholder="Full name *" value={form.customerName} onChange={(event) => updateField("customerName", event.target.value)} required />
                     <input className="field" placeholder="Email address *" type="email" value={form.email} onChange={(event) => updateField("email", event.target.value)} required />
@@ -1726,7 +1750,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                       onChange={(event) => updateField("biggestChallenge", event.target.value)} 
                       rows={3} 
                       required 
-                      style={{ gridColumn: "span 2" }} 
+                      style={{ gridColumn: "1 / -1" }} 
                     />
                     
                     <select 
@@ -1734,7 +1758,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                       value={form.aiImplementation} 
                       onChange={(event) => updateField("aiImplementation", event.target.value)} 
                       required 
-                      style={{ gridColumn: "span 2" }}
+                      style={{ gridColumn: "1 / -1" }}
                     >
                       <option value="">Considering AI implementation? *</option>
                       <option>Yes</option>
@@ -1747,32 +1771,8 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                       placeholder="Any upcoming deadlines or events?" 
                       value={form.deadlines} 
                       onChange={(event) => updateField("deadlines", event.target.value)} 
-                      style={{ gridColumn: "span 2" }} 
+                      style={{ gridColumn: "1 / -1" }} 
                     />
-
-                    {/* SELECT PACKAGE (Standard option removed) */}
-                    <div style={{ gridColumn: "span 2", marginTop: "16px", marginBottom: "4px" }}>
-                      <label style={{ color: "#C8A96E", fontSize: "11px", fontFamily: "var(--mono)", letterSpacing: "1.5px", textTransform: "uppercase", fontWeight: 600 }}>Select Package Option *</label>
-                    </div>
-                    <select
-                      className="field"
-                      style={{ border: "1px solid #C8A96E", color: "#C8A96E", backgroundColor: "rgba(200,169,110,0.05)", fontWeight: 600, gridColumn: "span 2" }}
-                      value={form.packageName}
-                      onChange={(event) => {
-                        const packageName = event.target.value;
-                        updateField("packageName", packageName);
-                        const matchedTier = TIER_OPTIONS.find((tier) => tier.name === packageName);
-                        if (matchedTier) {
-                          setSelectedTier(matchedTier.id);
-                          updateField("serviceType", matchedTier.serviceType);
-                        }
-                      }}
-                    >
-                      <option>Sovereign X Digital Audit — Deep</option>
-                      <option>Sovereign X Image Audit</option>
-                      <option>Sovereign X Voice Agent</option>
-                      <option>Sovereign X Growth Blueprint</option>
-                    </select>
 
                     {/* Conditional Digital Audit Exclusive Social Handles */}
                     <AnimatePresence initial={false}>
@@ -1786,12 +1786,12 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                           className="intake-sub-grid grid-responsive-2"
                           style={{
                             gridColumn: "1 / -1",
-                            gap: "12px",
+                            gap: "20px",
                             width: "100%",
                             overflow: "hidden"
                           }}
                         >
-                          <div style={{ gridColumn: "span 2", fontSize: "11px", color: "#C8A96E", fontFamily: "var(--mono)", letterSpacing: "1.5px", marginTop: "12px", marginBottom: "4px", textTransform: "uppercase", fontWeight: 600 }}>Social Audits (Optional)</div>
+                          <div style={{ gridColumn: "1 / -1", fontSize: "11px", color: "#C8A96E", fontFamily: "var(--mono)", letterSpacing: "1.5px", marginTop: "12px", marginBottom: "4px", textTransform: "uppercase", fontWeight: 600 }}>Social Audits (Optional)</div>
                           <input className="field" placeholder="Instagram handle (Business)" value={form.socialInstagram} onChange={(event) => updateField("socialInstagram", event.target.value)} />
                           <input className="field" placeholder="LinkedIn profile URL" value={form.socialLinkedin} onChange={(event) => updateField("socialLinkedin", event.target.value)} />
                           <input className="field" placeholder="Facebook page URL" value={form.socialFacebook} onChange={(event) => updateField("socialFacebook", event.target.value)} />
