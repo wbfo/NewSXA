@@ -3918,7 +3918,8 @@ html[data-theme="light"] .sx-intake .nav-mobile-menu {
   background: var(--surface);
   border: 1px solid var(--border);
   color: var(--text);
-  padding: 14px 16px;
+  padding: 16px 20px;
+  font-size: 15px;
   outline: none;
   border-radius: 0;
 }

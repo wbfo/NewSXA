@@ -1707,21 +1707,21 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                 <form className="order-form" onSubmit={submitOrder}>
                   <div className="intake-form-grid">
                     {/* Primary Contact Details */}
-                    <input className="field" placeholder="Full name (Who is legally responsible?) *" value={form.customerName} onChange={(event) => updateField("customerName", event.target.value)} required />
-                    <input className="field" placeholder="Direct email (No generic info@ addresses) *" type="email" value={form.email} onChange={(event) => updateField("email", event.target.value)} required />
-                    <input className="field" placeholder="Phone / WhatsApp (For urgent alerts)" value={form.phone} onChange={(event) => updateField("phone", event.target.value)} />
-                    <input className="field" placeholder="How did you find us? (Be honest — we track this)" value={form.hearAbout} onChange={(event) => updateField("hearAbout", event.target.value)} required />
+                    <input className="field" placeholder="Full name *" value={form.customerName} onChange={(event) => updateField("customerName", event.target.value)} required />
+                    <input className="field" placeholder="Email address *" type="email" value={form.email} onChange={(event) => updateField("email", event.target.value)} required />
+                    <input className="field" placeholder="Phone / WhatsApp" value={form.phone} onChange={(event) => updateField("phone", event.target.value)} />
+                    <input className="field" placeholder="How did you hear about us?" value={form.hearAbout} onChange={(event) => updateField("hearAbout", event.target.value)} required />
 
                     {/* Business/Audit Details */}
-                    <input className="field" placeholder="Business name (The entity under audit) *" value={form.businessName} onChange={(event) => updateField("businessName", event.target.value)} required />
-                    <input className="field" placeholder="Website URL (The domain that is currently underperforming) *" value={form.websiteUrl} onChange={(event) => updateField("websiteUrl", event.target.value)} required />
-                    <input className="field" placeholder="Industry or field (What do you actually sell?) *" value={form.industry} onChange={(event) => updateField("industry", event.target.value)} required />
-                    <input className="field" placeholder="City & state (Where is the friction happening?) *" value={form.cityState} onChange={(event) => updateField("cityState", event.target.value)} required />
-                    <input className="field" placeholder="Number of locations (How many places are leaking revenue?) *" value={form.locations} onChange={(event) => updateField("locations", event.target.value)} required />
+                    <input className="field" placeholder="Business name *" value={form.businessName} onChange={(event) => updateField("businessName", event.target.value)} required />
+                    <input className="field" placeholder="Website URL *" value={form.websiteUrl} onChange={(event) => updateField("websiteUrl", event.target.value)} required />
+                    <input className="field" placeholder="Industry / field *" value={form.industry} onChange={(event) => updateField("industry", event.target.value)} required />
+                    <input className="field" placeholder="City and state *" value={form.cityState} onChange={(event) => updateField("cityState", event.target.value)} required />
+                    <input className="field" placeholder="Number of locations *" value={form.locations} onChange={(event) => updateField("locations", event.target.value)} required />
                     
                     <textarea 
                       className="field field-textarea" 
-                      placeholder="Biggest current challenge (Be honest — what is actually broken?) *" 
+                      placeholder="Biggest current challenge *" 
                       value={form.biggestChallenge} 
                       onChange={(event) => updateField("biggestChallenge", event.target.value)} 
                       rows={3} 
@@ -1736,7 +1736,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                       required 
                       style={{ gridColumn: "span 2" }}
                     >
-                      <option value="">Are you considering AI implementation? (Or waiting to get left behind?) *</option>
+                      <option value="">Considering AI implementation? *</option>
                       <option>Yes</option>
                       <option>No</option>
                       <option>Maybe</option>
@@ -1744,7 +1744,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                     
                     <input 
                       className="field" 
-                      placeholder="Upcoming deadlines or critical events? (Why does this need to be fixed today?)" 
+                      placeholder="Any upcoming deadlines or events?" 
                       value={form.deadlines} 
                       onChange={(event) => updateField("deadlines", event.target.value)} 
                       style={{ gridColumn: "span 2" }} 
