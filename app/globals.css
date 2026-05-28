@@ -5136,11 +5136,6 @@ html[data-theme="light"] .sx-intake .order-business {
     gap: 0;
   }
 
-  /* Hide theme toggle on mobile, keep CTA visible */
-  .sx-intake .nav-actions > button {
-    display: none;
-  }
-
   .sx-intake .nav-hamburger {
     display: flex;
   }
