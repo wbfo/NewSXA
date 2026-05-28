@@ -252,8 +252,8 @@ const EMPTY_FORM = {
   businessName: "",
   email: "",
   phone: "",
-  packageName: "Sovereign X Digital Audit — Standard",
-  serviceType: "Digital Audit",
+  packageName: "Sovereign X Digital Audit — Deep",
+  serviceType: "Deep Digital Audit",
   budget: "",
   hearAbout: "",
   websiteUrl: "",
@@ -504,7 +504,7 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const [selectedTier, setSelectedTier] = useState(TIER_OPTIONS[0].id);
+  const [selectedTier, setSelectedTier] = useState(TIER_OPTIONS[1].id);
   const [heroBgY, setHeroBgY] = useState(0);
   const [navScrolled, setNavScrolled] = useState(false);
   const revealRef = useRef<HTMLDivElement>(null);
@@ -1690,12 +1690,57 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
 
                 <form className="order-form" onSubmit={submitOrder}>
                   <div className="intake-form-grid">
-                    <input className="field" placeholder="Full name *" value={form.customerName} onChange={(event) => updateField("customerName", event.target.value)} required />
-                    <input className="field" placeholder="Email address *" type="email" value={form.email} onChange={(event) => updateField("email", event.target.value)} required />
-                    <input className="field" placeholder="Phone / WhatsApp" value={form.phone} onChange={(event) => updateField("phone", event.target.value)} />
+                    {/* Primary Contact Details */}
+                    <input className="field" placeholder="Full name (Who is legally responsible?) *" value={form.customerName} onChange={(event) => updateField("customerName", event.target.value)} required />
+                    <input className="field" placeholder="Direct email (No generic info@ addresses) *" type="email" value={form.email} onChange={(event) => updateField("email", event.target.value)} required />
+                    <input className="field" placeholder="Phone / WhatsApp (For urgent alerts)" value={form.phone} onChange={(event) => updateField("phone", event.target.value)} />
+                    <input className="field" placeholder="How did you find us? (Be honest — we track this)" value={form.hearAbout} onChange={(event) => updateField("hearAbout", event.target.value)} required />
+
+                    {/* Business/Audit Details */}
+                    <input className="field" placeholder="Business name (The entity under audit) *" value={form.businessName} onChange={(event) => updateField("businessName", event.target.value)} required />
+                    <input className="field" placeholder="Website URL (The domain that is currently underperforming) *" value={form.websiteUrl} onChange={(event) => updateField("websiteUrl", event.target.value)} required />
+                    <input className="field" placeholder="Industry or field (What do you actually sell?) *" value={form.industry} onChange={(event) => updateField("industry", event.target.value)} required />
+                    <input className="field" placeholder="City & state (Where is the friction happening?) *" value={form.cityState} onChange={(event) => updateField("cityState", event.target.value)} required />
+                    <input className="field" placeholder="Number of locations (How many places are leaking revenue?) *" value={form.locations} onChange={(event) => updateField("locations", event.target.value)} required />
+                    
+                    <textarea 
+                      className="field field-textarea" 
+                      placeholder="Biggest current challenge (Be honest — what is actually broken?) *" 
+                      value={form.biggestChallenge} 
+                      onChange={(event) => updateField("biggestChallenge", event.target.value)} 
+                      rows={3} 
+                      required 
+                      style={{ gridColumn: "span 2" }} 
+                    />
+                    
+                    <select 
+                      className="field" 
+                      value={form.aiImplementation} 
+                      onChange={(event) => updateField("aiImplementation", event.target.value)} 
+                      required 
+                      style={{ gridColumn: "span 2" }}
+                    >
+                      <option value="">Are you considering AI implementation? (Or waiting to get left behind?) *</option>
+                      <option>Yes</option>
+                      <option>No</option>
+                      <option>Maybe</option>
+                    </select>
+                    
+                    <input 
+                      className="field" 
+                      placeholder="Upcoming deadlines or critical events? (Why does this need to be fixed today?)" 
+                      value={form.deadlines} 
+                      onChange={(event) => updateField("deadlines", event.target.value)} 
+                      style={{ gridColumn: "span 2" }} 
+                    />
+
+                    {/* SELECT PACKAGE (Standard option removed) */}
+                    <div style={{ gridColumn: "span 2", marginTop: "16px", marginBottom: "4px" }}>
+                      <label style={{ color: "#C8A96E", fontSize: "11px", fontFamily: "var(--mono)", letterSpacing: "1.5px", textTransform: "uppercase", fontWeight: 600 }}>Select Package Option *</label>
+                    </div>
                     <select
                       className="field"
-                      style={{ border: "1px solid #C8A96E", color: "#C8A96E", backgroundColor: "rgba(200,169,110,0.05)", fontWeight: 600 }}
+                      style={{ border: "1px solid #C8A96E", color: "#C8A96E", backgroundColor: "rgba(200,169,110,0.05)", fontWeight: 600, gridColumn: "span 2" }}
                       value={form.packageName}
                       onChange={(event) => {
                         const packageName = event.target.value;
@@ -1707,18 +1752,17 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                         }
                       }}
                     >
-                      <option>Sovereign X Digital Audit — Standard</option>
                       <option>Sovereign X Digital Audit — Deep</option>
                       <option>Sovereign X Image Audit</option>
                       <option>Sovereign X Voice Agent</option>
                       <option>Sovereign X Growth Blueprint</option>
                     </select>
-                    <input className="field" placeholder="How did you hear about us?" value={form.hearAbout} onChange={(event) => updateField("hearAbout", event.target.value)} required />
 
+                    {/* Conditional Digital Audit Exclusive Social Handles */}
                     <AnimatePresence initial={false}>
-                      {(isDigitalAudit || isVoiceAgent) && (
+                      {isDigitalAudit && (
                         <motion.div
-                          key="digital-voice-block"
+                          key="digital-social-block"
                           initial={{ opacity: 0, height: 0 }}
                           animate={{ opacity: 1, height: "auto" }}
                           exit={{ opacity: 0, height: 0 }}
@@ -1731,40 +1775,8 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
                             overflow: "hidden"
                           }}
                         >
-                          <input className="field" placeholder="Business name *" value={form.businessName} onChange={(event) => updateField("businessName", event.target.value)} required />
-                          <input className="field" placeholder="Website URL *" value={form.websiteUrl} onChange={(event) => updateField("websiteUrl", event.target.value)} required />
-                          <input className="field" placeholder={isVoiceAgent ? "Industry *" : "Industry / field *"} value={form.industry} onChange={(event) => updateField("industry", event.target.value)} required style={{ gridColumn: "span 2" }} />
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-
-                    <AnimatePresence initial={false}>
-                      {isDigitalAudit && (
-                        <motion.div
-                          key="digital-exclusive-block"
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: "auto" }}
-                          exit={{ opacity: 0, height: 0 }}
-                          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                          className="intake-sub-grid grid-responsive-2"
-                          style={{
-                            gridColumn: "1 / -1",
-                            gap: "12px",
-                            width: "100%",
-                            overflow: "hidden"
-                          }}
-                        >
-                          <input className="field" placeholder="City and state *" value={form.cityState} onChange={(event) => updateField("cityState", event.target.value)} required />
-                          <input className="field" placeholder="Number of locations *" value={form.locations} onChange={(event) => updateField("locations", event.target.value)} required />
-                          <textarea className="field field-textarea" placeholder="Biggest current challenge *" value={form.biggestChallenge} onChange={(event) => updateField("biggestChallenge", event.target.value)} rows={3} required style={{ gridColumn: "span 2" }} />
-                          <select className="field" value={form.aiImplementation} onChange={(event) => updateField("aiImplementation", event.target.value)} required style={{ gridColumn: "span 2" }}>
-                            <option value="">Considering AI implementation? *</option>
-                            <option>Yes</option>
-                            <option>No</option>
-                            <option>Maybe</option>
-                          </select>
-                          <input className="field" placeholder="Any upcoming deadlines or events?" value={form.deadlines} onChange={(event) => updateField("deadlines", event.target.value)} style={{ gridColumn: "span 2" }} />
-                          <input className="field" placeholder="Instagram handle" value={form.socialInstagram} onChange={(event) => updateField("socialInstagram", event.target.value)} />
+                          <div style={{ gridColumn: "span 2", fontSize: "11px", color: "#C8A96E", fontFamily: "var(--mono)", letterSpacing: "1.5px", marginTop: "12px", marginBottom: "4px", textTransform: "uppercase", fontWeight: 600 }}>Social Audits (Optional)</div>
+                          <input className="field" placeholder="Instagram handle (Business)" value={form.socialInstagram} onChange={(event) => updateField("socialInstagram", event.target.value)} />
                           <input className="field" placeholder="LinkedIn profile URL" value={form.socialLinkedin} onChange={(event) => updateField("socialLinkedin", event.target.value)} />
                           <input className="field" placeholder="Facebook page URL" value={form.socialFacebook} onChange={(event) => updateField("socialFacebook", event.target.value)} />
                           <input className="field" placeholder="Other social platform + handle" value={form.socialOther} onChange={(event) => updateField("socialOther", event.target.value)} />
