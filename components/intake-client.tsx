@@ -5,7 +5,7 @@ import Link from "next/link";
 import type { DashboardPayload, ClientOrder } from "@/lib/domain/types";
 import { ThemeProvider, useTheme } from "@/components/theme-provider";
 import { formatDisplayTime } from "@/lib/utils/time";
-import { ThreeDocumentCarousel } from "@/components/three-document-carousel";
+import { SovereignSnippet } from "@/components/sovereign-snippet";
 import { motion, AnimatePresence, useInView, animate } from "framer-motion";
 import { SovereignXLogo } from "@/components/sovereign-x-logo";
 
@@ -1310,9 +1310,25 @@ function IntakeInner({ initialData }: { initialData: DashboardPayload }) {
         </section>
 
         {/* ── Snippet Parallax — What Lands in Your Drive ── */}
-        <section className="compact" id="samples" style={{ paddingBottom: "0" }}>
-          <div className="wrap">
-            <ThreeDocumentCarousel />
+        <section className="compact" id="samples" style={{ paddingBottom: "40px" }}>
+          <div className="wrap" style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+            <div className="text-center py-12 px-6" style={{ maxWidth: "640px", marginBottom: "32px" }}>
+              <p className="font-mono text-xs tracking-[4px] uppercase mb-4" style={{ color: "#C8A96E" }}>See The Work</p>
+              <h2 className="text-3xl md:text-4xl font-serif mb-4" style={{ color: "#D0C8B8", textTransform: "none", letterSpacing: "normal" }}>What You Receive Before You Pay a Dollar</h2>
+              <p className="text-sm mx-auto" style={{ color: "#888", lineHeight: 1.8 }}>
+                Before any client commits, we send a free partial disclosure — 3 verified findings from a real audit of their business or image. No pitch. No pressure. Just the intelligence.
+              </p>
+            </div>
+            
+            <div style={{ width: "100%", display: "flex", justifyContent: "center", paddingInline: "12px" }}>
+              <SovereignSnippet />
+            </div>
+
+            <div className="text-center mt-12">
+              <a href="/samples" className="font-mono text-sm tracking-widest uppercase border-b pb-1 transition-colors" style={{ color: "#C8A96E", borderColor: "#C8A96E44", textDecoration: "none" }}>
+                View Full Standard & Deep Sample Reports →
+              </a>
+            </div>
           </div>
         </section>
 
