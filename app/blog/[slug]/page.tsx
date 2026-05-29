@@ -356,8 +356,6 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
                 borderRadius: '8px',
                 border: '1px solid var(--border)',
                 boxShadow: 'var(--shadow-card)',
-                aspectRatio: '16/9',
-                objectFit: 'cover'
               }}
             />
           </div>
