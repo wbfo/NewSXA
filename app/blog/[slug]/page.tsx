@@ -149,10 +149,38 @@ const components = {
   ),
 
   ActionChecklist: ({ thisWeek, thisMonth }: any) => {
-    let weekItems = [];
-    let monthItems = [];
-    try { weekItems = typeof thisWeek === 'string' ? JSON.parse(thisWeek) : (thisWeek || []); } catch(e) { console.error('Error parsing thisWeek:', e); }
-    try { monthItems = typeof thisMonth === 'string' ? JSON.parse(thisMonth) : (thisMonth || []); } catch(e) { console.error('Error parsing thisMonth:', e); }
+    let weekItems: string[] = [];
+    let monthItems: string[] = [];
+
+    if (Array.isArray(thisWeek)) {
+      weekItems = thisWeek;
+    } else if (typeof thisWeek === 'string') {
+      try {
+        weekItems = JSON.parse(thisWeek);
+      } catch (e) {
+        try {
+          // Fallback to evaluating JS array expression
+          weekItems = new Function(`return ${thisWeek}`)();
+        } catch (err) {
+          console.error('Error parsing thisWeek:', err);
+        }
+      }
+    }
+
+    if (Array.isArray(thisMonth)) {
+      monthItems = thisMonth;
+    } else if (typeof thisMonth === 'string') {
+      try {
+        monthItems = JSON.parse(thisMonth);
+      } catch (e) {
+        try {
+          // Fallback to evaluating JS array expression
+          monthItems = new Function(`return ${thisMonth}`)();
+        } catch (err) {
+          console.error('Error parsing thisMonth:', err);
+        }
+      }
+    }
 
     return (
       <div style={{
