@@ -513,7 +513,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         paddingTop: '48px',
         paddingBottom: '80px',
       }}>
-        <MDXRemote source={content} components={components} />
+        <MDXRemote source={content} components={components} options={{ parseFrontmatter: false, mdxOptions: {}, blockJS: false }} />
       </div>
 
       {/* RELATED INTELLIGENCE */}
