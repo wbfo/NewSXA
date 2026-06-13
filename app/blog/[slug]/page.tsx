@@ -1,4 +1,5 @@
 import { getPostBySlug, getAllPosts } from '@/lib/blog'
+import { getRelatedPosts } from '@/lib/blog-taxonomy'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import { notFound } from 'next/navigation'
 // Cache bust
@@ -283,12 +284,21 @@ const components = {
 export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
   const { frontmatter, content } = getPostBySlug(resolvedParams.slug)
-  const allPosts = getAllPosts()
-  const relatedPosts = allPosts.filter((p: any) => p.slug !== resolvedParams.slug).slice(0, 3)
 
   if (!frontmatter) {
     notFound()
   }
+
+  const allPosts = getAllPosts()
+  const relatedPosts = getRelatedPosts(allPosts, {
+    slug: resolvedParams.slug,
+    title: String(frontmatter.title || ''),
+    description: String(frontmatter.description || ''),
+    date: String(frontmatter.date || ''),
+    industry: String(frontmatter.industry || ''),
+    stakes: String(frontmatter.stakes || ''),
+    tag: String(frontmatter.tag || ''),
+  }, 6)
 
   return (
     <main style={{ background: 'var(--bg)', minHeight: '100vh', color: 'var(--text)' }}>
@@ -532,7 +542,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
           paddingBottom: '16px',
           marginBottom: '32px',
         }}>
-          Related intelligence
+          Related intelligence · selected for this topic
         </h3>
         
         <div style={{

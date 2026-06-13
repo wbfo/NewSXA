@@ -1,38 +1,15 @@
 'use client'
 
 import { useState } from 'react'
-
-interface Post {
-  slug: string
-  title: string
-  description: string
-  date: string
-  industry: string
-  stakes: string
-  tag: string
-}
+import { getIntelligenceNode, intelligenceNodes, type BlogPostSummary } from '@/lib/blog-taxonomy'
 
 interface BlogIndexClientProps {
-  posts: Post[]
+  posts: BlogPostSummary[]
 }
 
 export function BlogIndexClient({ posts }: BlogIndexClientProps) {
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedTag, setSelectedTag] = useState('ALL')
-
-  // Available filters based on tags in posts
-  const tags = ['ALL', 'AI VISIBILITY', 'LOCAL VISIBILITY', 'METRICS', 'DIGITAL SOVEREIGNTY', 'THE STAKES']
-
-  // Normalization helper
-  const normalizeTag = (tag: string) => {
-    const t = tag.toUpperCase().trim()
-    if (t.includes('AI VISIBILITY')) return 'AI VISIBILITY'
-    if (t.includes('LOCAL VISIBILITY') || t.includes('GOOGLE VISIBILITY')) return 'LOCAL VISIBILITY'
-    if (t.includes('METRICS')) return 'METRICS'
-    if (t.includes('SOVEREIGNTY')) return 'DIGITAL SOVEREIGNTY'
-    if (t.includes('STAKES') || t.includes('AUDIT')) return 'THE STAKES'
-    return 'THE STAKES' // fallback grouping
-  }
 
   // Filter posts based on search query and selected tag
   const filteredPosts = posts.filter(post => {
@@ -45,13 +22,13 @@ export function BlogIndexClient({ posts }: BlogIndexClientProps) {
       return matchesSearch
     }
     
-    return matchesSearch && normalizeTag(post.tag) === selectedTag
+    return matchesSearch && getIntelligenceNode(post) === selectedTag
   })
 
   // Helper to count posts in each tag category
   const getTagCount = (tag: string) => {
     if (tag === 'ALL') return posts.length
-    return posts.filter(post => normalizeTag(post.tag) === tag).length
+    return posts.filter(post => getIntelligenceNode(post) === tag).length
   }
 
   return (
@@ -177,7 +154,12 @@ export function BlogIndexClient({ posts }: BlogIndexClientProps) {
       <div className="mobile-padding-wrapper" style={{ maxWidth: '1100px', margin: '0 auto', marginBottom: '24px' }}>
         <div className="search-container">
           <div className="search-input-wrapper">
-            <span className="search-icon">[SRC]</span>
+            <span className="search-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'block' }}>
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+            </span>
             <input
               type="text"
               className="search-input"
@@ -192,7 +174,7 @@ export function BlogIndexClient({ posts }: BlogIndexClientProps) {
               Filter by Intelligence Node:
             </div>
             <div className="filter-tags-grid">
-              {tags.map((tag) => {
+              {intelligenceNodes.map((tag) => {
                 const count = getTagCount(tag)
                 if (count === 0 && tag !== 'ALL') return null // hide empty nodes
                 return (
