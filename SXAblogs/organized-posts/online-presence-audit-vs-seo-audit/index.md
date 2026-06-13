@@ -1,0 +1,90 @@
+---
+title: "Online Presence Audit vs SEO Audit — What Each One Actually Checks"
+slug: "online-presence-audit-vs-seo-audit"
+category: "Comparison · Audit Types"
+type: "Evergreen"
+metaDescription: "An SEO audit and an online presence audit check different things. Most businesses assume they're getting both when they're only getting one. Here is exactly what each one covers — and which one you actually need."
+estimatedRevenueAtStake: "The visibility gaps an SEO audit leaves unchecked — GBP, AI citations, NAP consistency, trust signals"
+assets:
+  hero: "./assets/hero.png"
+  og: "./assets/og.png"
+---
+
+# Online Presence Audit vs SEO Audit — What Each One Actually Checks
+
+---
+
+A family medicine practice in Denver had commissioned an SEO audit from a marketing firm the previous year. The report was detailed: 87 pages covering keyword gaps, technical issues, page speed scores, and backlink opportunities. The practice implemented the recommendations. Their Google rankings improved.
+
+When a new patient moved to the area and asked ChatGPT for a recommendation for a primary care physician who accepted her insurance, the practice was not mentioned. When she searched Google for "family medicine Denver" she found them on page 2. Their GBP had outdated hours. Their Healthgrades profile was incomplete. Their NAP was inconsistent across four directories.
+
+The SEO audit had found real issues. It had also missed the majority of the factors determining whether this patient found them.
+
+---
+
+## What an SEO Audit Checks
+
+An SEO audit evaluates the factors that determine your website's ranking in Google's traditional blue-link results. A comprehensive SEO audit covers technical elements (crawlability, indexation, page speed, mobile performance, Core Web Vitals, HTTPS), on-page factors (keyword relevance, content quality, heading structure, meta titles and descriptions), off-page factors (backlink profile, domain authority, anchor text distribution), and increasingly, AI Overview visibility for priority queries.
+
+What a standard SEO audit does not evaluate: your Google Business Profile status and completeness, your NAP consistency across directories and data aggregators, how your business appears in ChatGPT or Perplexity, your review profile and response patterns, your visual and content consistency across LinkedIn, Yelp, and industry-specific directories, or whether your schema markup is configured correctly enough to support AI entity recognition.
+
+An SEO audit is a deep evaluation of one channel. It is not a complete picture of how your business is found.
+
+---
+
+## Finding 01: AN ONLINE PRESENCE AUDIT CASTS A SIGNIFICANTLY WIDER NET
+
+A comprehensive online presence audit evaluates your business across every channel where a prospective client might find or verify you — not just Google's organic results. The scope includes: your GBP (status, completeness, review profile, last update date, category accuracy), your website (technical performance, schema markup, content citability, AI-readability), your NAP consistency across 30+ directories, how you appear in ChatGPT, Perplexity, and Google AI Overviews, your social media profiles and their consistency with your website, your review profile across Google, Yelp, and industry-specific platforms, and your first-page Google brand search results. An SEO audit is a subset of this evaluation. An online presence audit is the complete picture.
+
+## Finding 02: GBP PROBLEMS ARE INVISIBLE TO AN SEO AUDIT
+
+Your Google Business Profile is one of the most important digital assets for local businesses — it drives 44% of clicks in local searches through the Maps pack, it is the primary trust verification source for 63.6% of consumers who check reviews before visiting a business, and it is a critical entity signal for AI recommendations. GBP status, completeness, and category accuracy are not evaluated by standard SEO audits. A business with a suspended GBP, an incomplete profile, or a category mismatch will receive no indication of these issues from an SEO audit. The organic rankings may be fine; the most important local discovery asset can be broken simultaneously.
+
+## Finding 03: NAP INCONSISTENCY IS AN SEO AUDIT BLIND SPOT WITH REAL CONSEQUENCES
+
+NAP (Name, Address, Phone) consistency across directories is one of the most common and high-impact problems in small business digital visibility. Only 30% of small businesses have consistent NAP across major directories. Inconsistent NAP reduces AI citation confidence, suppresses Google Maps rankings, and creates trust gaps for consumers who encounter conflicting information. Standard SEO audits typically flag NAP as a citation metric but rarely conduct the thorough 30+ directory check that reveals the full scope of inconsistencies. The family medicine practice had four directory inconsistencies that an SEO audit would not have surfaced as a priority finding.
+
+## Finding 04: AI VISIBILITY IS A DISTINCT DIMENSION MOST SEO AUDITS DON'T EVALUATE
+
+In 2026, a growing share of patient and client discovery begins on AI platforms. Standard SEO audits were not designed to evaluate AI visibility — they were designed to evaluate Google rankings. An online presence audit that includes AI visibility testing (running the five-query protocol across ChatGPT, Perplexity, and Google AI Overviews) provides findings that an SEO audit structurally cannot. The schema markup required to support AI entity recognition, the content citability assessment, the third-party citation quality review — these are all outside the scope of a standard SEO audit but directly within the scope of a comprehensive online presence audit.
+
+FINDING FIVE — WHICH ONE YOU NEED DEPENDS ON WHAT QUESTION YOU'RE TRYING TO ANSWER
+
+If the question is: "why has my organic Google ranking dropped?" — an SEO audit is the right tool. If the question is: "why am I not getting more new client inquiries despite having a reasonable online presence?" — an online presence audit is the right tool. The family medicine practice's problem was not their Google ranking, which had improved. Their problem was that the majority of new patient discovery paths — GBP, AI platforms, directory consistency, review profile — were underperforming. An SEO audit would not have found that. An online presence audit would have found all of it.
+
+---
+
+## Side-by-Side: What Each Audit Covers
+
+| | SEO Audit | Online Presence Audit |
+|---|---|---|
+| Website technical health | ✓ | ✓ |
+| Keyword rankings | ✓ | ✓ |
+| Backlink profile | ✓ | Partial |
+| Schema markup | Partial | ✓ |
+| Google Business Profile | ✗ | ✓ |
+| NAP consistency (30+ directories) | ✗ | ✓ |
+| AI platform visibility | ✗ | ✓ |
+| Review profile and trust signals | ✗ | ✓ |
+| Social media consistency | ✗ | ✓ |
+| First-page brand audit | ✗ | ✓ |
+
+---
+
+## Action Checklist
+
+**This Week**
+- If you have received an SEO audit in the past 12 months, check whether it covered: GBP completeness, NAP consistency across 30+ directories, and AI platform visibility. If not, those dimensions were not evaluated.
+- Search your business name in ChatGPT. Search your category and city. Note what you find.
+
+**This Month**
+- Commission a full online presence and AI Readiness Audit that evaluates all channels — not just organic search rankings.
+- Use the findings to identify whether the gaps limiting your new client acquisition are in SEO, or in the channels your SEO audit couldn't see.
+
+---
+
+An SEO audit tells you how your website ranks in Google. An online presence audit tells you how your business is found, verified, and recommended across every channel where a prospective client might encounter you.
+
+For most small businesses, the highest-leverage gaps are not the ones an SEO audit finds.
+
+[Book the Audit →](https://sxaudits.com/intake)

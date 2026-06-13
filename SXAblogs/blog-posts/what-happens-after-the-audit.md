@@ -1,0 +1,106 @@
+# What Happens After the Audit
+
+**Category:** The Audit · What We Do
+**Type:** Evergreen [E]
+**Slug:** /blog/what-happens-after-the-audit
+**Meta description:** The audit gives you the diagnosis. Here is what to do with the findings — how to prioritize, what to implement first, and how to measure whether it's working.
+**Estimated revenue at stake:** The gap between receiving findings and acting on them is where most of the opportunity is lost
+
+---
+
+A dermatologist in Dallas received her audit on a Wednesday morning. The findings were specific: her schema markup was misconfigured and producing validation errors; her NAP was inconsistent across eleven directories, including Apple Maps where she had a 2019 business address; she didn't appear in any AI category recommendations despite being the highest-rated dermatologist in her zip code; and her About page was written in language that AI systems couldn't excerpt in any useful form.
+
+She read the report. She understood the findings. And then she didn't know what to do next.
+
+Not because the findings were unclear — they were specific and prioritized. But because she had a full practice, a team to manage, and no in-house person whose job it was to implement the technical fixes the report outlined.
+
+The audit told her exactly what was wrong. The question of what to do about it was a separate problem.
+
+---
+
+## The Gap Between Diagnosis and Implementation
+
+The most common outcome after a digital audit is partial implementation: one or two findings addressed immediately, the rest deferred indefinitely. The highest-priority fix — which is often the least visible one, like schema misconfiguration or data aggregator inconsistency — gets deferred because it is technical and requires someone who knows what to do with it. The lower-priority but more visible fix — like adding photos to the GBP — gets addressed first because it is accessible and feels productive.
+
+This is a predictable outcome of receiving a diagnosis without a clear implementation path. The audit produces the diagnosis. The implementation path determines the results.
+
+---
+
+FINDING 01 — START WITH THE HIGHEST-LEVERAGE TECHNICAL FIXES FIRST
+
+The prioritization in the audit report is intentional — findings are ordered by revenue impact per unit of effort, not by complexity or visibility. The highest-leverage fixes are almost always the technical foundation items: schema markup configuration, NAP inconsistency in major directories, and GBP completeness. These have outsized impact on AI visibility because they affect the basic entity signals AI systems use to decide whether to cite and recommend a business at all. A business that addresses these three areas before anything else will see more impact from those fixes than from any amount of content creation or social posting.
+
+FINDING 02 — MOST HIGH-IMPACT FIXES ARE ONE-TIME ACTIONS
+
+The highest-priority findings in most audits are fixable in a bounded amount of work — not ongoing commitments. Correcting schema markup on a website is a one-time technical action. Updating NAP across directories is a several-hour task, not a recurring one (though it requires quarterly maintenance). Adding FAQ content to a website is a one-time content project. These are not campaign investments or monthly retainers — they are specific, time-bounded fixes that, once implemented, continue producing results without ongoing maintenance. This is different from content marketing or social media, which require continuous production to maintain results.
+
+FINDING 03 — THE 30-DAY IMPLEMENTATION SEQUENCE
+
+The implementation sequence that produces the fastest measurable improvement for most businesses follows a four-week framework. Week 1: fix the foundation — correct schema markup errors, update GBP to complete and accurate, update the two to three highest-discrepancy NAP listings. Week 2: extend the schema layer — add FAQ schema to service pages, correct sameAs links in Person or LocalBusiness schema, test all structured data through Google's Rich Results Test. Week 3: build citation authority — update professional directory listings, address data aggregator inconsistencies, identify and pursue one high-authority third-party citation. Week 4: improve content citability — rewrite About page in structured, quotable language, add one FAQ page addressing new client questions, ensure all key pages are updated within the last 90 days. The AI visibility improvements from this sequence typically become measurable within 45–60 days.
+
+FINDING 04 — IMPLEMENTATION REQUIRES A DESIGNATED OWNER
+
+The dermatologist's problem was not motivation or understanding — it was capacity. The findings were clear. The implementation required a designated owner: someone with access to the website backend to fix schema, someone with the time to work through the directory list, someone to rewrite the About page. If that person is not the business owner, the implementation requires either a staff member with a defined scope or a specific engagement with a technical implementer. The audit does not include implementation — it provides the diagnosis that makes implementation efficient and targeted. Businesses that move fastest are those that identify the implementation owner before the report arrives.
+
+FINDING FIVE — THE FOLLOW-UP AUDIT IS THE MEASURE OF PROGRESS
+
+AI visibility changes are not immediately visible in traditional analytics. Schema fixes don't produce a traffic spike the next day. NAP corrections don't cause a sudden jump in Google Maps ranking. The improvement is cumulative — AI systems update their entity models over weeks, not hours, as they recrawl and reprocess the updated signals. The way to verify that implementation is working is a follow-up audit 60–90 days after the first one. This is not an upsell — it is the measurement step. A second audit run against the same framework produces a new score, identifies what changed, and confirms whether the implementation addressed the right issues in the right sequence.
+
+---
+
+## The Post-Audit Implementation Checklist
+
+**Week 1 — Foundation:**
+- Fix schema markup errors identified in the audit (use Google's Rich Results Test to verify)
+- Complete your GBP: every field, services listed, updated description, recent photos
+- Correct NAP for the two to three directories with the highest discrepancy
+
+**Week 2 — Schema Layer:**
+- Add FAQ schema to service pages with Q&A content
+- Verify sameAs links in your schema connect to your LinkedIn, GBP, and website
+- Test all structured data and resolve any remaining validation errors
+
+**Week 3 — Citation Authority:**
+- Update professional association directory listings
+- Submit corrections to the primary data aggregators (Neustar, Infogroup, Acxiom)
+- Identify one high-authority third-party citation opportunity (guest article, industry profile, podcast)
+
+**Week 4 — Content Citability:**
+- Rewrite your website's About or bio page in clear, quotable, structured language
+- Add one FAQ page addressing your three most common new client questions
+- Ensure all primary service pages have been updated within the last 90 days
+
+**Day 60–90:**
+- Commission a follow-up audit to measure the score change and identify remaining gaps
+
+---
+
+## What to Do If You Can't Implement It Yourself
+
+The audit report is structured for independent implementation by anyone who can access the relevant platforms — Google Business Profile, the website backend, and a web browser. The schema fixes can be implemented by most web developers in under two hours. The NAP corrections require time and access, not technical expertise. The content rewrites require someone who can write clearly in your voice.
+
+If your team doesn't have the capacity for any of these, the audit findings are specific enough to hand to any competent implementer with clear instructions about what to prioritize. You are not starting from a broad brief — you are starting from a ranked list of specific actions.
+
+---
+
+The dermatologist found a web developer on Upwork and paid $350 to implement the schema fixes. She updated her GBP and top four directory listings herself in about three hours over two evenings. She rewrote her About page in an afternoon. The total implementation cost was under $600. Within 60 days, she was appearing in AI category recommendations for the first time.
+
+The audit cost $[X]. The implementation cost $600. The new patient inquiries from AI-driven discovery are still compounding.
+
+[Book the Audit →](https://sxaudits.com/intake)
+
+---
+
+## Image Descriptions
+
+**HERO IMAGE**
+Dark background. A ranked list of audit findings — HIGH PRIORITY (schema misconfigured), HIGH PRIORITY (NAP inconsistent in 11 directories), MEDIUM PRIORITY (About page not AI-readable), LOW PRIORITY (GBP photos outdated) — with a 30-day calendar beside it showing which week addresses which finding. Caption: "The audit tells you what's wrong. Here is how to fix it — in order." Sovereign X Audits branding bottom right.
+
+**INFOGRAPHIC**
+Titled "The 30-Day Post-Audit Implementation Sequence." Four-week calendar view: WEEK 1 (foundation: schema, GBP, top NAP fixes), WEEK 2 (schema layer: FAQ schema, sameAs links, validation), WEEK 3 (citation authority: directories, aggregators, one citation), WEEK 4 (content: About page rewrite, FAQ content, freshness). DAY 60–90: Follow-up audit. Bottom callout: "Most high-impact fixes are one-time actions, not ongoing campaigns." Dark background, gold accents, Sovereign X branding.
+
+**OG IMAGE (1200×630)**
+Dark background. Large headline: "You received the audit. Here is what to do with it." Subtext: "The diagnosis is in the report. The implementation sequence is what turns it into results. Here is exactly how to move from findings to measurable improvement." Sovereign X Audits logo bottom left. sxaudits.com bottom right.
+
+---
+*Sovereign X Audits · sxaudits.com · BlackFur Capital Group LLC*

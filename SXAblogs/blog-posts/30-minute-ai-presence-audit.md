@@ -1,0 +1,119 @@
+# How to Run a 30-Minute AI Presence Audit on Your Own Business Right Now
+
+**Category:** How To Fix It · All Industries
+**Type:** Timely [T]
+**Slug:** /blog/30-minute-ai-presence-audit
+**Meta description:** You can run a meaningful AI presence audit on your own business in 30 minutes. Here is the exact process — what to check, what to document, and what to do with what you find.
+**Estimated revenue at stake:** Varies; identifying even one major gap can recover $20K–$100K+ annually
+
+---
+
+You don't need a professional audit to find out whether your business has serious AI visibility problems. You need 30 minutes, a browser in incognito mode, and the willingness to look at what you find without filtering it through what you hope is true.
+
+This is the self-audit process. It won't replace a full Sovereign X audit — it won't catch everything, and it won't give you the dollar figures — but it will tell you whether you have a problem worth addressing urgently, and which areas are most likely causing it.
+
+---
+
+## Before You Start
+
+Open a browser in incognito or private mode for all searches. Your regular browser is personalized to your history and location in ways that make your business look more visible than it actually is to a new customer.
+
+Have a notepad or document open to record what you find. You will want to reference these notes later.
+
+Set a timer for 30 minutes. The goal is a rapid diagnostic, not an exhaustive analysis.
+
+---
+
+## Part 1 — AI Platform Testing (10 minutes)
+
+Open ChatGPT (chat.openai.com) and Perplexity (perplexity.ai) in separate tabs.
+
+Run three to five queries that reflect how a new customer searches for your service. Use natural language — "best [service] in [city]," "who should I hire for [service] in [city]," and "[service] near [neighborhood or zip code]."
+
+For each query, note: Does your business appear? If yes, where in the response? If no, which businesses appear? Run each query twice on ChatGPT, as responses vary between runs.
+
+What you're looking for: consistent appearance across queries. If you appear in zero or one of your test queries, you have an AI visibility problem that is actively costing you leads.
+
+---
+
+## Part 2 — Google Business Profile Check (5 minutes)
+
+Search your business name on Google in incognito mode. Look at the GBP panel that appears on the right side of results.
+
+Check: Is the profile claimed and verified? Are the hours current? Does the address match your website exactly? Are there recent reviews? Has the business responded to reviews in the past 30 days? Are photos recent?
+
+A GBP with outdated hours, an unresponded review on the first page, or an address that differs from your website is a trust gap that both AI systems and prospective customers register in the first 30 seconds.
+
+---
+
+## Part 3 — NAP Consistency Spot Check (5 minutes)
+
+Open your website, your GBP, and your Yelp listing (or the most prominent directory for your industry) in three separate tabs.
+
+Compare your business name, address, and phone number across all three. They must be character-for-character identical — including abbreviations (St. vs Street), suite numbers, and phone formatting. If any of these differ, you have a NAP inconsistency that is suppressing both local search rankings and AI visibility.
+
+---
+
+## Part 4 — Schema Markup Check (5 minutes)
+
+Go to search.google.com/test/rich-results in a new tab. Enter your website URL and run the test. Look for LocalBusiness schema in the results. If it is absent or flagged with errors, you have no machine-readable identity layer on your website.
+
+You can also go to schema.org and search "LocalBusiness" to see what a complete schema implementation includes. Compare what the tool shows for your site against the full specification.
+
+---
+
+## Part 5 — Content Citability Check (5 minutes)
+
+Review your website's navigation. Ask yourself: does my website have any page that directly answers a specific question a new customer would ask before hiring me? Not a services page — an answer page. A FAQ. A guide. A post that starts with a customer question and answers it clearly.
+
+If the answer is no, your website has no citation targets for AI systems. AI cannot recommend you based on information it cannot quote.
+
+---
+
+## Scoring Your Audit
+
+Assign yourself a pass or fail on each of the five areas:
+
+- AI platform visibility: Do you appear in more than half your test queries?
+- GBP completeness: Is it claimed, current, consistent, and responded to?
+- NAP consistency: Is information identical across website, GBP, and top directory?
+- Schema markup: Does Google's Rich Results Test show LocalBusiness schema?
+- Content citability: Does your site have at least one direct-answer page AI can quote?
+
+Three or more failures means your digital infrastructure has significant gaps that are suppressing your visibility in ways your current analytics are not showing you.
+
+---
+
+## Action Checklist
+
+**This Week**
+- Run this audit. Document every finding. Do not skip the AI platform testing — it is the most revealing part.
+- If you score two or fewer passes, prioritize fixing schema markup and NAP consistency first. These are the fastest wins.
+
+**This Month**
+- Commission a full Sovereign X Digital Audit if the self-audit reveals more than two serious gaps. The self-audit identifies categories of problems; the professional audit quantifies the revenue impact of each one and delivers a prioritized fix sequence.
+- Begin adding citation-ready content: at least one FAQ page or structured post answering a real customer question.
+
+---
+
+This audit takes 30 minutes. The gaps it reveals can represent years of invisible revenue leakage. Both things are true.
+
+If you want the dollar figures, a priority sequence, and findings across all 21 diagnostic areas, we deliver that in 72 hours.
+
+[Book the Audit →](https://sxaudits.com/intake)
+
+---
+
+## Image Descriptions
+
+**HERO IMAGE**
+Dark background. A timer showing 30:00 prominently displayed. Around it, five small icons representing each audit step: AI platform (chat bubble), GBP (map pin), NAP (list), Schema (code brackets), Content (document with check). Caption: "30 minutes. Five checks. Everything you need to know whether your infrastructure is working." Sovereign X Audits branding bottom right.
+
+**INFOGRAPHIC**
+Titled "The 30-Minute AI Presence Self-Audit." Five steps in a numbered vertical flow, each with a time allocation and a "What to look for" line: (1) AI Platform Testing — 10 min — Do you appear in ChatGPT and Perplexity queries?; (2) GBP Check — 5 min — Is your profile claimed, current, and consistent?; (3) NAP Consistency — 5 min — Is your name/address/phone identical everywhere?; (4) Schema Markup — 5 min — Does Google's Rich Results Test show LocalBusiness schema?; (5) Content Citability — 5 min — Does your site have any page AI can quote? Scoring guide at bottom: 4–5 passes = strong foundation; 2–3 passes = significant gaps; 0–1 passes = urgent action needed. Dark background, gold accents, Sovereign X branding.
+
+**OG IMAGE (1200×630)**
+Dark background. Large headline: "You can audit your AI visibility in 30 minutes." Subtext: "Here is the exact process — and what most business owners find when they run it for the first time." Sovereign X Audits logo bottom left. sxaudits.com bottom right.
+
+---
+*Sovereign X Audits · sxaudits.com · BlackFur Capital Group LLC*

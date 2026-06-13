@@ -1,0 +1,626 @@
+[
+  {
+    "slug": "2026-personal-brand-audit",
+    "title": "The 2026 Personal Brand Audit: What ChatGPT Says About You",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/2026-personal-brand-audit.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/2026-personal-brand-audit",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "30-minute-ai-presence-audit",
+    "title": "How to Run a 30-Minute AI Presence Audit on Your Own Business Right Now",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/30-minute-ai-presence-audit.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/30-minute-ai-presence-audit",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "small-business-calls-unanswered",
+    "title": "62% of Small Business Calls Go Unanswered — Is Yours One of Them?",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/68-percent-small-business-calls-unanswered.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/small-business-calls-unanswered",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "aeo-vs-geo-vs-seo",
+    "title": "AEO vs GEO vs SEO — Which One Does Your Business Actually Need?",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/aeo-vs-geo-vs-seo-which-does-your-business-need.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/aeo-vs-geo-vs-seo",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "ai-search-vs-traditional-search-2026",
+    "title": "AI Search vs Traditional Search — How Discovery Actually Works in 2026",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/ai-search-vs-traditional-search-2026.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/ai-search-vs-traditional-search-2026",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "ai-visibility-audit-for-cpas",
+    "title": "The AI Visibility Audit for CPAs: Why Your Firm Is Invisible to AI",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/ai-visibility-audit-for-cpas.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/ai-visibility-audit-for-cpas",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "ai-visibility-vs-website-traffic",
+    "title": "AI Visibility vs Website Traffic — Why You May Be Tracking the Wrong Number",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/ai-visibility-vs-website-traffic.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/ai-visibility-vs-website-traffic",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "ai-voice-agent-vs-live-receptionist",
+    "title": "AI Voice Agent vs Live Receptionist — What Each One Actually Costs and Does",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/ai-voice-agent-vs-live-receptionist.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/ai-voice-agent-vs-live-receptionist",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "aicc-verification-framework",
+    "title": "What Is the AICC Verification Framework",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/aicc-verification-framework.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/aicc-verification-framework",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "beautiful-website-nobody-finds",
+    "title": "Why a Beautiful Website That Nobody Finds Is Worse Than No Website at All",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/beautiful-website-nobody-finds.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/beautiful-website-nobody-finds",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "building-business-on-social-media-renting",
+    "title": "Why Building Your Business on Social Media Alone Is Like Renting Instead of Owning",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/building-business-on-social-media-renting.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/building-business-on-social-media-renting",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "building-on-rented-land",
+    "title": "Why Most Businesses Are Building on Rented Land — and What It Costs Them",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/building-on-rented-land.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/building-on-rented-land",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "contractor-marketing-audit",
+    "title": "Contractor Marketing Audit: Why Your Website Isn't Producing Calls",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/contractor-marketing-audit.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/contractor-marketing-audit",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "dental-practice-digital-audit",
+    "title": "Dental Practice Digital Audit: The New-Patient Visibility Framework",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/dental-practice-digital-audit.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/dental-practice-digital-audit",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "diagnosis-before-implementation",
+    "title": "Why Diagnosis Has to Come Before Implementation",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/diagnosis-before-implementation.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/diagnosis-before-implementation",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "difference-between-known-and-findable",
+    "title": "The Difference Between Being Known and Being Findable",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/difference-between-known-and-findable.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/difference-between-known-and-findable",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "digital-audit-vs-marketing-audit",
+    "title": "Digital Audit vs Marketing Audit — What's the Difference and Which Comes First",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/digital-audit-vs-marketing-audit.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/digital-audit-vs-marketing-audit",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "digital-presence-as-first-impression",
+    "title": "Your Digital Presence Is Your First Impression. Most Businesses Are Failing It.",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/digital-presence-as-first-impression.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/digital-presence-as-first-impression",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "digital-sovereignty-for-small-business",
+    "title": "Digital Sovereignty for Small Business: Owning Your Infrastructure in the AI Era",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/digital-sovereignty-for-small-business.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/digital-sovereignty-for-small-business",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "digital-sovereignty-why-audit-checks-it",
+    "title": "What Is Digital Sovereignty and Why Your Audit Should Check for It",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/digital-sovereignty-why-audit-checks-it.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/digital-sovereignty-why-audit-checks-it",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "diy-audit-vs-professional-audit",
+    "title": "DIY Digital Audit vs Professional Audit — What You Can Check Yourself vs What Requires an Expert",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/diy-audit-vs-professional-audit.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/diy-audit-vs-professional-audit",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "fix-visibility-before-running-ads",
+    "title": "Why You Need to Fix Your Visibility Before Running Ads",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/fix-visibility-before-running-ads.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/fix-visibility-before-running-ads",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "free-audit-tools-vs-paid-audit",
+    "title": "Free Audit Tools vs Paid Audit — What You Get for Each and Where the Value Gap Is",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/free-audit-tools-vs-paid-audit.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/free-audit-tools-vs-paid-audit",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "geo-aeo-aio-llmo-decoder",
+    "title": "GEO, AEO, AIO, LLMO: A Plain-English Decoder for the New Search Alphabet",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/geo-aeo-aio-llmo-decoder.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/geo-aeo-aio-llmo-decoder",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "geo-vs-seo-vs-aeo-which-does-your-business-need",
+    "title": "GEO vs SEO vs AEO — What's the Difference and Which One Does Your Business Need?",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/geo-vs-seo-vs-aeo-which-does-your-business-need.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/geo-vs-seo-vs-aeo-which-does-your-business-need",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "getting-audit-vs-running-google-ads",
+    "title": "Getting a Digital Audit vs Running Google Ads — Why Sequence Matters More Than Budget",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/getting-audit-vs-running-google-ads.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/getting-audit-vs-running-google-ads",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "google-suspended-20-year-old-business",
+    "title": "Google Suspended a 20-Year-Old Business Overnight. Here Is What That Means.",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/google-suspended-20-year-old-business.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/google-suspended-20-year-old-business",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "how-to-become-the-answer-not-just-a-link",
+    "title": "How to Become the Answer, Not Just a Link",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/how-to-become-the-answer-not-just-a-link.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/how-to-become-the-answer-not-just-a-link",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "how-to-fix-online-presence-30-days",
+    "title": "How Do I Fix My Online Presence in 30 Days?",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/how-to-fix-online-presence-in-30-days.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/how-to-fix-online-presence-30-days",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "how-to-get-into-google-maps-local-3-pack",
+    "title": "How Do I Get Into the Google Maps Local 3-Pack?",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/how-to-get-into-google-maps-local-3-pack.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/how-to-get-into-google-maps-local-3-pack",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "how-to-read-your-ai-citation-report",
+    "title": "How to Read Your Own AI Citation Report: A 15-Minute Self-Audit",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/how-to-read-your-ai-citation-report.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/how-to-read-your-ai-citation-report",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "how-to-verify-chatgpt-recommends-your-business",
+    "title": "How to Actually Verify If ChatGPT Is Recommending Your Business",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/how-to-verify-chatgpt-recommends-your-business.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/how-to-verify-chatgpt-recommends-your-business",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "image-consultant-visual-identity-ai",
+    "title": "Image Consultant in the Age of AI: Why Your Visual Identity Is Now Machine-Read",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/image-consultant-visual-identity-ai.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/image-consultant-visual-identity-ai",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "indexed-by-google-vs-trusted-by-ai",
+    "title": "The Difference Between Being Indexed by Google and Being Trusted by AI",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/indexed-by-google-vs-trusted-by-ai.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/indexed-by-google-vs-trusted-by-ai",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "industry-tailored-ai-readiness-audit",
+    "title": "Why Your AI Readiness Audit Should Be Industry-Specific",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/industry-tailored-ai-readiness-audit.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/industry-tailored-ai-readiness-audit",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "med-spa-local-seo-audit",
+    "title": "Med Spa Local SEO Audit: The 12-Point Checklist Patients Actually Care About",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/med-spa-local-seo-audit-checklist.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/med-spa-local-seo-audit",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "nap-consistency-quarterly-audit",
+    "title": "NAP Consistency: The Audit Every Business Should Run Quarterly",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/nap-consistency-quarterly-audit.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/nap-consistency-quarterly-audit",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "one-time-audit-vs-ongoing-monitoring",
+    "title": "One-Time Audit vs Ongoing Monitoring — Which One Your Business Actually Needs",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/one-time-audit-vs-ongoing-monitoring.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/one-time-audit-vs-ongoing-monitoring",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "online-presence-audit-vs-seo-audit",
+    "title": "Online Presence Audit vs SEO Audit — What Each One Actually Checks",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/online-presence-audit-vs-seo-audit.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/online-presence-audit-vs-seo-audit",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "organic-search-vs-ai-citations",
+    "title": "Organic Search vs AI Citations — Which Drives More Qualified Leads Now",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/organic-search-vs-ai-citations.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/organic-search-vs-ai-citations",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "real-estate-agent-after-hours-lead-capture",
+    "title": "Real Estate Agent After-Hours Lead Capture: The First-Responder Advantage",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/real-estate-agent-after-hours-lead-capture.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/real-estate-agent-after-hours-lead-capture",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "recover-after-google-penalty-suspension",
+    "title": "How to Recover After a Google Penalty or Suspension",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/recover-after-google-penalty-suspension.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/recover-after-google-penalty-suspension",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "stop-googling-your-own-business",
+    "title": "Stop Googling Your Own Business to Check Your Rankings",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/stop-googling-your-own-business.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/stop-googling-your-own-business",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "sx-audits-vs-diy-tools",
+    "title": "SX Audits vs DIY Tools — What Semrush and Ahrefs Check vs What We Check",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/sx-audits-vs-diy-tools.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/sx-audits-vs-diy-tools",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "sx-audits-vs-gustyaudit",
+    "title": "SX Audits vs GustyAudit — Conversion Friction vs Full Digital Presence Diagnosis",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/sx-audits-vs-gustyaudit.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/sx-audits-vs-gustyaudit",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "sx-audits-vs-nordic-digi-solutions",
+    "title": "SX Audits vs NordicDigi — What Each One Actually Delivers",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/sx-audits-vs-nordic-digi-solutions.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/sx-audits-vs-nordic-digi-solutions",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "sx-audits-vs-rw-ads",
+    "title": "SX Audits vs RW Ads — Fractional CMO Strategy vs Digital Infrastructure Diagnosis",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/sx-audits-vs-rw-ads.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/sx-audits-vs-rw-ads",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "sx-audits-vs-seo-agency",
+    "title": "SX Audits vs Hiring an SEO Agency — What Each One Is Built to Do",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/sx-audits-vs-seo-agency.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/sx-audits-vs-seo-agency",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "sx-audits-vs-zephora-consulting",
+    "title": "SX Audits vs Zephora Consulting — Broad Multi-Service Firm vs Specialized Digital Diagnostic",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/sx-audits-vs-zephora-consulting.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/sx-audits-vs-zephora-consulting",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "voice-agent-compatibility-audit",
+    "title": "What Voice Agent Compatibility Means and Why Your Audit Should Include It",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/voice-agent-compatibility-audit.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/voice-agent-compatibility-audit",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "what-ai-systems-verify-before-recommending",
+    "title": "What AI Systems Actually Verify Before Recommending a Business",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/what-ai-systems-verify-before-recommending.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/what-ai-systems-verify-before-recommending",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "what-does-an-ai-visibility-audit-check",
+    "title": "What Does an AI Visibility Audit Actually Check?",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/what-does-an-ai-visibility-audit-check.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/what-does-an-ai-visibility-audit-check",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "what-does-my-business-look-like-to-ai",
+    "title": "What Does My Business Look Like to AI Right Now?",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/what-does-my-business-look-like-to-ai.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/what-does-my-business-look-like-to-ai",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "what-happens-after-the-audit",
+    "title": "What Happens After the Audit",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/what-happens-after-the-audit.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/what-happens-after-the-audit",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "what-is-a-digital-audit",
+    "title": "What Is a Digital Audit and What Does It Actually Include?",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/what-is-a-digital-audit.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/what-is-a-digital-audit",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "what-is-aeo",
+    "title": "What Is AEO and How Is It Different from SEO and GEO?",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/what-is-aeo.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/what-is-aeo",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "what-is-ai-readiness-small-business",
+    "title": "What Is AI Readiness and How Do You Measure It for a Small Business?",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/what-is-ai-readiness-small-business.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/what-is-ai-readiness-small-business",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "what-is-an-ai-readiness-score",
+    "title": "What Is an AI Readiness Score and How Is Yours Calculated?",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/what-is-an-ai-readiness-score.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/what-is-an-ai-readiness-score",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "what-is-an-online-presence",
+    "title": "What Is an Online Presence and Why Is It Different from Having a Website?",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/what-is-an-online-presence.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/what-is-an-online-presence",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "what-is-included-in-ai-readiness-audit",
+    "title": "What's Actually Included in an AI Readiness Audit",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/what-is-included-in-ai-readiness-audit.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/what-is-included-in-ai-readiness-audit",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "what-is-living-blog-audit",
+    "title": "What Is a Living Blog Audit",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/what-is-living-blog-audit.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/what-is-living-blog-audit",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "what-is-llms-txt",
+    "title": "What llms.txt Is, Whether You Need One, and How to Write It",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/what-is-llms-txt.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/what-is-llms-txt",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "what-is-schema-markup",
+    "title": "What Is Schema Markup and Does My Business Actually Need It?",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/what-is-schema-markup.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/what-is-schema-markup",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "what-it-means-to-own-your-story-online",
+    "title": "What It Means to Own Your Story Online",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/what-it-means-to-own-your-story-online.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/what-it-means-to-own-your-story-online",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "what-most-digital-audits-miss",
+    "title": "What Most Digital Audits Miss — and Why It Costs Businesses More Than the Audit Itself",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/what-most-digital-audits-miss.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/what-most-digital-audits-miss",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "what-revenue-leak-detection-means",
+    "title": "What Revenue Leak Detection Actually Means",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/what-revenue-leak-detection-means.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/what-revenue-leak-detection-means",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "what-to-do-when-google-removes-your-business",
+    "title": "What to Do When Google Removes Your Business from Search",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/what-to-do-when-google-removes-your-business.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/what-to-do-when-google-removes-your-business",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "why-72-hour-delivery",
+    "title": "Why We Deliver Your Audit in 72 Hours",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/why-72-hour-delivery.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/why-72-hour-delivery",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "why-competitor-showing-up-chatgpt",
+    "title": "Why the Business Down the Street Is Showing Up on ChatGPT and You're Not",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/why-competitor-showing-up-chatgpt.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/why-competitor-showing-up-chatgpt",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "why-direct-founder-access-matters",
+    "title": "Why Direct Founder Access Before Purchase Changes Everything",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/why-direct-founder-access-matters.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/why-direct-founder-access-matters",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "why-most-audits-deliver-pdf-and-disappear",
+    "title": "Why Most Audits Deliver a PDF and Disappear",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/why-most-audits-deliver-pdf-and-disappear.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/why-most-audits-deliver-pdf-and-disappear",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "why-no-discovery-calls",
+    "title": "Why We Don't Do Discovery Calls Before Delivering Your Audit",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/why-no-discovery-calls.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/why-no-discovery-calls",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "why-people-google-business-before-calling",
+    "title": "Why People Google Your Business Before They Call",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/why-people-google-business-before-calling.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/why-people-google-business-before-calling",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "why-reddit-is-powerful-seo-signal",
+    "title": "Why Reddit Is Now One of the Most Powerful SEO Signals for Local Businesses",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/why-reddit-is-powerful-seo-signal.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/why-reddit-is-powerful-seo-signal",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "why-seo-agency-hasnt-told-you-about-geo",
+    "title": "Why Your SEO Agency Hasn't Told You About GEO",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/why-seo-agency-hasnt-told-you-about-geo.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/why-seo-agency-hasnt-told-you-about-geo",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "why-we-publish-client-count",
+    "title": "Why We Tell You Exactly How Many Clients We've Served",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/why-we-publish-client-count.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/why-we-publish-client-count",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "why-your-website-is-your-most-important-business-asset",
+    "title": "Why Your Website Is Still Your Most Important Business Asset",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/why-your-website-is-your-most-important-business-asset.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/why-your-website-is-your-most-important-business-asset",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  },
+  {
+    "slug": "your-brand-is-what-google-says-it-is",
+    "title": "Your Brand Is What Google Says It Is — Here's How to Find Out",
+    "source": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/blog-posts/your-brand-is-what-google-says-it-is.md",
+    "output": "/Users/abimbolaolaitan/Desktop/SXA/SXAblogs/organized-posts/your-brand-is-what-google-says-it-is",
+    "hero": "assets/hero.png",
+    "og": "assets/og.png"
+  }
+]
