@@ -30,14 +30,15 @@ type SpeechRecognitionAPI = {
   lang: string;
   start: () => void;
   stop: () => void;
+  abort: () => void;
   onresult: ((event: SpeechRecognitionEvent) => void) | null;
-  onerror: (() => void) | null;
+  onerror: ((event: any) => void) | null;
   onend: (() => void) | null;
 };
 
 type SpeechRecognitionConstructor = new () => SpeechRecognitionAPI;
 
-function useVoiceInput(onTranscript: (text: string) => void) {
+function useVoiceInput(onTranscript: (text: string) => void, onError?: (err: string) => void) {
   const [voiceState, setVoiceState] = useState<VoiceState>("idle");
   const recognitionRef = useRef<SpeechRecognitionAPI | null>(null);
 
@@ -73,8 +74,15 @@ function useVoiceInput(onTranscript: (text: string) => void) {
       }
     };
 
-    recognition.onerror = () => {
+    recognition.onerror = (event: any) => {
       setVoiceState("idle");
+      if (onError && event?.error) {
+        if (event.error === "not-allowed") {
+          onError("Microphone access denied. Please enable microphone permissions in your browser settings.");
+        } else if (event.error !== "no-speech" && event.error !== "aborted") {
+          onError(`Speech recognition error: ${event.error}`);
+        }
+      }
     };
 
     recognition.onend = () => {
@@ -82,18 +90,37 @@ function useVoiceInput(onTranscript: (text: string) => void) {
     };
 
     recognitionRef.current = recognition;
-  }, [onTranscript]);
+
+    return () => {
+      if (recognition) {
+        try {
+          recognition.abort();
+        } catch (e) {
+          // ignore
+        }
+      }
+    };
+  }, [onTranscript, onError]);
 
   const startListening = useCallback(() => {
     if (!recognitionRef.current || voiceState === "unsupported") return;
-    recognitionRef.current.start();
-    setVoiceState("listening");
-  }, [voiceState]);
+    try {
+      recognitionRef.current.start();
+      setVoiceState("listening");
+      if (onError) onError(""); // clear any previous error
+    } catch (e) {
+      if (onError) onError("Failed to start voice input.");
+    }
+  }, [voiceState, onError]);
 
   const stopListening = useCallback(() => {
     if (!recognitionRef.current) return;
-    recognitionRef.current.stop();
-    setVoiceState("idle");
+    try {
+      recognitionRef.current.stop();
+      setVoiceState("idle");
+    } catch (e) {
+      // ignore
+    }
   }, []);
 
   const toggle = useCallback(() => {
@@ -619,7 +646,7 @@ export function ChatClient({ initialData }: { initialData: DashboardPayload }) {
     textareaRef.current?.focus();
   }, []);
 
-  const { voiceState, toggle: toggleVoice } = useVoiceInput(handleTranscript);
+  const { voiceState, toggle: toggleVoice } = useVoiceInput(handleTranscript, setError);
 
   const sendMessage = async () => {
     if ((!message.trim() && attachments.length === 0) || isSubmitting) return;

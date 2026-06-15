@@ -1,0 +1,254 @@
+[
+  {
+    "slug": "2026-personal-brand-audit",
+    "desc": "Titled \"The 2026 Personal Brand Audit \u2014 5 Queries to Run Right Now.\" Five query templates in a numbered vertical list with instructions: (1) \"Tell me about [your name]\" \u2014 check accuracy; (2) \"What is [your name] known for?\" \u2014 check completeness; (3) \"Best [your profession] in [city]?\" \u2014 check category appearance; (4) \"What is [your name]'s methodology?\" \u2014 check knowledge depth; (5) \"Who is similar to [your name]?\" \u2014 check comparative positioning. Score guide: 5/5 accurate and present = strong machine-readable brand. Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "small-business-calls-unanswered",
+    "desc": "Titled \"The Missed Call Problem \u2014 By the Numbers.\" Five data-point callouts in a vertical layout: (1) 62% of small business calls go unanswered; (2) 85% of missed callers never call back; (3) $126,000 average annual revenue lost per business; (4) 30\u201340% of missed calls happen after hours; (5) 85% of homeowners hire the first contractor who responds. Bottom callout: \"This is not a marketing problem. It is an intake infrastructure problem.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "aeo-vs-geo-vs-seo",
+    "desc": "Titled \"SEO vs. AEO vs. GEO: What Each One Targets.\" Three-column layout. Column 1 (SEO): Target = Google organic results; Key factors = keywords, backlinks, domain authority; Who's doing it = most businesses. Column 2 (AEO): Target = Featured snippets, People Also Ask; Key factors = FAQ structure, direct answers; Who's doing it = few small businesses. Column 3 (GEO): Target = ChatGPT, Perplexity, AI Overviews; Key factors = schema, citations, entity clarity; Who's doing it = fewer than 12% of marketing teams. Bold callout at bottom: \"Most businesses are optimizing for one surface. Customers are using all three.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "ai-search-vs-traditional-search-2026",
+    "desc": "Titled \"AI Search vs Traditional Search \u2014 How Discovery Works in 2026.\" Two-column comparison. TRADITIONAL SEARCH: ranking model, 10 links returned, keyword + authority signals, 60%+ end without click, dominant volume channel. AI SEARCH: synthesis model, 2-3 businesses named, schema + entity + citation signals, converts at 4.4\u00d7 organic rate, growing at +600% YoY. Bottom: \"Both channels are active. Both require different infrastructure. Most businesses are only optimizing for one.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "ai-visibility-audit-for-cpas",
+    "desc": "Titled \"Why CPA Firms Are Invisible to AI \u2014 and What to Fix First.\" Five rows: (1) No FAQ content \u2014 AI has nothing to cite; (2) GBP unclaimed \u2014 invisible in local search; (3) Credentials not machine-readable \u2014 schema missing; (4) Directory presence incomplete \u2014 no third-party authority signals; (5) Zero AI-specific content strategy \u2014 fewer than 12% of professional service firms have one. Each row has a fix note. Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "aicc-verification-framework",
+    "desc": "Titled \"The AICC Verification Framework \u2014 How SX Audits Assesses AI Presence.\" Four-section breakdown with description of each dimension and what it checks. AI Readiness Score composite shown at bottom. Bold callout: \"Most AI visibility checks are single-platform and unstructured. AICC measures Accuracy, Identity Consistency, Citability, and Cross-Platform Coverage.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "building-business-on-social-media-renting",
+    "desc": "Titled \"Rented vs. Owned Digital Infrastructure.\" Two-column comparison. RENTED: Instagram (algorithm controls reach), Facebook (organic reach ~2%), TikTok (content restrictions applied without warning), GBP (can be suspended), Yelp (platform manages listing). OWNED: Website (full control), Email list (no algorithm), Direct booking (platform-independent), Blog content (compounds over time). Bold callout: \"Businesses with owned infrastructure generate 2\u00d7 more revenue than those with social-only presence.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "building-on-rented-land",
+    "desc": "Titled \"Owned vs. Rented Digital Channels \u2014 What Small Businesses Are Building On.\" Two columns. LEFT: \"Rented\" \u2014 Instagram (platform controls reach), Facebook (organic reach: ~2%), GBP (can be suspended without warning), Yelp (platform manages your listing), App marketplaces (rules change unilaterally). RIGHT: \"Owned\" \u2014 Website (you control it), Email list (no algorithm between you and your audience), Direct booking (zero platform dependency), Blog content (compounds over time). Bold callout: \"90% of local businesses rely primarily on rented channels.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "contractor-marketing-audit",
+    "desc": "Titled \"Why Your Contractor Website Isn't Producing Calls.\" Five-finding layout with dollar impact callouts: (1) GBP unclaimed or incomplete \u2014 70% of leads come from GBP; (2) Response time over 1 hour \u2014 3.5\u00d7 lower conversion rate; (3) Invisible to AI search \u2014 37% of homeowner research starts on ChatGPT/Perplexity; (4) No service-area or FAQ content \u2014 zero citation targets for AI; (5) No after-hours capture \u2014 evening inquiries 100% lost. Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "dental-practice-digital-audit",
+    "desc": "Titled \"The Four-Layer New-Patient Visibility Framework for Dental Practices.\" Four horizontal bars stacked, each representing a layer: Foundation \u2192 Visibility \u2192 AI Presence \u2192 Conversion. Each bar lists three to four key components. A funnel visual at the right shows new patients entering at the top and dropping off at each layer with poor infrastructure. Bottom callout: \"93% of patients search online before booking. Most practices only capture a fraction of them.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "diagnosis-before-implementation",
+    "desc": "Titled \"Why Digital Marketing Fails Without Prior Diagnosis.\" Two-path diagram. PATH A (No Diagnosis): New website \u2192 Content calendar \u2192 Ads \u2192 8 months \u2192 Marginal results \u2192 Foundation still broken. PATH B (Diagnosis First): Audit \u2192 Fix foundation (NAP, schema, GBP, trust) \u2192 Implement on solid base \u2192 Results compound. Below both paths: \"The difference between the paths is not budget. It's sequence.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "digital-audit-vs-marketing-audit",
+    "desc": "Titled \"Digital Audit vs Marketing Audit \u2014 What Each Covers and Which Comes First.\" Two-column layout. DIGITAL AUDIT: website technical health, schema markup, GBP status, NAP consistency, AI visibility, trust signals \u2014 answers: \"Is the infrastructure working?\" MARKETING AUDIT: channel performance, content strategy, conversion paths, messaging alignment, ROI by channel \u2014 answers: \"Is the strategy working?\" Arrow below: \"Digital audit first \u2192 Marketing audit second. This is the sequence that produces results.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "digital-presence-as-first-impression",
+    "desc": "Titled \"What Your Digital First Impression Is Actually Saying.\" Five-point audit checklist with status indicators: Website design and currency, GBP completeness and reviews, Consistency across platforms, AI summary accuracy, Response to negative content. Each point marked: BUILDING TRUST / NEUTRAL / RAISING DOUBT. Bottom callout: \"97% of consumers research businesses online before any purchase decision. The digital impression happens before you ever speak.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "digital-sovereignty-why-audit-checks-it",
+    "desc": "Titled \"Digital Sovereignty \u2014 The Spectrum from Rented to Owned.\" Horizontal spectrum showing four stages from fully rented to fully sovereign. For each: what discovery looks like, what a platform suspension does to lead volume. Bold callout: \"AI citation is the most sovereign discovery channel available \u2014 earned through infrastructure, not platform registration.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "diy-audit-vs-professional-audit",
+    "desc": "Titled \"DIY Audit vs Professional Audit \u2014 What Each Approach Covers.\" Comparison table with checkmarks and X marks across 10 dimensions. Bold callout: \"The highest-leverage gaps are the ones free tools don't find.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "geo-aeo-aio-llmo-decoder",
+    "desc": "Titled \"The AI Search Alphabet \u2014 Plain-English Decoder.\" Five rows: SEO (Google blue-link rankings \u2014 still essential \u2014 does not address AI answers), AEO (Google featured snippets \u2014 valuable for zero-click \u2014 foundational for AI), GEO (AI platform citations \u2014 ChatGPT, Perplexity, Google AI Overviews \u2014 primary 2026 discipline), AIO (umbrella term \u2014 not a distinct discipline), LLMO (technical GEO framing \u2014 LLM-specific implementation). Bottom: \"The outcome is what matters: does your business appear in AI-generated recommendations? That is the question all of these disciplines are trying to answer.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "geo-vs-seo-vs-aeo-which-does-your-business-need",
+    "desc": "Titled \"GEO vs SEO vs AEO \u2014 What Each One Optimizes For.\" Three-column comparison table. SEO: keyword rankings, backlinks, technical crawlability, Google blue links. AEO: featured snippets, FAQ schema, question-answer content, zero-click answers. GEO: schema markup, entity consistency, content citability, AI platform citations. Bottom: \"Only 12% of AI citations come from Google's top-ranked pages. The three disciplines require three different strategies.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "getting-audit-vs-running-google-ads",
+    "desc": "Titled \"Digital Audit vs Google Ads \u2014 The Sequence That Determines ROI.\" Flow diagram showing two paths. PATH 1 (wrong order): Ads \u2192 Traffic \u2192 Low conversion \u2192 Wasted spend \u2192 Audit too late. PATH 2 (right order): Audit \u2192 Fix infrastructure \u2192 Ads \u2192 Traffic \u2192 Higher conversion \u2192 ROI. Bold callout: \"30\u201350% of small business ad spend is wasted on traffic arriving at infrastructure that can't convert it.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "how-to-fix-online-presence-30-days",
+    "desc": "Titled \"Fix Your Online Presence in 30 Days \u2014 The Sequence.\" Four-week breakdown with key actions per week. Week 1: Claim GBP, standardize NAP, submit sitemap. Week 2: LocalBusiness schema, FAQ schema, check robot access. Week 3: Top 3 directories, respond to reviews, social profile audit. Week 4: FAQ page, update service page, run AI visibility test. Each week has a \"Why this week\" note explaining the build-on logic. Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "how-to-get-into-google-maps-local-3-pack",
+    "desc": "Titled \"What Gets a Business Into the Google Maps 3-Pack.\" Three-column structure representing Google's three ranking pillars: RELEVANCE (Primary GBP category, services listed, keyword match), DISTANCE (Business proximity to searcher, service area configuration), PROMINENCE (Review volume and recency, website authority, NAP consistency, citation quality, GBP completeness). Each column has a key action item below it. Bold callout at bottom: \"8 of the top 10 ranking signals come directly from the Google Business Profile.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "how-to-read-your-ai-citation-report",
+    "desc": "Titled \"How to Read Your AI Citation Report in 15 Minutes.\" Two sections. TOP: \"Five Queries to Run\" \u2014 listed with brief descriptions. BOTTOM: \"Five Things to Check in Every Response\" \u2014 Accuracy of facts; Completeness vs. competitors; Source attribution; Sentiment and framing; Presence or absence. Each item with a one-line interpretation guide. Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "how-to-verify-chatgpt-recommends-your-business",
+    "desc": "Titled \"How to Test Your AI Visibility in 30 Minutes.\" Four-step visual: Step 1 \u2014 Write 5 queries your customers actually use; Step 2 \u2014 Open ChatGPT, Perplexity, and Google in incognito; Step 3 \u2014 Run each query twice and document results; Step 4 \u2014 Calculate visibility score: (appearances \u00f7 total tests) \u00d7 100. Below the steps: a scoring guide \u2014 Below 10% = AI-invisible; 10\u201350% = partial visibility; Above 50% = strong foundation. Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "image-consultant-visual-identity-ai",
+    "desc": "Titled \"Visual Identity in the Age of AI \u2014 What Machines Are Processing.\" Three columns: (1) What AI sees \u2014 profile photos, brand color consistency, image metadata, visual entity signals across platforms; (2) What it means \u2014 consistent visual brand = stronger entity recognition = more confident AI citations; (3) What to do \u2014 professional headshot audit, LinkedIn photo review, color palette consistency check, digital brand alignment. Caption: \"Your image is data. In 2026, it's being processed at machine speed.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "industry-tailored-ai-readiness-audit",
+    "desc": "Titled \"Industry-Specific AI Visibility Signals \u2014 What Actually Matters by Vertical.\" Five-column layout with industry icons at top. PROFESSIONAL SERVICES: Credential directories, Association listings, License schema. HEALTHCARE: Specialty directories, Healthcare schema, Insurance signals. LOCAL SERVICES: Foursquare, GBP, Data aggregators. REAL ESTATE: Portal profiles, Response speed, Lead capture. PERSONAL BRAND: Person schema, Entity specificity, Original content. Bottom: \"A generic audit applies the same rubric to all of them. An industry-tailored audit applies the right one.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "med-spa-local-seo-audit",
+    "desc": "Titled \"Med Spa Local SEO Audit \u2014 12 Points That Determine Your Patient Acquisition Rate.\" 12 numbered rows organized in three groups: FOUNDATION (GBP, NAP, schema), VISIBILITY (AI test, directories, reviews), CONVERSION (content, intake, after-hours, mobile). Each row has a \"% impact on new patients\" callout. Bottom stat: \"Med spas in the local 3-pack capture 40\u201360% of 'near me' search clicks.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "nap-consistency-quarterly-audit",
+    "desc": "Titled \"The Quarterly NAP Audit \u2014 What to Check and Where.\" Left column: \"Your Canonical NAP\" \u2014 a box where the business records its official name, address, and phone format. Right column: 10 platform rows with status indicators (consistent / inconsistent): Website, Google Business Profile, Yelp, Facebook, Apple Maps, Bing Places, BBB, Industry Directory 1, Industry Directory 2, Data Aggregators. Bold callout: \"Run this every quarter. Takes under an hour. Inconsistencies compound for years if ignored.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "one-time-audit-vs-ongoing-monitoring",
+    "desc": "Titled \"One-Time Audit vs Ongoing Monitoring \u2014 What Each One Does.\" Two-column layout. ONE-TIME AUDIT: point-in-time diagnostic, establishes baseline, identifies what is broken, produces action plan. ONGOING MONITORING: detects when infrastructure drifts, tracks GBP changes, catches AI citation shifts, monitors competitor movement. Arrow: \"The correct sequence: audit first \u2192 implement fixes \u2192 monitor to protect the gains.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "online-presence-audit-vs-seo-audit",
+    "desc": "Titled \"SEO Audit vs Online Presence Audit \u2014 What Each One Checks.\" Checklist comparison table with checkmarks and X marks for both audit types across 10 dimensions. Bold callout: \"Most businesses commission an SEO audit thinking they're getting both. Here is what the SEO audit doesn't see.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "organic-search-vs-ai-citations",
+    "desc": "Titled \"Organic Search vs AI Citations \u2014 Lead Quality Comparison.\" Two-column layout. ORGANIC SEARCH: high volume, early consideration stage, keyword intent, 1.76% average conversion, requires sorting for qualification. AI CITATIONS: lower volume, late consideration stage, pre-qualified intent, 4.4\u00d7 conversion premium, arrive with context complete. Bold callout: \"AI-referred visitors convert at 4.4\u00d7 the rate of organic search visitors. Only 12% of AI citations overlap with Google's top-10 results.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "real-estate-agent-after-hours-lead-capture",
+    "desc": "Titled \"The First-Responder Advantage in Real Estate.\" Three-section layout: TOP: The problem \u2014 78% of leads go to first responder; average agent response time: 917 minutes; agents responding in 5 min are 21\u00d7 more likely to qualify. MIDDLE: The cost \u2014 one missed after-hours lead per week at $20K average commission = $1M/year in lost pipeline. BOTTOM: The fix \u2014 AI voice agent ($400\u2013$800/mo) answers immediately at any hour; ROI from one recovered transaction covers 6+ months of cost. Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "recover-after-google-penalty-suspension",
+    "desc": "Titled \"Google Penalty & Suspension Recovery \u2014 The Correct Sequence.\" Three-column layout by event type: MANUAL ACTION (Search Console \u2192 resolve violation \u2192 reconsideration request \u2192 wait), ALGORITHMIC (diagnose cause \u2192 improve quality \u2192 wait for next update cycle), GBP SUSPENSION (gather exact documentation \u2192 submit appeal \u2192 do not create new profile \u2192 follow up). Bottom row: \"Do not take: speculative changes, new profile creation, premature reconsideration requests.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "sx-audits-vs-diy-tools",
+    "desc": "Titled \"SX Audits vs Semrush vs Ahrefs \u2014 What Each One Actually Checks.\" Coverage comparison table with 9 dimensions and checkmark/X notation. Bold callout: \"Semrush and Ahrefs audit the website. SX Audits audits the full digital presence.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "sx-audits-vs-gustyaudit",
+    "desc": "Titled \"SX Audits vs GustyAudit \u2014 Where in the Funnel Each One Works.\" Funnel diagram: DISCOVERY (AI platforms, GBP, NAP, schema) \u2192 ARRIVAL (website traffic) \u2192 CONVERSION (UX, friction, CTA). SX Audits addresses the discovery layer. GustyAudit addresses the conversion layer. Bold callout: \"AI-referred visitors convert at 4.4\u00d7 the rate of organic traffic. Establish discovery first, then optimize conversion.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "sx-audits-vs-nordic-digi-solutions",
+    "desc": "Titled \"SX Audits vs NordicDigi \u2014 What Each One Delivers.\" Comparison table with 8 dimensions. Bold callout: \"A web agency builds the asset. A digital audit ensures the asset is configured to be found, cited, and recommended.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "sx-audits-vs-rw-ads",
+    "desc": "Titled \"SX Audits vs RW Ads \u2014 What Each One Does.\" Service type comparison with 8 dimensions. Bold callout: \"Strategy built on unverified infrastructure underperforms. Infrastructure diagnosis comes first.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "sx-audits-vs-seo-agency",
+    "desc": "Titled \"SX Audits vs SEO Agency \u2014 What Each One Is Built to Do.\" Quick comparison table with six dimensions. Bold callout: \"Fewer than 12% of SEO agency teams have a GEO strategy. Only 12% of AI citations overlap with Google's top-10 organic results.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "sx-audits-vs-zephora-consulting",
+    "desc": "Titled \"SX Audits vs Zephora Consulting \u2014 Specialist vs Generalist.\" Service scope comparison with 8 dimensions. Bold callout: \"A digital audit from a firm that sells 15 services is not the same as a digital audit from a firm whose only product is the audit.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "voice-agent-compatibility-audit",
+    "desc": "Titled \"Voice Agent Compatibility \u2014 What the Audit Checks.\" Three-component breakdown: Information Accuracy (GBP, FAQ content), Content Accessibility (structure for AI access), Integration Readiness (calendar, booking system). Bold callout: \"The same schema that earns AI citations supports AI voice accuracy. Configure both before deploying either.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "what-ai-systems-verify-before-recommending",
+    "desc": "Titled \"The 5 Things AI Verifies Before Recommending Your Business.\" Five scored rows in a scoring table format. Each row shows the dimension, its weight (points), a \"PASS\" example, and a \"FAIL\" example. Total possible score: 100. Bold callout: \"A business scoring below 60 is unlikely to appear in AI recommendations for competitive queries.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "what-does-an-ai-visibility-audit-check",
+    "desc": "Titled \"The 6 Things an AI Visibility Audit Actually Checks.\" Six numbered rows in a vertical list, each with a percentage weight or point value and a one-sentence description: (1) Technical Crawlability \u2014 20 pts \u2014 Can AI bots reach and read your content? (2) Entity Recognition & Schema \u2014 20 pts \u2014 Is your business clearly defined for AI systems? (3) Content Citation Readiness \u2014 30 pts \u2014 Does your content give AI something to quote? (4) NAP Consistency \u2014 15 pts \u2014 Is your information identical everywhere it appears? (5) Third-Party Validation \u2014 10 pts \u2014 Do authoritative sources mention you? (6) Platform Testing \u2014 Direct queries across ChatGPT, Perplexity, Google AI. Dark background, gold accents, Sovereign X branding at bottom."
+  },
+  {
+    "slug": "what-does-my-business-look-like-to-ai",
+    "desc": "Titled \"How AI Evaluates a Business Before Recommending It.\" Five rows, each with an icon and a pass/fail example. (1) NAP Consistency \u2014 PASS: identical across all platforms / FAIL: 3 different phone numbers found. (2) GBP Status \u2014 PASS: claimed, verified, complete / FAIL: unclaimed, no hours listed. (3) Schema Markup \u2014 PASS: LocalBusiness schema present / FAIL: no structured data. (4) Content to Cite \u2014 PASS: FAQ and service pages present / FAIL: only a homepage and contact page. (5) Third-Party Mentions \u2014 PASS: 12 authoritative citations / FAIL: 0 off-site mentions. Bold callout: \"AI skips businesses that fail even two of these.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "what-is-a-digital-audit",
+    "desc": "Vertical infographic titled \"What a Digital Audit Actually Covers.\" Six numbered rows, each with an icon, category label, and one-line description: (1) Website & Technical \u2014 schema, speed, metadata; (2) Brand & NAP Consistency \u2014 name, address, phone across all platforms; (3) Local SEO & AI Visibility \u2014 Google, ChatGPT, Perplexity; (4) Social Media Infrastructure \u2014 linked correctly, feeding authority; (5) Systems & Intake \u2014 calls, forms, after-hours capture; (6) AI Readiness \u2014 voice agents, automation gaps. Dark background, gold accent lines, Sovereign X branding at the bottom."
+  },
+  {
+    "slug": "what-is-aeo",
+    "desc": "Titled \"SEO vs. AEO vs. GEO \u2014 What Each One Actually Targets.\" A three-row comparison table with columns: Discipline / What It Targets / What You Need / Who's Missing It. Row 1: SEO \u2014 Google blue links \u2014 keywords, backlinks, domain authority \u2014 businesses ignoring AI. Row 2: AEO \u2014 Featured snippets, zero-click answers \u2014 FAQ structure, direct answers \u2014 most small businesses. Row 3: GEO \u2014 ChatGPT, Perplexity, AI Overviews \u2014 schema, citations, entity clarity \u2014 88%+ of businesses. Dark background, gold accent lines, Sovereign X branding."
+  },
+  {
+    "slug": "what-is-ai-readiness-small-business",
+    "desc": "Titled \"AI Readiness for Small Businesses \u2014 What It Measures.\" Three-tier pyramid structure. Foundation (bottom): GBP claimed, NAP consistent, schema implemented, FAQ content present. Intermediate (middle): Directory listings, third-party mentions, content freshness. Advanced (top): llms.txt, citation monitoring, competitive benchmarking. Side callout: \"Most businesses are not yet at the foundation tier. Start there.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "what-is-an-ai-readiness-score",
+    "desc": "Titled \"How an AI Readiness Score Is Calculated.\" Five horizontal score bars, each labeled with a dimension name, its weight, and a fill level showing a typical underperforming business: Technical Access (20 pts) \u2014 12/20; Entity Clarity (20 pts) \u2014 8/20; Content Readiness (30 pts) \u2014 5/30; Third-Party Validation (20 pts) \u2014 4/20; Freshness (10 pts) \u2014 3/10. Total shown: 32/100. Bold callout: \"Above 70 = AI-ready. Below 30 = AI-invisible.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "what-is-an-online-presence",
+    "desc": "Titled \"Online Presence vs. Having a Website.\" Two columns side by side. LEFT: \"A Website\" \u2014 one URL, one touchpoint, invisible without traffic, zero authority on its own. RIGHT: \"An Online Presence\" \u2014 GBP, directories, reviews, social signals, schema markup, AI citations, NAP consistency across all platforms. Below both columns: \"Most businesses have the left. Their competitors are building the right.\" Dark background, gold accents, Sovereign X branding at bottom."
+  },
+  {
+    "slug": "what-is-included-in-ai-readiness-audit",
+    "desc": "Titled \"The 5 Dimensions of an AI Readiness Audit.\" Five rows with icons: (1) AI Platform Testing \u2014 ChatGPT, Perplexity, Google AI Overviews, 5 query types, consistency testing; (2) Schema Markup \u2014 LocalBusiness, FAQ, Person, sameAs links, Rich Results validation; (3) NAP Consistency \u2014 30+ directories, data aggregators, severity scoring; (4) Content Citability \u2014 structured bio, FAQ content, heading organization, freshness, original perspective content; (5) Trust Signals \u2014 third-party citations, review profile, response pattern. Score range: 0\u2013100. AI-ready threshold: 70+. Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "what-is-living-blog-audit",
+    "desc": "Titled \"The Living Blog Audit \u2014 What It Finds and What to Do.\" Three-category content sorting: Optimize (structural improvements \u2192 AI citation eligibility), Consolidate (merge \u2192 concentrate authority), Remove (remove \u2192 restore domain authority). Bold callout: \"Pages not updated quarterly are 3\u00d7 more likely to lose AI citation rates.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "what-is-llms-txt",
+    "desc": "Titled \"What Is llms.txt \u2014 and Should You Have One?\" Three-row layout: (1) What it is \u2014 a plain-text file guiding AI systems to your most important content; (2) Current adoption \u2014 3.2% of websites have one; no major AI company has publicly committed to reading it yet; (3) Priority order for small businesses \u2014 Schema markup first \u2192 NAP consistency \u2192 GBP \u2192 FAQ content \u2192 llms.txt. Bold callout: \"30 minutes to implement. Low risk. High upside as AI crawler adoption grows.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "what-is-schema-markup",
+    "desc": "Titled \"What Schema Markup Does for Your Business.\" Four-section layout: (1) What it is \u2014 structured data code embedded in your website HTML; (2) What it does \u2014 tells AI and search engines your business identity explicitly; (3) The results \u2014 20\u201330% higher CTR, rich results, AI citation eligibility; (4) How to check \u2014 Google Rich Results Test URL. Bold callout: \"Two hours of work. Years of compounding return.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "what-it-means-to-own-your-story-online",
+    "desc": "Titled \"Who Tells Your Story If You Don't.\" Four panels, each showing a different force filling the narrative vacuum: (1) Review platforms \u2014 star ratings and individual reviews, indexed permanently; (2) AI systems \u2014 summaries built from whatever structured data is available; (3) Competitors \u2014 appearing in recommendations where you're absent; (4) Time \u2014 outdated content that remains visible years after it was accurate. Below all four: \"Owned narrative infrastructure replaces all four with your voice.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "what-most-digital-audits-miss",
+    "desc": "Titled \"What Most Digital Audits Miss \u2014 The Five Suppression Dimensions.\" Five panels: AI platform visibility, GBP accuracy, NAP consistency, schema markup, trust signals \u2014 each with a brief description of what the gap costs and why standard audits don't check it. Bold callout: \"These five dimensions are what determine whether a prospective client finds, trusts, and contacts your business in 2026.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "what-revenue-leak-detection-means",
+    "desc": "Titled \"Where Revenue Leaks in a Digital Presence.\" Five leak types illustrated: AI platform absence, GBP errors, NAP inconsistency, AI Overview exclusion, trust signal gaps. Revenue impact estimates for each. Bold callout: \"Businesses lose 20\u201340% of potential revenue to preventable digital infrastructure gaps.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "what-to-do-when-google-removes-your-business",
+    "desc": "Titled \"Google Removed Your Business \u2014 The Recovery Sequence.\" Two-column diagram: LEFT shows the four types of removal (GBP suspension, website deindexation, manual penalty, Maps listing removal) with visual icons. RIGHT shows the corresponding recovery steps for each type. Bottom row: \"Common failure points: documentation mismatch, creating new profile, editing during appeal.\" Bold callout: \"42% of GBP suspensions involve address verification failures. Documentation accuracy is everything.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "why-72-hour-delivery",
+    "desc": "Titled \"72 Hours vs. 4 Weeks \u2014 What the Timeline Difference Actually Means.\" Two-column comparison. 72 HOURS: Intake form \u2192 Systematic audit \u2192 Scored report delivered \u2192 Act within the week. 4 WEEKS: Onboarding call \u2192 Kickoff meeting \u2192 Mid-engagement check-in \u2192 Presentation design \u2192 Final walkthrough \u2192 Action finally possible. Bottom callout: \"Longer engagements serve the agency's workflow, not the client's business problem.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "why-direct-founder-access-matters",
+    "desc": "Titled \"Direct Founder Access \u2014 What It Changes.\" Four-point breakdown: information quality (founder vs. sales rep), timeline (24 hours vs. 3 weeks), incentive (accuracy vs. conversion), client quality (informed decision vs. managed into purchase). Bold callout: \"The person who answers your intake is the person who will conduct your audit.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "why-no-discovery-calls",
+    "desc": "Titled \"Why We Don't Require Discovery Calls.\" Four callout cards: (1) Discovery calls are often sales calls in diagnostic framing; (2) Self-reported digital presence data is frequently inaccurate; (3) Pre-audit conversations can introduce confirmation bias; (4) The intake form captures what actually matters. Bottom: \"An audit that starts with objective evidence produces more honest findings than one that starts with a conversation.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "why-people-google-business-before-calling",
+    "desc": "Titled \"The Pre-Call Research Sequence \u2014 What Happens Before Anyone Dials.\" Four-step flow: (1) Receive referral or recommendation \u2192 (2) Google business name: check hours, reviews, website \u2192 (3) Read reviews: volume, recency, response pattern \u2192 (4) Decision: call or move on. Key stats: 97% research before contacting \u00b7 10 reviews read on average before trust \u00b7 41% always read reviews \u00b7 88% call or visit within 24 hours of a local search. Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "why-reddit-is-powerful-seo-signal",
+    "desc": "Titled \"Why Reddit Now Outranks Your Website in Google Search.\" Four-panel layout: (1) The Google-Reddit deal \u2014 $60M/yr data licensing, 1,328% visibility jump; (2) How threads rank \u2014 question-format queries, natural language match, 50+ upvotes + discussion; (3) Why it matters for AI \u2014 48% of AI citations come from community platforms; (4) What to do \u2014 monitor, respond professionally, earn mentions organically. Bold callout: \"A single Reddit mention in a first-page thread is worth more than most directory listings.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "why-seo-agency-hasnt-told-you-about-geo",
+    "desc": "Titled \"SEO vs. GEO \u2014 Why They Require Different Strategies.\" Two-column comparison. SEO optimizes for: keyword rankings, backlink authority, content depth, Google crawlability. GEO optimizes for: schema markup, content citability, entity consistency, third-party validation. Key finding: \"Only 12% of AI citations come from Google's top-10 ranking pages. SEO performance and AI visibility have diverged.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "why-we-publish-client-count",
+    "desc": "Titled \"Why Sovereign X Audits Publishes an Exact Client Count.\" Four-point breakdown of what the specific number signals: it is accurate, it is tracked, it updates, and the ratio of experience to pricing is knowable. Bold callout: \"Vague social proof creates an impression. A specific number creates accountability.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "why-your-website-is-your-most-important-business-asset",
+    "desc": "Titled \"Your Website vs. Every Other Channel \u2014 What You Actually Own.\" Two-column comparison. LEFT: \"Owned Channels\" \u2014 Website (full control), Email list (full control), Direct bookings (full control). RIGHT: \"Rented Channels\" \u2014 Instagram (algorithm controls reach), Google Business Profile (can be suspended), Yelp (platform sets the rules), Facebook (organic reach near zero). Bold callout below: \"Algorithms buried 95% of organic business content in 2026. Only one channel is immune.\" Dark background, gold accents, Sovereign X branding."
+  },
+  {
+    "slug": "your-brand-is-what-google-says-it-is",
+    "desc": "Titled \"What a New Customer Finds in the First 30 Seconds.\" Five-step visual showing the customer research journey: (1) Google the business name \u2192 sees first-page results; (2) Check star rating on GBP \u2192 reads recent reviews; (3) Look at hours and location \u2192 checks accuracy; (4) Scan social profiles \u2192 assesses activity level; (5) Ask ChatGPT for a recommendation \u2192 sees which competitor appears instead. At each step, a callout showing the percentage of customers who drop off when they find a red flag. Dark background, gold accents, Sovereign X branding."
+  }
+]

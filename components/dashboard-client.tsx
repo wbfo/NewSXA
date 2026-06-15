@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import type { BusinessExpense, DashboardPayload, ExpenseCategory, ExpenseCycle, ExpenseDecision, ExpenseStatus, FinanceBudget, QueueItem, ReportItem, WorkflowRun } from "@/lib/domain/types";
+import type { BusinessExpense, ChatMessage, DashboardPayload, ExpenseCategory, ExpenseCycle, ExpenseDecision, ExpenseStatus, FinanceBudget, QueueItem, ReportItem, WorkflowRun } from "@/lib/domain/types";
 import { Navigation } from "@/components/navigation";
 import { TopBar } from "@/components/topbar";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -10,6 +10,7 @@ import { Badge, Panel, ProgressBar } from "@/components/ui";
 import { ToolkitSectionView } from "@/components/toolkit-views";
 import { formatDisplayTime } from "@/lib/utils/time";
 import { buildFinanceSummary, getMonthlyExpenseAmount } from "@/lib/finance/calculations";
+import { ChatBubble } from "@/components/chat-bubble";
 
 async function fetchDashboard() {
   const response = await fetch("/api/dashboard", { cache: "no-store" });
@@ -308,7 +309,16 @@ function useDashboard(initialData: DashboardPayload) {
     setDashboard(await fetchDashboard());
   };
 
-  return { dashboard, triggerAudit, approveWorkflow, addProspect, addPipelineItem, updateRevenue, addExpense, updateExpense, deleteExpense, updateFinanceBudget, updateOrderStatus, addAsset, updateAsset, uploadVaultFile, deletePipelineItem, deleteProspect, dismissQueueItem, markReportRead, dismissReport, approveReportItem, dismissReportItem, runOutreach, runCfo, runFollowup, runResearch, isSubmitting, error, connectionError };
+  const refreshDashboard = async () => {
+    try {
+      const data = await fetchDashboard();
+      setDashboard(data);
+    } catch {
+      // ignore
+    }
+  };
+
+  return { dashboard, triggerAudit, approveWorkflow, addProspect, addPipelineItem, updateRevenue, addExpense, updateExpense, deleteExpense, updateFinanceBudget, updateOrderStatus, addAsset, updateAsset, uploadVaultFile, deletePipelineItem, deleteProspect, dismissQueueItem, markReportRead, dismissReport, approveReportItem, dismissReportItem, runOutreach, runCfo, runFollowup, runResearch, refreshDashboard, isSubmitting, error, connectionError };
 }
 
 function toneForQueue(item: QueueItem) {
@@ -1980,16 +1990,17 @@ function ChatView({ dashboard }: { dashboard: DashboardPayload }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: text }),
       });
-      const data = await res.json() as { reply?: string; error?: string };
+      const data = await res.json() as { reply?: ChatMessage | string; error?: string };
       if (!res.ok) throw new Error(data.error ?? "Hermes did not respond.");
       if (data.reply) {
+        const replyText = typeof data.reply === "object" ? data.reply.content : data.reply;
         setMessages(prev => [
           ...prev,
           {
-            id: `hermes-${Date.now()}`,
+            id: typeof data.reply === "object" ? data.reply.id : `hermes-${Date.now()}`,
             role: "assistant" as const,
-            content: data.reply!,
-            createdAt: new Date().toISOString(),
+            content: replyText,
+            createdAt: typeof data.reply === "object" ? data.reply.createdAt : new Date().toISOString(),
           },
         ]);
       }
@@ -2273,7 +2284,7 @@ function InboxView({
 }
 
 export function DashboardClient({ initialData, section }: { initialData: DashboardPayload; section: string }) {
-  const { dashboard, triggerAudit, approveWorkflow, addProspect, addPipelineItem, updateRevenue, addExpense, updateExpense, deleteExpense, updateFinanceBudget, updateOrderStatus, addAsset, updateAsset, uploadVaultFile, deletePipelineItem, deleteProspect, dismissQueueItem, markReportRead, dismissReport, approveReportItem, dismissReportItem, runOutreach, runCfo, runFollowup, runResearch, isSubmitting, error, connectionError } = useDashboard(initialData);
+  const { dashboard, triggerAudit, approveWorkflow, addProspect, addPipelineItem, updateRevenue, addExpense, updateExpense, deleteExpense, updateFinanceBudget, updateOrderStatus, addAsset, updateAsset, uploadVaultFile, deletePipelineItem, deleteProspect, dismissQueueItem, markReportRead, dismissReport, approveReportItem, dismissReportItem, runOutreach, runCfo, runFollowup, runResearch, refreshDashboard, isSubmitting, error, connectionError } = useDashboard(initialData);
   const toolkitDocument = dashboard.toolkit.find((item) => item.id === section);
 
   const mainView = (() => {
@@ -2360,6 +2371,7 @@ export function DashboardClient({ initialData, section }: { initialData: Dashboa
           </div>
         </div>
       </div>
+      <ChatBubble dashboard={dashboard} refreshDashboard={refreshDashboard} />
     </ThemeProvider>
   );
 }

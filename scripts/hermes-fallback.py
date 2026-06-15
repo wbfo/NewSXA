@@ -10,9 +10,9 @@ from pathlib import Path
 
 def main() -> int:
     hermes_bin = os.environ.get("HERMES_BIN", str(Path.home() / ".hermes" / "hermes-agent" / "venv" / "bin" / "hermes"))
-    primary = os.environ.get("HERMES_PRIMARY_MODEL", "gemma4:26b")
+    primary = os.environ.get("HERMES_PRIMARY_MODEL", "gemma4:12b-it-qat")
     secondary = os.environ.get("HERMES_SECONDARY_MODEL", "minimax-m2:cloud")
-    tertiary = os.environ.get("HERMES_TERTIARY_MODEL", "deepseek-v3.1:671b-cloud")
+    tertiary = os.environ.get("HERMES_TERTIARY_MODEL", "deepseek-v4-pro:cloud")
     per_model_timeout = int(os.environ.get("HERMES_MODEL_TIMEOUT_SECONDS", "25"))
     models = [primary, secondary, tertiary]
     failure_patterns = re.compile(r"invalid tool call|Session not found|No Anthropic credentials found|Adapter failed|Error:", re.I)
