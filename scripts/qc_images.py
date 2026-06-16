@@ -79,7 +79,7 @@ def main():
                     post_ok = False
 
         # 3. Check Infographic Image (if referenced in body)
-        infographic_match = re.search(r'!\[.*?\]\((/images/blog/post-.*?-infographic\.jpg)\)', content)
+        infographic_match = re.search(r'!\[.*?\]\((/images/blog/post-.*?-infographic(?:-v\d+)?\.jpg)\)', content)
         if infographic_match:
             infographic_path = infographic_match.group(1)
             relative_path = infographic_path.lstrip('/')
